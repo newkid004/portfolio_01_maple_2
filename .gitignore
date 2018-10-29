@@ -1,5 +1,6 @@
 # Prerequisites
 *.d
+*.db
 
 # Compiled Object files
 *.slo
@@ -30,3 +31,10 @@
 *.exe
 *.out
 *.app
+*.tlog
+*.log
+*.enc
+*.suo
+*.ipch
+*.ilk
+*.pdb
