@@ -22,7 +22,7 @@
     <ProjectGuid>{7C0A3AA2-9BB1-47A6-81A6-D29200A61266}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>winAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>winDirect</ProjectName>
     <SccProjectName>SAK</SccProjectName>
     <SccAuxPath>SAK</SccAuxPath>
@@ -34,7 +34,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -76,14 +76,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\newki\OneDrive\문서\Visual Studio 2015\SGA\pp\4_mapTool+2D\portfolio_ror\ror_game\ror\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\newki\OneDrive\문서\Visual Studio 2015\SGA\pp\4_mapTool+2D\portfolio_ror\ror_game\ror\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\프로그래밍\Maple\MapleProject2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\프로그래밍\Maple\MapleProject2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\newki\OneDrive\문서\Visual Studio 2015\SGA\181001_directX9\winDirect\winAPI\jsoncpp\include\json;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;C:\Users\newki\OneDrive\문서\Visual Studio 2015\SGA\181001_directX9\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
-    <SourcePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SourcePath)</SourcePath>
+    <IncludePath>D:\프로그래밍\Maple\MapleProject2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\프로그래밍\Maple\MapleProject2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -115,7 +114,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>json_vc71_libmtd.lib;d3d9.lib;d3dx9.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;json_vc71_libmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -167,6 +166,8 @@
     <ClCompile Include="effectBase.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="enemyBase.cpp" />
+    <ClCompile Include="eventBase.cpp" />
+    <ClCompile Include="eventManager.cpp" />
     <ClCompile Include="fieldBase.cpp" />
     <ClCompile Include="fieldManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
@@ -224,6 +225,8 @@
     <ClInclude Include="effectBase.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="enemyBase.h" />
+    <ClInclude Include="eventBase.h" />
+    <ClInclude Include="eventManager.h" />
     <ClInclude Include="fieldBase.h" />
     <ClInclude Include="fieldManager.h" />
     <ClInclude Include="gameNode.h" />
