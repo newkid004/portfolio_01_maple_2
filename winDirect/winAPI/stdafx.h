@@ -5,6 +5,7 @@
 #pragma once
 #pragma comment(lib, "D2D1.lib")
 #pragma comment(lib, "windowscodecs.lib")
+#pragma comment(lib, "jsoncpp/lib_json/json_vc71_libmtd.lib")
 
 #include <SDKDDKver.h>
 
@@ -53,6 +54,9 @@ using namespace D2D1;
 // #include "triFunction.h"
 #include "utils.h"
 
+// json
+#include "jsoncpp/include/json/forwards.h"
+#include "jsoncpp/include/json/json.h"
 
 
 
