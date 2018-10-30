@@ -60,7 +60,7 @@ public :
 	IWICImagingFactory * getFactory(void) { return _imgFactory; };
 
 	// ----- image ----- //
-	image* add(string strKey, wchar_t * fileName, int maxFrameX = 1, int maxFrameY = 1);
+	image* add(string strKey, const wchar_t * fileName, int maxFrameX = 1, int maxFrameY = 1, bool isUsePixel = false);
 
 	// ----- layer ----- //
 	void pushLayer(fRECT * clippedArea);
