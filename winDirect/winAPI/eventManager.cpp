@@ -43,3 +43,4 @@ void eventManager::deleteAll()
 		SAFE_DELETE(*iter);
 	}
 }
+

@@ -13,3 +13,4 @@ eventBase * eventBase::makeEvent(baseObject * sour, baseObject * dest, unsigned 
 
 	return ev;
 }
+
