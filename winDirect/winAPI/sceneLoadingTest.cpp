@@ -35,6 +35,7 @@ HRESULT sceneLoadingTest::init(void)
 	_ani->start();
 
 	IMAGEMANAGER->setRenderState(IRS_ALWAYS_RESET_TRANSFORM, false);
+	IMAGEMANAGER->disableTransform(bit_pick(TF_ALL, TF_POSITION));
 	IMAGEMANAGER->statePos(fPOINT(
 		(WINSIZEX - _ani->getFrameSize().x) / 2,
 		(WINSIZEY - _ani->getFrameSize().y) / 2));
@@ -62,6 +63,7 @@ void sceneLoadingTest::update(void)
 	if (_loading->loadingDone() && _ani->isEnd())
 	{
 		release();
+		IMAGEMANAGER->enableTransform(TF_ALL);
 		SCENEMANAGER->changeScene("test");
 	}
 }

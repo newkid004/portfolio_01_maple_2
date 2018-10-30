@@ -13,7 +13,9 @@ HRESULT imageManager::init(void)
 	_imgPos = { 0, 0 };
 	_imgFlip = 0;
 	_imgRotate = 0.0f;
+	_imgScale = { 1.f, 1.f };
 
+	_renderTransform = TF_ALL;
 	_renderState = 0;
 
 	return S_OK;
@@ -125,24 +127,31 @@ void imageManager::resetTransform(void)
 	_imgPos = { 0 ,0 };
 	_imgFlip = 0; 
 	_imgRotate = 0.0f;
+	_imgScale = { 1.f, 1.f };
 }
 
-void imageManager::resetTransform(e_RESET_TRANSFORM resetValue)
+void imageManager::resetTransform(e_TRANSFORM resetValue)
 {
-	if (resetValue & RTF_POSITION)	_imgPos = { 0 ,0 };
-	if (resetValue & RTF_ROTATION)	_imgRotate = 0.0f;
-	if (resetValue & RTF_FLIP)		_imgFlip = 0;
+	if (resetValue & TF_POSITION)	_imgPos = { 0 ,0 };
+	if (resetValue & TF_ROTATION)	_imgRotate = 0.0f;
+	if (resetValue & TF_FLIP)		_imgFlip = 0;
+	if (resetValue & TF_SCALE)		_imgScale = { 1.f, 1.f };
 }
 
 void imageManager::setTransform(D2D1_POINT_2F * pos)
 {
-	D2D1_SIZE_F flipPos; _flip2fpos(_imgFlip, flipPos);
+	Matrix3x2F m = Matrix3x2F::Identity();
 
-	_renderTarget->SetTransform(
-		Matrix3x2F::Scale(flipPos, *pos) *				// 반전
-		Matrix3x2F::Rotation(_imgRotate, *pos) *		// 회전
-		Matrix3x2F::Translation(_imgPos.x, _imgPos.y)	// 위치
-		);
+	// 반전
+	if (_renderTransform & TF_FLIP) {
+		D2D1_SIZE_F flipPos; _flip2fpos(_imgFlip, flipPos);
+		m = m * Matrix3x2F::Scale(flipPos, *pos);
+	}
+	if (_renderTransform & TF_SCALE)	m = m * Matrix3x2F::Scale(_imgScale, *pos);				// 크기
+	if (_renderTransform & TF_ROTATION)	m = m * Matrix3x2F::Rotation(_imgRotate, *pos);			// 회전
+	if (_renderTransform & TF_POSITION)	m = m * Matrix3x2F::Translation(_imgPos.x, _imgPos.y);	// 위치
+
+	_renderTarget->SetTransform(m);
 }
 
 void imageManager::setRenderState(e_IMG_RENDER_STATE state, int value)
