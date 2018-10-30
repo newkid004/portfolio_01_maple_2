@@ -25,6 +25,7 @@ public :
 private :
 	template<typename T> T * find(int kind, map<int, T*> _map);
 	template<typename T> T * add(int kind, T* addition, map<int, T*> _map);
+	template<typename T> void releaseMap(map<int, T*> _map);
 
 public:
 	enemyManager() {};

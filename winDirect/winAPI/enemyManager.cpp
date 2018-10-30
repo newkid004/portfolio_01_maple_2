@@ -5,14 +5,8 @@
 
 void enemyManager::release(void)
 {
-	auto i = _mEnemy.begin();
-	for (; i != _mEnemy.end(); )
-	{
-		i->second->release();
-		SAFE_DELETE(i->second);
-
-		i = _mEnemy.erase(i);
-	}
+	releaseMap(_mEnemy);
+	releaseMap(_mBoss);
 }
 
 enemyBase * enemyManager::createEnemy(e_ENEMY_KIND kind)
@@ -29,7 +23,6 @@ enemyBase * enemyManager::createEnemy(e_ENEMY_KIND kind)
 
 	return m;
 }
-
 
 bossBase * enemyManager::createBoss(e_BOSS_KIND kind)
 {
@@ -52,7 +45,6 @@ T * enemyManager::find(int kind, map<int, T*> _map)
 	if (i == _map.end()) return NULL;
 
 	return i->second;
-
 }
 
 template<typename T>
@@ -64,4 +56,17 @@ T * enemyManager::add(int kind, T * addition, map<int, T*> _map)
 	_map.insert(make_pair(kind, addition));
 
 	return m;
+}
+
+template<typename T>
+void enemyManager::releaseMap(map<int, T*> _map)
+{
+	map<int, T*>::iterator i = _map.begin();
+	for (; i != _map.end(); )
+	{
+		i->second->release();
+		SAFE_DELETE(i->second);
+
+		i = _map.erase(i);
+	}
 }
