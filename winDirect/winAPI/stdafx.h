@@ -58,8 +58,6 @@ using namespace D2D1;
 #include "jsoncpp/include/json/forwards.h"
 #include "jsoncpp/include/json/json.h"
 
-
-
 using namespace MY_UTIL;
 
 // ¸Å´ÏÀú
@@ -88,6 +86,7 @@ using namespace MY_UTIL;
 #include "npcManager.h"
 #include "questManager.h"
 #include "shopManager.h"
+#include "enemyManager.h"
 
 #include "gameSystem.h"
 
@@ -114,6 +113,7 @@ using namespace MY_UTIL;
 #define NPCMANAGER		npcManager::getSingleton()
 #define QUESTMANAGER	questManager::getSingleton()
 #define SHOPMANAGER		shopManager::getSingleton()
+#define ENEMYMANAGER	enemyManager::getSingleton()
 
 #define GAMESYSTEM		gameSystem::getSingleton()
 

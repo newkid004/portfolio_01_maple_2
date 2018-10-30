@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "enemyManager.h"
 
-#include "enemyBase.h"
+#include "enemyList.h"
 
 void enemyManager::release(void)
 {
@@ -17,13 +17,32 @@ void enemyManager::release(void)
 
 enemyBase * enemyManager::createEnemy(e_ENEMY_KIND kind)
 {
-	return nullptr;
+	enemyBase * m = find(kind, _mEnemy);
+	if (m == NULL) return NULL;
+
+	switch (kind)
+	{
+	case ENEMY_KIND_0000_SNAIL_GREEN:	m = new enemy_0000_snail; ((enemy_0000_snail*)m)->init(ENEMY_KIND_0000_SNAIL_GREEN); break;
+	case ENEMY_KIND_0000_SNAIL_BLUE:	m = new enemy_0000_snail; ((enemy_0000_snail*)m)->init(ENEMY_KIND_0000_SNAIL_BLUE); break;
+	case ENEMY_KIND_0000_SNAIL_RED:		m = new enemy_0000_snail; ((enemy_0000_snail*)m)->init(ENEMY_KIND_0000_SNAIL_RED); break;
+	}
+
+	return m;
 }
 
 
 bossBase * enemyManager::createBoss(e_BOSS_KIND kind)
 {
-	return nullptr;
+	bossBase * m = find(kind, _mBoss);
+	if (m == NULL) return NULL;
+
+	switch (kind)
+	{
+	case BOSS_KIND_0000_KING_SLIME:	break;
+	case BOSS_KIND_NONE: break;
+	}
+
+	return m;
 }
 
 template<typename T>
