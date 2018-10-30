@@ -192,6 +192,7 @@
     <ClCompile Include="questBase.cpp" />
     <ClCompile Include="questManager.cpp" />
     <ClCompile Include="renderManager.cpp" />
+    <ClCompile Include="sceneLoadingTest.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="sceneTest.cpp" />
     <ClCompile Include="shopBase.cpp" />
@@ -259,6 +260,7 @@
     <ClInclude Include="questManager.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="renderManager.h" />
+    <ClInclude Include="sceneLoadingTest.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="sceneTest.h" />
     <ClInclude Include="shopBase.h" />

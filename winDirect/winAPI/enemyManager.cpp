@@ -2,6 +2,7 @@
 #include "enemyManager.h"
 
 #include "enemyList.h"
+#include "bossBase.h"
 
 void enemyManager::release(void)
 {

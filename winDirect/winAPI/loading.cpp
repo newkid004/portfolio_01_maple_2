@@ -5,7 +5,7 @@ HRESULT loadItem::putImage(char* keyName, wchar_t * fileName, int maxFrameX, int
 {
 	_kind = LOAD_KIND_IMAGE;
 
-	_resource.keyName = new char[strlen(keyName)];		strcpy(_resource.keyName, keyName);
+	_resource.keyName = new char[strlen(keyName) + 1];		strcpy(_resource.keyName, keyName);
 	_resource.vWString = new wstring[1];				_resource.vWString[0] = fileName;
 	_resource.vInt = new int[2];						_resource.vInt[0] = maxFrameX; _resource.vInt[1] = maxFrameY;
 	_resource.vBool = new bool[1];						_resource.vBool[0] = isUsePixel;
@@ -17,7 +17,7 @@ HRESULT loadItem::putSound(char* keyName, char * fileName, bool bgm, bool loop)
 {
 	_kind = LOAD_KIND_SOUND;
 
-	_resource.keyName = new char[strlen(keyName)];		strcpy(_resource.keyName, keyName);
+	_resource.keyName = new char[strlen(keyName) + 1];		strcpy(_resource.keyName, keyName);
 	_resource.vString = new string[1];					_resource.vString[0] = fileName;
 	_resource.vBool = new bool[2];						_resource.vBool[0] = bgm; _resource.vBool[1] = loop;
 

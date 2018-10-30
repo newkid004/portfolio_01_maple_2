@@ -196,6 +196,9 @@
     <Filter Include="메인게임\Game Framework\object\_character\enemy\enemies">
       <UniqueIdentifier>{7d47c25b-fa4d-454a-9355-39840bfeec68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Scene\test">
+      <UniqueIdentifier>{368772c5-572b-4bf1-bbf3-9172fd5e35db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -251,9 +254,6 @@
     </ClCompile>
     <ClCompile Include="mainGame.cpp">
       <Filter>메인게임\mainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="sceneTest.cpp">
-      <Filter>메인게임\Scene</Filter>
     </ClCompile>
     <ClCompile Include="image.cpp">
       <Filter>API Framework\매니져\이미지\GDI</Filter>
@@ -363,6 +363,12 @@
     <ClCompile Include="enemy_0000_snail.cpp">
       <Filter>메인게임\Game Framework\object\_character\enemy\enemies</Filter>
     </ClCompile>
+    <ClCompile Include="sceneLoadingTest.cpp">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneTest.cpp">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -430,9 +436,6 @@
     </ClInclude>
     <ClInclude Include="mainGame.h">
       <Filter>메인게임\mainGame</Filter>
-    </ClInclude>
-    <ClInclude Include="sceneTest.h">
-      <Filter>메인게임\Scene</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
       <Filter>API Framework\매니져\이미지\GDI</Filter>
@@ -559,6 +562,12 @@
     </ClInclude>
     <ClInclude Include="enemyList.h">
       <Filter>메인게임\Game Framework\Manager\enemy\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneLoadingTest.h">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneTest.h">
+      <Filter>메인게임\Scene\test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
