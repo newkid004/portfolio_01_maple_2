@@ -27,7 +27,7 @@ void imageManager::release(void)
 	_layer->Release();
 }
 
-image * imageManager::add(string strKey, wchar_t * fileName, int maxFrameX, int maxFrameY)
+image * imageManager::add(string strKey, wchar_t * fileName, int maxFrameX, int maxFrameY, bool isUsePixel)
 {
 	// 추가하려는 이미지가 존재하는지 키값으로 확인
 	image* img = find(strKey);
@@ -37,7 +37,7 @@ image * imageManager::add(string strKey, wchar_t * fileName, int maxFrameX, int 
 
 	// 없으면 생성
 	img = new image;
-	img->init(fileName, maxFrameX, maxFrameY);
+	img->init(fileName, maxFrameX, maxFrameY, isUsePixel);
 
 	_mImageList.insert(make_pair(strKey, img));
 

@@ -176,5 +176,13 @@ namespace MY_UTIL
 	inline int bit_reverse(int b) { return 0x7FFFFFF - b; };
 	inline int bit_pick(int b1, int b2) { return b1 & bit_reverse(b2); };
 	inline int bit_flip(int b1, int b2) { return b1 ^ b2; };
+
+
+	inline bool colorCompare(ColorF* first, ColorF* second) {
+		if (first->r == second->r && first->g == second->g && first->b == second->b && first->a == second->a)
+			return true;
+		else
+			return false;
+	}
 }
 

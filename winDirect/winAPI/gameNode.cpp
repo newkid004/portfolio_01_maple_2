@@ -232,9 +232,11 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	case WM_KEYUP:
 		KEYMANAGER->setInputKey(NULL);
 		break;
+
 	case WM_LBUTTONDBLCLK:
 		KEYMANAGER->dbClick();
 		break;
+
 	case WM_MOUSEWHEEL: {
 
 		if ((short)HIWORD(wParam) < 0)

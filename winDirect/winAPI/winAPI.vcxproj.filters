@@ -352,6 +352,9 @@
       <Filter>메인게임\Game Framework\object\_character\enemy\boss</Filter>
     </ClCompile>
     <ClCompile Include="enemyManager.cpp" />
+    <ClCompile Include="sceneTest2.cpp">
+      <Filter>메인게임\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -541,6 +544,9 @@
       <Filter>메인게임\Game Framework\object\_character\enemy\_base</Filter>
     </ClInclude>
     <ClInclude Include="enemyManager.h" />
+    <ClInclude Include="sceneTest2.h">
+      <Filter>메인게임\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="quest.Json">

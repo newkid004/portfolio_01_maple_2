@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "characterBase.h"
 
-
-
 void characterBase::setRayStruct()
 {
 	fPOINT	_currentPos		= _position;
