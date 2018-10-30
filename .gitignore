@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 *.db
+*.opendb
 
 # Compiled Object files
 *.slo
