@@ -156,6 +156,7 @@
     <ClCompile Include="animationGroup.cpp" />
     <ClCompile Include="animationGroupManager.cpp" />
     <ClCompile Include="baseObject.cpp" />
+    <ClCompile Include="bossBase.cpp" />
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="effectBase.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="enemyBase.cpp" />
+    <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="eventBase.cpp" />
     <ClCompile Include="eventManager.cpp" />
     <ClCompile Include="fieldBase.cpp" />
@@ -213,6 +215,7 @@
     <ClInclude Include="animationGroup.h" />
     <ClInclude Include="animationGroupManager.h" />
     <ClInclude Include="baseObject.h" />
+    <ClInclude Include="bossBase.h" />
     <ClInclude Include="buffBase.h" />
     <ClInclude Include="buffManager.h" />
     <ClInclude Include="bulletBase.h" />
@@ -225,6 +228,8 @@
     <ClInclude Include="effectBase.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="enemyBase.h" />
+    <ClInclude Include="enemyDef.h" />
+    <ClInclude Include="enemyManager.h" />
     <ClInclude Include="eventBase.h" />
     <ClInclude Include="eventManager.h" />
     <ClInclude Include="fieldBase.h" />

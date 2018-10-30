@@ -1,18 +1,12 @@
 #pragma once
 #include "characterBase.h"
-class enemyBase:public characterBase
+class enemyBase : public characterBase
 {
 protected:
-	NUM_REAL			_hp;
-
+	int		_enemyKind;
 
 public:
-	HRESULT init();
-	void update();
-	void release();
-	void render();
-
-	enemyBase() {};
+	enemyBase() : _enemyKind(0) {};
 	~enemyBase() {};
 };
 
