@@ -6,6 +6,7 @@
 #pragma comment(lib, "D2D1.lib")
 #pragma comment(lib, "windowscodecs.lib")
 #pragma comment(lib, "jsoncpp/lib_json/json_vc71_libmtd.lib")
+#pragma comment(lib, "dwrite.lib")
 
 #include <SDKDDKver.h>
 
@@ -44,6 +45,7 @@
 
 // Direct 헤더 파일
 #include <d2d1.h>
+#include <dwrite.h>
 
 using namespace std;
 using namespace D2D1;

@@ -110,6 +110,10 @@ private:
 	camera*				_currentCamera;
 	vector<tagRender>	_vRenderList[RO_COUNT];
 
+	IDWriteFactory*			_writeFactory;
+	ID2D1SolidColorBrush*	_brush;
+	IDWriteTextFormat*		_textFormat;
+
 public :
 	HRESULT init(void);
 	void release(void);
@@ -127,6 +131,8 @@ public :
 
 	void setRenderState(e_RENDER_MANAGER_STATE s, int value);
 	int  getRenderState(e_RENDER_MANAGER_STATE s);
+
+	void setBrushColor(D2D1_COLOR_F * color) { _brush->SetColor(*color); };
 
 private :
 	bool clipRender(tagRender & r);
