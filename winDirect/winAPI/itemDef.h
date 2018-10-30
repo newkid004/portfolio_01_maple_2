@@ -9,7 +9,7 @@ namespace itemDef
 		ITEM_TYPE_CHECK					=	0x00ff,
 
 		ITEM_TYPE_WEAPON				=	0x0001,
-		ITEM_TYPE_AMMOR					=	0x0002,
+		ITEM_TYPE_ARMOR					=	0x0002,
 
 		ITEM_TYPE_CONSUMABLE			=	0x0004,
 
