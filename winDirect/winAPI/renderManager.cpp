@@ -4,6 +4,28 @@
 
 HRESULT renderManager::init(void)
 {
+	// 폰트 색상 : black
+	_renderTarget->CreateSolidColorBrush(C_COLOR_BLACK, &_brush);
+	
+	// writeFactory 생성
+	DWriteCreateFactory(
+		DWRITE_FACTORY_TYPE_SHARED,
+		__uuidof(_writeFactory),
+		(IUnknown**)_writeFactory);
+
+	// textFormat 생성
+	_writeFactory->CreateTextFormat(
+		L"궁서",
+		NULL,
+		DWRITE_FONT_WEIGHT_REGULAR,
+		DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL,
+		16.0f,
+		L"",
+		&_textFormat);
+
+
+
 	return S_OK;
 }
 

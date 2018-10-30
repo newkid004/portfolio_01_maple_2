@@ -126,7 +126,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		HwndRenderTargetProperties(_hWnd, SizeU(RectWidth(r), RectHeight(r))),	// 출력 대상 윈도우 핸들
 		&_renderTarget))														// 렌더 타겟 설정
 		return 0;
-	
+
 	// antialias 설정
 	_renderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);	// 사용
 

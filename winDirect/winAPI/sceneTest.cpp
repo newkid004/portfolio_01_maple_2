@@ -4,9 +4,6 @@
 HRESULT sceneTest::init(void)
 {
 	getBackColor() = C_COLOR_GRAY;
-
-	IMAGEMANAGER->add("test", L"image/testImg.png");
-	IMAGEMANAGER->add("frame", L"image/frame.png", 12, 1);
 	IMAGEMANAGER->setRenderState(IRS_ALWAYS_RESET_TRANSFORM, false);
 
 	_ani = new animation;
@@ -24,11 +21,6 @@ void sceneTest::release(void)
 void sceneTest::update(void)
 {
 	updateControl();
-	static int i = 1;
-	auto color = IMAGEMANAGER->find("test")->getBitmapPixel(POINT{i,i});
-	cout << (int)color.a<<"  " <<(int)color.r <<"  " <<(int)color.g << "  " <<(int)color.b << "  "<< endl;
-	i++;
-	if (i > 99)i = 0;
 }
 
 void sceneTest::render(void)
@@ -41,6 +33,7 @@ void sceneTest::updateControl(void)
 	static fPOINT pos;
 	static float rot;
 	static int flip;
+	static float scale = 1.0f;
 
 	if (KEYMANAGER->down('W'))	rot -= TIMEMANAGER->getElapsedTime() * 180;
 	if (KEYMANAGER->down('S'))	rot += TIMEMANAGER->getElapsedTime() * 180;
@@ -53,9 +46,18 @@ void sceneTest::updateControl(void)
 	if (KEYMANAGER->press('A')) flip ^= IMAGE_FLIP_HORIZON;
 	if (KEYMANAGER->press('D')) flip ^= IMAGE_FLIP_VERTICAL;
 
+	if (KEYMANAGER->down('E')) scale += TIMEMANAGER->getElapsedTime() * 3;
+	if (KEYMANAGER->down('Q')) scale -= TIMEMANAGER->getElapsedTime() * 3;
+
 	if (KEYMANAGER->press(VK_SPACE)) _ani->start();
+
+	if (KEYMANAGER->press(VK_F1)) IMAGEMANAGER->getTransformState() ^= TF_FLIP;
+	if (KEYMANAGER->press(VK_F2)) IMAGEMANAGER->getTransformState() ^= TF_SCALE;
+	if (KEYMANAGER->press(VK_F3)) IMAGEMANAGER->getTransformState() ^= TF_ROTATION;
+	if (KEYMANAGER->press(VK_F4)) IMAGEMANAGER->getTransformState() ^= TF_POSITION;
 
 	IMAGEMANAGER->statePos(pos);
 	IMAGEMANAGER->stateRotate(rot);
 	IMAGEMANAGER->stateFlip(flip);
+	IMAGEMANAGER->statScale(scale, scale);
 }

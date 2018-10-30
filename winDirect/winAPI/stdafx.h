@@ -6,6 +6,7 @@
 #pragma comment(lib, "D2D1.lib")
 #pragma comment(lib, "windowscodecs.lib")
 #pragma comment(lib, "jsoncpp/lib_json/json_vc71_libmtd.lib")
+#pragma comment(lib, "dwrite.lib")
 
 #include <SDKDDKver.h>
 
@@ -44,6 +45,7 @@
 
 // Direct 헤더 파일
 #include <d2d1.h>
+#include <dwrite.h>
 
 using namespace std;
 using namespace D2D1;
@@ -57,8 +59,6 @@ using namespace D2D1;
 // json
 #include "jsoncpp/include/json/forwards.h"
 #include "jsoncpp/include/json/json.h"
-
-
 
 using namespace MY_UTIL;
 
@@ -88,6 +88,7 @@ using namespace MY_UTIL;
 #include "npcManager.h"
 #include "questManager.h"
 #include "shopManager.h"
+#include "enemyManager.h"
 
 #include "gameSystem.h"
 
@@ -114,6 +115,7 @@ using namespace MY_UTIL;
 #define NPCMANAGER		npcManager::getSingleton()
 #define QUESTMANAGER	questManager::getSingleton()
 #define SHOPMANAGER		shopManager::getSingleton()
+#define ENEMYMANAGER	enemyManager::getSingleton()
 
 #define GAMESYSTEM		gameSystem::getSingleton()
 
