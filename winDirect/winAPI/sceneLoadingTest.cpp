@@ -6,6 +6,15 @@
 HRESULT sceneLoadingTest::init(void)
 {
 	_loading = new loading; _loading->init();
+	_ani = new animation;
+
+	// ----- first load ----- //
+	_loadingImage = IMAGEMANAGER->add("wizet_loading", L"image/background/wizet.png", 1, 44);
+
+	// ----- UI ----- //
+	_loading->loadImage("charaterSelectBack", L"image/background/charaterSelectBack.png");
+	_loading->loadImage("nonePlayerB", L"image/charaterSelect/nonePlayerB.png", 1, 8);
+	_loading->loadImage("nonePlayer", L"image/charaterSelect/nonePlayer.png");
 
 	// ----- skill ----- //
 	// 0. beginner
@@ -19,31 +28,45 @@ HRESULT sceneLoadingTest::init(void)
 	_loading->loadImage("test", L"image/testImg.png");
 	_loading->loadImage("frame", L"image/frame.png", 12, 1);
 
+	// ani
+	_ani->init(_loadingImage);
+	_ani->setFPS(15.f);
+	_ani->setDefPlayFrame(false, true);
+	_ani->start();
+
+	IMAGEMANAGER->setRenderState(IRS_ALWAYS_RESET_TRANSFORM, false);
+	IMAGEMANAGER->statePos(fPOINT(
+		(WINSIZEX - _ani->getFrameSize().x) / 2,
+		(WINSIZEY - _ani->getFrameSize().y) / 2));
+
 	return S_OK;
 }
 
 void sceneLoadingTest::release(void)
-{
-}
-
-void sceneLoadingTest::update(void)
-{
-	if (_loading->loadingDone())
-	{
-		releaseLoading();
-		SCENEMANAGER->changeScene("test");
-	}
-}
-
-void sceneLoadingTest::render(void)
-{
-}
-
-void sceneLoadingTest::releaseLoading(void)
 {
 	if (_loading)
 	{
 		_loading->release();
 		SAFE_DELETE(_loading);
 	}
+	if (_ani)
+	{
+		_ani->release();
+		SAFE_DELETE(_ani);
+	}
+}
+
+void sceneLoadingTest::update(void)
+{
+	_ani->update();
+	if (_loading->loadingDone() && _ani->isEnd())
+	{
+		release();
+		SCENEMANAGER->changeScene("test");
+	}
+}
+
+void sceneLoadingTest::render(void)
+{
+	_loadingImage->aniRender(_ani);
 }

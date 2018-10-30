@@ -33,7 +33,7 @@ struct fPOINT
 
 	fPOINT()						{ this->x = 0; this->y = 0; }
 	fPOINT(NUM_REAL xy)				{ this->x = xy; this->y = xy; };
-	fPOINT(NUM_REAL x, NUM_REAL y) { this->x = x; this->y = y; };
+	fPOINT(NUM_REAL x, NUM_REAL y)	{ this->x = x; this->y = y; };
 
 	fPOINT operator+(fPOINT input) { return fPOINT(this->x + input.x, this->y + input.y); }
 	fPOINT operator-(fPOINT input) { return fPOINT(this->x - input.x, this->y - input.y); }

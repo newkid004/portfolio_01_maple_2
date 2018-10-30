@@ -6,6 +6,8 @@ class loading;
 class sceneLoadingTest : public gameNode
 {
 private :
+	image * _loadingImage;
+	animation* _ani;
 	loading* _loading;
 
 public :
@@ -13,9 +15,6 @@ public :
 	void release(void);
 	void update(void);
 	void render(void);
-
-public :
-	void releaseLoading(void);
 
 public:
 	sceneLoadingTest() {};
