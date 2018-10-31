@@ -21,11 +21,20 @@ void bulletBase::update(void)
 
 void bulletBase::render(void)
 {
+	function<void(void)>* fBefore = new function<void(void)>;
+	*fBefore = [&](void)->void 
+	{ 
+		IMAGEMANAGER->getTransformState() = bit_pick(TF_ALL, TF_ROTATION | TF_SCALE);
+		IMAGEMANAGER->stateFlip(_info.flip); 
+	};
+
 	RENDERMANAGER->add(
 		RO_SKILL_FRONT,
 		_img,
 		_position - _ani->getFrameSize() / 2, 
 		_ani->getFramePos(), 
 		_ani->getFrameSize(), 
-		1.0f, 0.0f, _info.flip);
+		1.0f,
+		fBefore,
+		NULL);
 }

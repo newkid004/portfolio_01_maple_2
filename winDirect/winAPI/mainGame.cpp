@@ -6,6 +6,8 @@
 #include "sceneLoadingTest.h"
 #include "loadingScene.h"
 #include "charaterSelectScene.h"
+#include "sceneTest2.h"
+#include "sceneTestPixelCrash.h"
 
 //=================//
 // # init # 초기화 //
@@ -19,9 +21,11 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("testLoading", new sceneLoadingTest);
 	SCENEMANAGER->addScene("loading", new loadingScene);
 	SCENEMANAGER->addScene("charaterSelect", new charaterSelectScene);
+	SCENEMANAGER->addScene("test2", new sceneTest2);
+	SCENEMANAGER->addScene("testPixelCrash", new sceneTestPixelCrash);
 
 	// change
-	SCENEMANAGER->changeScene("testLoading");
+	SCENEMANAGER->changeScene("testPixelCrash");
 	//SCENEMANAGER->changeScene("test");
 	
 	return S_OK;
@@ -52,7 +56,7 @@ void mainGame::update(void)
 void mainGame::render(void)
 {
 #ifdef PROCESS_D3D
-	if (true)
+	if (_renderTarget)
 	{
 		_renderTarget->BeginDraw();
 		_renderTarget->Clear(getBackColor());
@@ -62,9 +66,6 @@ void mainGame::render(void)
 
 		// ============================================================
 		_renderTarget->EndDraw();
-		
-		// ----- 백버퍼 시연 ----- //
-		// _dDevice->Present(0, 0, 0, 0);			// 백버퍼 시연
 	}
 
 #else

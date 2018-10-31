@@ -14,6 +14,14 @@ void effectBase::update(void)
 
 void effectBase::render(void)
 {
+	function<void(void)>* fBefore = new function<void(void)>;
+	*fBefore = [&](void)->void
+	{
+		IMAGEMANAGER->getTransformState() = TF_ALL;
+		IMAGEMANAGER->stateRotate(_infoEffect.rotation);
+		IMAGEMANAGER->stateFlip(_infoEffect.flip);
+	};
+
 	RENDERMANAGER->add(
 		_infoEffect.renderOrder,
 		_infoEffect.image,
@@ -21,6 +29,6 @@ void effectBase::render(void)
 		_infoEffect.ani->getFramePos(),
 		_infoEffect.ani->getFrameSize(),
 		_infoEffect.alpha,
-		_infoEffect.rotation,
-		_infoEffect.flip);
+		NULL,
+		NULL);
 }

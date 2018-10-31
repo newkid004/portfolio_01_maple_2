@@ -13,6 +13,9 @@
 //거의 사용되지 않는 내용은 Windows 헤더에서 제외
 #define WIN32_LEAN_AND_MEAN
 
+// c_str 제어문 경고 무시
+#define _CRT_SECURE_NO_WARNINGS
+
 // #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 //Windows 헤더 파일
@@ -89,6 +92,7 @@ using namespace MY_UTIL;
 #include "questManager.h"
 #include "shopManager.h"
 #include "enemyManager.h"
+#include "textManager.h"
 
 #include "gameSystem.h"
 
@@ -116,6 +120,7 @@ using namespace MY_UTIL;
 #define QUESTMANAGER	questManager::getSingleton()
 #define SHOPMANAGER		shopManager::getSingleton()
 #define ENEMYMANAGER	enemyManager::getSingleton()
+#define TEXTMANAGER		textManager::getSingleton()
 
 #define GAMESYSTEM		gameSystem::getSingleton()
 
