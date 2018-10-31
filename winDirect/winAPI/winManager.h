@@ -30,6 +30,8 @@ public :
 	UI_LIST_ITER* close(windowBase* winBase);
 	UI_LIST_ITER* close(UI_LIST_ITER*& winIter);
 
+	UI_LIST_ITER* getIgnoreIter(void) { return &(_lWindow.rend()).base(); };
+
 public:
 	winManager() {};
 	~winManager() {};
