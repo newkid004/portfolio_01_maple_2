@@ -49,9 +49,6 @@
     <Filter Include="API Framework\매니져\사운드">
       <UniqueIdentifier>{0ac68111-4a53-4616-9d7b-fe027b282928}</UniqueIdentifier>
     </Filter>
-    <Filter Include="API Framework\매니져\이미지\GDI">
-      <UniqueIdentifier>{41cce586-91e0-4109-8535-80e9a6a1e21f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="API Framework\매니져\Json">
       <UniqueIdentifier>{a67edd88-2622-4ea2-ab0a-755681351c79}</UniqueIdentifier>
     </Filter>
@@ -142,12 +139,6 @@
     <Filter Include="메인게임\Game Framework\object">
       <UniqueIdentifier>{843f9ec6-fa55-4519-a4d7-97b3bf1c869a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\object\baseObject">
-      <UniqueIdentifier>{c2a378ba-29a4-4c8c-b9e4-d90b14370acf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Game Framework\object\enemyBase">
-      <UniqueIdentifier>{b4338e02-f31a-4e30-8ace-20c8fe36e5ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="메인게임\Game Framework\object\item">
       <UniqueIdentifier>{ed91bf44-6322-4183-aba2-c8638c8cf7e5}</UniqueIdentifier>
     </Filter>
@@ -160,15 +151,6 @@
     <Filter Include="메인게임\Game Framework\object\NPC\NPCManager">
       <UniqueIdentifier>{d6815cf5-9baf-4497-8c0c-12d361921ac6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\object\character">
-      <UniqueIdentifier>{81f10eb2-0dd1-48fd-906a-f436f12166fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Game Framework\object\character\_base">
-      <UniqueIdentifier>{055c4ff9-bb35-491d-826d-3bd1bbdcf67b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Game Framework\object\enemyBase\_base">
-      <UniqueIdentifier>{f805eb79-5234-4c85-bd10-de2774cf0b8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="메인게임\Game Framework\object\bullet">
       <UniqueIdentifier>{8508b19a-3db0-4228-9e09-fc22a583112c}</UniqueIdentifier>
     </Filter>
@@ -180,6 +162,45 @@
     </Filter>
     <Filter Include="메인게임\Game Framework\Manager\effect\_base">
       <UniqueIdentifier>{993b7965-a00d-4fb0-929a-2d155b9599bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\event">
+      <UniqueIdentifier>{fff07e96-ea39-4112-8187-20caf2579d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\event\_base">
+      <UniqueIdentifier>{f13bfe91-3f81-499f-8823-97eaac722a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\object\_base">
+      <UniqueIdentifier>{c2a378ba-29a4-4c8c-b9e4-d90b14370acf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\object\_character">
+      <UniqueIdentifier>{81f10eb2-0dd1-48fd-906a-f436f12166fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\object\_character\_base">
+      <UniqueIdentifier>{055c4ff9-bb35-491d-826d-3bd1bbdcf67b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\object\_character\enemy">
+      <UniqueIdentifier>{b4338e02-f31a-4e30-8ace-20c8fe36e5ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\enemy">
+      <UniqueIdentifier>{a9da7829-4ba5-43e4-912f-dc0cec8925ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\enemy\_base">
+      <UniqueIdentifier>{f805eb79-5234-4c85-bd10-de2774cf0b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\object\_character\enemy\_boss">
+      <UniqueIdentifier>{d0157f3b-b368-49fd-99cf-e8c7a90a20eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\object\_character\enemy\enemies">
+      <UniqueIdentifier>{7d47c25b-fa4d-454a-9355-39840bfeec68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Scene\test">
+      <UniqueIdentifier>{368772c5-572b-4bf1-bbf3-9172fd5e35db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\text">
+      <UniqueIdentifier>{c861758a-3aa0-420a-8e14-68be36c4f850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API Framework\매니져\이미지\direct">
+      <UniqueIdentifier>{41cce586-91e0-4109-8535-80e9a6a1e21f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -232,19 +253,16 @@
       <Filter>API Framework\animation</Filter>
     </ClCompile>
     <ClCompile Include="imageManager.cpp">
-      <Filter>API Framework\매니져\이미지\GDI</Filter>
+      <Filter>API Framework\매니져\이미지\direct</Filter>
     </ClCompile>
     <ClCompile Include="mainGame.cpp">
       <Filter>메인게임\mainGame</Filter>
     </ClCompile>
-    <ClCompile Include="sceneTest.cpp">
-      <Filter>메인게임\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="image.cpp">
-      <Filter>API Framework\매니져\이미지\GDI</Filter>
+      <Filter>API Framework\매니져\이미지\direct</Filter>
     </ClCompile>
     <ClCompile Include="baseObject.cpp">
-      <Filter>메인게임\Game Framework\object\baseObject</Filter>
+      <Filter>메인게임\Game Framework\object\_base</Filter>
     </ClCompile>
     <ClCompile Include="npcBase.cpp">
       <Filter>메인게임\Game Framework\object\NPC</Filter>
@@ -319,10 +337,10 @@
       <Filter>메인게임\Game Framework\Manager\shop\_base</Filter>
     </ClCompile>
     <ClCompile Include="characterBase.cpp">
-      <Filter>메인게임\Game Framework\object\character\_base</Filter>
+      <Filter>메인게임\Game Framework\object\_character\_base</Filter>
     </ClCompile>
     <ClCompile Include="enemyBase.cpp">
-      <Filter>메인게임\Game Framework\object\enemyBase\_base</Filter>
+      <Filter>메인게임\Game Framework\Manager\enemy\_base</Filter>
     </ClCompile>
     <ClCompile Include="bulletBase.cpp">
       <Filter>메인게임\Game Framework\object\bullet\_base</Filter>
@@ -332,6 +350,31 @@
     </ClCompile>
     <ClCompile Include="effectBase.cpp">
       <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
+    </ClCompile>
+    <ClCompile Include="eventBase.cpp">
+      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
+    </ClCompile>
+    <ClCompile Include="eventManager.cpp">
+      <Filter>메인게임\Game Framework\Manager\event</Filter>
+    </ClCompile>
+    <ClCompile Include="bossBase.cpp">
+      <Filter>메인게임\Game Framework\object\_character\enemy\_boss</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager.cpp">
+      <Filter>메인게임\Game Framework\Manager\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy_0000_snail.cpp">
+      <Filter>메인게임\Game Framework\object\_character\enemy\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneLoadingTest.cpp">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneTest.cpp">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneTest2.cpp" />
+    <ClCompile Include="textManager.cpp">
+      <Filter>메인게임\Game Framework\Manager\text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -393,7 +436,7 @@
       <Filter>API Framework\animation</Filter>
     </ClInclude>
     <ClInclude Include="imageManager.h">
-      <Filter>API Framework\매니져\이미지\GDI</Filter>
+      <Filter>API Framework\매니져\이미지\direct</Filter>
     </ClInclude>
     <ClInclude Include="singletonBase.h">
       <Filter>API Framework\매니져</Filter>
@@ -401,23 +444,20 @@
     <ClInclude Include="mainGame.h">
       <Filter>메인게임\mainGame</Filter>
     </ClInclude>
-    <ClInclude Include="sceneTest.h">
-      <Filter>메인게임\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="image.h">
-      <Filter>API Framework\매니져\이미지\GDI</Filter>
+      <Filter>API Framework\매니져\이미지\direct</Filter>
     </ClInclude>
     <ClInclude Include="baseObject.h">
-      <Filter>메인게임\Game Framework\object\baseObject</Filter>
+      <Filter>메인게임\Game Framework\object\_base</Filter>
     </ClInclude>
     <ClInclude Include="objectDef.h">
-      <Filter>메인게임\Game Framework\object\baseObject</Filter>
+      <Filter>메인게임\Game Framework\object\_base</Filter>
     </ClInclude>
     <ClInclude Include="itemDef.h">
-      <Filter>메인게임\Game Framework\object\baseObject</Filter>
+      <Filter>메인게임\Game Framework\object\_base</Filter>
     </ClInclude>
     <ClInclude Include="classesDef.h">
-      <Filter>메인게임\Game Framework\object\baseObject</Filter>
+      <Filter>메인게임\Game Framework\object\_base</Filter>
     </ClInclude>
     <ClInclude Include="npcBase.h">
       <Filter>메인게임\Game Framework\object\NPC</Filter>
@@ -435,7 +475,7 @@
       <Filter>메인게임\Game Framework\Manager\skill\base</Filter>
     </ClInclude>
     <ClInclude Include="state.h">
-      <Filter>메인게임\Game Framework\object\character</Filter>
+      <Filter>메인게임\Game Framework\object\_character</Filter>
     </ClInclude>
     <ClInclude Include="buffManager.h">
       <Filter>메인게임\Game Framework\Manager\buff</Filter>
@@ -495,10 +535,10 @@
       <Filter>메인게임\Game Framework\Manager\shop\_base</Filter>
     </ClInclude>
     <ClInclude Include="characterBase.h">
-      <Filter>메인게임\Game Framework\object\character\_base</Filter>
+      <Filter>메인게임\Game Framework\object\_character\_base</Filter>
     </ClInclude>
     <ClInclude Include="enemyBase.h">
-      <Filter>메인게임\Game Framework\object\enemyBase\_base</Filter>
+      <Filter>메인게임\Game Framework\Manager\enemy\_base</Filter>
     </ClInclude>
     <ClInclude Include="bulletBase.h">
       <Filter>메인게임\Game Framework\object\bullet\_base</Filter>
@@ -508,6 +548,37 @@
     </ClInclude>
     <ClInclude Include="effectBase.h">
       <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="eventBase.h">
+      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="eventManager.h">
+      <Filter>메인게임\Game Framework\Manager\event</Filter>
+    </ClInclude>
+    <ClInclude Include="bossBase.h">
+      <Filter>메인게임\Game Framework\object\_character\enemy\_boss</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyDef.h">
+      <Filter>메인게임\Game Framework\Manager\enemy\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManager.h">
+      <Filter>메인게임\Game Framework\Manager\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy_0000_snail.h">
+      <Filter>메인게임\Game Framework\object\_character\enemy\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyList.h">
+      <Filter>메인게임\Game Framework\Manager\enemy\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneLoadingTest.h">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneTest.h">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneTest2.h" />
+    <ClInclude Include="textManager.h">
+      <Filter>메인게임\Game Framework\Manager\text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

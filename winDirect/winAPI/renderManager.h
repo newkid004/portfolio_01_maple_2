@@ -66,18 +66,11 @@ private :
 		fPOINT size;
 
 		float alpha;
-		float rotate;
-		int flip;
 
-		tagRender() : 
-			img(NULL),
-			pos(0.0f), 
-			clip(0.0f), 
-			size(0.0f), 
-			alpha(1.0f), 
-			rotate(0.0f),
-			flip(0)
-		{};
+		function<void(void)>* callBefore;
+		function<void(void)>* callAfter;
+
+		tagRender() { ZeroMemory(this, sizeof(tagRender)); alpha = 1.0f; };
 
 		tagRender(image* inImage) : 
 			tagRender()
@@ -92,16 +85,18 @@ private :
 			this->pos = inPos; 
 		};
 
-		tagRender(image* img, fPOINT pos, fPOINT sour, fPOINT dest, float alpha = 1.0f, float rotate = 0.0f, int flip = 0)
+		tagRender(image* img, fPOINT pos, fPOINT sour, fPOINT dest, float alpha = 1.0f, 
+			function<void(void)>* callBefore = NULL, function<void(void)>* callAfter = NULL)
 		{
-			this->img = img;
-			this->pos = pos;
-			this->clip = sour;
-			this->size = dest;
+			this->img		= img;
+			this->pos		= pos;
+			this->clip		= sour;
+			this->size		= dest;
 
-			this->alpha = alpha;
-			this->rotate = rotate;
-			this->flip = flip;
+			this->alpha		= alpha;
+
+			this->callBefore = callBefore;
+			this->callAfter = callAfter;
 		};
 	};
 
@@ -117,18 +112,16 @@ public :
 	void render(void);
 
 public :
-	void releaseList(int order);
-	void renderList(int order);
-
-public :
-	void add(e_RENDER_ORDER order, image * img, fPOINT pos, fPOINT clip, fPOINT size, float alpha = 1.0f, float rotate = 0.0f, int flip = 0);
+	void add(e_RENDER_ORDER order, image * img, fPOINT pos, fPOINT clip, fPOINT size, float alpha = 1.0f, function<void(void)>* callBefore = NULL, function<void(void)>* callAfter = NULL);
 
 	void setCamera(camera* c) { _currentCamera = c; };
 
 	void setRenderState(e_RENDER_MANAGER_STATE s, int value);
-	int  getRenderState(e_RENDER_MANAGER_STATE s);
+	int  getRenderState(e_RENDER_MANAGER_STATE s) { return 0 < (_renderState & s); };
 
 private :
+	void renderList(int order);
+	void releaseList(int order);
 	bool clipRender(tagRender & r);
 
 public:

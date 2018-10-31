@@ -13,6 +13,8 @@ protected:
 	list<buffBase*> _LbuffList;					//버프 리스트
 	list<buffBase*>::iterator _Libuff;
 
+	stateBasic	_stateBasic;
+
 protected:
 	fPOINT		_velocity;						//속도			<- 중력 + 마찰속도 + 현재 속도 (최종속도)
 	rayStruct	_rayStruct;						//광선 구조체(충돌검사 광선)
@@ -28,6 +30,9 @@ public:
 
 	list<buffBase*>&getBuffList() { return _LbuffList; }
 	patternBase* getPattern() { return _currentPattern; }
+
+	stateBasic & getStat(void) { return _stateBasic; };
+
 	void getVelocity() {
 		_velocity = _currentPattern->getPatternVelocity();
 		_velocity.y += 1.0f;
@@ -36,10 +41,7 @@ public:
 		rayCollision();
 	}
 
-	virtual HRESULT init() = 0;
-	virtual void release() = 0;
-	virtual void render() = 0;
-	characterBase() {};
+	characterBase() { _objectKind = (objDef::OBJECT)(_objectKind | (int)objDef::OBJECT_CHARACTER); };
 	~characterBase() {};
 };
 

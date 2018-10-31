@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 *.db
+*.opendb
 
 # Compiled Object files
 *.slo
@@ -38,3 +39,4 @@
 *.ipch
 *.ilk
 *.pdb
+/winDirect/.vs/winDirect/v15/Browse.VC.opendb

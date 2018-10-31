@@ -71,7 +71,7 @@ struct itemContentWeapon : public itemContentEquip {
 	itemContentWeapon() : itemContentEquip() { type |= itemDef::ITEM_TYPE_WEAPON; }
 };
 struct itemContentArmor : public itemContentEquip {
-	itemContentArmor() : itemContentEquip() { type |= itemDef::ITEM_TYPE_AMMOR; }
+	itemContentArmor() : itemContentEquip() { type |= itemDef::ITEM_TYPE_ARMOR; }
 };
 
 class itemBase : public baseObject

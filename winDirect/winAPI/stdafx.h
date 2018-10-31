@@ -5,11 +5,16 @@
 #pragma once
 #pragma comment(lib, "D2D1.lib")
 #pragma comment(lib, "windowscodecs.lib")
+#pragma comment(lib, "jsoncpp/lib_json/json_vc71_libmtd.lib")
+#pragma comment(lib, "dwrite.lib")
 
 #include <SDKDDKver.h>
 
 //거의 사용되지 않는 내용은 Windows 헤더에서 제외
 #define WIN32_LEAN_AND_MEAN
+
+// c_str 제어문 경고 무시
+#define _CRT_SECURE_NO_WARNINGS
 
 // #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
@@ -43,6 +48,7 @@
 
 // Direct 헤더 파일
 #include <d2d1.h>
+#include <dwrite.h>
 
 using namespace std;
 using namespace D2D1;
@@ -53,8 +59,9 @@ using namespace D2D1;
 // #include "triFunction.h"
 #include "utils.h"
 
-
-
+// json
+#include "jsoncpp/include/json/forwards.h"
+#include "jsoncpp/include/json/json.h"
 
 using namespace MY_UTIL;
 
@@ -84,6 +91,8 @@ using namespace MY_UTIL;
 #include "npcManager.h"
 #include "questManager.h"
 #include "shopManager.h"
+#include "enemyManager.h"
+#include "textManager.h"
 
 #include "gameSystem.h"
 
@@ -110,6 +119,8 @@ using namespace MY_UTIL;
 #define NPCMANAGER		npcManager::getSingleton()
 #define QUESTMANAGER	questManager::getSingleton()
 #define SHOPMANAGER		shopManager::getSingleton()
+#define ENEMYMANAGER	enemyManager::getSingleton()
+#define TEXTMANAGER		textManager::getSingleton()
 
 #define GAMESYSTEM		gameSystem::getSingleton()
 

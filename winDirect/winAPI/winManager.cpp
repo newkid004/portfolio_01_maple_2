@@ -35,8 +35,11 @@ void winManager::update(void)
 
 void winManager::render(void)
 {
-	for (auto winBase : _lWindow)
-		winBase->render();
+	UI_LIST::reverse_iterator iter = _lWindow.rbegin();
+	for (; iter != _lWindow.rend(); ++iter)
+	{
+		(*iter)->render();
+	}
 }
 
 windowBase * winManager::add(string winName, windowBase * winAdd)
@@ -98,7 +101,7 @@ winManager::UI_LIST_ITER*  winManager::close(string winName)
 
 	// ÀÌ¹Ì ´ÝÇû´ÂÁö ÆÇº°
 	windowBase* winBase = iter->second;
-	if (winBase->getIter() != NULL)
+	if (winBase->getIter() == NULL)
 	{
 		// ÀÌ¹Ì ´ÝÇôÀÖÀ½ -> ³ª°¨
 		return NULL;
