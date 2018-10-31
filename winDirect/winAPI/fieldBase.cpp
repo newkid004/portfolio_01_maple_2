@@ -8,7 +8,7 @@
 
 HRESULT fieldBase::init(void)
 {
-	_imgField = NULL;
+	_vFieldImage.reserve(6);
 	_pixel = NULL;
 
 	return S_OK;
@@ -16,6 +16,8 @@ HRESULT fieldBase::init(void)
 
 void fieldBase::release(void)
 {
+	_vFieldImage.clear();
+
 	releasePixelImage();
 	releaseTotal();
 }
@@ -44,7 +46,7 @@ void fieldBase::setPixelImage(const char * fileName)
 	// imgField 정의 필요
 	HDC hdc = GetDC(_hWnd);
 	_pixel->pDC = CreateCompatibleDC(hdc);
-	_pixel->pBitmap = (HBITMAP)LoadImage(_hInstance, fileName, IMAGE_BITMAP, _imgField->getSize().x, _imgField->getSize().y, LR_LOADFROMFILE);
+	_pixel->pBitmap = (HBITMAP)LoadImage(_hInstance, fileName, IMAGE_BITMAP, _vFieldImage[0].img->getSize().x, _vFieldImage[0].img->getSize().y, LR_LOADFROMFILE);
 	_pixel->oBitmap = (HBITMAP)SelectObject(_pixel->pDC, _pixel->pBitmap);
 }
 
