@@ -78,6 +78,7 @@ public :
 	fPOINT &	statePos(fPOINT input)		{ return _imgPos = input; };
 	int &		stateFlip(int input)		{ return _imgFlip = input; };
 	float &		stateRotate(float input)	{ return _imgRotate = input; };
+	D2D1_SIZE_F& statScale(float xy)		{ return _imgScale = D2D1_SIZE_F{ xy, xy }; }
 	D2D1_SIZE_F& statScale(float x, float y){ return _imgScale = D2D1_SIZE_F{ x, y }; }
 	D2D1_SIZE_F& statScale(fPOINT input)	{ return _imgScale = D2D1_SIZE_F{ input.x, input.y }; }
 

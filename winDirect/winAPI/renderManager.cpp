@@ -4,28 +4,6 @@
 
 HRESULT renderManager::init(void)
 {
-	// 폰트 색상 : black
-	_renderTarget->CreateSolidColorBrush(C_COLOR_BLACK, &_brush);
-	
-	// writeFactory 생성
-	DWriteCreateFactory(
-		DWRITE_FACTORY_TYPE_SHARED,
-		__uuidof(_writeFactory),
-		(IUnknown**)_writeFactory);
-
-	// textFormat 생성
-	_writeFactory->CreateTextFormat(
-		L"궁서",
-		NULL,
-		DWRITE_FONT_WEIGHT_REGULAR,
-		DWRITE_FONT_STYLE_NORMAL,
-		DWRITE_FONT_STRETCH_NORMAL,
-		16.0f,
-		L"",
-		&_textFormat);
-
-
-
 	return S_OK;
 }
 
@@ -54,33 +32,11 @@ void renderManager::render(void)
 		IMAGEMANAGER->setRenderState(IRS_ALWAYS_RESET_TRANSFORM, true);
 }
 
-void renderManager::releaseList(int order)
-{
-	_vRenderList[order].clear();
-}
-
-void renderManager::renderList(int order)
-{
-	for (tagRender & stRender : _vRenderList[order])
-	{
-		IMAGEMANAGER->statePos(stRender.pos);
-		IMAGEMANAGER->stateFlip(stRender.flip);
-		IMAGEMANAGER->stateRotate(stRender.rotate);
-
-		stRender.img->render(
-			stRender.clip.x,
-			stRender.clip.y,
-			stRender.size.x,
-			stRender.size.y,
-			stRender.alpha);
-	}
-}
-
-void renderManager::add(e_RENDER_ORDER order, image * img, fPOINT pos, fPOINT clip, fPOINT size, float alpha, float rotate, int flip)
+void renderManager::add(e_RENDER_ORDER order, image * img, fPOINT pos, fPOINT clip, fPOINT size, float alpha, function<void(void)>* callBefore, function<void(void)>* callAfter)
 {
 	if (img == NULL) return;
 
-	tagRender addable = tagRender(img, pos, clip, size, alpha, rotate, flip);
+	tagRender addable = tagRender(img, pos, clip, size, alpha, callBefore, callAfter);
 
 	if (_renderState & RMS_CLIP_INTO_CAMERA)
 	{
@@ -103,12 +59,39 @@ void renderManager::setRenderState(e_RENDER_MANAGER_STATE s, int value)
 	}
 }
 
-int renderManager::getRenderState(e_RENDER_MANAGER_STATE s)
+// ----- private ----- //
+void renderManager::renderList(int order)
 {
-	return 0 < (_renderState & s);
+	for (tagRender & stRender : _vRenderList[order])
+	{
+		IMAGEMANAGER->statePos(stRender.pos);
+
+		if (stRender.callBefore)
+		{
+			(*stRender.callBefore)();
+			delete stRender.callBefore;
+		}
+
+		stRender.img->render(
+			stRender.clip.x,
+			stRender.clip.y,
+			stRender.size.x,
+			stRender.size.y,
+			stRender.alpha);
+
+		if (stRender.callAfter)
+		{
+			(*stRender.callAfter)();
+			delete stRender.callAfter;
+		}
+	}
 }
 
-// ----- private ----- //
+void renderManager::releaseList(int order)
+{
+	_vRenderList[order].clear();
+}
+
 bool renderManager::clipRender(tagRender & r)
 {
 	static fPOINT & cOffset	= _currentCamera->getOffset();

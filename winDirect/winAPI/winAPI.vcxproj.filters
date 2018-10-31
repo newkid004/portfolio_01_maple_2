@@ -199,6 +199,9 @@
     <Filter Include="메인게임\Scene\test">
       <UniqueIdentifier>{368772c5-572b-4bf1-bbf3-9172fd5e35db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\text">
+      <UniqueIdentifier>{c861758a-3aa0-420a-8e14-68be36c4f850}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -368,6 +371,10 @@
     </ClCompile>
     <ClCompile Include="sceneTest.cpp">
       <Filter>메인게임\Scene\test</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneTest2.cpp" />
+    <ClCompile Include="textManager.cpp">
+      <Filter>메인게임\Game Framework\Manager\text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -568,6 +575,10 @@
     </ClInclude>
     <ClInclude Include="sceneTest.h">
       <Filter>메인게임\Scene\test</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneTest2.h" />
+    <ClInclude Include="textManager.h">
+      <Filter>메인게임\Game Framework\Manager\text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -89,6 +89,7 @@ using namespace MY_UTIL;
 #include "questManager.h"
 #include "shopManager.h"
 #include "enemyManager.h"
+#include "textManager.h"
 
 #include "gameSystem.h"
 
@@ -116,6 +117,7 @@ using namespace MY_UTIL;
 #define QUESTMANAGER	questManager::getSingleton()
 #define SHOPMANAGER		shopManager::getSingleton()
 #define ENEMYMANAGER	enemyManager::getSingleton()
+#define TEXTMANAGER		textManager::getSingleton()
 
 #define GAMESYSTEM		gameSystem::getSingleton()
 
