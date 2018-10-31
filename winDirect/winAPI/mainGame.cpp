@@ -6,6 +6,7 @@
 #include "sceneLoadingTest.h"
 #include "loadingScene.h"
 #include "charaterSelectScene.h"
+#include "sceneTest2.h"
 
 //=================//
 // # init # ÃÊ±âÈ­ //
@@ -19,6 +20,7 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("testLoading", new sceneLoadingTest);
 	SCENEMANAGER->addScene("loading", new loadingScene);
 	SCENEMANAGER->addScene("charaterSelect", new charaterSelectScene);
+	SCENEMANAGER->addScene("test2", new sceneTest2);
 
 	// change
 	SCENEMANAGER->changeScene("testLoading");

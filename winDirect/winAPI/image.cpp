@@ -36,7 +36,7 @@ HRESULT image::_putImage(bool isUsePixel)
 	if (isUsePixel)
 	{
 		if (S_OK != (hr = IMAGEMANAGER->getFactory()->CreateBitmap(_imageInfo->bitmap->GetSize().width, _imageInfo->bitmap->GetSize().height,
-			GUID_WICPixelFormat32bppRGBA1010102, WICBitmapNoCache, &_imageInfo->wBitmap)))return hr;
+			GUID_WICPixelFormat32bppRGBA1010102XR, WICBitmapNoCache, &_imageInfo->wBitmap)))return hr;
 	}
 		
 	converter->Release();
@@ -193,12 +193,12 @@ ColorF image::getBitmapPixel(POINT pos)
 	BYTE* buffer;
 	UINT size;
 	WICRect rc;
-	rc.X = pos.x; rc.Width = 1;
+	rc.X = pos.x; rc.Width =  1;
 	rc.Y = pos.y; rc.Height = 1;
 	
 	_imageInfo->wBitmap->Lock(&rc, WICBitmapLockRead, &bLock);
 	bLock->GetDataPointer(&size,&buffer);
-	
+
 	ColorF color = ColorF(buffer[2], buffer[1], buffer[0], buffer[3]);
 	bLock->Release();
 	return color;

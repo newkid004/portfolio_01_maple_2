@@ -76,8 +76,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\프로그래밍\Maple\MapleProject2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\프로그래밍\Maple\MapleProject2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -195,6 +195,7 @@
     <ClCompile Include="sceneLoadingTest.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="sceneTest.cpp" />
+    <ClCompile Include="sceneTest2.cpp" />
     <ClCompile Include="shopBase.cpp" />
     <ClCompile Include="shopManager.cpp" />
     <ClCompile Include="skillBase.cpp" />
@@ -263,6 +264,7 @@
     <ClInclude Include="sceneLoadingTest.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="sceneTest.h" />
+    <ClInclude Include="sceneTest2.h" />
     <ClInclude Include="shopBase.h" />
     <ClInclude Include="shopManager.h" />
     <ClInclude Include="singletonBase.h" />
