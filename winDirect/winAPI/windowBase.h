@@ -43,13 +43,13 @@ public :
 	virtual void render(void);
 
 public :
-	list<windowBase*>::iterator*& getIter(void) { return _managedIter; };
+	UI_LIST_ITER*& getIter(void) { return _managedIter; };
 	string & getName(void) { return _winName; };
 	fPOINT & getPos(void) { return _pos; };
 
 public :	// ----- window ----- //
 	virtual void show(void) { WINMANAGER->show(this); };
-	virtual list<windowBase*>::iterator* close(void) {return WINMANAGER->close(this); };
+	virtual UI_LIST_ITER* close(void) {return WINMANAGER->close(this); };
 	virtual bool isShow(void) { return _managedIter ? true : false; };
 
 public :	// ----- button ----- //
@@ -77,7 +77,7 @@ public :
 	int & getScroll(void) { return _scroll; };
 	shopBase*& getShop(void) { return _shop; };
 
-	list<windowBase*>::iterator* close(void) override { _scroll = 0; return windowBase::close(); };
+	UI_LIST_ITER* close(void) override { _scroll = 0; return windowBase::close(); };
 
 public:
 	windowShop() {};

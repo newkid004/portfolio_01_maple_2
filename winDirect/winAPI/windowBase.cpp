@@ -21,14 +21,8 @@ void windowBase::release(void)
 
 windowBase::UI_LIST_ITER * windowBase::update(void)
 {
-	auto i = _lButton.begin();
-	for (; i != _lButton.end();)
-	{
-		auto result = (*i)->update();
-		if (result) return result;
-	}
-
-	return NULL;
+	UI_LIST_ITER iter = (*_managedIter);
+	return &(--iter);
 }
 
 void windowBase::render(void)

@@ -18,7 +18,7 @@ HRESULT sceneTestPixelCrash::init(void)
 	_field->setPixelImage("image/map/henesys_pixel.bmp");
 
 	// ----- text ----- //
-	TEXTMANAGER->add("text", L"¹ÙÅÁ", 16.f);
+	TEXTMANAGER->add("text", L"µ¸¿òÃ¼", 16.f);
 
 	IMAGEMANAGER->resetTransform();
 	getBackColor() = C_COLOR_WHITE;

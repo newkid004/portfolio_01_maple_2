@@ -22,12 +22,13 @@ void winManager::release(void)
 
 void winManager::update(void)
 {
-	for (auto iter = _lWindow.begin(); iter != _lWindow.end();)
+
+	for (auto iter = _lWindow.rbegin(); iter != _lWindow.rend();)
 	{
 		auto nextIter = (*iter)->update();
 		
 		if (nextIter)
-			iter = *nextIter;
+			iter = make_reverse_iterator(*nextIter);
 		else
 			++iter;
 	}
@@ -35,8 +36,8 @@ void winManager::update(void)
 
 void winManager::render(void)
 {
-	UI_LIST::reverse_iterator iter = _lWindow.rbegin();
-	for (; iter != _lWindow.rend(); ++iter)
+	UI_LIST_ITER iter = _lWindow.begin();
+	for (; iter != _lWindow.end(); ++iter)
 	{
 		(*iter)->render();
 	}
@@ -75,8 +76,8 @@ void winManager::show(string winName)
 	}
 
 	// 맨 앞에 창 띄움
-	_lWindow.push_front(winBase);
-	winBase->getIter() = &_lWindow.begin();
+	_lWindow.push_back(winBase);
+	winBase->getIter() = &_lWindow.rbegin().base();
 }
 
 void winManager::show(windowBase * winBase)
@@ -88,12 +89,12 @@ void winManager::show(UI_LIST_ITER *& winIter)
 {
 	// ** 충돌 위험 ** //
 	// 맨 앞에 창 삽입 후, 기존 위치 삭제
-	_lWindow.push_front(**winIter);
+	_lWindow.push_back(**winIter);
 	_lWindow.erase(*winIter);
-	winIter = &_lWindow.begin();
+	winIter = &_lWindow.rbegin().base();
 }
 
-winManager::UI_LIST_ITER*  winManager::close(string winName)
+winManager::UI_LIST_ITER* winManager::close(string winName)
 {
 	// 목록에 담겨있는지 판별
 	auto iter = _mWindow.find(winName);
@@ -111,7 +112,7 @@ winManager::UI_LIST_ITER*  winManager::close(string winName)
 	winManager::UI_LIST_ITER* nextIter = &_lWindow.erase(*winBase->getIter());
 	winBase->getIter() = NULL;
 
-	return nextIter;
+	return &(--(*nextIter));
 }
 
 winManager::UI_LIST_ITER* winManager::close(windowBase * winBase)
@@ -126,5 +127,5 @@ winManager::UI_LIST_ITER* winManager::close(UI_LIST_ITER *& winIter)
 	auto nextIter = &_lWindow.erase(*winIter);
 	winIter = NULL;
 
-	return nextIter;
+	return &(--(*nextIter));
 }
