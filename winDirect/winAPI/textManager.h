@@ -19,7 +19,7 @@ public :
 	IDWriteTextFormat* find(string name);
 
 public :
-	void drawText(wchar_t* text, int length, D2D1_RECT_F range, IDWriteTextFormat* format, function<void(void)> * callBefore = NULL);
+	void drawText(const wchar_t* text, int length, D2D1_RECT_F range, IDWriteTextFormat* format, function<void(void)> * callBefore = NULL);
 
 public :
 	void setTextColor(D2D1_COLOR_F * color) { _brush->SetColor(*color); };

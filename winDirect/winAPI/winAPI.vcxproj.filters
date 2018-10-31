@@ -202,6 +202,9 @@
     <Filter Include="API Framework\매니져\이미지\direct">
       <UniqueIdentifier>{41cce586-91e0-4109-8535-80e9a6a1e21f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Scene\test_pixelCrash">
+      <UniqueIdentifier>{cf15b6ae-e0ca-480d-82bb-72744c01e796}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -375,6 +378,9 @@
     <ClCompile Include="sceneTest2.cpp" />
     <ClCompile Include="textManager.cpp">
       <Filter>메인게임\Game Framework\Manager\text</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneTestPixelCrash.cpp">
+      <Filter>메인게임\Scene\test_pixelCrash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -579,6 +585,9 @@
     <ClInclude Include="sceneTest2.h" />
     <ClInclude Include="textManager.h">
       <Filter>메인게임\Game Framework\Manager\text</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneTestPixelCrash.h">
+      <Filter>메인게임\Scene\test_pixelCrash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

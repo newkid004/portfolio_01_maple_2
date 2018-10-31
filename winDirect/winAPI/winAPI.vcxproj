@@ -196,6 +196,7 @@
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="sceneTest.cpp" />
     <ClCompile Include="sceneTest2.cpp" />
+    <ClCompile Include="sceneTestPixelCrash.cpp" />
     <ClCompile Include="shopBase.cpp" />
     <ClCompile Include="shopManager.cpp" />
     <ClCompile Include="skillBase.cpp" />
@@ -266,6 +267,7 @@
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="sceneTest.h" />
     <ClInclude Include="sceneTest2.h" />
+    <ClInclude Include="sceneTestPixelCrash.h" />
     <ClInclude Include="shopBase.h" />
     <ClInclude Include="shopManager.h" />
     <ClInclude Include="singletonBase.h" />

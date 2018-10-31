@@ -45,8 +45,8 @@ IDWriteTextFormat * textManager::add(string name, wchar_t* fontStyle, float size
 		&t);
 
 	// 텍스트 정렬 : left
-	t->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-	t->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+	t->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+	t->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
 
 	_mTextFormat.insert(make_pair(name, t));
 	return t;
@@ -60,7 +60,7 @@ IDWriteTextFormat * textManager::find(string name)
 	return i->second;
 }
 
-void textManager::drawText(wchar_t * text, int length, D2D1_RECT_F range, IDWriteTextFormat * format, function<void(void)> * callBefore)
+void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F range, IDWriteTextFormat * format, function<void(void)> * callBefore)
 {
 	if (callBefore)
 	{
