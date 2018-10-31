@@ -3,9 +3,10 @@
 
 HRESULT sceneTest2::init()
 {
-	
 	pos.x = 100;
 	pos.y = 100;
+
+	x = y = 0;
 	return S_OK;
 }
 
@@ -16,30 +17,29 @@ void sceneTest2::release()
 void sceneTest2::update()
 {
 	
-	if (KEYMANAGER->down(VK_LEFT))
+	if (KEYMANAGER->press(VK_LEFT))
 	{
 		pos.x -= 10;
+		x--;
 	}
-	if (KEYMANAGER->down(VK_RIGHT))
+	if (KEYMANAGER->press(VK_RIGHT))
 	{
 		pos.x += 10;
+		x++;
 	}
-	if (KEYMANAGER->down(VK_UP))
+	if (KEYMANAGER->press(VK_UP))
 	{
 		pos.y -= 10;
+		y--;
 	}
-	if (KEYMANAGER->down(VK_DOWN))
+	if (KEYMANAGER->press(VK_DOWN))
 	{
 		pos.y += 10;
+		y++;
 	}
-	/*ColorF color = IMAGEMANAGER->find("test")->getBitmapPixel(_ptMouse);
-	cout << _ptMouse.x << "        " << _ptMouse.y << endl;
-	cout << color.a << "," << color.r << "," << color.g << "," << color.b << endl;
-	cout << "----------------------------------------------------------------------" << endl;
-	if (colorCompare(&IMAGEMANAGER->find("henesys_pixel")->getBitmapPixel(POINT{0,0}), &ColorF{ 0,150,255,0 }))
-	{
-		SCENEMANAGER->changeScene("charaterSelect");
-	}*/
+	
+	
+
 }
 
 void sceneTest2::render()
@@ -68,4 +68,7 @@ void sceneTest2::render()
 
 	IMAGEMANAGER->statePos(pos);
 	IMAGEMANAGER->find("start")->render();
+
+	IMAGEMANAGER->statePos(300, 500);
+	IMAGEMANAGER->find("buttonTest")->frameRender(x, y, 1.0f);
 }
