@@ -205,6 +205,12 @@
     <Filter Include="메인게임\Scene\test_pixelCrash">
       <UniqueIdentifier>{cf15b6ae-e0ca-480d-82bb-72744c01e796}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\button">
+      <UniqueIdentifier>{f8ad0bc4-0173-4e80-b704-01f52011517a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\button\_base">
+      <UniqueIdentifier>{c78512d1-0388-4158-90ad-f540d75d01c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -375,12 +381,20 @@
     <ClCompile Include="sceneTest.cpp">
       <Filter>메인게임\Scene\test</Filter>
     </ClCompile>
-    <ClCompile Include="sceneTest2.cpp" />
     <ClCompile Include="textManager.cpp">
       <Filter>메인게임\Game Framework\Manager\text</Filter>
     </ClCompile>
     <ClCompile Include="sceneTestPixelCrash.cpp">
       <Filter>메인게임\Scene\test_pixelCrash</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneTest2.cpp">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonBase.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonTest.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -582,12 +596,20 @@
     <ClInclude Include="sceneTest.h">
       <Filter>메인게임\Scene\test</Filter>
     </ClInclude>
-    <ClInclude Include="sceneTest2.h" />
     <ClInclude Include="textManager.h">
       <Filter>메인게임\Game Framework\Manager\text</Filter>
     </ClInclude>
     <ClInclude Include="sceneTestPixelCrash.h">
       <Filter>메인게임\Scene\test_pixelCrash</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneTest2.h">
+      <Filter>메인게임\Scene\test</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonBase.h">
+      <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonTest.h">
+      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -25,8 +25,9 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("testPixelCrash", new sceneTestPixelCrash);
 
 	// change
-	SCENEMANAGER->changeScene("testPixelCrash");
+	//SCENEMANAGER->changeScene("testPixelCrash");
 	//SCENEMANAGER->changeScene("test");
+	SCENEMANAGER->changeScene("loading");
 	
 	return S_OK;
 }

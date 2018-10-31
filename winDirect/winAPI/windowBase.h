@@ -1,28 +1,7 @@
 #pragma once
 
-class windowBase;
-
-class buttonBase
-{
-protected :
-	fPOINT _pos;	// relative
-	fPOINT _size;
-
-	function<void(void)> _active;
-
-public :
-	virtual list<windowBase*>::iterator* update(void) { return NULL; };
-	virtual void render(fPOINT & offset) {};
-
-public :
-	fPOINT & getPos(void) { return _pos; };
-	fPOINT & getSize(void) { return _size; };
-	function<void(void)> & getActivate(void) { return _active; };
-
-public :
-	buttonBase() {};
-	~buttonBase() {};
-};
+//class windowBase;
+class buttonBase;
 
 class windowBase
 {
@@ -30,6 +9,7 @@ protected :
 	typedef list<windowBase*>::iterator UI_LIST_ITER;
 
 protected:
+	image* _img;
 	UI_LIST_ITER* _managedIter;
 	string _winName;
 	fPOINT _pos;
