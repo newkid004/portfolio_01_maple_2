@@ -70,15 +70,7 @@ private :
 		function<void(void)>* callBefore;
 		function<void(void)>* callAfter;
 
-		tagRender() :
-			img(NULL),
-			pos(0.0f),
-			clip(0.0f),
-			size(0.0f),
-			alpha(1.0f),
-			callBefore(NULL),
-			callAfter(NULL)
-		{};
+		tagRender() { ZeroMemory(this, sizeof(tagRender)); alpha = 1.0f; };
 
 		tagRender(image* inImage) : 
 			tagRender()
