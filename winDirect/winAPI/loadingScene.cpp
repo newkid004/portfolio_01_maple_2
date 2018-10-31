@@ -15,10 +15,10 @@ HRESULT loadingScene::init(void)
 	IMAGEMANAGER->add("wizet_loading", L"image/background/wizet.png",1,44);
 	IMAGEMANAGER->add("nonePlayerB", L"image/charaterSelect/nonePlayerB.png", 1, 8);
 	IMAGEMANAGER->add("nonePlayer", L"image/charaterSelect/nonePlayer.png");
-	IMAGEMANAGER->add("start", L"image/testImg.png", 1, 1, true);
-	//======================헤네시스=========================
-	IMAGEMANAGER->add("henesys", L"image/map/henesys.png", 1, 1, true);
-	IMAGEMANAGER->add("henesys_pixel", L"image/map/henesys_pixel.png",1,1,true);
+	// IMAGEMANAGER->add("start", L"image/testImg.png", 1, 1, true);
+	// //======================헤네시스=========================
+	// IMAGEMANAGER->add("henesys", L"image/map/henesys.png", 1, 1, true);
+	// IMAGEMANAGER->add("henesys_pixel", L"image/map/henesys_pixel.png",1,1,true);
 	IMAGEMANAGER->add("henesys_background_1", L"image/background/henesys_background_1.png");
 	IMAGEMANAGER->add("henesys_background_2", L"image/background/henesys_background_2.png");
 	IMAGEMANAGER->add("henesys_background_3", L"image/background/henesys_background_3.png");

@@ -9,7 +9,7 @@ image::image() : _imageInfo(NULL)
 {
 }
 
-HRESULT image::_putImage(bool isUsePixel)
+HRESULT image::_putImage()
 {
 	HRESULT hr = S_OK;
 
@@ -31,13 +31,6 @@ HRESULT image::_putImage(bool isUsePixel)
 
 	// D2D용 비트맵 생성
 	if (S_OK != (hr = _renderTarget->CreateBitmapFromWicBitmap(converter, NULL, &_imageInfo->bitmap))) return hr;
-
-	// pixel용 비트맵 생성
-	if (isUsePixel)
-	{
-		if (S_OK != (hr = IMAGEMANAGER->getFactory()->CreateBitmap(_imageInfo->bitmap->GetSize().width, _imageInfo->bitmap->GetSize().height,
-			GUID_WICPixelFormat32bppRGBA1010102XR, WICBitmapNoCache, &_imageInfo->wBitmap)))return hr;
-	}
 		
 	converter->Release();
 	fDecoder->Release();
@@ -54,12 +47,12 @@ void image::_putImageInfo(void)
 	_imageInfo->frameSize.y = _imageInfo->size.y / _imageInfo->maxFrame.y;
 }
 
-HRESULT image::init(const wchar_t * fileName, bool isUsePixel)
+HRESULT image::init(const wchar_t * fileName)
 {
-	return init(fileName, 1, 1, isUsePixel);
+	return init(fileName, 1, 1);
 }
 
-HRESULT image::init(const wchar_t * fileName, int maxFrameX, int maxFrameY, bool isUsePixel)
+HRESULT image::init(const wchar_t * fileName, int maxFrameX, int maxFrameY)
 {
 	//재초기화 방지용, 이미지 정보에 값이 들어 있다면 릴리즈를 먼저 해줄것
 	if (_imageInfo != NULL) this->release();
@@ -73,7 +66,7 @@ HRESULT image::init(const wchar_t * fileName, int maxFrameX, int maxFrameY, bool
 	_fileName = fileName;
 
 	//리소스 입력
-	if (S_OK != _putImage(isUsePixel))
+	if (S_OK != _putImage())
 	{
 		release();
 		return E_FAIL;
@@ -96,10 +89,6 @@ void image::release(void)
 	{
 		// 이미지 삭제
 		_imageInfo->bitmap->Release();
-
-		// 픽셀 이미지 삭제
-		if (_imageInfo->wBitmap) 
-			_imageInfo->wBitmap->Release();
 
 		//포인터 삭제
 		SAFE_DELETE(_imageInfo);
@@ -185,41 +174,4 @@ void image::aniRender(animation * ani, float alpha)
 			(float)ani->getFramePos().x, (float)ani->getFramePos().y,
 			(float)ani->getFrameWidth(), (float)ani->getFrameHeight(),
 			alpha);
-}
-
-ColorF image::getBitmapPixel(POINT pos)
-{
-	IWICBitmapLock * bLock;
-	BYTE* buffer;
-	UINT size;
-	WICRect rc;
-	rc.X = pos.x; rc.Width =  1;
-	rc.Y = pos.y; rc.Height = 1;
-	
-	_imageInfo->wBitmap->Lock(&rc, WICBitmapLockRead, &bLock);
-	bLock->GetDataPointer(&size,&buffer);
-
-	ColorF color = ColorF(buffer[2], buffer[1], buffer[0], buffer[3]);
-	bLock->Release();
-	return color;
-}
-
-HRESULT image::getBitmapPixels(POINT posSour, POINT posDest, ColorF * out)
-{
-	IWICBitmapLock * bLock;
-	BYTE* buffer;
-	UINT size;
-	WICRect rc;
-	rc.X = posSour.x; rc.Width = posDest.x - posSour.x;
-	rc.Y = posSour.y; rc.Height = posDest.y - posSour.y;
-
-	_imageInfo->wBitmap->Lock(&rc, WICBitmapLockRead, &bLock);
-	HRESULT hr = bLock->GetDataPointer(&size, &buffer);
-
-	for (int i = 0; i < size / sizeof(UINT); ++i)
-		out[i] = ColorF(buffer[2], buffer[1], buffer[0], buffer[3]);
-
-	bLock->Release();
-
-	return hr;
 }

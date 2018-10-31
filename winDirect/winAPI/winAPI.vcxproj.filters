@@ -49,9 +49,6 @@
     <Filter Include="API Framework\매니져\사운드">
       <UniqueIdentifier>{0ac68111-4a53-4616-9d7b-fe027b282928}</UniqueIdentifier>
     </Filter>
-    <Filter Include="API Framework\매니져\이미지\GDI">
-      <UniqueIdentifier>{41cce586-91e0-4109-8535-80e9a6a1e21f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="API Framework\매니져\Json">
       <UniqueIdentifier>{a67edd88-2622-4ea2-ab0a-755681351c79}</UniqueIdentifier>
     </Filter>
@@ -202,6 +199,9 @@
     <Filter Include="메인게임\Game Framework\Manager\text">
       <UniqueIdentifier>{c861758a-3aa0-420a-8e14-68be36c4f850}</UniqueIdentifier>
     </Filter>
+    <Filter Include="API Framework\매니져\이미지\direct">
+      <UniqueIdentifier>{41cce586-91e0-4109-8535-80e9a6a1e21f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -253,13 +253,13 @@
       <Filter>API Framework\animation</Filter>
     </ClCompile>
     <ClCompile Include="imageManager.cpp">
-      <Filter>API Framework\매니져\이미지\GDI</Filter>
+      <Filter>API Framework\매니져\이미지\direct</Filter>
     </ClCompile>
     <ClCompile Include="mainGame.cpp">
       <Filter>메인게임\mainGame</Filter>
     </ClCompile>
     <ClCompile Include="image.cpp">
-      <Filter>API Framework\매니져\이미지\GDI</Filter>
+      <Filter>API Framework\매니져\이미지\direct</Filter>
     </ClCompile>
     <ClCompile Include="baseObject.cpp">
       <Filter>메인게임\Game Framework\object\_base</Filter>
@@ -436,7 +436,7 @@
       <Filter>API Framework\animation</Filter>
     </ClInclude>
     <ClInclude Include="imageManager.h">
-      <Filter>API Framework\매니져\이미지\GDI</Filter>
+      <Filter>API Framework\매니져\이미지\direct</Filter>
     </ClInclude>
     <ClInclude Include="singletonBase.h">
       <Filter>API Framework\매니져</Filter>
@@ -445,7 +445,7 @@
       <Filter>메인게임\mainGame</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
-      <Filter>API Framework\매니져\이미지\GDI</Filter>
+      <Filter>API Framework\매니져\이미지\direct</Filter>
     </ClInclude>
     <ClInclude Include="baseObject.h">
       <Filter>메인게임\Game Framework\object\_base</Filter>
