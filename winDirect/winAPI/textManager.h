@@ -9,6 +9,7 @@ private :
 private :
 	ID2D1SolidColorBrush*	_brush;
 	IDWriteFactory*			_writeFactory;
+	IDWriteTextFormat*		_currentFormat;
 
 public :
 	HRESULT init(void);
@@ -17,9 +18,10 @@ public :
 public :
 	IDWriteTextFormat* add(string name, wchar_t* fontStyle, float size);
 	IDWriteTextFormat* find(string name);
+	IDWriteTextFormat* setFont(string name);
 
 public :
-	void drawText(wchar_t* text, int length, D2D1_RECT_F range, IDWriteTextFormat* format, function<void(void)> * callBefore = NULL);
+	void drawText(wchar_t* text, int length, D2D1_RECT_F range, function<void(void)> * callBefore = NULL, IDWriteTextFormat* format = NULL);
 
 public :
 	void setTextColor(D2D1_COLOR_F * color) { _brush->SetColor(*color); };

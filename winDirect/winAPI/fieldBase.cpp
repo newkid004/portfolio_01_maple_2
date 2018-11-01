@@ -46,7 +46,7 @@ void fieldBase::setPixelImage(const char * fileName)
 	// imgField 정의 필요
 	HDC hdc = GetDC(_hWnd);
 	_pixel->pDC = CreateCompatibleDC(hdc);
-	_pixel->pBitmap = (HBITMAP)LoadImage(_hInstance, fileName, IMAGE_BITMAP, _vFieldImage[0].img->getSize().x, _vFieldImage[0].img->getSize().y, LR_LOADFROMFILE);
+	_pixel->pBitmap = (HBITMAP)LoadImage(_hInstance, fileName, IMAGE_BITMAP, (int)_vFieldImage[0].img->getSize().x, (int)_vFieldImage[0].img->getSize().y, LR_LOADFROMFILE);
 	_pixel->oBitmap = (HBITMAP)SelectObject(_pixel->pDC, _pixel->pBitmap);
 }
 

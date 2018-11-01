@@ -45,6 +45,11 @@ struct fPOINT
 	fPOINT operator*(NUM_REAL input) { return fPOINT(this->x * input, this->y * input); }
 	fPOINT operator/(NUM_REAL input) { return fPOINT(this->x / input, this->y / input); }
 
+	fPOINT operator+(POINT input) { return fPOINT(this->x + input.x, this->y + input.y); }
+	fPOINT operator-(POINT input) { return fPOINT(this->x - input.x, this->y - input.y); }
+	fPOINT operator*(POINT input) { return fPOINT(this->x * input.x, this->y * input.y); }
+	fPOINT operator/(POINT input) { return fPOINT(this->x / input.x, this->y / input.y); }
+
 	void operator+=(fPOINT input) { this->x += input.x; this->y += input.y; };
 	void operator-=(fPOINT input) { this->x -= input.x; this->y -= input.y; };
 	void operator*=(fPOINT input) { this->x *= input.x; this->y *= input.y; };

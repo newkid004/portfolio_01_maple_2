@@ -3,12 +3,11 @@
 
 class windowBase;
 
+typedef list<windowBase*> UI_LIST;
+typedef UI_LIST::iterator UI_LIST_ITER;
+
 class winManager : public singletonBase<winManager>
 {
-public :
-	typedef list<windowBase*> UI_LIST;
-	typedef UI_LIST::iterator UI_LIST_ITER;
-
 private :
 	map<string, windowBase*>	_mWindow;
 	UI_LIST						_lWindow;
@@ -25,10 +24,12 @@ public :
 
 	void show(string winName);
 	void show(windowBase* winBase);
-	void show(UI_LIST_ITER*& winIter);
-	UI_LIST_ITER* close(string winName);
-	UI_LIST_ITER* close(windowBase* winBase);
-	UI_LIST_ITER* close(UI_LIST_ITER*& winIter);
+	void show(UI_LIST_ITER& winIter);
+	UI_LIST_ITER close(string winName);
+	UI_LIST_ITER close(windowBase* winBase);
+	UI_LIST_ITER close(UI_LIST_ITER& winIter);
+
+	UI_LIST_ITER getIgnoreIter(void) { return _lWindow.end(); };
 
 public:
 	winManager() {};

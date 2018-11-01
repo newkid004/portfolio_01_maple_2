@@ -46,13 +46,6 @@ public :
 	virtual void render(void);
 
 public :
-	void releaseTotal(void);
-	void releaseItem(void)		{ releaseList(_fieldList.item, true); };
-	void releaseEnemy(void)		{ releaseList(_fieldList.enemy, true); };
-	// void releaseInteract(void)	{ releaseList(_fieldList.interact, false); };
-	void releaseNPC(void)		{ releaseList(_fieldList.npc, false); };
-
-public :
 	tagFieldList & getFieldList(void) { return _fieldList; };
 
 	void addItem(itemBase* addition)			{ addObject(addition, _fieldList.item); };
@@ -72,6 +65,13 @@ public :	// ----- image, pixel ----- //
 
 public :
 	fPOINT getSize(void) { return _vFieldImage[0].img->getSize(); };
+
+private :
+	void releaseTotal(void);
+	void releaseItem(void) { releaseList(_fieldList.item, true); };
+	void releaseEnemy(void) { releaseList(_fieldList.enemy, true); };
+	// void releaseInteract(void)	{ releaseList(_fieldList.interact, false); };
+	void releaseNPC(void) { releaseList(_fieldList.npc, false); };
 
 private :
 	template <typename OBJ> inline void addObject(OBJ arg, list<pair<list<baseObject*>::iterator*, OBJ>> & o_list);

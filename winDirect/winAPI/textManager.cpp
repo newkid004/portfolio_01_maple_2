@@ -13,6 +13,8 @@ HRESULT textManager::init(void)
 	// 텍스트 색상 : black
 	_renderTarget->CreateSolidColorBrush(C_COLOR_BLACK, &_brush);
 
+	_currentFormat = NULL;
+
 	return S_OK;
 }
 
@@ -45,8 +47,8 @@ IDWriteTextFormat * textManager::add(string name, wchar_t* fontStyle, float size
 		&t);
 
 	// 텍스트 정렬 : left
-	t->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-	t->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+	t->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+	t->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
 
 	_mTextFormat.insert(make_pair(name, t));
 	return t;
@@ -60,7 +62,15 @@ IDWriteTextFormat * textManager::find(string name)
 	return i->second;
 }
 
-void textManager::drawText(wchar_t * text, int length, D2D1_RECT_F range, IDWriteTextFormat * format, function<void(void)> * callBefore)
+IDWriteTextFormat * textManager::setFont(string name)
+{
+	IDWriteTextFormat* f = find(name);
+	if (f == NULL) return NULL;
+
+	return _currentFormat = f;
+}
+
+void textManager::drawText(wchar_t * text, int length, D2D1_RECT_F range, function<void(void)> * callBefore, IDWriteTextFormat * format)
 {
 	if (callBefore)
 	{
@@ -68,6 +78,8 @@ void textManager::drawText(wchar_t * text, int length, D2D1_RECT_F range, IDWrit
 		delete callBefore;
 	}
 
+	if (format)
+	{
 	_renderTarget->DrawTextA(
 		text,
 		length,
@@ -75,4 +87,18 @@ void textManager::drawText(wchar_t * text, int length, D2D1_RECT_F range, IDWrit
 		range,
 		_brush,
 		D2D1_DRAW_TEXT_OPTIONS_CLIP);
+
+		return;
+	}
+
+	if (_currentFormat)
+	{
+		_renderTarget->DrawTextA(
+			text,
+			length,
+			_currentFormat,
+			range,
+			_brush,
+			D2D1_DRAW_TEXT_OPTIONS_CLIP);
+	}
 }
