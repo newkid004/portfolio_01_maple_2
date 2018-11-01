@@ -24,7 +24,7 @@ UI_LIST_ITER buttonTest::update(void)
 	if (IsClickRect(rc, _ptMouse))
 	{
 		if (KEYMANAGER->up(VK_LBUTTON))
-			_active();
+			return _active();
 		else if (KEYMANAGER->down(VK_LBUTTON))
 			_frame = 2;
 		else

@@ -220,9 +220,6 @@
     <Filter Include="메인게임\Scene\test\button">
       <UniqueIdentifier>{78092c5e-646d-42da-9583-2181db270ef8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Scene\test\inven">
-      <UniqueIdentifier>{8be8d49c-4b56-408d-948e-b3392ef7da56}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -417,8 +414,8 @@
     <ClCompile Include="buttonTest3.cpp">
       <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClCompile>
-    <ClCompile Include="invenWindowTest.cpp">
-      <Filter>메인게임\Scene\test\inven</Filter>
+    <ClCompile Include="settingButtonTest.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClCompile>
     <ClCompile Include="buttonBase.cpp">
       <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
@@ -650,8 +647,8 @@
     <ClInclude Include="buttonTest3.h">
       <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClInclude>
-    <ClInclude Include="invenWindowTest.h">
-      <Filter>메인게임\Scene\test\inven</Filter>
+    <ClInclude Include="settingButtonTest.h">
+      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
