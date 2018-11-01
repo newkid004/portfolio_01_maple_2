@@ -99,7 +99,7 @@ void winManager::show(windowBase * winBase)
 	}
 
 	// ¸Ç ¾ÕÀÇ iterator »ðÀÔ
-	winBase->getIter = _lWindow.begin();
+	winBase->getIter() = _lWindow.begin();
 }
 
 void winManager::show(UI_LIST_ITER & winIter)
