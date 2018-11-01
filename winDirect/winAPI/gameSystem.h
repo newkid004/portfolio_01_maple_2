@@ -25,19 +25,20 @@ struct tagGameOption
 
 };
 
-struct tagShortcut
-{
-	string name;
-	int mapindex;
-	int putIndex;
-
-	function<void(void)> active;
-
-	tagShortcut() : putIndex(-1) {};
-};
-
 class gameSystem : public singletonBase<gameSystem>
 {
+private :
+	struct tagShortcut
+	{
+		string name;
+		int mapindex;
+		int putIndex;
+
+		function<void(void)> active;
+
+		tagShortcut() : putIndex(-1) {};
+	};
+
 private : 
 	tagGameOption	_infoOption;
 	fieldBase*		_curField;
@@ -73,7 +74,10 @@ public :	// * player * //
 public :	// * shortcut * //
 	void addShortcut(string name, int index, const function<void(void)> & active);
 	void putShortcut(string name, int virtualKey);
-	void useShortcut(int virtualKey) { _vShortcutSetting[virtualKey]->active(); };
+	void pickShortcut(int virtualKey)	{ pickShortcut(_vShortcutSetting[virtualKey]); };
+	void pickShortcut(string name)		{ pickShortcut(findShortcut(name)); };
+	void pickShortcut(tagShortcut* sc)	{ if (sc) sc->putIndex = -1; };
+	void useShortcut(int virtualKey)	{ tagShortcut* sc = _vShortcutSetting[virtualKey]; if (sc) _vShortcutSetting[virtualKey]->active(); };
 
 private :
 	tagShortcut* findShortcut(string name);

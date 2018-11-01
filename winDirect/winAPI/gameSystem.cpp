@@ -24,9 +24,7 @@ void gameSystem::render(void)
 
 void gameSystem::updateShortcut(void)
 {
-	int inputKey = KEYMANAGER->getInputKey();
-
-
+	useShortcut(KEYMANAGER->getInputKey());		// 단축키 사용
 }
 
 void gameSystem::addShortcut(string name, int index, const function<void(void)> & active)
@@ -56,7 +54,7 @@ void gameSystem::putShortcut(string name, int virtualKey)
 	*settedSc = sc;
 }
 
-tagShortcut * gameSystem::findShortcut(string name)
+gameSystem::tagShortcut * gameSystem::findShortcut(string name)
 {
 	auto iter = _mShortcutTotal.find(name);
 	if (iter == _mShortcutTotal.end()) return NULL;
