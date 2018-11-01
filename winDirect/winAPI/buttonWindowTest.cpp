@@ -40,8 +40,8 @@ void buttonWindowTest::initWindow(void)
 	b = new buttonTest2; b->init();
 	b3 = new buttonTest3; b3->init();
 
-	w->addButton(b);
-	w->addButton(b3);
+	w->addButton("testButton0", b);
+	w->addButton("testButton1", b3);
 	w->getPos() = { 500,500 };
 	b3->getPos().x += 100;
 	WINMANAGER->add("testWindow2", w);

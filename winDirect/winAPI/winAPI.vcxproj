@@ -160,6 +160,7 @@
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
+    <ClCompile Include="buttonBase.cpp" />
     <ClCompile Include="buttonTest.cpp" />
     <ClCompile Include="buttonTest2.cpp" />
     <ClCompile Include="buttonTest3.cpp" />
