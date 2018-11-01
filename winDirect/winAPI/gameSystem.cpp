@@ -15,21 +15,29 @@ void gameSystem::release(void)
 
 void gameSystem::update(void)
 {
+	updateShortcut();
 }
 
 void gameSystem::render(void)
 {
 }
 
-void gameSystem::addShortcut(string name, int index, function<void(void)>* active)
+void gameSystem::updateShortcut(void)
+{
+	int inputKey = KEYMANAGER->getInputKey();
+
+
+}
+
+void gameSystem::addShortcut(string name, int index, const function<void(void)> & active)
 {
 	tagShortcut* sc = findShortcut(name);
 	if (sc != NULL) return;
 
-	tagShortcut* addition = new tagShortcut;
+	sc = new tagShortcut;
 	sc->name = name;
 	sc->mapindex = index;
-	sc->active = *active;
+	sc->active = active;
 
 	_mShortcutTotal.insert(make_pair(name, sc));
 }

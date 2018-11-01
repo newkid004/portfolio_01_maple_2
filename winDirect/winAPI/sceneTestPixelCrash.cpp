@@ -53,6 +53,7 @@ void sceneTestPixelCrash::render(void)
 	wstring str1 = to_wstring(_ptMouse.x) + L"\t" + to_wstring(_ptMouse.y);
 	wstring str2 = to_wstring(color & 0xff) + L"\t" + to_wstring((color & (0xff << 8)) >> 8) + L"\t" + to_wstring((color & (0xff << 16)) >> 16);
 
-	TEXTMANAGER->drawText(str1.c_str(), str1.length(), D2D1_RECT_F{ 0, 0, 120, 120 }, TEXTMANAGER->find("text"));
-	TEXTMANAGER->drawText(str2.c_str(), str2.length(), D2D1_RECT_F{ 0, 40, 200, 120 }, TEXTMANAGER->find("text"));
+	TEXTMANAGER->setFont("text");
+	TEXTMANAGER->drawText(str1.c_str(), str1.length(), D2D1_RECT_F{ 0, 0, 120, 120 });
+	TEXTMANAGER->drawText(str2.c_str(), str2.length(), D2D1_RECT_F{ 0, 40, 200, 120 });
 }

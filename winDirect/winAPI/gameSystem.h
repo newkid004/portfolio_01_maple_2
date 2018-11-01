@@ -52,6 +52,9 @@ public :
 	void update(void);
 	void render(void);
 
+private :
+	void updateShortcut(void);
+
 public :	// * option * //
 	tagGameOption& getInfoOption(void) { return _infoOption; };
 
@@ -68,7 +71,7 @@ public :	// * player * //
 	playerableBase *& getPlayer(void) { return _player; };
 
 public :	// * shortcut * //
-	void addShortcut(string name, int index, function<void(void)>* active);
+	void addShortcut(string name, int index, const function<void(void)> & active);
 	void putShortcut(string name, int virtualKey);
 	void useShortcut(int virtualKey) { _vShortcutSetting[virtualKey]->active(); };
 
