@@ -67,6 +67,7 @@ buttonBase * windowBase::addButton(string name, buttonBase * addition)
 	buttonBase* b = findButton(name);
 	if (b != NULL) return b;
 
+	addition->getWindow() = this;
 	_mButton.insert(make_pair(name, addition));
 
 	return addition;
