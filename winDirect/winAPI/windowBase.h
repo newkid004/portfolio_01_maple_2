@@ -19,6 +19,7 @@ public :
 	virtual void render(void);
 
 public :
+	image* & getImage(void) { return _img; }
 	UI_LIST_ITER & getIter(void) { return _managedIter; };
 	string & getName(void) { return _winName; };
 	fPOINT & getPos(void) { return _pos; };
