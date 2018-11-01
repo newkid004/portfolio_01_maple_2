@@ -83,14 +83,32 @@ void winManager::show(string winName)
 
 void winManager::show(windowBase * winBase)
 {
-	show(winBase->getIter());
+	// 맨 앞으로 창 이동
+	_lWindow.push_front(winBase);
+
+	// 닫혀있는지 판별
+	if (winBase->getIter() == _lWindow.end())
+	{
+		// 닫혀있음
+		winBase->getIter() = _lWindow.begin();
+	}
+	else
+	{
+		// 열려있음
+		_lWindow.erase(winBase->getIter());
+	}
+
+	// 맨 앞의 iterator 삽입
+	winBase->getIter() = _lWindow.begin();
 }
 
 void winManager::show(UI_LIST_ITER & winIter)
 {
 	// ** 충돌 위험 ** //
-	// 맨 앞에 창 삽입 후, 기존 위치 삭제
-	_lWindow.push_front(*winIter);
+	// 닫혔는지 판별
+	if (winIter != _lWindow.end())
+		_lWindow.push_front(*winIter);
+
 	_lWindow.erase(winIter);
 	winIter = _lWindow.begin();
 }

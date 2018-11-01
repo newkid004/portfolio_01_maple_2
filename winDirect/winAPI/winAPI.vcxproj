@@ -161,6 +161,9 @@
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
     <ClCompile Include="buttonTest.cpp" />
+    <ClCompile Include="buttonTest2.cpp" />
+    <ClCompile Include="buttonTest3.cpp" />
+    <ClCompile Include="buttonWindowTest.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="characterBase.cpp" />
@@ -179,6 +182,7 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniData.cpp" />
+    <ClCompile Include="invenWindowTest.cpp" />
     <ClCompile Include="itemBase.cpp" />
     <ClCompile Include="JsonSaveLoader.cpp" />
     <ClCompile Include="keyManager.cpp" />
@@ -228,6 +232,9 @@
     <ClInclude Include="bulletBase.h" />
     <ClInclude Include="buttonBase.h" />
     <ClInclude Include="buttonTest.h" />
+    <ClInclude Include="buttonTest2.h" />
+    <ClInclude Include="buttonTest3.h" />
+    <ClInclude Include="buttonWindowTest.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="characterBase.h" />
@@ -250,6 +257,7 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniData.h" />
+    <ClInclude Include="invenWindowTest.h" />
     <ClInclude Include="itemBase.h" />
     <ClInclude Include="itemDef.h" />
     <ClInclude Include="JsonSaveLoader.h" />

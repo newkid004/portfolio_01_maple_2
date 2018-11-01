@@ -9,6 +9,8 @@
 #include "sceneTest2.h"
 #include "sceneTestPixelCrash.h"
 #include "sceneWindowTest.h"
+#include "buttonWindowTest.h"
+#include "invenWindowTest.h"
 
 //=================//
 // # init # ÃÊ±âÈ­ //
@@ -25,9 +27,12 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("test2", new sceneTest2);
 	SCENEMANAGER->addScene("testPixelCrash", new sceneTestPixelCrash);
 	SCENEMANAGER->addScene("WindowTest", new sceneWindowTest);
+	SCENEMANAGER->addScene("buttonWindowTest", new buttonWindowTest);
+	SCENEMANAGER->addScene("invenWindowTest", new invenWindowTest);
+
 
 	// change
-	SCENEMANAGER->changeScene("WindowTest");
+	SCENEMANAGER->changeScene("buttonWindowTest");
 	
 	return S_OK;
 }
