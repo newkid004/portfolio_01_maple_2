@@ -18,6 +18,7 @@ private:
 	selectionSlot1 _charater[8];
 	fPOINT pos;
 	
+	int x, y;
 public:
 	HRESULT init();
 	void release();

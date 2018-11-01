@@ -14,6 +14,7 @@ HRESULT keyManager::init()
 
 	_callWheelUp = NULL;
 	_callWheelDown = NULL;
+	_callDBClick = NULL;
 
 	return S_OK;
 }

@@ -160,6 +160,7 @@
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
+    <ClCompile Include="buttonTest.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="characterBase.cpp" />
@@ -196,6 +197,8 @@
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="sceneTest.cpp" />
     <ClCompile Include="sceneTest2.cpp" />
+    <ClCompile Include="sceneTestPixelCrash.cpp" />
+    <ClCompile Include="sceneWindowTest.cpp" />
     <ClCompile Include="shopBase.cpp" />
     <ClCompile Include="shopManager.cpp" />
     <ClCompile Include="skillBase.cpp" />
@@ -223,6 +226,8 @@
     <ClInclude Include="buffBase.h" />
     <ClInclude Include="buffManager.h" />
     <ClInclude Include="bulletBase.h" />
+    <ClInclude Include="buttonBase.h" />
+    <ClInclude Include="buttonTest.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="characterBase.h" />
@@ -266,6 +271,8 @@
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="sceneTest.h" />
     <ClInclude Include="sceneTest2.h" />
+    <ClInclude Include="sceneTestPixelCrash.h" />
+    <ClInclude Include="sceneWindowTest.h" />
     <ClInclude Include="shopBase.h" />
     <ClInclude Include="shopManager.h" />
     <ClInclude Include="singletonBase.h" />

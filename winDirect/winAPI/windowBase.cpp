@@ -2,10 +2,13 @@
 #include "windowBase.h"
 #include "winManager.h"
 
+#include "buttonBase.h"
+
 // ----- Window Base ----- //
 HRESULT windowBase::init(void)
 {
-	_managedIter = NULL;
+	_img = NULL;
+	_managedIter = WINMANAGER->getIgnoreIter();
 
 	return S_OK;
 }
@@ -19,22 +22,31 @@ void windowBase::release(void)
 	}
 }
 
-windowBase::UI_LIST_ITER * windowBase::update(void)
+UI_LIST_ITER windowBase::update(void)
 {
-	auto i = _lButton.begin();
-	for (; i != _lButton.end();)
+	UI_LIST_ITER viewIter;
+	for (auto i = _lButton.begin(); i != _lButton.end(); ++i)
 	{
-		auto result = (*i)->update();
-		if (result) return result;
+		viewIter = (*i)->update();
+		if (viewIter == WINMANAGER->getIgnoreIter())
+			return viewIter;
 	}
 
-	return NULL;
+	list<windowBase*>::iterator iter = _managedIter;
+	return ++iter;
 }
 
 void windowBase::render(void)
 {
+	if (_img)
+	{
+		IMAGEMANAGER->getTransformState() = TF_POSITION;
+		IMAGEMANAGER->statePos(_pos);
+		_img->render();
+	}
+
 	for (auto i = _lButton.begin(); i != _lButton.end(); ++i)
-		(*i)->render(_pos);
+		(*i)->render();
 }
 
 
