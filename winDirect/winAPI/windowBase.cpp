@@ -32,6 +32,19 @@ UI_LIST_ITER windowBase::update(void)
 			return viewIter;
 	}
 
+	// 윈도우 내 마우스 클릭
+	if (KEYMANAGER->down(VK_LBUTTON))
+	{
+		fRECT rc(_pos, _pos + _img->getSize());
+		if (IsClickRect(rc, _ptMouse))
+		{
+			// 윈도우를 맨 앞으로 / 뒷 창 무시
+			this->show();
+
+			return WINMANAGER->getIgnoreIter();
+		}
+	}
+
 	list<windowBase*>::iterator iter = _managedIter;
 	return ++iter;
 }
