@@ -24,10 +24,10 @@ public :
 
 	void show(string winName);
 	void show(windowBase* winBase);
-	void show(UI_LIST_ITER& winIter);
 	UI_LIST_ITER close(string winName);
 	UI_LIST_ITER close(windowBase* winBase);
-	UI_LIST_ITER close(UI_LIST_ITER& winIter);
+	UI_LIST_ITER trans(string winName);
+	UI_LIST_ITER trans(windowBase* winBase);
 
 	UI_LIST_ITER getIgnoreIter(void) { return _lWindow.end(); };
 

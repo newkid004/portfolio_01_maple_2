@@ -28,6 +28,7 @@ public :	// ----- window ----- //
 	virtual void show(void) { WINMANAGER->show(this); };
 	virtual UI_LIST_ITER close(void) {return WINMANAGER->close(this); };
 	virtual bool isShow(void) { return !(_managedIter == WINMANAGER->getIgnoreIter()); };
+	virtual bool isClose(void) { return _managedIter == WINMANAGER->getIgnoreIter(); };
 
 public :	// ----- button ----- //
 	void addButton(buttonBase* addition) { addition->getWindow() = this; _lButton.push_back(addition); };
