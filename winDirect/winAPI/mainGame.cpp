@@ -10,7 +10,6 @@
 #include "sceneTestPixelCrash.h"
 #include "sceneWindowTest.h"
 #include "buttonWindowTest.h"
-#include "invenWindowTest.h"
 
 //=================//
 // # init # ÃÊ±âÈ­ //
@@ -28,7 +27,6 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("testPixelCrash", new sceneTestPixelCrash);
 	SCENEMANAGER->addScene("WindowTest", new sceneWindowTest);
 	SCENEMANAGER->addScene("buttonWindowTest", new buttonWindowTest);
-	SCENEMANAGER->addScene("invenWindowTest", new invenWindowTest);
 
 
 	// change

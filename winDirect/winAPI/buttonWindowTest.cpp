@@ -11,6 +11,7 @@ HRESULT buttonWindowTest::init(void)
 	IMAGEMANAGER->add("invenUI", L"image/UI/invenUI.png");
 	IMAGEMANAGER->add("buttonUI", L"image/UI/buttonUI.png", 3, 6);
 	IMAGEMANAGER->add("setting", L"image/UI/setting.png");
+	IMAGEMANAGER->add("settingUI", L"image/UI/Shortcuts.png");
 	initWindow();
 	IMAGEMANAGER->resetTransform();
 	return S_OK;
@@ -53,4 +54,18 @@ void buttonWindowTest::initWindow(void)
 	w->getPos().y = WINSIZEY / 4;
 
 	WINMANAGER->add("invenUI", w);
+
+	w = new windowBase; w->init();
+	w->getImage() = IMAGEMANAGER->find("setting");
+	w->getPos().x = 550;
+	w->getPos().y = 350;
+
+	WINMANAGER->add("setting", w);
+
+	w = new windowBase; w->init();
+	w->getImage() = IMAGEMANAGER->find("settingUI");
+	w->getPos().x = 0;
+	w->getPos().y = 0;
+
+	WINMANAGER->add("settingUI", w);
 }

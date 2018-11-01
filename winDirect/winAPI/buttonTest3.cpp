@@ -5,7 +5,7 @@
 HRESULT buttonTest3::init(void)
 {
 	_img = IMAGEMANAGER->find("buttonUI");
-	_active = [&](void)->UI_LIST_ITER { return WINMANAGER->find("invenUI")->close(); };
+	_active = [&](void)->UI_LIST_ITER {WINMANAGER->find("setting")->show(); return _bindWindow->getIter(); };
 
 	_size = _img->getFrameSize();
 
@@ -23,7 +23,7 @@ UI_LIST_ITER buttonTest3::update(void)
 	if (IsClickRect(rc, _ptMouse))
 	{
 		if (KEYMANAGER->up(VK_LBUTTON))
-			_active();
+			return _active();
 		else if (KEYMANAGER->down(VK_LBUTTON))
 			_frame = 2;
 		else
