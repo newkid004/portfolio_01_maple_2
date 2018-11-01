@@ -8,6 +8,7 @@
 #include "charaterSelectScene.h"
 #include "sceneTest2.h"
 #include "sceneTestPixelCrash.h"
+#include "sceneWindowTest.h"
 
 //=================//
 // # init # ÃÊ±âÈ­ //
@@ -23,11 +24,10 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("charaterSelect", new charaterSelectScene);
 	SCENEMANAGER->addScene("test2", new sceneTest2);
 	SCENEMANAGER->addScene("testPixelCrash", new sceneTestPixelCrash);
+	SCENEMANAGER->addScene("WindowTest", new sceneWindowTest);
 
 	// change
-	//SCENEMANAGER->changeScene("testPixelCrash");
-	//SCENEMANAGER->changeScene("test");
-	SCENEMANAGER->changeScene("loading");
+	SCENEMANAGER->changeScene("WindowTest");
 	
 	return S_OK;
 }

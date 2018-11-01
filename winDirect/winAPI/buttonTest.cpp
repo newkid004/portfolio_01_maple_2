@@ -1,31 +1,48 @@
 #include "stdafx.h"
 #include "buttonTest.h"
+
 #include "windowBase.h"
 
 HRESULT buttonTest::init(void)
 {
-	_active = [&](void)->void { _bindWindow->close(); };
+	_img = IMAGEMANAGER->find("buttonTest");
+	_active = [&](void)->UI_LIST_ITER { return _bindWindow->close(); };
+
+	_size = _img->getFrameSize();
+
+	_frame = 0;
+
 	return S_OK;
 }
 
-list<windowBase*>::iterator * buttonTest::update(void)
+UI_LIST_ITER buttonTest::update(void)
 {
-	fRECT fRc;
-	fRc.LT = _pos + _bindWindow->getPos();
-	fRc.RB = fRc.LT + _size;
+	fRECT rc;
+	rc.LT = _pos + _bindWindow->getPos();
+	rc.RB = rc.LT + _size;
 
-	if (IsClickRect(fRc, _ptMouse))
+	if (IsClickRect(rc, _ptMouse))
 	{
-		if (KEYMANAGER->press(VK_LBUTTON))
-		{
-
-		}
+		if (KEYMANAGER->up(VK_LBUTTON))
+			_active();
+		else if (KEYMANAGER->down(VK_LBUTTON))
+			_frame = 2;
+		else
+			_frame = 1;
 	}
-	
-	return nullptr;
+	else
+		_frame = 0;
+
+	KEYMANAGER->up(VK_LBUTTON);
+	KEYMANAGER->down(VK_LBUTTON);
+
+	return _bindWindow->getIter();
 }
 
-void buttonTest::render(fPOINT & offset)
+void buttonTest::render(void)
 {
+	IMAGEMANAGER->getTransformState() = TF_POSITION;
+	IMAGEMANAGER->statePos(_pos + _bindWindow->getPos());
 
+	_img->frameRender(_frame, 0);
 }

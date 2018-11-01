@@ -22,22 +22,19 @@ void winManager::release(void)
 
 void winManager::update(void)
 {
+	auto iter = _lWindow.begin();
 
-	for (auto iter = _lWindow.rbegin(); iter != _lWindow.rend();)
+	for (; iter != _lWindow.end(); )
 	{
-		auto nextIter = (*iter)->update();
-		
-		if (nextIter)
-			iter = make_reverse_iterator(*nextIter);
-		else
-			++iter;
-	}
+		iter = (*iter)->update();
+	} 
+
 }
 
 void winManager::render(void)
 {
-	UI_LIST_ITER iter = _lWindow.begin();
-	for (; iter != _lWindow.end(); ++iter)
+	auto iter = _lWindow.rbegin();
+	for (; iter != _lWindow.rend(); ++iter)
 	{
 		(*iter)->render();
 	}
@@ -49,7 +46,11 @@ windowBase * winManager::add(string winName, windowBase * winAdd)
 	auto iter = _mWindow.find(winName);
 	if (iter != _mWindow.end()) return iter->second;
 
+	winAdd->getIter() = _lWindow.end();
+	winAdd->getName() = winName;
+
 	_mWindow.insert(make_pair(winName, winAdd));
+
 	return winAdd;
 }
 
@@ -69,15 +70,15 @@ void winManager::show(string winName)
 
 	// 이미 열렸는지 판별
 	windowBase* winBase = iter->second;
-	if (winBase->getIter() != NULL)
+	if (winBase->getIter() != _lWindow.end())
 	{
 		// 이미 열려있음 -> 기존 위치 삭제
-		_lWindow.erase(*winBase->getIter());
+		_lWindow.erase(winBase->getIter());
 	}
 
 	// 맨 앞에 창 띄움
-	_lWindow.push_back(winBase);
-	winBase->getIter() = &_lWindow.rbegin().base();
+	_lWindow.push_front(winBase);
+	winBase->getIter() = _lWindow.begin();
 }
 
 void winManager::show(windowBase * winBase)
@@ -85,47 +86,47 @@ void winManager::show(windowBase * winBase)
 	show(winBase->getIter());
 }
 
-void winManager::show(UI_LIST_ITER *& winIter)
+void winManager::show(UI_LIST_ITER & winIter)
 {
 	// ** 충돌 위험 ** //
 	// 맨 앞에 창 삽입 후, 기존 위치 삭제
-	_lWindow.push_back(**winIter);
-	_lWindow.erase(*winIter);
-	winIter = &_lWindow.rbegin().base();
+	_lWindow.push_front(*winIter);
+	_lWindow.erase(winIter);
+	winIter = _lWindow.begin();
 }
 
-winManager::UI_LIST_ITER* winManager::close(string winName)
+UI_LIST_ITER winManager::close(string winName)
 {
 	// 목록에 담겨있는지 판별
 	auto iter = _mWindow.find(winName);
-	if (iter == _mWindow.end()) return NULL;
+	if (iter == _mWindow.end()) return _lWindow.end();
 
 	// 이미 닫혔는지 판별
 	windowBase* winBase = iter->second;
-	if (winBase->getIter() == NULL)
+	if (winBase->getIter() == _lWindow.end())
 	{
 		// 이미 닫혀있음 -> 나감
-		return NULL;
+		return _lWindow.end();
 	}
 
 	// 닫고 초기화
-	winManager::UI_LIST_ITER* nextIter = &_lWindow.erase(*winBase->getIter());
-	winBase->getIter() = NULL;
+	UI_LIST_ITER nextIter = _lWindow.erase(winBase->getIter());
+	winBase->getIter() = _lWindow.end();
 
-	return &(--(*nextIter));
+	return nextIter;
 }
 
-winManager::UI_LIST_ITER* winManager::close(windowBase * winBase)
+UI_LIST_ITER winManager::close(windowBase * winBase)
 {
 	return close(winBase->getIter());
 }
 
-winManager::UI_LIST_ITER* winManager::close(UI_LIST_ITER *& winIter)
+UI_LIST_ITER winManager::close(UI_LIST_ITER & winIter)
 {
 	// ** 충돌 위험 ** //
 	// 닫고 초기화
-	auto nextIter = &_lWindow.erase(*winIter);
-	winIter = NULL;
+	UI_LIST_ITER nextIter = _lWindow.erase(winIter);
+	winIter = _lWindow.end();
 
-	return &(--(*nextIter));
+	return nextIter;
 }

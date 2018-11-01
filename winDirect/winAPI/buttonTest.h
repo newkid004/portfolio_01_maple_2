@@ -4,12 +4,14 @@
 class buttonTest : public buttonBase
 {
 private:
+	int _frame;
 	
 public:
 	HRESULT init(void);
+	UI_LIST_ITER update(void);
+	void render(void);
 
-	list<windowBase*>::iterator* update(void);
-	void render(fPOINT & offset);
+public :
 	buttonTest(){}
 	~buttonTest(){}
 };

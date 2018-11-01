@@ -9,18 +9,21 @@ protected:
 	fPOINT _pos;	// relative
 	fPOINT _size;
 
-	function<void(void)> _active;
+	function<UI_LIST_ITER(void)> _active;
 	windowBase* _bindWindow;
 public:
-	virtual list<windowBase*>::iterator* update(void) { return NULL; };
-	virtual void render(fPOINT & offset) {};
+	virtual HRESULT init(void) { return S_OK; };
+	virtual void release(void) {};
+	virtual UI_LIST_ITER update(void) { return WINMANAGER->getIgnoreIter(); };
+	virtual void render(void) {};
 
 public:
 	image* & getImage(void) { return _img; }
 	fPOINT & getPos(void) { return _pos; };
 	fPOINT & getSize(void) { return _size; };
-	function<void(void)> & getActivate(void) { return _active; };
 	windowBase* &getWindow(void) { return _bindWindow; }
+
+	function<UI_LIST_ITER(void)> & getActivate(void) { return _active; };
 public:
 	buttonBase() {};
 	~buttonBase() {};
