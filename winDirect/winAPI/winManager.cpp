@@ -130,3 +130,25 @@ UI_LIST_ITER winManager::close(UI_LIST_ITER & winIter)
 
 	return nextIter;
 }
+
+UI_LIST_ITER winManager::trans(string winName)
+{
+	// 목록에 담겨있는지 판별
+	auto iter = _mWindow.find(winName);
+	if (iter == _mWindow.end()) return _lWindow.end();
+
+	// 열렸는지 판별
+	windowBase* winBase = iter->second;
+	if (winBase->isShow())
+	{
+		// 열려있음 -> 닫음
+		winBase->close();
+	}
+	else
+	{
+		// 닫혀있음 -> 열림
+		winBase->show();
+	}
+
+	return winBase->getIter();
+}
