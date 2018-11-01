@@ -5,7 +5,7 @@
 HRESULT buttonTest2::init(void)
 {
 	_img = IMAGEMANAGER->find("buttonUI");
-	_active = [&](void)->UI_LIST_ITER { WINMANAGER->find("invenUI")->show(); return _bindWindow->getIter(); };
+	_active = [&](void)->UI_LIST_ITER { WINMANAGER->trans("invenUI"); return _bindWindow->getIter(); };
 
 	_size = _img->getFrameSize();
 

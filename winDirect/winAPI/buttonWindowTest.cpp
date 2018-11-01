@@ -10,6 +10,7 @@ HRESULT buttonWindowTest::init(void)
 {
 	IMAGEMANAGER->add("invenUI", L"image/UI/invenUI.png");
 	IMAGEMANAGER->add("buttonUI", L"image/UI/buttonUI.png", 3, 6);
+	IMAGEMANAGER->add("setting", L"image/UI/setting.png");
 	initWindow();
 	IMAGEMANAGER->resetTransform();
 	return S_OK;
