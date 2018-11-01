@@ -15,21 +15,34 @@ HRESULT windowBase::init(void)
 
 void windowBase::release(void)
 {
-	for (auto i = _lButton.begin(); i != _lButton.end();)
+	for (auto i = _mButton.begin(); i != _mButton.end();)
 	{
-		SAFE_DELETE(*i);
-		i = _lButton.erase(i);
+		SAFE_DELETE(i->second);
+		i = _mButton.erase(i);
 	}
 }
 
 UI_LIST_ITER windowBase::update(void)
 {
 	UI_LIST_ITER viewIter;
-	for (auto i = _lButton.begin(); i != _lButton.end(); ++i)
+	for (auto i = _mButton.begin(); i != _mButton.end(); ++i)
 	{
-		viewIter = (*i)->update();
+		viewIter = i->second->update();
 		if (viewIter == WINMANAGER->getIgnoreIter())
 			return viewIter;
+	}
+
+	// 윈도우 내 마우스 클릭
+	if (KEYMANAGER->down(VK_LBUTTON))
+	{
+		fRECT rc(_pos, _pos + _img->getSize());
+		if (IsClickRect(rc, _ptMouse))
+		{
+			// 윈도우를 맨 앞으로 / 뒷 창 무시
+			this->show();
+
+			return WINMANAGER->getIgnoreIter();
+		}
 	}
 
 	list<windowBase*>::iterator iter = _managedIter;
@@ -45,8 +58,27 @@ void windowBase::render(void)
 		_img->render();
 	}
 
-	for (auto i = _lButton.begin(); i != _lButton.end(); ++i)
-		(*i)->render();
+	for (auto i = _mButton.begin(); i != _mButton.end(); ++i)
+		i->second->render();
+}
+
+buttonBase * windowBase::addButton(string name, buttonBase * addition)
+{
+	buttonBase* b = findButton(name);
+
+	if (b != NULL) return b;
+	addition->getWindow() = this;
+	_mButton.insert(make_pair(name, addition));
+
+	return addition;
+}
+
+buttonBase * windowBase::findButton(string name)
+{
+	auto & iter = _mButton.find(name);
+	if (iter == _mButton.end()) return NULL;
+
+	return iter->second;
 }
 
 

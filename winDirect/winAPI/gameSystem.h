@@ -25,6 +25,17 @@ struct tagGameOption
 
 };
 
+struct tagShortcut
+{
+	string name;
+	int mapindex;
+	int putIndex;
+
+	function<void(void)> active;
+
+	tagShortcut() : putIndex(-1) {};
+};
+
 class gameSystem : public singletonBase<gameSystem>
 {
 private : 
@@ -32,11 +43,17 @@ private :
 	fieldBase*		_curField;
 	playerableBase*	_player;
 
+	map<string, tagShortcut*>	_mShortcutTotal;
+	vector<tagShortcut*>		_vShortcutSetting;
+
 public :
 	HRESULT init(void);
 	void release(void);
 	void update(void);
 	void render(void);
+
+private :
+	void updateShortcut(void);
 
 public :	// * option * //
 	tagGameOption& getInfoOption(void) { return _infoOption; };
@@ -52,6 +69,15 @@ public :	// * field * //
 
 public :	// * player * //
 	playerableBase *& getPlayer(void) { return _player; };
+
+public :	// * shortcut * //
+	void addShortcut(string name, int index, const function<void(void)> & active);
+	void putShortcut(string name, int virtualKey);
+	void useShortcut(int virtualKey) { _vShortcutSetting[virtualKey]->active(); };
+
+private :
+	tagShortcut* findShortcut(string name);
+
 
 public:
 	gameSystem() {};

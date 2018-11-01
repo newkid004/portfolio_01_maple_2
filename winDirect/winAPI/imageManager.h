@@ -18,11 +18,11 @@ enum e_IMAGE_FLIP
 enum e_TRANSFORM
 {
 	TF_NONE			= 0,
-	TF_POSITION		= 0b0001,
-	TF_ROTATION		= 0b0010,
-	TF_FLIP			= 0b0100,
-	TF_SCALE		= 0b1000,
-	TF_ALL			= 0b1111
+	TF_POSITION		= 0b0001,		// 위치
+	TF_ROTATION		= 0b0010,		// 회전
+	TF_FLIP			= 0b0100,		// 반전
+	TF_SCALE		= 0b1000,		// 크기
+	TF_ALL			= 0b1111		// 전부
 };
 
 class imageManager : public singletonBase<imageManager>

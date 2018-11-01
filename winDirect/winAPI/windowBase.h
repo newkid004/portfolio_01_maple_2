@@ -10,7 +10,7 @@ protected:
 	string _winName;
 	fPOINT _pos;
 
-	list<buttonBase*> _lButton;
+	map<string, buttonBase*> _mButton;
 
 public :
 	virtual HRESULT init(void);
@@ -19,6 +19,7 @@ public :
 	virtual void render(void);
 
 public :
+	image* & getImage(void) { return _img; }
 	UI_LIST_ITER & getIter(void) { return _managedIter; };
 	string & getName(void) { return _winName; };
 	fPOINT & getPos(void) { return _pos; };
@@ -27,9 +28,11 @@ public :	// ----- window ----- //
 	virtual void show(void) { WINMANAGER->show(this); };
 	virtual UI_LIST_ITER close(void) {return WINMANAGER->close(this); };
 	virtual bool isShow(void) { return !(_managedIter == WINMANAGER->getIgnoreIter()); };
+	virtual bool isClose(void) { return _managedIter == WINMANAGER->getIgnoreIter(); };
 
 public :	// ----- button ----- //
-	void addButton(buttonBase* addition) { addition->getWindow() = this; _lButton.push_back(addition); };
+	buttonBase* addButton(string name, buttonBase* addition);
+	buttonBase* findButton(string name);
 
 public :
 	windowBase() {};

@@ -9,6 +9,7 @@ HRESULT sceneWindowTest::init(void)
 	IMAGEMANAGER->add("buttonTest", L"image/UI/buttonTest.png", 3, 2);
 
 	initWindow();
+	initSystem();
 
 	IMAGEMANAGER->resetTransform();
 
@@ -39,7 +40,13 @@ void sceneWindowTest::initWindow(void)
 	w = new windowBase; w->init();
 	b = new buttonTest; b->init();
 
-	w->addButton(b);
+	w->addButton("testButton", b);
 	WINMANAGER->add("testWindow", w);
 	WINMANAGER->show("testWindow");
+}
+
+void sceneWindowTest::initSystem(void)
+{
+	GAMESYSTEM->addShortcut("show", 0, [&](void)->void { WINMANAGER->trans("testWindow"); });
+	GAMESYSTEM->putShortcut("show", 'Q');
 }
