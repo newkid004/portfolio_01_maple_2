@@ -5,8 +5,9 @@
 
 HRESULT settingButtonTest::init(void)
 {
-	_img = IMAGEMANAGER->find("buttonUI");
-	_active = [&](void)->UI_LIST_ITER {  WINMANAGER->find("settingUI")->show(); return _bindWindow->getIter();  };
+	_img = IMAGEMANAGER->find("escUI");
+
+	_active = [&](void)->UI_LIST_ITER {  WINMANAGER->trans("settingUI"); return _bindWindow->getIter();  };
 
 	_size = _img->getFrameSize();
 
@@ -26,7 +27,7 @@ UI_LIST_ITER settingButtonTest::update(void)
 		if (KEYMANAGER->up(VK_LBUTTON))
 			return _active();
 		else if (KEYMANAGER->down(VK_LBUTTON))
-			_frame = 2;
+			_frame = 1;
 		else
 			_frame = 1;
 	}

@@ -5,7 +5,7 @@
 HRESULT buttonTest3::init(void)
 {
 	_img = IMAGEMANAGER->find("buttonUI");
-	_active = [&](void)->UI_LIST_ITER {WINMANAGER->find("setting")->show(); return _bindWindow->getIter(); };
+	_active = [&](void)->UI_LIST_ITER {WINMANAGER->trans("setting"); return _bindWindow->getIter(); };
 
 	_size = _img->getFrameSize();
 
