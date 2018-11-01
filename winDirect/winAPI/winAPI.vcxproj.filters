@@ -417,6 +417,9 @@
     <ClCompile Include="settingButtonTest.cpp">
       <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClCompile>
+    <ClCompile Include="buttonBase.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

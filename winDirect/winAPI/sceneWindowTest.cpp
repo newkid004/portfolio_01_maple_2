@@ -40,7 +40,7 @@ void sceneWindowTest::initWindow(void)
 	w = new windowBase; w->init();
 	b = new buttonTest; b->init();
 
-	w->addButton(b);
+	w->addButton("testButton", b);
 	WINMANAGER->add("testWindow", w);
 	WINMANAGER->show("testWindow");
 }

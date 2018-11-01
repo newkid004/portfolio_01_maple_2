@@ -15,19 +15,19 @@ HRESULT windowBase::init(void)
 
 void windowBase::release(void)
 {
-	for (auto i = _lButton.begin(); i != _lButton.end();)
+	for (auto i = _mButton.begin(); i != _mButton.end();)
 	{
-		SAFE_DELETE(*i);
-		i = _lButton.erase(i);
+		SAFE_DELETE(i->second);
+		i = _mButton.erase(i);
 	}
 }
 
 UI_LIST_ITER windowBase::update(void)
 {
 	UI_LIST_ITER viewIter;
-	for (auto i = _lButton.begin(); i != _lButton.end(); ++i)
+	for (auto i = _mButton.begin(); i != _mButton.end(); ++i)
 	{
-		viewIter = (*i)->update();
+		viewIter = i->second->update();
 		if (viewIter == WINMANAGER->getIgnoreIter())
 			return viewIter;
 	}
@@ -58,8 +58,26 @@ void windowBase::render(void)
 		_img->render();
 	}
 
-	for (auto i = _lButton.begin(); i != _lButton.end(); ++i)
-		(*i)->render();
+	for (auto i = _mButton.begin(); i != _mButton.end(); ++i)
+		i->second->render();
+}
+
+buttonBase * windowBase::addButton(string name, buttonBase * addition)
+{
+	buttonBase* b = findButton(name);
+	if (b != NULL) return b;
+
+	_mButton.insert(make_pair(name, addition));
+
+	return addition;
+}
+
+buttonBase * windowBase::findButton(string name)
+{
+	auto & iter = _mButton.find(name);
+	if (iter == _mButton.end()) return NULL;
+
+	return iter->second;
 }
 
 
