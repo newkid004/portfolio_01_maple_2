@@ -10,7 +10,7 @@ protected:
 	string _winName;
 	fPOINT _pos;
 
-	list<buttonBase*> _lButton;
+	map<string, buttonBase*> _mButton;
 
 public :
 	virtual HRESULT init(void);
@@ -31,7 +31,8 @@ public :	// ----- window ----- //
 	virtual bool isClose(void) { return _managedIter == WINMANAGER->getIgnoreIter(); };
 
 public :	// ----- button ----- //
-	void addButton(buttonBase* addition) { addition->getWindow() = this; _lButton.push_back(addition); };
+	buttonBase* addButton(string name, buttonBase* addition);
+	buttonBase* findButton(string name);
 
 public :
 	windowBase() {};
