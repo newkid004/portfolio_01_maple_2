@@ -68,31 +68,28 @@ void winManager::show(string winName)
 	auto iter = _mWindow.find(winName);
 	if (iter == _mWindow.end()) return;
 
-	// 이미 열렸는지 판별
-	windowBase* winBase = iter->second;
-	if (winBase->getIter() != _lWindow.end())
-	{
-		// 이미 열려있음 -> 기존 위치 삭제
-		_lWindow.erase(winBase->getIter());
-	}
-
-	// 맨 앞에 창 띄움
-	_lWindow.push_front(winBase);
-	winBase->getIter() = _lWindow.begin();
+	show(iter->second);
 }
 
 void winManager::show(windowBase * winBase)
 {
-	show(winBase->getIter());
-}
+	// 맨 앞으로 창 이동
+	_lWindow.push_front(winBase);
 
-void winManager::show(UI_LIST_ITER & winIter)
-{
-	// ** 충돌 위험 ** //
-	// 맨 앞에 창 삽입 후, 기존 위치 삭제
-	_lWindow.push_front(*winIter);
-	_lWindow.erase(winIter);
-	winIter = _lWindow.begin();
+	// 닫혀있는지 판별
+	if (winBase->getIter() == _lWindow.end())
+	{
+		// 닫혀있음
+		winBase->getIter() = _lWindow.begin();
+	}
+	else
+	{
+		// 열려있음
+		_lWindow.erase(winBase->getIter());
+	}
+
+	// 맨 앞의 iterator 삽입
+	winBase->getIter() = _lWindow.begin();
 }
 
 UI_LIST_ITER winManager::close(string winName)
@@ -101,8 +98,12 @@ UI_LIST_ITER winManager::close(string winName)
 	auto iter = _mWindow.find(winName);
 	if (iter == _mWindow.end()) return _lWindow.end();
 
+	return close(iter->second);
+}
+
+UI_LIST_ITER winManager::close(windowBase * winBase)
+{
 	// 이미 닫혔는지 판별
-	windowBase* winBase = iter->second;
 	if (winBase->getIter() == _lWindow.end())
 	{
 		// 이미 닫혀있음 -> 나감
@@ -116,17 +117,28 @@ UI_LIST_ITER winManager::close(string winName)
 	return nextIter;
 }
 
-UI_LIST_ITER winManager::close(windowBase * winBase)
+UI_LIST_ITER winManager::trans(string winName)
 {
-	return close(winBase->getIter());
+	// 목록에 담겨있는지 판별
+	auto iter = _mWindow.find(winName);
+	if (iter == _mWindow.end()) return _lWindow.end();
+
+	return trans(iter->second);
 }
 
-UI_LIST_ITER winManager::close(UI_LIST_ITER & winIter)
+UI_LIST_ITER winManager::trans(windowBase * winBase)
 {
-	// ** 충돌 위험 ** //
-	// 닫고 초기화
-	UI_LIST_ITER nextIter = _lWindow.erase(winIter);
-	winIter = _lWindow.end();
+	// 열렸는지 판별
+	if (winBase->isShow())
+	{
+		// 열려있음 -> 닫음
+		winBase->close();
+	}
+	else
+	{
+		// 닫혀있음 -> 열림
+		winBase->show();
+	}
 
-	return nextIter;
+	return winBase->getIter();
 }

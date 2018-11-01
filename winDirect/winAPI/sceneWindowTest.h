@@ -11,6 +11,7 @@ public :
 
 public :
 	void initWindow(void);
+	void initSystem(void);
 
 public:
 	sceneWindowTest() {};
