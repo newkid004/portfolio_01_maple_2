@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "player.h"
 
+player::player() : _headPosition(fPOINT(0.0f, 0.0f)),
+				   _facePosition(fPOINT(0.0f, 0.0f)),
+				   _hairPosition(fPOINT(0.0f, 0.0f))
+{
+}
 
 HRESULT player::init(void)
 {
@@ -49,6 +54,25 @@ void player::release(void)
 
 void player::update(void)
 {
+	keyUpdate();
+	setPartPosition();
+}
+
+void player::render(void)
+{
+	IMAGEMANAGER->statePos(_position);
+	IMAGEMANAGER->find("p_body")->aniRender(_aniBody->update());
+	IMAGEMANAGER->find("p_arm")->aniRender(_aniArm->update());
+	IMAGEMANAGER->statePos(_headPosition);
+	IMAGEMANAGER->find("p_head")->render();
+	IMAGEMANAGER->statePos(_facePosition);
+	IMAGEMANAGER->find("p_face")->frameRender(fPOINT(0,0));
+	IMAGEMANAGER->statePos(_hairPosition);
+	IMAGEMANAGER->find("p_hair")->render();
+}
+
+void player::keyUpdate(void)
+{
 	if (KEYMANAGER->press(VK_SPACE))
 	{
 		_aniBody->start();
@@ -61,11 +85,19 @@ void player::update(void)
 		_aniArm->stop();
 	}
 
-	if (KEYMANAGER->down(VK_LEFT)) {
-		_position.x -= TIMEMANAGER->getElapsedTime() * 200; _dir = LEFT;
+	if (KEYMANAGER->down(VK_LEFT))
+	{
+		_position.x -= TIMEMANAGER->getElapsedTime() * 200;
+		_dir = LEFT;
+		_flip = _dir == RIGHT ? IMAGE_FLIP_VERTICAL : 0;
+		IMAGEMANAGER->stateFlip(_flip);
 	}
-	else if (KEYMANAGER->down(VK_RIGHT)) {
-		_position.x += TIMEMANAGER->getElapsedTime() * 200; _dir = RIGHT;
+	if (KEYMANAGER->down(VK_RIGHT))
+	{
+		_position.x += TIMEMANAGER->getElapsedTime() * 200; 
+		_dir = RIGHT;
+		_flip = _dir == RIGHT ? IMAGE_FLIP_VERTICAL : 0;
+		IMAGEMANAGER->stateFlip(_flip);
 	}
 
 	if (KEYMANAGER->press(VK_LEFT) || KEYMANAGER->press(VK_RIGHT))
@@ -74,15 +106,13 @@ void player::update(void)
 		_aniArm->stop();
 		_state.movement = M_WALK;
 		setAnimation(_state.movement);
-		_flip = _dir == RIGHT ? IMAGE_FLIP_VERTICAL : 0;
-		
-		IMAGEMANAGER->stateFlip(_flip);
+
 		_aniBody->start();
 		_aniArm->start();
 	}
-	
+
 	if (!KEYMANAGER->down(VK_LEFT) && !KEYMANAGER->down(VK_RIGHT) &&
-		!KEYMANAGER->down(VK_UP) && !KEYMANAGER->down(VK_DOWN) && 
+		!KEYMANAGER->down(VK_UP) && !KEYMANAGER->down(VK_DOWN) &&
 		_state.movement != M_NONE)
 	{
 		_aniBody->stop();
@@ -92,20 +122,6 @@ void player::update(void)
 		_aniBody->start();
 		_aniArm->start();
 	}
-
-}
-
-void player::render(void)
-{
-	IMAGEMANAGER->statePos(_position);
-	IMAGEMANAGER->find("p_body")->aniRender(_aniBody->update());
-	IMAGEMANAGER->find("p_arm")->aniRender(_aniArm->update());
-	IMAGEMANAGER->statePos(fPOINT(_position.x + 34, _position.y));
-	IMAGEMANAGER->find("p_head")->render();
-	IMAGEMANAGER->statePos(fPOINT(_position.x + 24, _position.y - 3));
-	IMAGEMANAGER->find("p_face")->frameRender(fPOINT(0,0));
-	IMAGEMANAGER->statePos(fPOINT(_position.x + 35, _position.y));
-	IMAGEMANAGER->find("p_hair")->render();
 }
 
 void player::setMotions(MOVEMENT movement, int maxFrameX, int frameY, float delay)
@@ -132,3 +148,21 @@ void player::setAnimation(MOVEMENT movement)
 		PointMake(_Mmotions.find(movement)->second.maxFrameX - 1, _Mmotions.find(movement)->second.frameY),
 		false, true);
 }
+
+void player::setPartPosition(void)
+{
+	if (_dir == LEFT)
+	{
+		_headPosition = fPOINT(_position.x + 33, _position.y + 1);
+		_facePosition = fPOINT(_position.x + 24, _position.y - 1);
+		_hairPosition = fPOINT(_position.x + 34, _position.y + 1);
+	}
+	
+	if (_dir == RIGHT)
+	{
+		_headPosition = fPOINT(_position.x + 28, _position.y + 1);
+		_facePosition = fPOINT(_position.x + 26, _position.y - 1);
+		_hairPosition = fPOINT(_position.x + 31, _position.y + 1);
+	}
+}
+
