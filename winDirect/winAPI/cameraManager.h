@@ -5,8 +5,8 @@
 class cameraManager : public singletonBase<cameraManager>
 {
 private :
-	typedef map<string, camera*>			mapCamera;
-	typedef map<string, camera*>::iterator	mapiCamera;
+	typedef unordered_map<string, camera*>			mapCamera;
+	typedef unordered_map<string, camera*>::iterator	mapiCamera;
 
 private :
 	mapCamera _mCamera;

@@ -4,7 +4,7 @@
 class textManager : public singletonBase<textManager>
 {
 private :
-	map<string, IDWriteTextFormat*> _mTextFormat;
+	unordered_map<string, IDWriteTextFormat*> _mTextFormat;
 
 private :
 	ID2D1SolidColorBrush*	_brush;

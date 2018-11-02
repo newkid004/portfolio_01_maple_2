@@ -8,7 +8,7 @@ class shopManager : public singletonBase<shopManager>
 {
 private :
 	windowShop * _bindWindow;
-	map<string, shopBase*> _mShop;
+	unordered_map<string, shopBase*> _mShop;
 
 public :
 	HRESULT init(void);

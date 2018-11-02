@@ -7,8 +7,8 @@ class
 sceneManager : public singletonBase<sceneManager>
 {
 public :
-	typedef map<string, gameNode*> mapSceneList;
-	typedef map<string, gameNode*>::iterator mapSceneIter;
+	typedef unordered_map<string, gameNode*> mapSceneList;
+	typedef unordered_map<string, gameNode*>::iterator mapSceneIter;
 
 private :
 	static gameNode* _currentScene;		// ÇöÀç ¾À

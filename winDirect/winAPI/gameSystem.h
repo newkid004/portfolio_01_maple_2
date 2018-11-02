@@ -44,7 +44,7 @@ private :
 	fieldBase*		_curField;
 	playerableBase*	_player;
 
-	map<string, tagShortcut*>	_mShortcutTotal;
+	unordered_map<string, tagShortcut*>	_mShortcutTotal;
 	vector<tagShortcut*>		_vShortcutSetting;
 
 public :

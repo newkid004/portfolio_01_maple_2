@@ -28,8 +28,8 @@ enum e_TRANSFORM
 class imageManager : public singletonBase<imageManager>
 {
 private:
-	typedef map<string, image*> mapImageList;				// 맵 이미지 목록
-	typedef map<string, image*>::iterator mapImageIter;		// 맵 이미지 목록 반복자
+	typedef unordered_map<string, image*> mapImageList;				// 맵 이미지 목록
+	typedef unordered_map<string, image*>::iterator mapImageIter;		// 맵 이미지 목록 반복자
 
 private:
 	mapImageList _mImageList;

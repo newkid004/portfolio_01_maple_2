@@ -4,14 +4,14 @@
 class questManager:public singletonBase<questManager>
 {
 private:
-	typedef map<string, questBase*> mQuest;
-	typedef map<string, questBase*>::iterator miQuest;
+	typedef unordered_map<string, questBase*> mQuest;
+	typedef unordered_map<string, questBase*>::iterator miQuest;
 	
-	typedef map<string, MoneyQuest*> mMoneyQuest;
-	typedef map<string, MoneyQuest*>::iterator miMoneyQuest;
+	typedef unordered_map<string, MoneyQuest*> mMoneyQuest;
+	typedef unordered_map<string, MoneyQuest*>::iterator miMoneyQuest;
 
-	typedef map<string, ItemQuest*> mItemQuest;
-	typedef map<string, ItemQuest*>::iterator miItemQuest;
+	typedef unordered_map<string, ItemQuest*> mItemQuest;
+	typedef unordered_map<string, ItemQuest*>::iterator miItemQuest;
 private:
 	mQuest			_mQuest;					miQuest			_miQuest;
 	mMoneyQuest		_mMoneyQuest;				miMoneyQuest	_miMoneyQuest;

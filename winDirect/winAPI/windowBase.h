@@ -10,7 +10,7 @@ protected:
 	string _winName;
 	fPOINT _pos;
 
-	map<string, buttonBase*> _mButton;
+	unordered_map<string, buttonBase*> _mButton;
 
 public :
 	virtual HRESULT init(void);
