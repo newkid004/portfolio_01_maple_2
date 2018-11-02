@@ -1,6 +1,6 @@
 #pragma once
 
-#include "buttonBase.h"
+class buttonBase;
 
 class windowBase
 {
