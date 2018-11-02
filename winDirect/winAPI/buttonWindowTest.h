@@ -7,8 +7,13 @@ public:
 	void release(void);
 	void update(void);
 	void render(void);
-	void initWindow(void);
 
+public :
+	void initImage(void);
+	void initWindow(void);
+	void initSystem(void);
+
+public :
 	buttonWindowTest(){}
 	~buttonWindowTest(){}
 };

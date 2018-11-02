@@ -6,17 +6,14 @@
 #include "buttonTest3.h"
 #include "settingButtonTest.h"
 
+#include "event_0000_test.h"
 
 HRESULT buttonWindowTest::init(void)
 {
-	IMAGEMANAGER->add("invenUI", L"image/UI/invenUI.png");
-	IMAGEMANAGER->add("buttonUI", L"image/UI/buttonUI.png", 3, 6);
-	IMAGEMANAGER->add("setting", L"image/UI/setting.png");
-	IMAGEMANAGER->add("settingUI", L"image/UI/Shortcuts.png");
-	IMAGEMANAGER->add("back", L"image/UI/shortcut_char.png");
-	IMAGEMANAGER->add("escUI", L"image/UI/escUI.png", 2, 3);
+	initImage();
 	initWindow();
-	IMAGEMANAGER->resetTransform();
+	initSystem();
+
 	return S_OK;
 }
 
@@ -26,12 +23,28 @@ void buttonWindowTest::release(void)
 
 void buttonWindowTest::update(void)
 {
+	GAMESYSTEM->update();
+	EVENTMANAGER->update();
 	WINMANAGER->update();
 }
 
 void buttonWindowTest::render(void)
 {
+	GAMESYSTEM->render();
+	EVENTMANAGER->render();
 	WINMANAGER->render();
+}
+
+void buttonWindowTest::initImage(void)
+{
+	IMAGEMANAGER->add("invenUI", L"image/UI/invenUI.png");
+	IMAGEMANAGER->add("buttonUI", L"image/UI/buttonUI.png", 3, 6);
+	IMAGEMANAGER->add("setting", L"image/UI/setting.png");
+	IMAGEMANAGER->add("settingUI", L"image/UI/Shortcuts.png");
+	IMAGEMANAGER->add("back", L"image/UI/shortcut_char.png");
+	IMAGEMANAGER->add("escUI", L"image/UI/escUI.png", 2, 3);
+
+	IMAGEMANAGER->resetTransform();
 }
 
 void buttonWindowTest::initWindow(void)
@@ -72,8 +85,14 @@ void buttonWindowTest::initWindow(void)
 
 	w = new windowBase; w->init();
 	w->getImage() = IMAGEMANAGER->find("settingUI");
-	w->getPos().x = 0;
+	w->getPos().x = 100;
 	w->getPos().y = 0;
 
 	WINMANAGER->add("settingUI", w);
+}
+
+void buttonWindowTest::initSystem(void)
+{
+	GAMESYSTEM->addShortcut("test", 0, [](void)->void { if (KEYMANAGER->press('Q')) EVENTMANAGER->add(new event_0000_test(NULL, WINMANAGER->find("settingUI"))); KEYMANAGER->press('Q'); });
+	GAMESYSTEM->putShortcut("test", 'Q');
 }
