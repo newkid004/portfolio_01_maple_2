@@ -53,8 +53,17 @@ public :
 	void update(void);
 	void render(void);
 
-private :
+private :	// * framework * //
+	// init
+	void initShortcut(void);
+
+	// release
+	void releaseShortcut(void);
+
+	// update
 	void updateShortcut(void);
+
+	// render
 
 public :	// * option * //
 	tagGameOption& getInfoOption(void) { return _infoOption; };

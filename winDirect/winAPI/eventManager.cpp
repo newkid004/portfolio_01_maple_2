@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "eventManager.h"
 
+#include "eventBase.h"
+
 void eventManager::release()
 {
 	deleteAll();
@@ -14,8 +16,7 @@ void eventManager::update()
 
 		if ((*iter)->getTimeAlive() <= 0)
 		{
-			(*iter)->release();
-			SAFE_DELETE(*iter);
+			delete *iter;
 			iter = _lEvent.erase(iter);
 		}
 		else ++iter;
@@ -39,8 +40,7 @@ void eventManager::deleteAll()
 {
 	for (auto iter = _lEvent.begin(); iter != _lEvent.end(); ++iter)
 	{
-		(*iter)->release();
-		SAFE_DELETE(*iter);
+		delete *iter;
 	}
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "buttonBase.h"
+class buttonBase;
 
 class windowBase
 {
@@ -26,7 +26,8 @@ public :
 
 public :	// ----- window ----- //
 	virtual void show(void) { WINMANAGER->show(this); };
-	virtual UI_LIST_ITER close(void) {return WINMANAGER->close(this); };
+	virtual UI_LIST_ITER close(void) { return WINMANAGER->close(this); };
+	virtual UI_LIST_ITER trans(void) { return WINMANAGER->trans(this); };
 	virtual bool isShow(void) { return !(_managedIter == WINMANAGER->getIgnoreIter()); };
 	virtual bool isClose(void) { return _managedIter == WINMANAGER->getIgnoreIter(); };
 

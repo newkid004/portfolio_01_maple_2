@@ -150,7 +150,7 @@ void buttonWindowTest::initWindow(void)
 
 void buttonWindowTest::initSystem(void)
 {
-	GAMESYSTEM->addShortcut("test", 0, [](void)->void { if (KEYMANAGER->press('Q')) WINMANAGER->trans("settingUI"); KEYMANAGER->press('Q'); });
+	GAMESYSTEM->addShortcut("test", 0, [](void)->void { if (KEYMANAGER->press('Q')) EVENTMANAGER->add(new event_0000_test(NULL, WINMANAGER->find("settingUI"))); KEYMANAGER->press('Q'); });
 	GAMESYSTEM->putShortcut("test", 'Q');
 	GAMESYSTEM->addShortcut("test2", 0, [](void)->void { if (KEYMANAGER->press('W')) WINMANAGER->trans("statusUI"); KEYMANAGER->press('W'); });
 	GAMESYSTEM->putShortcut("test2", 'W');

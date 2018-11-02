@@ -220,8 +220,14 @@
     <Filter Include="메인게임\Scene\test\button">
       <UniqueIdentifier>{78092c5e-646d-42da-9583-2181db270ef8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\button\statUp">
-      <UniqueIdentifier>{20a730b0-4b49-47bc-8b3a-77e779f390d8}</UniqueIdentifier>
+    <Filter Include="메인게임\Game Framework\Manager\window\button\_test">
+      <UniqueIdentifier>{8166be66-df21-462a-8590-647e202592ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\event">
+      <UniqueIdentifier>{d6035637-4916-4ff6-a4ab-bc9eda1f10fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\event\_test">
+      <UniqueIdentifier>{ccd2816c-ebab-41c0-a6aa-2595cdf9ad9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -393,9 +399,6 @@
     <ClCompile Include="sceneTestPixelCrash.cpp">
       <Filter>메인게임\Scene\test\pixel</Filter>
     </ClCompile>
-    <ClCompile Include="buttonTest.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
-    </ClCompile>
     <ClCompile Include="sceneLoadingTest.cpp">
       <Filter>메인게임\Scene\test\loading</Filter>
     </ClCompile>
@@ -411,17 +414,20 @@
     <ClCompile Include="buttonWindowTest.cpp">
       <Filter>메인게임\Scene\test\button</Filter>
     </ClCompile>
+    <ClCompile Include="buttonTest.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+    </ClCompile>
     <ClCompile Include="buttonTest2.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
     </ClCompile>
     <ClCompile Include="buttonTest3.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
     </ClCompile>
     <ClCompile Include="settingButtonTest.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
     </ClCompile>
-    <ClCompile Include="buttonBase.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
+    <ClCompile Include="event_0000_test.cpp">
+      <Filter>메인게임\Game Framework\event\_test</Filter>
     </ClCompile>
     <ClCompile Include="btDexUp.cpp">
       <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
@@ -647,9 +653,6 @@
     <ClInclude Include="buttonBase.h">
       <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
     </ClInclude>
-    <ClInclude Include="buttonTest.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
-    </ClInclude>
     <ClInclude Include="sceneLoadingTest.h">
       <Filter>메인게임\Scene\test\loading</Filter>
     </ClInclude>
@@ -665,14 +668,26 @@
     <ClInclude Include="buttonWindowTest.h">
       <Filter>메인게임\Scene\test\button</Filter>
     </ClInclude>
+    <ClInclude Include="buttonTest.h">
+      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+    </ClInclude>
     <ClInclude Include="buttonTest2.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
     </ClInclude>
     <ClInclude Include="buttonTest3.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
     </ClInclude>
     <ClInclude Include="settingButtonTest.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+    </ClInclude>
+    <ClInclude Include="eventDef.h">
+      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="eventList.h">
+      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="event_0000_test.h">
+      <Filter>메인게임\Game Framework\event\_test</Filter>
     </ClInclude>
     <ClInclude Include="btDexUp.h">
       <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>

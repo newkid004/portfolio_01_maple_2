@@ -4,13 +4,14 @@
 
 HRESULT gameSystem::init(void)
 {
-	_vShortcutSetting.resize(256, NULL);
+	initShortcut();
 
 	return S_OK;
 }
 
 void gameSystem::release(void)
 {
+	releaseShortcut();
 }
 
 void gameSystem::update(void)
@@ -20,6 +21,27 @@ void gameSystem::update(void)
 
 void gameSystem::render(void)
 {
+}
+
+void gameSystem::initShortcut(void)
+{
+	_vShortcutSetting.resize(256, NULL);
+
+	// 방향키 설정
+	addShortcut("DIR_UP",		-1, [](void)->void {}); putShortcut("DIR_UP", VK_UP);
+	addShortcut("DIR_DOWN",		-1, [](void)->void {}); putShortcut("DIR_DOWN", VK_DOWN);
+	addShortcut("DIR_LEFT",		-1, [](void)->void {}); putShortcut("DIR_LEFT", VK_LEFT);
+	addShortcut("DIR_RIGHT",	-1, [](void)->void {}); putShortcut("DIR_RIGHT", VK_RIGHT);
+}
+
+void gameSystem::releaseShortcut(void)
+{
+	_vShortcutSetting.clear();
+	for (auto i = _mShortcutTotal.begin(); i != _mShortcutTotal.end();)
+	{
+		SAFE_DELETE(i->second);
+		i = _mShortcutTotal.erase(i);
+	}
 }
 
 void gameSystem::updateShortcut(void)

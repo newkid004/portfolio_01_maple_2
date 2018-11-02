@@ -86,6 +86,9 @@ HRESULT gameNode::init(bool managerInit)
 		// 텍스트 매니저 초기화
 		TEXTMANAGER->init();
 
+		// 이벤트 매니저 초기화
+		EVENTMANAGER->init();
+
 		// 게임 시스템 싱글톤 초기화
 		GAMESYSTEM->init();
 
@@ -175,6 +178,10 @@ void gameNode::release(void)
 		// 텍스트 매니저 해제
 		TEXTMANAGER->release();
 		TEXTMANAGER->releaseSingleton();
+
+		// 이벤트 매니저 해제
+		EVENTMANAGER->release();
+		EVENTMANAGER->releaseSingleton();
 
 		// 게임 시스템 해제
 		GAMESYSTEM->release();
