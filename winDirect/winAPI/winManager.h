@@ -21,6 +21,7 @@ public :
 public :
 	windowBase * add(string winName, windowBase* winAdd);
 	windowBase* find(string winName);
+	windowBase* getFocus(void) { if (_lWindow.empty()) return NULL; return *_lWindow.begin(); }
 
 	void show(string winName);
 	void show(windowBase* winBase);
