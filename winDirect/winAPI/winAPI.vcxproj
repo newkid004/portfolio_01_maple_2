@@ -196,6 +196,7 @@
     <ClCompile Include="passiveSkill.cpp" />
     <ClCompile Include="patternBase.cpp" />
     <ClCompile Include="patternManager.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="questBase.cpp" />
     <ClCompile Include="questManager.cpp" />
     <ClCompile Include="renderManager.cpp" />
@@ -279,6 +280,7 @@
     <ClInclude Include="passiveSkill.h" />
     <ClInclude Include="patternBase.h" />
     <ClInclude Include="patternManager.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="questBase.h" />
     <ClInclude Include="questManager.h" />
     <ClInclude Include="randomFunction.h" />

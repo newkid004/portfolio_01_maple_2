@@ -444,6 +444,9 @@
     <ClCompile Include="inventory.cpp">
       <Filter>메인게임\Game Framework\inventory</Filter>
     </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>메인게임\Game Framework\object\_character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -694,6 +697,9 @@
     </ClInclude>
     <ClInclude Include="inventory.h">
       <Filter>메인게임\Game Framework\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>메인게임\Game Framework\object\_character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
