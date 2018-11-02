@@ -175,6 +175,7 @@
     <ClCompile Include="enemy_0000_snail.cpp" />
     <ClCompile Include="eventBase.cpp" />
     <ClCompile Include="eventManager.cpp" />
+    <ClCompile Include="event_0000_test.cpp" />
     <ClCompile Include="fieldBase.cpp" />
     <ClCompile Include="fieldManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
@@ -249,7 +250,10 @@
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="enemy_0000_snail.h" />
     <ClInclude Include="eventBase.h" />
+    <ClInclude Include="eventDef.h" />
+    <ClInclude Include="eventList.h" />
     <ClInclude Include="eventManager.h" />
+    <ClInclude Include="event_0000_test.h" />
     <ClInclude Include="fieldBase.h" />
     <ClInclude Include="fieldManager.h" />
     <ClInclude Include="gameNode.h" />

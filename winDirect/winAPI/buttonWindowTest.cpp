@@ -6,6 +6,7 @@
 #include "buttonTest3.h"
 #include "settingButtonTest.h"
 
+#include "event_0000_test.h"
 
 HRESULT buttonWindowTest::init(void)
 {
@@ -23,12 +24,14 @@ void buttonWindowTest::release(void)
 void buttonWindowTest::update(void)
 {
 	GAMESYSTEM->update();
+	EVENTMANAGER->update();
 	WINMANAGER->update();
 }
 
 void buttonWindowTest::render(void)
 {
 	GAMESYSTEM->render();
+	EVENTMANAGER->render();
 	WINMANAGER->render();
 }
 
@@ -90,6 +93,6 @@ void buttonWindowTest::initWindow(void)
 
 void buttonWindowTest::initSystem(void)
 {
-	GAMESYSTEM->addShortcut("test", 0, [](void)->void { if (KEYMANAGER->press('Q')) WINMANAGER->trans("settingUI"); KEYMANAGER->press('Q'); });
+	GAMESYSTEM->addShortcut("test", 0, [](void)->void { if (KEYMANAGER->press('Q')) EVENTMANAGER->add(new event_0000_test(NULL, WINMANAGER->find("settingUI"))); KEYMANAGER->press('Q'); });
 	GAMESYSTEM->putShortcut("test", 'Q');
 }
