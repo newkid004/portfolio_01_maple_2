@@ -93,6 +93,7 @@ using namespace MY_UTIL;
 #include "shopManager.h"
 #include "enemyManager.h"
 #include "textManager.h"
+#include "eventManager.h"
 
 #include "gameSystem.h"
 
@@ -121,6 +122,7 @@ using namespace MY_UTIL;
 #define SHOPMANAGER		shopManager::getSingleton()
 #define ENEMYMANAGER	enemyManager::getSingleton()
 #define TEXTMANAGER		textManager::getSingleton()
+#define EVENTMANAGER	eventManager::getSingleton()
 
 #define GAMESYSTEM		gameSystem::getSingleton()
 

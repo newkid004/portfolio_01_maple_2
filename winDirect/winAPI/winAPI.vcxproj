@@ -160,7 +160,6 @@
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
-    <ClCompile Include="buttonBase.cpp" />
     <ClCompile Include="buttonTest.cpp" />
     <ClCompile Include="buttonTest2.cpp" />
     <ClCompile Include="buttonTest3.cpp" />
@@ -176,6 +175,7 @@
     <ClCompile Include="enemy_0000_snail.cpp" />
     <ClCompile Include="eventBase.cpp" />
     <ClCompile Include="eventManager.cpp" />
+    <ClCompile Include="event_0000_test.cpp" />
     <ClCompile Include="fieldBase.cpp" />
     <ClCompile Include="fieldManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
@@ -250,7 +250,10 @@
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="enemy_0000_snail.h" />
     <ClInclude Include="eventBase.h" />
+    <ClInclude Include="eventDef.h" />
+    <ClInclude Include="eventList.h" />
     <ClInclude Include="eventManager.h" />
+    <ClInclude Include="event_0000_test.h" />
     <ClInclude Include="fieldBase.h" />
     <ClInclude Include="fieldManager.h" />
     <ClInclude Include="gameNode.h" />
