@@ -1,6 +1,5 @@
 #pragma once
-
-class windowBase;
+#include "windowBase.h"
 
 class buttonBase
 {
@@ -18,13 +17,13 @@ public:
 	virtual void render(void) {};
 
 public:
-	image* & getImage(void) { return _img; }
+	image* & getImage(void) { return _img; };
 	fPOINT & getPos(void) { return _pos; };
 	fPOINT & getSize(void) { return _size; };
-	windowBase* &getWindow(void) { return _bindWindow; }
+	windowBase* &getWindow(void) { return _bindWindow; };
 
-	fPOINT getAbsPos(void);
-	fRECT getAbsRect(void) { fRECT rc; rc.LT = getAbsPos(); rc.RB = rc.LT + _size; return rc; }
+	fPOINT getAbsPos(void) { return _pos + _bindWindow->getPos(); };
+	fRECT getAbsRect(void) { fRECT rc; rc.LT = getAbsPos(); rc.RB = rc.LT + _size; return rc; };
 
 	function<UI_LIST_ITER(void)> & getActivate(void) { return _active; };
 public:

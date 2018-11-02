@@ -160,7 +160,6 @@
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
-    <ClCompile Include="buttonBase.cpp" />
     <ClCompile Include="buttonTest.cpp" />
     <ClCompile Include="buttonTest2.cpp" />
     <ClCompile Include="buttonTest3.cpp" />
@@ -176,6 +175,7 @@
     <ClCompile Include="enemy_0000_snail.cpp" />
     <ClCompile Include="eventBase.cpp" />
     <ClCompile Include="eventManager.cpp" />
+    <ClCompile Include="event_0000_test.cpp" />
     <ClCompile Include="fieldBase.cpp" />
     <ClCompile Include="fieldManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
@@ -183,7 +183,6 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniData.cpp" />
-    <ClCompile Include="invenWindowTest.cpp" />
     <ClCompile Include="itemBase.cpp" />
     <ClCompile Include="JsonSaveLoader.cpp" />
     <ClCompile Include="keyManager.cpp" />
@@ -204,6 +203,7 @@
     <ClCompile Include="sceneTest2.cpp" />
     <ClCompile Include="sceneTestPixelCrash.cpp" />
     <ClCompile Include="sceneWindowTest.cpp" />
+    <ClCompile Include="settingButtonTest.cpp" />
     <ClCompile Include="shopBase.cpp" />
     <ClCompile Include="shopManager.cpp" />
     <ClCompile Include="skillBase.cpp" />
@@ -250,7 +250,10 @@
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="enemy_0000_snail.h" />
     <ClInclude Include="eventBase.h" />
+    <ClInclude Include="eventDef.h" />
+    <ClInclude Include="eventList.h" />
     <ClInclude Include="eventManager.h" />
+    <ClInclude Include="event_0000_test.h" />
     <ClInclude Include="fieldBase.h" />
     <ClInclude Include="fieldManager.h" />
     <ClInclude Include="gameNode.h" />
@@ -258,7 +261,6 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniData.h" />
-    <ClInclude Include="invenWindowTest.h" />
     <ClInclude Include="itemBase.h" />
     <ClInclude Include="itemDef.h" />
     <ClInclude Include="JsonSaveLoader.h" />
@@ -282,6 +284,7 @@
     <ClInclude Include="sceneTest2.h" />
     <ClInclude Include="sceneTestPixelCrash.h" />
     <ClInclude Include="sceneWindowTest.h" />
+    <ClInclude Include="settingButtonTest.h" />
     <ClInclude Include="shopBase.h" />
     <ClInclude Include="shopManager.h" />
     <ClInclude Include="singletonBase.h" />
