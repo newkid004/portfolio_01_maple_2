@@ -5,13 +5,10 @@
 #include "buttonTest2.h"
 #include "buttonTest3.h"
 #include "settingButtonTest.h"
-#include "btStrUp.h"
-#include "btDexUp.h"
-#include "btIntUp.h"
-#include "btLukUp.h"
-#include "btHpUp.h"
-#include "btMpUp.h"
+#include "btnStatUp.h"
 #include "btDetails.h"
+#include "event_0000_test.h"
+#include "windowStatus.h"
 
 HRESULT buttonWindowTest::init(void)
 {
@@ -60,24 +57,13 @@ void buttonWindowTest::initWindow(void)
 	buttonTest2* b;
 	buttonTest3* b3;
 	settingButtonTest* s;
-	btStrUp* _btStrUp;
-	btDexUp* _btDexUp;
-	btIntUp* _btIntUp;
-	btLukUp* _btLukUp;
-	btHpUp* _btHpUp;
-	btMpUp* _btMpUp;
+	btnStatUp* _btnStatUp;
 	btDetails* _btDetails;
 
 	w = new windowBase; w->init();
 	b = new buttonTest2; b->init();
 	b3 = new buttonTest3; b3->init();
 	s = new settingButtonTest; s->init();
-	_btStrUp = new btStrUp; _btStrUp->init();
-	_btDexUp = new btDexUp; _btDexUp->init();
-	_btIntUp = new btIntUp; _btIntUp->init();
-	_btLukUp = new btLukUp; _btLukUp->init();
-	_btHpUp = new btHpUp; _btHpUp->init();
-	_btMpUp = new btMpUp; _btMpUp->init();
 	_btDetails = new btDetails; _btDetails->init();
 
 	w->addButton("testButton0", b);
@@ -111,29 +97,35 @@ void buttonWindowTest::initWindow(void)
 
 	WINMANAGER->add("settingUI", w);
 
-	w = new windowBase; w->init();
+	w = new windowStatus; w->init();
 	w->getImage() = IMAGEMANAGER->find("statusUI");
 	w->getPos().x = 700;
 	w->getPos().y = 100;
 	
-	_btStrUp->getPos().x = 185;
-	_btStrUp->getPos().y = 208;
-	w->addButton("btStrUp", _btStrUp);
-	_btDexUp->getPos().x = 185;
-	_btDexUp->getPos().y = 226;
-	w->addButton("btDexUp", _btDexUp);
-	_btIntUp->getPos().x = 185;
-	_btIntUp->getPos().y = 244;
-	w->addButton("btIntUp", _btIntUp);
-	_btLukUp->getPos().x = 185;
-	_btLukUp->getPos().y = 262;
-	w->addButton("btLukUp", _btLukUp);
-	_btHpUp->getPos().x = 185;
-	_btHpUp->getPos().y = 121;
-	w->addButton("btHpUp", _btHpUp);
-	_btMpUp->getPos().x = 185;
-	_btMpUp->getPos().y = 139;
-	w->addButton("btMpUp", _btMpUp);
+	_btnStatUp = new btnStatUp; _btnStatUp->init();
+	_btnStatUp->getPos() = { 185,208 };
+	w->addButton("btnStrUp", _btnStatUp);
+
+	_btnStatUp = new btnStatUp; _btnStatUp->init();
+	_btnStatUp->getPos() = { 185,226 };
+	w->addButton("btnDexUp", _btnStatUp);
+
+	_btnStatUp = new btnStatUp; _btnStatUp->init();
+	_btnStatUp->getPos() = { 185,244 };
+	w->addButton("btnIntUp", _btnStatUp);
+
+	_btnStatUp = new btnStatUp; _btnStatUp->init();
+	_btnStatUp->getPos() = { 185,262 };
+	w->addButton("btnLukUp", _btnStatUp);
+
+	_btnStatUp = new btnStatUp; _btnStatUp->init();
+	_btnStatUp->getPos() = { 185,121 };
+	w->addButton("btnHpUp", _btnStatUp);
+	
+	_btnStatUp = new btnStatUp; _btnStatUp->init();
+	_btnStatUp->getPos() = { 185,139 };
+	w->addButton("btnMpUp", _btnStatUp);
+
 	_btDetails->getPos().x = 130;
 	_btDetails->getPos().y = 287;
 	w->addButton("btDetails", _btDetails);

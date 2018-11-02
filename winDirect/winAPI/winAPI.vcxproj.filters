@@ -202,12 +202,6 @@
     <Filter Include="API Framework\매니져\이미지\direct">
       <UniqueIdentifier>{41cce586-91e0-4109-8535-80e9a6a1e21f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\button">
-      <UniqueIdentifier>{f8ad0bc4-0173-4e80-b704-01f52011517a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\button\_base">
-      <UniqueIdentifier>{c78512d1-0388-4158-90ad-f540d75d01c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="메인게임\Scene\test\loading">
       <UniqueIdentifier>{a5477802-2aba-4400-880c-5a6b742865dc}</UniqueIdentifier>
     </Filter>
@@ -220,14 +214,23 @@
     <Filter Include="메인게임\Scene\test\button">
       <UniqueIdentifier>{78092c5e-646d-42da-9583-2181db270ef8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\button\_test">
-      <UniqueIdentifier>{8166be66-df21-462a-8590-647e202592ee}</UniqueIdentifier>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button">
+      <UniqueIdentifier>{f8ad0bc4-0173-4e80-b704-01f52011517a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\event">
-      <UniqueIdentifier>{d6035637-4916-4ff6-a4ab-bc9eda1f10fe}</UniqueIdentifier>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button\_base">
+      <UniqueIdentifier>{c78512d1-0388-4158-90ad-f540d75d01c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\event\_test">
-      <UniqueIdentifier>{ccd2816c-ebab-41c0-a6aa-2595cdf9ad9b}</UniqueIdentifier>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button\_test">
+      <UniqueIdentifier>{2872e89d-1d46-462c-bc35-e98fe2f3778d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\status">
+      <UniqueIdentifier>{fa7bfa71-83ba-41f8-8f82-134b92784563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\status\_button">
+      <UniqueIdentifier>{8635f76e-28bc-4132-806a-b17b2db66152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\status\_button\statUp">
+      <UniqueIdentifier>{20a730b0-4b49-47bc-8b3a-77e779f390d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -414,41 +417,24 @@
     <ClCompile Include="buttonWindowTest.cpp">
       <Filter>메인게임\Scene\test\button</Filter>
     </ClCompile>
+    <ClCompile Include="event_0000_test.cpp" />
     <ClCompile Include="buttonTest.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClCompile>
     <ClCompile Include="buttonTest2.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClCompile>
     <ClCompile Include="buttonTest3.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClCompile>
     <ClCompile Include="settingButtonTest.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
-    </ClCompile>
-    <ClCompile Include="event_0000_test.cpp">
-      <Filter>메인게임\Game Framework\event\_test</Filter>
-    </ClCompile>
-    <ClCompile Include="btDexUp.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClCompile>
-    <ClCompile Include="btIntUp.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClCompile>
-    <ClCompile Include="btLukUp.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClCompile>
-    <ClCompile Include="btHpUp.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClCompile>
-    <ClCompile Include="btMpUp.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClCompile>
-    <ClCompile Include="btStrUp.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClCompile>
     <ClCompile Include="btDetails.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\status\_button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="btnStatUp.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\status\_button\statUp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -651,7 +637,7 @@
       <Filter>메인게임\Scene\test\pixel</Filter>
     </ClInclude>
     <ClInclude Include="buttonBase.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_base</Filter>
     </ClInclude>
     <ClInclude Include="sceneLoadingTest.h">
       <Filter>메인게임\Scene\test\loading</Filter>
@@ -668,47 +654,29 @@
     <ClInclude Include="buttonWindowTest.h">
       <Filter>메인게임\Scene\test\button</Filter>
     </ClInclude>
+    <ClInclude Include="eventDef.h" />
+    <ClInclude Include="eventList.h" />
+    <ClInclude Include="event_0000_test.h" />
     <ClInclude Include="buttonTest.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClInclude>
     <ClInclude Include="buttonTest2.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClInclude>
     <ClInclude Include="buttonTest3.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClInclude>
     <ClInclude Include="settingButtonTest.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\_test</Filter>
-    </ClInclude>
-    <ClInclude Include="eventDef.h">
-      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
-    </ClInclude>
-    <ClInclude Include="eventList.h">
-      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
-    </ClInclude>
-    <ClInclude Include="event_0000_test.h">
-      <Filter>메인게임\Game Framework\event\_test</Filter>
-    </ClInclude>
-    <ClInclude Include="btDexUp.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClInclude>
-    <ClInclude Include="btIntUp.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClInclude>
-    <ClInclude Include="btLukUp.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClInclude>
-    <ClInclude Include="btHpUp.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClInclude>
-    <ClInclude Include="btMpUp.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
-    </ClInclude>
-    <ClInclude Include="btStrUp.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClInclude>
     <ClInclude Include="btDetails.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\status\_button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="btnStatUp.h">
+      <Filter>메인게임\Game Framework\Manager\window\status\_button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="windowStatus.h">
+      <Filter>메인게임\Game Framework\Manager\window\status</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
