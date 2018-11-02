@@ -238,6 +238,9 @@
     <Filter Include="메인게임\Game Framework\inventory">
       <UniqueIdentifier>{5cdbe08e-3dc6-408f-a0d0-b4379dc02b6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Scene\test\player">
+      <UniqueIdentifier>{1353263f-cec2-4479-ad32-6c158ebf8378}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -446,6 +449,9 @@
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>메인게임\Game Framework\object\_character</Filter>
+    </ClCompile>
+    <ClCompile Include="playerTestScene.cpp">
+      <Filter>메인게임\Scene\test\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -700,6 +706,9 @@
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>메인게임\Game Framework\object\_character</Filter>
+    </ClInclude>
+    <ClInclude Include="playerTestScene.h">
+      <Filter>메인게임\Scene\test\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
