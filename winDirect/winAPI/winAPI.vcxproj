@@ -157,6 +157,13 @@
     <ClCompile Include="animationGroupManager.cpp" />
     <ClCompile Include="baseObject.cpp" />
     <ClCompile Include="bossBase.cpp" />
+    <ClCompile Include="btDetails.cpp" />
+    <ClCompile Include="btDexUp.cpp" />
+    <ClCompile Include="btHpUp.cpp" />
+    <ClCompile Include="btIntUp.cpp" />
+    <ClCompile Include="btLukUp.cpp" />
+    <ClCompile Include="btMpUp.cpp" />
+    <ClCompile Include="btStrUp.cpp" />
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
@@ -228,6 +235,13 @@
     <ClInclude Include="animationGroupManager.h" />
     <ClInclude Include="baseObject.h" />
     <ClInclude Include="bossBase.h" />
+    <ClInclude Include="btDetails.h" />
+    <ClInclude Include="btDexUp.h" />
+    <ClInclude Include="btHpUp.h" />
+    <ClInclude Include="btIntUp.h" />
+    <ClInclude Include="btLukUp.h" />
+    <ClInclude Include="btMpUp.h" />
+    <ClInclude Include="btStrUp.h" />
     <ClInclude Include="buffBase.h" />
     <ClInclude Include="buffManager.h" />
     <ClInclude Include="bulletBase.h" />

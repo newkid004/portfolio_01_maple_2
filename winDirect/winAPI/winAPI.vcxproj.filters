@@ -220,6 +220,9 @@
     <Filter Include="메인게임\Scene\test\button">
       <UniqueIdentifier>{78092c5e-646d-42da-9583-2181db270ef8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\button\statUp">
+      <UniqueIdentifier>{20a730b0-4b49-47bc-8b3a-77e779f390d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -419,6 +422,27 @@
     </ClCompile>
     <ClCompile Include="buttonBase.cpp">
       <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
+    </ClCompile>
+    <ClCompile Include="btDexUp.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="btIntUp.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="btLukUp.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="btHpUp.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="btMpUp.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="btStrUp.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="btDetails.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -648,6 +672,27 @@
       <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClInclude>
     <ClInclude Include="settingButtonTest.h">
+      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+    </ClInclude>
+    <ClInclude Include="btDexUp.h">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="btIntUp.h">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="btLukUp.h">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="btHpUp.h">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="btMpUp.h">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="btStrUp.h">
+      <Filter>메인게임\Game Framework\Manager\window\button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="btDetails.h">
       <Filter>메인게임\Game Framework\Manager\window\button</Filter>
     </ClInclude>
   </ItemGroup>
