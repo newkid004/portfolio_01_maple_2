@@ -235,6 +235,9 @@
     <Filter Include="메인게임\Game Framework\Manager\event\_test">
       <UniqueIdentifier>{71637455-87ac-43c5-b868-9d23926d9729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Game Framework\inventory">
+      <UniqueIdentifier>{5cdbe08e-3dc6-408f-a0d0-b4379dc02b6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -384,9 +387,6 @@
     <ClCompile Include="effectBase.cpp">
       <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
     </ClCompile>
-    <ClCompile Include="eventBase.cpp">
-      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
-    </ClCompile>
     <ClCompile Include="eventManager.cpp">
       <Filter>메인게임\Game Framework\Manager\event</Filter>
     </ClCompile>
@@ -440,6 +440,9 @@
     </ClCompile>
     <ClCompile Include="event_0000_test.cpp">
       <Filter>메인게임\Game Framework\Manager\event\_test</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>메인게임\Game Framework\inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -688,6 +691,9 @@
     </ClInclude>
     <ClInclude Include="event_0000_test.h">
       <Filter>메인게임\Game Framework\Manager\event\_test</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>메인게임\Game Framework\inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
