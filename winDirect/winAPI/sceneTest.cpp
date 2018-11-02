@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "sceneTest.h"
 
+static fPOINT offset;
+
 HRESULT sceneTest::init(void)
 {
 	getBackColor() = C_COLOR_GRAY;
@@ -25,7 +27,9 @@ void sceneTest::update(void)
 
 void sceneTest::render(void)
 {
-	IMAGEMANAGER->find("frame")->aniRender(_ani->update());
+	_ani->update();
+
+	IMAGEMANAGER->find("frame")->loopRender(&fRECT(20, 30, 300, 900));
 }
 
 void sceneTest::updateControl(void)
@@ -48,6 +52,11 @@ void sceneTest::updateControl(void)
 
 	if (KEYMANAGER->down('E')) scale += TIMEMANAGER->getElapsedTime() * 3;
 	if (KEYMANAGER->down('Q')) scale -= TIMEMANAGER->getElapsedTime() * 3;
+
+	if (KEYMANAGER->down('I')) offset.y -= TIMEMANAGER->getElapsedTime() * 200;
+	if (KEYMANAGER->down('K')) offset.y += TIMEMANAGER->getElapsedTime() * 200;
+	if (KEYMANAGER->down('J')) offset.x -= TIMEMANAGER->getElapsedTime() * 200;
+	if (KEYMANAGER->down('L')) offset.x += TIMEMANAGER->getElapsedTime() * 200;
 
 	if (KEYMANAGER->press(VK_SPACE)) _ani->start();
 

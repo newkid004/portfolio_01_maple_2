@@ -73,6 +73,7 @@ public :
 	fPOINT &	statePos(void)		{ return _imgPos; };
 	int &		stateFlip(void)		{ return _imgFlip; };
 	float &		stateRotate(void)	{ return _imgRotate; };
+	D2D1_SIZE_F& statScale(void)	{ return _imgScale; };
 
 	fPOINT &	statePos(float x, float y)	{ return _imgPos = fPOINT(x, y); };
 	fPOINT &	statePos(fPOINT input)		{ return _imgPos = input; };

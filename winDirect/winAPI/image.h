@@ -51,6 +51,10 @@ public:
 	// 애니 렌더
 	void aniRender(animation * ani, float alpha = 1.0f);
 
+	// 루프 렌더 : 회전 무효화
+	void loopRender(fRECT * range, fPOINT offset = 0.f, float alpha = 1.f);
+	void loopFrameRender(int frameX, int frameY, fRECT * range, fPOINT offset = 0.f, float alpha = 1.f);
+
 public :
 	// =========================== inline ============================== //
 	// 이미지 가로, 세로크기

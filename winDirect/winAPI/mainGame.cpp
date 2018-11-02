@@ -30,7 +30,7 @@ HRESULT mainGame::init(void)
 
 
 	// change
-	SCENEMANAGER->changeScene("buttonWindowTest");
+	SCENEMANAGER->changeScene("testLoading");
 	
 	return S_OK;
 }

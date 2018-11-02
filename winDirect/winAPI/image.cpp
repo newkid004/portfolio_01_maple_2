@@ -175,3 +175,50 @@ void image::aniRender(animation * ani, float alpha)
 			(float)ani->getFrameWidth(), (float)ani->getFrameHeight(),
 			alpha);
 }
+
+void image::loopRender(fRECT * range, fPOINT offset, float alpha)
+{
+	// 기존 렌더 상태 저장
+	fPOINT oPosition = IMAGEMANAGER->statePos();
+	int oTransState = IMAGEMANAGER->getTransformState();
+
+	// 회전 무효화
+	IMAGEMANAGER->disableTransform(TF_ROTATION);
+
+	// ----- 실행 ----- //
+
+	fPOINT scale = fPOINT(IMAGEMANAGER->statScale().width, IMAGEMANAGER->statScale().height);
+	fPOINT currentPos = range->LT;
+	fPOINT currentSize = _imageInfo->size * scale;
+	fPOINT destPos;
+
+	for (; currentPos.y < range->RB.y; currentPos.y += currentSize.y)
+	{
+		destPos.y = currentPos.y + currentSize.y;
+		destPos.y = range->RB.y <= destPos.y ? range->RB.y : destPos.y;
+
+		for (currentPos.x = 0; currentPos.x < range->RB.x; currentPos.x += currentSize.x)
+		{
+			destPos.x = currentPos.x + currentSize.x;
+			destPos.x = range->RB.x <= destPos.x ? range->RB.x : destPos.x;
+			IMAGEMANAGER->statePos(currentPos);
+
+			// 기존 이미지 출력 비율 계산
+			fPOINT imgRatio = destPos - currentPos;
+			imgRatio.x = _imageInfo->size.x * (imgRatio.x / _imageInfo->size.x);
+			imgRatio.y = _imageInfo->size.y * (imgRatio.y / _imageInfo->size.y);
+
+			render(offset.x, offset.y, imgRatio.x, imgRatio.y, alpha);
+		}
+	}
+
+	// ----- 종료 ----- //
+
+	// 렌더 상태 복구
+	IMAGEMANAGER->statePos(oPosition);
+	IMAGEMANAGER->getTransformState() = oTransState;
+}
+
+void image::loopFrameRender(int frameX, int frameY, fRECT * range, fPOINT offset, float alpha)
+{
+}
