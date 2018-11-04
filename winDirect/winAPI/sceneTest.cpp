@@ -2,6 +2,10 @@
 #include "sceneTest.h"
 
 static fPOINT offset;
+static fPOINT pos;
+static float rot;
+static int flip;
+static float scale = 1.0f;
 
 HRESULT sceneTest::init(void)
 {
@@ -12,6 +16,9 @@ HRESULT sceneTest::init(void)
 	_ani->init(IMAGEMANAGER->find("frame"));
 	_ani->setFPS(15.0f);
 	_ani->setDefPlayFrame(false, false);
+
+	TEXTMANAGER->add("text", L"µ¸¿òÃ¼", 12.f);
+	TEXTMANAGER->setFont("text");
 
 	return S_OK;
 }
@@ -29,16 +36,27 @@ void sceneTest::render(void)
 {
 	_ani->update();
 
-	IMAGEMANAGER->find("frame")->loopRender(&fRECT(20, 30, 300, 900));
+	IMAGEMANAGER->getTransformState(TF_ALL);
+	IMAGEMANAGER->find("12")->loopRender(&fRECT(pos.x, pos.y, pos.x + 100 * scale, pos.y + 80 * scale), offset);
+
+	IMAGEMANAGER->getTransformState(TF_POSITION);
+	IMAGEMANAGER->statePos(WINSIZEX - 300, 10);
+	IMAGEMANAGER->setTransform();
+
+	D2D1_RECT_F rc = D2D1_RECT_F{ 0, 0, 300, 200 };
+	wstring str;
+	str = L"offset : " + to_wstring(offset.x) + L" / " + to_wstring(offset.y);
+	TEXTMANAGER->drawText(&str, &rc); 
+
+	str = L"posision : " + to_wstring(pos.x) + L" / " + to_wstring(pos.y); rc.top += 20;
+	TEXTMANAGER->drawText(&str, &rc);
+
+	str = L"scale : " + to_wstring(scale); rc.top += 20;
+	TEXTMANAGER->drawText(&str, &rc);
 }
 
 void sceneTest::updateControl(void)
 {
-	static fPOINT pos;
-	static float rot;
-	static int flip;
-	static float scale = 1.0f;
-
 	if (KEYMANAGER->down('W'))	rot -= TIMEMANAGER->getElapsedTime() * 180;
 	if (KEYMANAGER->down('S'))	rot += TIMEMANAGER->getElapsedTime() * 180;
 

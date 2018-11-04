@@ -83,6 +83,8 @@ struct fRECT
 	fRECT operator-(NUM_REAL input) { return fRECT(fPOINT(LT - input), fPOINT(RB - input)); }
 	fRECT operator*(NUM_REAL input) { return fRECT(fPOINT(LT * input), fPOINT(RB * input)); }
 	fRECT operator/(NUM_REAL input) { return fRECT(fPOINT(LT / input), fPOINT(RB / input)); }
+
+	static fPOINT size(fRECT * rc) { return fPOINT(rc->RB.x - rc->LT.x, rc->RB.y - rc->LT.y); }
 };
 
 struct physicF

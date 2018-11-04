@@ -70,7 +70,7 @@ IDWriteTextFormat * textManager::setFont(string name)
 	return _currentFormat = f;
 }
 
-void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F range, function<void(void)> * callBefore, IDWriteTextFormat * format)
+void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F* range, function<void(void)> * callBefore, IDWriteTextFormat * format)
 {
 	if (callBefore)
 	{
@@ -84,7 +84,7 @@ void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F range, 
 		text,
 		length,
 		format, 
-		range,
+		*range,
 		_brush,
 		D2D1_DRAW_TEXT_OPTIONS_CLIP);
 
@@ -97,7 +97,7 @@ void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F range, 
 			text,
 			length,
 			_currentFormat,
-			range,
+			*range,
 			_brush,
 			D2D1_DRAW_TEXT_OPTIONS_CLIP);
 	}

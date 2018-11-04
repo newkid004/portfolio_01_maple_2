@@ -85,12 +85,15 @@ public :
 
 	void resetTransform(void);
 	void resetTransform(e_TRANSFORM resetValue);
+	void setTransform(void);
 	void setTransform(D2D1_POINT_2F * pos);
+	void setTransformZero(void);
 	void enableTransform(void) { _renderTransform = TF_ALL; };
 	void enableTransform(int tf) { _renderTransform |= tf; };
 	void disableTransform(void) { _renderTransform = 0; };
 	void disableTransform(int tf) { _renderTransform = bit_pick(_renderTransform, tf); };
 	int & getTransformState(void) { return _renderTransform; };
+	int & getTransformState(int tf) { return _renderTransform = tf; };
 
 	void setRenderState(e_IMG_RENDER_STATE state, int value);
 	const int getRenderState(void) { return _renderState; };

@@ -42,7 +42,7 @@ public:
 	void render(float alpha = 1.0f);
 
 	// 이미지 클리핑
-	void render(float clipX, float clipY, float clipW, float clipH, float alpha = 1.0f);
+	void render(float clipX, float clipY, float clipW, float clipH, float alpha = 1.0f, D2D1_POINT_2F center = { -1.f, -1.f });
 
 	// 프레임 렌더
 	void frameRender(int frameX, int frameY, float alpha = 1.0f);
