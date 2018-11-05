@@ -10,37 +10,39 @@ struct itemContentBase
 {
 	int type;
 
-	image* imgIcon = NULL;
-	image* imgShadow = NULL;
+	image* img;
 
-	fPOINT imgFramePos;
+	fPOINT frame;
+	fPOINT frameShadow;
 
-	string name;
-	string memo;
+	wstring name;
+	wstring memo;
 
-	int cost;
+	int price;
 
 	itemContentBase() :
 		type(0),
-		imgIcon(NULL),
-		imgShadow(NULL),
-		imgFramePos(0.f),
-		cost(0)
+		img(NULL),
+		frame(0.f),
+		frameShadow(0.f),
+		price(0)
 	{}
 	virtual ~itemContentBase() {};
 
 	virtual void operator=(itemContentBase i) { this->operator=(&i); }
 	virtual void operator=(itemContentBase* i) 
 	{
-		this->type		= i->type;
-		this->imgIcon	= i->imgIcon;
-		this->imgShadow	= i->imgShadow;
-		this->name		= i->name;
-		this->memo		= i->memo;
-		this->cost		= i->cost;
+		this->type			= i->type;
+		this->img			= i->img;
+		this->frame			= i->frame;
+		this->frameShadow	= i->frameShadow;
+		this->name			= i->name;
+		this->memo			= i->memo;
+		this->price = i->price;
 	};
 };
 
+// ----- equipment ----- //
 struct tagItemEquipmentInfo
 {
 	image* img;
@@ -50,8 +52,6 @@ struct tagItemEquipmentInfo
 
 struct itemContentEquip : public itemContentBase
 {
-
-
 	stateLimit limit;
 	stateBasic basic;
 	statePoint point;
@@ -74,6 +74,20 @@ struct itemContentArmor : public itemContentEquip {
 	itemContentArmor() : itemContentEquip() { type |= itemDef::ITEM_TYPE_ARMOR; }
 };
 
+// ----- consumeable ----- //
+struct itemContentConsume : public itemContentBase
+{
+	int count;
+
+	virtual void operator=(itemContentConsume i) { this->operator=(&i); };
+	virtual void operator=(itemContentConsume* i)
+	{
+		itemContentBase::operator=(i);
+		this->count = i->count;
+	};
+};
+
+// ----- item Base ----- //
 class itemBase : public baseObject
 {
 protected :
@@ -87,10 +101,11 @@ public :
 
 public :
 	virtual void render2Field(float alphaRatio = 1.f);
+	virtual void render2shop(fPOINT posOffset, int placement);
 	virtual void render2Inventory(fPOINT posOffset, fPOINT placement);
 
 public :
-	itemContentBase* getContent(void) { return _content; };
+	itemContentBase*& getContent(void)				{ return _content; };
 	static int getContentType(itemBase* i)			{ return i->getContent()->type & itemDef::ITEM_TYPE_CHECK; };
 	static int getContentType(itemContentBase* i)	{ return i->type & itemDef::ITEM_TYPE_CHECK; };
 

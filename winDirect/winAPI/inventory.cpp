@@ -21,18 +21,14 @@ void inventory::release(void)
 	_vInventory.clear();
 }
 
-void inventory::update(void)
-{
-}
-
-void inventory::render(void)
-{
-}
-
 itemBase * inventory::push(itemBase * item, POINT pos)
 {
 	if (pos.x <= -1 || pos.y <= -1)
 		pos = _front;
+
+	// 최대 크기
+	if (_vInventory.size() <= pos.y &&  _vInventory[0].size() <= pos.x) 
+		return NULL;
 
 	_vInventory[pos.y][pos.x] = item;
 

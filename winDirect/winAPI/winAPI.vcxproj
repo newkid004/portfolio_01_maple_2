@@ -186,6 +186,7 @@
     <ClCompile Include="iniData.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="itemBase.cpp" />
+    <ClCompile Include="itemManager.cpp" />
     <ClCompile Include="JsonSaveLoader.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="loading.cpp" />
@@ -206,6 +207,7 @@
     <ClCompile Include="sceneTest.cpp" />
     <ClCompile Include="sceneTest2.cpp" />
     <ClCompile Include="sceneTestPixelCrash.cpp" />
+    <ClCompile Include="sceneTestShop.cpp" />
     <ClCompile Include="sceneWindowTest.cpp" />
     <ClCompile Include="settingButtonTest.cpp" />
     <ClCompile Include="shopBase.cpp" />
@@ -271,6 +273,7 @@
     <ClInclude Include="inventory.h" />
     <ClInclude Include="itemBase.h" />
     <ClInclude Include="itemDef.h" />
+    <ClInclude Include="itemManager.h" />
     <ClInclude Include="JsonSaveLoader.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="loading.h" />
@@ -293,6 +296,7 @@
     <ClInclude Include="sceneTest.h" />
     <ClInclude Include="sceneTest2.h" />
     <ClInclude Include="sceneTestPixelCrash.h" />
+    <ClInclude Include="sceneTestShop.h" />
     <ClInclude Include="sceneWindowTest.h" />
     <ClInclude Include="settingButtonTest.h" />
     <ClInclude Include="shopBase.h" />

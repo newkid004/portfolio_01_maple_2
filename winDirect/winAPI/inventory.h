@@ -17,8 +17,6 @@ private :
 public :
 	HRESULT init(void);
 	void release(void);
-	void update(void);
-	void render(void);
 
 public :
 	itemBase* push(itemBase* item, POINT pos = {-1, -1});	// defalt : front

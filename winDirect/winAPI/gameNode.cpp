@@ -89,6 +89,9 @@ HRESULT gameNode::init(bool managerInit)
 		// 이벤트 매니저 초기화
 		EVENTMANAGER->init();
 
+		// 아이템 매니저 초기화
+		ITEMMANAGER->init();
+
 		// 게임 시스템 싱글톤 초기화
 		GAMESYSTEM->init();
 
@@ -182,6 +185,10 @@ void gameNode::release(void)
 		// 이벤트 매니저 해제
 		EVENTMANAGER->release();
 		EVENTMANAGER->releaseSingleton();
+
+		// 아이템 매니저 해제
+		ITEMMANAGER->release();
+		ITEMMANAGER->releaseSingleton();
 
 		// 게임 시스템 해제
 		GAMESYSTEM->release();

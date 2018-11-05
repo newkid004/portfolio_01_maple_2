@@ -88,7 +88,7 @@ void player::render(void)
 
 void player::initInventory(void)
 {
-	for (auto inven : _inven)
+	for (auto & inven : _inven)
 	{
 		inven = new inventory;
 		inven->init();
@@ -97,7 +97,7 @@ void player::initInventory(void)
 
 void player::releaseInventory(void)
 {
-	for (auto inven : _inven)
+	for (auto & inven : _inven)
 	{
 		inven->release();
 		SAFE_DELETE(inven);

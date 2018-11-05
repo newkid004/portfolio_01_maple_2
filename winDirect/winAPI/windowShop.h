@@ -31,15 +31,21 @@ public:
 	HRESULT init(void);
 	void render(void);
 
-public :
-	void selectInven(int index);
-
 public:
 	tagShopContent & getContentShop(void) { return _conShop; };
 	tagShopContent & getContentPlayer(void) { return _conPlayer; };
 	shopBase*& getShop(void) { return _shop; };
 
 	UI_LIST_ITER close(void) override;
+
+public :
+	void selectInven(int index);
+
+	void scrollShop(int value);
+	void scrollPlayer(int value);
+
+private :
+	void scrolling(int value, tagShopContent & target, int maximum);
 
 public:
 	windowShop() {};
