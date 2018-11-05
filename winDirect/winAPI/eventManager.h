@@ -1,8 +1,9 @@
 #pragma once
 #include "singletonBase.h"
-#include "eventBase.h"
 
-class eventManager:public singletonBase<eventManager>
+class eventBase;
+
+class eventManager : public singletonBase<eventManager>
 {
 private:
 	list<eventBase*> _lEvent;

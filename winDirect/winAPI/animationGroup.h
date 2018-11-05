@@ -4,7 +4,7 @@
 class animationGroup
 {
 private:	// ¸É¹ö º¯¼ö
-	map<string, animation*> _mAnimation;
+	unordered_map<string, animation*> _mAnimation;
 
 	string _curAniName;
 	animation* _curAni;

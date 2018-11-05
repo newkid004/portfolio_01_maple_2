@@ -28,8 +28,8 @@ enum e_TRANSFORM
 class imageManager : public singletonBase<imageManager>
 {
 private:
-	typedef map<string, image*> mapImageList;				// 맵 이미지 목록
-	typedef map<string, image*>::iterator mapImageIter;		// 맵 이미지 목록 반복자
+	typedef unordered_map<string, image*> mapImageList;				// 맵 이미지 목록
+	typedef unordered_map<string, image*>::iterator mapImageIter;		// 맵 이미지 목록 반복자
 
 private:
 	mapImageList _mImageList;
@@ -73,6 +73,7 @@ public :
 	fPOINT &	statePos(void)		{ return _imgPos; };
 	int &		stateFlip(void)		{ return _imgFlip; };
 	float &		stateRotate(void)	{ return _imgRotate; };
+	D2D1_SIZE_F& statScale(void)	{ return _imgScale; };
 
 	fPOINT &	statePos(float x, float y)	{ return _imgPos = fPOINT(x, y); };
 	fPOINT &	statePos(fPOINT input)		{ return _imgPos = input; };
@@ -84,12 +85,15 @@ public :
 
 	void resetTransform(void);
 	void resetTransform(e_TRANSFORM resetValue);
+	void setTransform(void);
 	void setTransform(D2D1_POINT_2F * pos);
+	void setTransformZero(void);
 	void enableTransform(void) { _renderTransform = TF_ALL; };
 	void enableTransform(int tf) { _renderTransform |= tf; };
 	void disableTransform(void) { _renderTransform = 0; };
 	void disableTransform(int tf) { _renderTransform = bit_pick(_renderTransform, tf); };
 	int & getTransformState(void) { return _renderTransform; };
+	int & getTransformState(int tf) { return _renderTransform = tf; };
 
 	void setRenderState(e_IMG_RENDER_STATE state, int value);
 	const int getRenderState(void) { return _renderState; };

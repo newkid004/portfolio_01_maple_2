@@ -14,6 +14,7 @@ public:
 	void update(float lock = 0.0f);
 	//해당 HDC에 정보 찍는다
 	void render(HDC hdc);
+	void render(void);
 	//전체 시간 가져온다
 	inline float getWorldTime(void) const { return _timer->getWorldTime(); }
 	//프레임 경과 시간

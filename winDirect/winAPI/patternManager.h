@@ -7,8 +7,8 @@
 class patternManager:public singletonBase<patternManager>
 {
 private:
-	typedef map<string, patternBase*>			mPattern;
-	typedef map<string, patternBase*>::iterator	miPattern;
+	typedef unordered_map<string, patternBase*>			mPattern;
+	typedef unordered_map<string, patternBase*>::iterator	miPattern;
 private:
 
 	mPattern _mPattern;
