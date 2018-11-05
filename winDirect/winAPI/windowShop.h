@@ -31,6 +31,9 @@ public:
 	HRESULT init(void);
 	void render(void);
 
+public :
+	void selectInven(int index);
+
 public:
 	tagShopContent & getContentShop(void) { return _conShop; };
 	tagShopContent & getContentPlayer(void) { return _conPlayer; };

@@ -3,6 +3,7 @@
 
 class fieldBase;
 class playerableBase;
+class player;
 
 struct tagVolume
 {
@@ -42,7 +43,8 @@ private :
 private : 
 	tagGameOption	_infoOption;
 	fieldBase*		_curField;
-	playerableBase*	_player;
+	playerableBase*	_playerBase;
+	player*			_player;
 
 	unordered_map<string, tagShortcut*>	_mShortcutTotal;
 	vector<tagShortcut*>		_vShortcutSetting;
@@ -78,7 +80,8 @@ public :	// * field * //
 	fieldBase *& getField(void) { return _curField; };
 
 public :	// * player * //
-	playerableBase *& getPlayer(void) { return _player; };
+	playerableBase *& getPlayerBase(void) { return _playerBase; };
+	player *& getPlayer(void) { return _player; };
 
 public :	// * shortcut * //
 	void addShortcut(string name, int index, const function<void(void)> & active);

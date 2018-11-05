@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "player.h"
 
+#include "inventory.h"
+
 player::player() : _headPosition(fPOINT(0.0f, 0.0f)),
 				   _facePosition(fPOINT(0.0f, 0.0f)),
 				   _hairPosition(fPOINT(0.0f, 0.0f))
@@ -40,6 +42,9 @@ HRESULT player::init(void)
  	_position = fPOINT(WINSIZEX / 2, WINSIZEY / 2);
 	_state.movement = M_NONE;
 	_dir = LEFT;
+
+	initInventory();
+
 	return S_OK;
 }
 
@@ -50,6 +55,8 @@ void player::release(void)
 
 	SAFE_DELETE(_aniBody);
 	SAFE_DELETE(_aniArm);
+
+	releaseInventory();
 }
 
 void player::update(void)
@@ -69,6 +76,24 @@ void player::render(void)
 	IMAGEMANAGER->find("p_face")->frameRender(fPOINT(0,0));
 	IMAGEMANAGER->statePos(_hairPosition);
 	IMAGEMANAGER->find("p_hair")->render();
+}
+
+void player::initInventory(void)
+{
+	for (auto inven : _inven)
+	{
+		inven = new inventory;
+		inven->init();
+	}
+}
+
+void player::releaseInventory(void)
+{
+	for (auto inven : _inven)
+	{
+		inven->release();
+		SAFE_DELETE(inven);
+	}
 }
 
 void player::keyUpdate(void)

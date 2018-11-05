@@ -2,6 +2,9 @@
 #include "windowShop.h"
 #include "shopBase.h"
 
+#include "player.h"
+#include "inventory.h"
+
 HRESULT windowShop::init(void)
 {
 	windowBase::init();
@@ -18,6 +21,11 @@ void windowShop::render(void)
 	windowBase::render();
 
 	if (_shop) _shop->render();
+}
+
+void windowShop::selectInven(int index)
+{
+	SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(index));
 }
 
 UI_LIST_ITER windowShop::close(void)

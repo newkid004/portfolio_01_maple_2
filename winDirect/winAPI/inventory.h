@@ -24,8 +24,11 @@ public :
 	itemBase* push(itemBase* item, POINT pos = {-1, -1});	// defalt : front
 	itemBase* pop(POINT pos);
 	itemBase* find(POINT pos);
-
+	
+	POINT size(void) { return POINT{ (long)_vInventory[0].size(), (long)_vInventory.size() }; };
 	void resize(POINT size);
+
+	vector<vector<itemBase*>> & getTotalInven(void) { return _vInventory; };
 
 private :
 	void resetFront(void);
