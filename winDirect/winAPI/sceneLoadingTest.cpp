@@ -26,6 +26,7 @@ HRESULT sceneLoadingTest::init(void)
 
 	// test
 	_loading->loadImage("test", L"image/testImg.png");
+	_loading->loadImage("12", L"image/12.png");
 	_loading->loadImage("frame", L"image/frame.png", 12, 1);
 
 	// ani

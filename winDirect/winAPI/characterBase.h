@@ -4,7 +4,12 @@
 #include "buffBase.h"
 #include "state.h"
 
-
+struct motionInfo
+{
+	int		maxFrameX;
+	int		frameY;
+	float	delay;
+};
 class characterBase :public baseObject
 {
 protected:
@@ -13,6 +18,8 @@ protected:
 	list<buffBase*> _LbuffList;					//버프 리스트
 	list<buffBase*>::iterator _Libuff;
 
+	map<MOVEMENT, motionInfo> _Mmotions;
+	state		_state;
 	stateBasic	_stateBasic;
 
 protected:

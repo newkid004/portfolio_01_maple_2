@@ -42,7 +42,7 @@ public:
 	void render(float alpha = 1.0f);
 
 	// 이미지 클리핑
-	void render(float clipX, float clipY, float clipW, float clipH, float alpha = 1.0f);
+	void render(float clipX, float clipY, float clipW, float clipH, float alpha = 1.0f, D2D1_POINT_2F center = { -1.f, -1.f });
 
 	// 프레임 렌더
 	void frameRender(int frameX, int frameY, float alpha = 1.0f);
@@ -50,6 +50,10 @@ public:
 
 	// 애니 렌더
 	void aniRender(animation * ani, float alpha = 1.0f);
+
+	// 루프 렌더 : 회전 무효화
+	void loopRender(fRECT * range, fPOINT offset = 0.f, int frameX = 0, int frameY = 0, float alpha = 1.f);
+	void loopRender(fRECT * range, fPOINT offset = 0.f, float frameSizeX = 0, float frameSizeY = 0, float alpha = 1.f);
 
 public :
 	// =========================== inline ============================== //

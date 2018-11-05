@@ -76,8 +76,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\msc20\source\repos\maplestory\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\msc20\source\repos\maplestory\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -196,6 +196,8 @@
     <ClCompile Include="passiveSkill.cpp" />
     <ClCompile Include="patternBase.cpp" />
     <ClCompile Include="patternManager.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerTestScene.cpp" />
     <ClCompile Include="questBase.cpp" />
     <ClCompile Include="questManager.cpp" />
     <ClCompile Include="renderManager.cpp" />
@@ -279,6 +281,8 @@
     <ClInclude Include="passiveSkill.h" />
     <ClInclude Include="patternBase.h" />
     <ClInclude Include="patternManager.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="playerTestScene.h" />
     <ClInclude Include="questBase.h" />
     <ClInclude Include="questManager.h" />
     <ClInclude Include="randomFunction.h" />
