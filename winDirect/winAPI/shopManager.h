@@ -14,6 +14,8 @@ private :
 
 	vector<itemBase*> _lPlayerItemView;
 
+	image* _imgMeso;
+
 public :
 	HRESULT init(void);
 	void release(void);
@@ -24,6 +26,8 @@ public :
 
 	windowShop *& getWindow(void) { return _bindWindow; };
 	vector<itemBase*> & getPlayerView(void) { return _lPlayerItemView; };
+
+	image* & getImageMeso(void) { return _imgMeso; };
 
 	void makePlayerView(inventory* inven);
 
