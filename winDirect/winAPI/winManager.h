@@ -9,8 +9,8 @@ typedef UI_LIST::iterator UI_LIST_ITER;
 class winManager : public singletonBase<winManager>
 {
 private :
-	map<string, windowBase*>	_mWindow;
-	UI_LIST						_lWindow;
+	unordered_map<string, windowBase*>	_mWindow;
+	UI_LIST								_lWindow;
 
 public :
 	HRESULT init(void);

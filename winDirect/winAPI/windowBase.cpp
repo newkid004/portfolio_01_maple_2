@@ -80,22 +80,3 @@ buttonBase * windowBase::findButton(string name)
 
 	return iter->second;
 }
-
-
-// ----- Window Shop ----- //
-#include "shopBase.h"
-HRESULT windowShop::init(void)
-{
-	windowBase::init();
-	_scroll = 0;
-	_shop = NULL;
-
-	return S_OK;
-}
-
-void windowShop::render(void)
-{
-	windowBase::render();
-	
-	if (_shop) _shop->render();
-}
