@@ -2,7 +2,7 @@
 #include "shopBase.h"
 
 #include "itemBase.h"
-#include "windowBase.h"
+#include "windowShop.h"
 
 HRESULT shopBase::init(void)
 {
@@ -25,15 +25,26 @@ void shopBase::update(void)
 void shopBase::render(void)
 {
 	static windowShop *& winShop = SHOPMANAGER->getWindow();
-	fPOINT posOffset = winShop->getPos();	// 윈도우 <-> 상점 간격만큼 더하기 필요
+
+	IMAGEMANAGER->getTransformState(TF_POSITION);
+}
+
+void shopBase::renderShop(windowShop * winShop)
+{
+	fPOINT & posOffset = winShop->getPos();
 
 	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
 	{
-		itemBase* viewItem = find(i + winShop->getScroll());
+		itemBase* viewItem = find(i + winShop->getContentShop().scroll);
 
 		if (viewItem)
 			viewItem->render2Inventory(posOffset, i);
 		else
 			break;
 	}
+}
+
+void shopBase::renderPlayer(windowShop * winShop)
+{
+	fPOINT & posOffset = winShop->getPos();
 }
