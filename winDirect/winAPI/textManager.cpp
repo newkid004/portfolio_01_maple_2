@@ -16,6 +16,7 @@ HRESULT textManager::init(void)
 
 	// 기본 텍스트 생성
 	_currentFormat = gameNode::getTextFormat() = add("defaultText", L"돋움체", 12.f);
+	TEXTMANAGER->add("shopText", L"돋움체", 10.f);
 
 	return S_OK;
 }
