@@ -76,8 +76,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\msc20\source\repos\maplestory\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\msc20\source\repos\maplestory\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -157,6 +157,8 @@
     <ClCompile Include="animationGroupManager.cpp" />
     <ClCompile Include="baseObject.cpp" />
     <ClCompile Include="bossBase.cpp" />
+    <ClCompile Include="btDetails.cpp" />
+    <ClCompile Include="btnStatUp.cpp" />
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
@@ -173,7 +175,6 @@
     <ClCompile Include="enemyBase.cpp" />
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="enemy_0000_snail.cpp" />
-    <ClCompile Include="eventBase.cpp" />
     <ClCompile Include="eventManager.cpp" />
     <ClCompile Include="event_0000_test.cpp" />
     <ClCompile Include="fieldBase.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniData.cpp" />
+    <ClCompile Include="inventory.cpp" />
     <ClCompile Include="itemBase.cpp" />
     <ClCompile Include="JsonSaveLoader.cpp" />
     <ClCompile Include="keyManager.cpp" />
@@ -194,6 +196,8 @@
     <ClCompile Include="passiveSkill.cpp" />
     <ClCompile Include="patternBase.cpp" />
     <ClCompile Include="patternManager.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerTestScene.cpp" />
     <ClCompile Include="questBase.cpp" />
     <ClCompile Include="questManager.cpp" />
     <ClCompile Include="renderManager.cpp" />
@@ -218,6 +222,7 @@
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txtDataManager.cpp" />
     <ClCompile Include="windowBase.cpp" />
+    <ClCompile Include="windowShop.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="winManager.cpp" />
   </ItemGroup>
@@ -228,6 +233,8 @@
     <ClInclude Include="animationGroupManager.h" />
     <ClInclude Include="baseObject.h" />
     <ClInclude Include="bossBase.h" />
+    <ClInclude Include="btDetails.h" />
+    <ClInclude Include="btnStatUp.h" />
     <ClInclude Include="buffBase.h" />
     <ClInclude Include="buffManager.h" />
     <ClInclude Include="bulletBase.h" />
@@ -261,6 +268,7 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniData.h" />
+    <ClInclude Include="inventory.h" />
     <ClInclude Include="itemBase.h" />
     <ClInclude Include="itemDef.h" />
     <ClInclude Include="JsonSaveLoader.h" />
@@ -274,6 +282,8 @@
     <ClInclude Include="passiveSkill.h" />
     <ClInclude Include="patternBase.h" />
     <ClInclude Include="patternManager.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="playerTestScene.h" />
     <ClInclude Include="questBase.h" />
     <ClInclude Include="questManager.h" />
     <ClInclude Include="randomFunction.h" />
@@ -300,6 +310,8 @@
     <ClInclude Include="txtDataManager.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="windowBase.h" />
+    <ClInclude Include="windowShop.h" />
+    <ClInclude Include="windowStatus.h" />
     <ClInclude Include="winManager.h" />
   </ItemGroup>
   <ItemGroup>

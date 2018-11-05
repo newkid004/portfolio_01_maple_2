@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "textManager.h"
 
+#include "gameNode.h"
 
 HRESULT textManager::init(void)
 {
@@ -13,7 +14,8 @@ HRESULT textManager::init(void)
 	// 텍스트 색상 : black
 	_renderTarget->CreateSolidColorBrush(C_COLOR_BLACK, &_brush);
 
-	_currentFormat = NULL;
+	// 기본 텍스트 생성
+	_currentFormat = gameNode::getTextFormat() = add("defaultText", L"돋움체", 12.f);
 
 	return S_OK;
 }
@@ -70,7 +72,7 @@ IDWriteTextFormat * textManager::setFont(string name)
 	return _currentFormat = f;
 }
 
-void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F range, function<void(void)> * callBefore, IDWriteTextFormat * format)
+void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F* range, function<void(void)> * callBefore, IDWriteTextFormat * format)
 {
 	if (callBefore)
 	{
@@ -84,7 +86,7 @@ void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F range, 
 		text,
 		length,
 		format, 
-		range,
+		*range,
 		_brush,
 		D2D1_DRAW_TEXT_OPTIONS_CLIP);
 
@@ -97,7 +99,7 @@ void textManager::drawText(const wchar_t * text, int length, D2D1_RECT_F range, 
 			text,
 			length,
 			_currentFormat,
-			range,
+			*range,
 			_brush,
 			D2D1_DRAW_TEXT_OPTIONS_CLIP);
 	}

@@ -4,8 +4,8 @@
 class animationGroupManager:public singletonBase<animationGroupManager>
 {
 private:
-	typedef map<string, animationGroup*> mAnimationGroup;
-	typedef map<string, animationGroup*>::iterator miAnimationGroup;
+	typedef unordered_map<string, animationGroup*> mAnimationGroup;
+	typedef unordered_map<string, animationGroup*>::iterator miAnimationGroup;
 
 private:
 

@@ -22,7 +22,7 @@ void animationGroup::update(float ratio)
 
 void animationGroup::release(void)
 {
-	map<string, animation*>::iterator iter = _mAnimation.begin();
+	unordered_map<string, animation*>::iterator iter = _mAnimation.begin();
 	for (; iter != _mAnimation.end();)
 	{
 		animation *& ani = iter->second;
@@ -37,7 +37,7 @@ void animationGroup::release(void)
 
 animation * animationGroup::add(string key, animation * ani, bool isCurrent)
 {
-	map<string, animation*>::iterator iter = _mAnimation.find(key);
+	unordered_map<string, animation*>::iterator iter = _mAnimation.find(key);
 	if (iter != _mAnimation.end()) return iter->second;
 
 	_mAnimation.insert(make_pair(key, ani));
@@ -55,7 +55,7 @@ animation * animationGroup::add(string key, animation * ani, bool isCurrent)
 
 animation * animationGroup::find(string key)
 {
-	map<string, animation*>::iterator iter = _mAnimation.find(key);
+	unordered_map<string, animation*>::iterator iter = _mAnimation.find(key);
 	if (iter == _mAnimation.end()) return NULL;
 
 	return iter->second;
@@ -65,7 +65,7 @@ animation * animationGroup::set(string key, bool isInit)
 {
 	if (_curAniName == key && !isInit) return _curAni;
 
-	map<string, animation*>::iterator iter = _mAnimation.find(key);
+	unordered_map<string, animation*>::iterator iter = _mAnimation.find(key);
 	if (iter == _mAnimation.end()) return NULL;
 
 	_curAniName = iter->first;

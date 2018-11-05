@@ -6,7 +6,7 @@ class fieldBase;
 class fieldManager : public singletonBase<fieldManager>
 {
 public :
-	map<string, fieldBase*> _mField;
+	unordered_map<string, fieldBase*> _mField;
 
 public :
 	HRESULT init(void);

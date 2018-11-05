@@ -8,13 +8,13 @@
 class skillManager:public singletonBase<skillManager>
 {
 private:
-	typedef map<string, skillBase*> mTotSkill;
-	typedef map<string, activeSkill*> mActSkill;
-	typedef map<string, passiveSkill*> mPasSkill;
+	typedef unordered_map<string, skillBase*> mTotSkill;
+	typedef unordered_map<string, activeSkill*> mActSkill;
+	typedef unordered_map<string, passiveSkill*> mPasSkill;
 
-	typedef map<string, skillBase*>::iterator miTotSkill;
-	typedef map<string, activeSkill*>::iterator miActSkill;
-	typedef map<string, passiveSkill*>::iterator miPasSkill;
+	typedef unordered_map<string, skillBase*>::iterator miTotSkill;
+	typedef unordered_map<string, activeSkill*>::iterator miActSkill;
+	typedef unordered_map<string, passiveSkill*>::iterator miPasSkill;
 
 private:
 	mTotSkill _mTotSkill;		miTotSkill _miTotSkill;

@@ -6,8 +6,8 @@ class effectBase;
 class effectManager : public singletonBase<effectManager>
 {
 private:
-	map<string, effectBase*> _mEffect;
-	map<string, effectBase*>::iterator _miEffect;
+	unordered_map<string, effectBase*> _mEffect;
+	unordered_map<string, effectBase*>::iterator _miEffect;
 public:
 	HRESULT init(void);
 	void release(void);

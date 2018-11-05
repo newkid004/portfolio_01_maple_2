@@ -2,8 +2,10 @@
 
 #ifdef PROCESS_D3D
 
-static ColorF		_backColor = C_COLOR_MAGENTA;
-static D2D1_SIZE_F	_renderRate;
+static ColorF				_backColor = C_COLOR_MAGENTA;
+static D2D1_SIZE_F			_renderRate;
+static IDWriteTextFormat*	_textFormat;
+
 class gameNode
 {
 private:
@@ -19,6 +21,7 @@ public:
 
 	static ColorF & getBackColor(void) { return _backColor; };
 	static D2D1_SIZE_F & getRate(void) { return _renderRate; };
+	static IDWriteTextFormat* & getTextFormat(void) { return _textFormat; };
 
 	//메인 프로시져
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);

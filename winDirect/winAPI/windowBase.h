@@ -10,7 +10,7 @@ protected:
 	string _winName;
 	fPOINT _pos;
 
-	map<string, buttonBase*> _mButton;
+	unordered_map<string, buttonBase*> _mButton;
 
 public :
 	virtual HRESULT init(void);
@@ -38,28 +38,4 @@ public :	// ----- button ----- //
 public :
 	windowBase() {};
 	~windowBase() {};
-};
-
-// ----- window : shop ----- //
-#define CNT_SHOP_ITEM_LIST 9
-class shopBase;
-class windowShop : public windowBase
-{
-private :
-	int _scroll;
-	shopBase* _shop;
-
-public :
-	HRESULT init(void);
-	void render(void);
-
-public :
-	int & getScroll(void) { return _scroll; };
-	shopBase*& getShop(void) { return _shop; };
-
-	UI_LIST_ITER close(void) override { _scroll = 0; return windowBase::close(); };
-
-public:
-	windowShop() {};
-	~windowShop() {};
 };
