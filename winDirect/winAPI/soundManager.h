@@ -60,9 +60,9 @@ class soundManager : public singletonBase<soundManager>
 {
 private:
 	int _maxSoundCustom;
-
+	
 	System* _system;
-	map<string, cSound*> _mSound;
+	unordered_map<string, cSound*> _mSound;
 
 	ChannelGroup* _cgMaster;
 

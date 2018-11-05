@@ -137,7 +137,7 @@ void soundManager::release(void)
 	// 사운드 삭제
 	if (_mSound.size() != 0)
 	{
-		map<string, cSound*>::iterator iter = _mSound.begin();
+		unordered_map<string, cSound*>::iterator iter = _mSound.begin();
 		for (; iter != _mSound.end();)
 		{
 			iter->second->release();
@@ -158,7 +158,7 @@ void soundManager::release(void)
 
 void soundManager::update(void)
 {
-	map<string, cSound*>::iterator iter = _mSound.begin();
+	unordered_map<string, cSound*>::iterator iter = _mSound.begin();
 	for (; iter != _mSound.end(); ++iter) iter->second->update();
 }
 
@@ -203,7 +203,7 @@ cSound* soundManager::addSound(const char* soundName, const char * fileName, boo
 
 cSound * soundManager::find(string soundName)
 {
-	map<string, cSound*>::iterator snd = _mSound.find(soundName);
+	unordered_map<string, cSound*>::iterator snd = _mSound.find(soundName);
 
 	if (snd != _mSound.end()) return snd->second;
 
@@ -212,6 +212,6 @@ cSound * soundManager::find(string soundName)
 
 void soundManager::stopAll(void)
 {
-	map<string, cSound*>::iterator iter = _mSound.begin();
+	unordered_map<string, cSound*>::iterator iter = _mSound.begin();
 	for (; iter != _mSound.end(); ++iter) iter->second->stop();
 }

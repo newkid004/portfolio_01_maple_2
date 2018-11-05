@@ -3,7 +3,7 @@
 
 class eventBase;
 
-class eventManager:public singletonBase<eventManager>
+class eventManager : public singletonBase<eventManager>
 {
 private:
 	list<eventBase*> _lEvent;

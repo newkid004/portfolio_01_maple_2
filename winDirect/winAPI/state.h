@@ -6,7 +6,7 @@
 enum MOVEMENT
 {
 	M_NONE				= 0x0000,
-	M_WAKE				= 0x0001,
+	M_WALK				= 0x0001,
 	M_DOWN				= 0x0002,
 	M_JUMP				= 0x0004,
 	M_ATTACK			= 0x0008,
