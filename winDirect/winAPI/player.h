@@ -21,7 +21,9 @@ class player : characterBase
 private:
 	animation* _aniBody;
 	animation* _aniArm;
+	animation* _aniLhand;
 	DIRECTION  _dir;
+	MOVEMENT   _movement[2];
 	fPOINT	   _headPosition;
 	fPOINT     _facePosition;
 	fPOINT     _hairPosition;
@@ -43,6 +45,7 @@ public :
 	void keyUpdate(void);
 	void setMotions(MOVEMENT movement, int maxFrameX, int frameY, float delay);
 	void setAnimation(MOVEMENT movement);
+	void setMovement(MOVEMENT movement);
 	void setPartPosition(void);
 
 public :	// ----- inventory ----- //

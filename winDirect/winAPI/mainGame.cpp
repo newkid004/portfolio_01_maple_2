@@ -30,10 +30,10 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("playerTest", new playerTestScene);
 
 	// change
-	SCENEMANAGER->changeScene("testLoading");
+	//SCENEMANAGER->changeScene("testLoading");
 	
 	//SCENEMANAGER->changeScene("buttonWindowTest");
-	//SCENEMANAGER->changeScene("playerTest");
+	SCENEMANAGER->changeScene("playerTest");
 	return S_OK;
 }
 

@@ -6,13 +6,15 @@
 enum MOVEMENT
 {
 	M_NONE				= 0x0000,
-	M_WALK				= 0x0001,
-	M_DOWN				= 0x0002,
-	M_JUMP				= 0x0004,
-	M_ATTACK			= 0x0008,
-	M_INV				= 0x0010,
-	M_FLY				= 0x0020,
-	M_DEAD			    = 0x0040,
+	M_ATTACK			= 0x0001,
+	M_WALK				= 0x0002,
+	M_DOWN				= 0x0010,
+	M_DOWNATTACK		= 0x0011,
+	M_JUMP				= 0x0020,
+	M_JUMPATTACK		= 0x0021,
+	M_INV				= 0x0030,
+	M_FLY				= 0x0040,
+	M_DEAD			    = 0x0060,
 	M_SPWAN				= 0x0080,
 };
 
