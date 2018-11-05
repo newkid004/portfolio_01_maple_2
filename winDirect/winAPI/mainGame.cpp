@@ -11,6 +11,8 @@
 #include "sceneWindowTest.h"
 #include "buttonWindowTest.h"
 #include "playerTestScene.h"
+#include "sceneTestShop.h"
+
 //=================//
 // # init # ÃÊ±âÈ­ //
 //=================//
@@ -28,9 +30,10 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("WindowTest", new sceneWindowTest);
 	SCENEMANAGER->addScene("buttonWindowTest", new buttonWindowTest);
 	SCENEMANAGER->addScene("playerTest", new playerTestScene);
+	SCENEMANAGER->addScene("testShop", new sceneTestShop);
 
 	// change
-	SCENEMANAGER->changeScene("testLoading");
+	SCENEMANAGER->changeScene("testShop");
 	
 	//SCENEMANAGER->changeScene("buttonWindowTest");
 	//SCENEMANAGER->changeScene("playerTest");

@@ -232,7 +232,44 @@ inline int getDirection2Speed(POINT speed)  { int direction = 0; direction |= (0
 inline int getDirection2Speed(fPOINT speed) { int direction = 0; direction |= (0 < speed.x) ? DIR_RIGHT : ((speed.x < 0) ? DIR_LEFT : 0); direction |= (0 < speed.y) ? DIR_DOWN : ((speed.y < 0) ? DIR_UP : 0); return direction; }
 //inline int getDirection2Speed(dPOINT speed) { int direction = 0; direction |= (0 < speed.x) ? DIR_RIGHT : ((speed.x < 0) ? DIR_LEFT : 0); direction |= (0 < speed.y) ? DIR_DOWN : ((speed.y < 0) ? DIR_UP : 0); return direction; }
 
+// 실수 modulation
 inline float rMod(float value, float modable) { return value - modable * (int)(value / modable); };
+
+// 3자리 마다 콤마(,) 넣기
+inline void insertComma(string * sour, string * dest)
+{
+	dest->resize(sour->size() + sour->size() / 3);
+
+	int process = 0;
+	int iSour = sour->size() - 1;
+	int iDest = dest->size() - 1 - ((sour->size() % 3) ? 0 : 1);
+
+	while (0 <= iSour)
+	{
+		if (process % 3 == 0 && process != 0)
+			(*dest)[iDest--] = ',';
+
+		++process;
+		(*dest)[iDest--] = (*sour)[iSour--];
+	}
+}
+inline void insertComma(wstring * sour, wstring * dest)
+{
+	dest->resize(sour->size() + sour->size() / 3);
+
+	int process = 0;
+	int iSour = sour->size() - 1;
+	int iDest = dest->size() - 1 - ((sour->size() % 3) ? 0 : 1);
+
+	while (0 <= iSour)
+	{
+		if (process % 3 == 0 && process != 0)
+			(*dest)[iDest--] = L',';
+
+		++process;
+		(*dest)[iDest--] = (*sour)[iSour--];
+	}
+}
 
 inline int getDirection2Radian(float rad)
 {

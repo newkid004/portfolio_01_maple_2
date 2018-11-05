@@ -31,14 +31,14 @@ void shopBase::render(void)
 
 void shopBase::renderShop(windowShop * winShop)
 {
-	static fPOINT & posOffset = winShop->getPos() + SHOPMANAGER->getWindow()->getContentShop().firstItemPos;
+	fPOINT & posOffset = winShop->getPos() + SHOPMANAGER->getWindow()->getContentShop().firstItemPos;
 
 	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
 	{
 		itemBase* viewItem = find(i + winShop->getContentShop().scroll);
 
 		if (viewItem)
-			viewItem->render2Inventory(posOffset, fPOINT(0, i));
+			viewItem->render2shop(posOffset, i);
 		else
 			break;
 	}
@@ -46,7 +46,7 @@ void shopBase::renderShop(windowShop * winShop)
 
 void shopBase::renderPlayer(windowShop * winShop)
 {
-	static fPOINT & posOffset = winShop->getPos() + SHOPMANAGER->getWindow()->getContentPlayer().firstItemPos;
+	fPOINT & posOffset = winShop->getPos() + SHOPMANAGER->getWindow()->getContentPlayer().firstItemPos;
 	static auto & playerItemView = SHOPMANAGER->getPlayerView();
 
 	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
@@ -56,6 +56,6 @@ void shopBase::renderPlayer(windowShop * winShop)
 		if (playerItemView.size() <= viewIndex) return;
 		
 		itemBase* viewItem = playerItemView[viewIndex];
-		viewItem->render2Inventory(posOffset, fPOINT(0, i));
+		viewItem->render2shop(posOffset, i);
 	}
 }
