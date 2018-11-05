@@ -52,8 +52,8 @@ public:
 	void aniRender(animation * ani, float alpha = 1.0f);
 
 	// 루프 렌더 : 회전 무효화
-	void loopRender(fRECT * range, fPOINT offset = 0.f, float alpha = 1.f);
-	void loopFrameRender(int frameX, int frameY, fRECT * range, fPOINT offset = 0.f, float alpha = 1.f);
+	void loopRender(fRECT * range, fPOINT offset = 0.f, int frameX = 0, int frameY = 0, float alpha = 1.f);
+	void loopRender(fRECT * range, fPOINT offset = 0.f, float frameSizeX = 0, float frameSizeY = 0, float alpha = 1.f);
 
 public :
 	// =========================== inline ============================== //

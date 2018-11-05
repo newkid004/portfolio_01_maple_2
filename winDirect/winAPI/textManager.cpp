@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "textManager.h"
 
+#include "gameNode.h"
 
 HRESULT textManager::init(void)
 {
@@ -13,7 +14,8 @@ HRESULT textManager::init(void)
 	// 텍스트 색상 : black
 	_renderTarget->CreateSolidColorBrush(C_COLOR_BLACK, &_brush);
 
-	_currentFormat = NULL;
+	// 기본 텍스트 생성
+	_currentFormat = gameNode::getTextFormat() = add("defaultText", L"돋움체", 12.f);
 
 	return S_OK;
 }

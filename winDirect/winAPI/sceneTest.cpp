@@ -37,7 +37,7 @@ void sceneTest::render(void)
 	_ani->update();
 
 	IMAGEMANAGER->getTransformState(TF_ALL);
-	IMAGEMANAGER->find("frame")->loopFrameRender(_ani->getFramePos().x / _ani->getFrameSize().x, _ani->getFramePos().y / _ani->getFrameSize().y, &fRECT(pos.x, pos.y, pos.x + 100 * scale, pos.y + 80 * scale), offset, 0.75f);
+	IMAGEMANAGER->find("frame")->loopRender(&fRECT(pos.x, pos.y, pos.x + 100 * scale, pos.y + 80 * scale), offset, _ani->getFramePos().x, _ani->getFramePos().y, 0.75f);
 
 	IMAGEMANAGER->getTransformState(TF_POSITION);
 	IMAGEMANAGER->statePos(WINSIZEX - 300, 10);

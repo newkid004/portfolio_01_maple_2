@@ -69,6 +69,7 @@ void mainGame::render(void)
 		// ============================================================
 
 		SCENEMANAGER->render();
+		TIMEMANAGER->render();
 
 		// ============================================================
 		_renderTarget->EndDraw();
