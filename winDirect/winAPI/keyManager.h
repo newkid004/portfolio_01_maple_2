@@ -28,8 +28,8 @@ public:
 	bool toggle(int key);
 
 	// 마우스 휠
-	void setWheelUp(function<void(void)> * upFunction);
-	void setWheelDown(function<void(void)> * downFunction);
+	void setWheelUp(function<void(void)> * upFunction, bool isDelete = true);
+	void setWheelDown(function<void(void)> * downFunction, bool isDelete = true);
 	void wheelUp(void) { if (_callWheelUp) (*_callWheelUp)(); };
 	void wheelDown(void) { if (_callWheelDown) (*_callWheelDown)(); };
 
@@ -38,7 +38,7 @@ public:
 	int getInputKey(void) { return _inputKey; };
 
 	// 마우스 더블클릭
-	void setDBClick(function<void(void)>* dbClickFunction);
+	void setDBClick(function<void(void)>* dbClickFunction, bool isDelete = true);
 	void dbClick(void) {if (_callDBClick)(*_callDBClick)();}
 	keyManager() {}
 	~keyManager() {}
