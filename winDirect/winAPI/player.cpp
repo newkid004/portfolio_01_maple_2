@@ -21,7 +21,7 @@ HRESULT player::init(void)
 
 	setMotions(M_NONE, 3, 0, 0.510f);
 	setMotions(M_WALK, 4, 1, 0.180f);
-	setMotions(M_JUMP, 0, 2, 0);
+	setMotions(M_JUMP, 0, 2, 1);
 
 	_aniBody = new animation;
 	_aniArm = new animation;
@@ -30,7 +30,7 @@ HRESULT player::init(void)
 	_aniBody->init(IMAGEMANAGER->find("p_body"));
 	_aniArm->init(IMAGEMANAGER->find("p_arm"));
 	_aniLhand->init(IMAGEMANAGER->find("p_lHand"));
-	
+
  	_position = fPOINT(WINSIZEX / 2, WINSIZEY / 2);
 	_state.movement = M_NONE;
 	_movement[0] = _movement[1] = M_NONE;
@@ -59,15 +59,6 @@ void player::update(void)
 	keyUpdate();
 	setPartPosition();
 
-	switch (_movement[0] | _movement[1])
-	{
-	case M_NONE: _state.movement = M_NONE; break;
-	case M_WALK: _state.movement = M_WALK; break;
-	case M_DOWN: _state.movement = M_DOWN; break;
-	case M_JUMP: _state.movement = M_JUMP; break;
-	case M_DOWNATTACK: _state.movement = M_DOWNATTACK; break;
-	case M_JUMPATTACK: _state.movement = M_JUMPATTACK; break;
-	}
 }
 
 void player::render(void)
@@ -106,7 +97,6 @@ void player::releaseInventory(void)
 
 void player::keyUpdate(void)
 {
-	_movement[0] = _movement[1] = M_NONE;
 	if (KEYMANAGER->press(VK_SPACE))
 	{
 		_aniBody->start();
@@ -136,18 +126,13 @@ void player::keyUpdate(void)
 			setMovement(M_WALK);
 	}
 
-	if (KEYMANAGER->press('c'))
+	if (KEYMANAGER->press('c') || KEYMANAGER->press('C'))
 	{
 		setMovement(M_JUMP);
 	}
 
 	if (KEYMANAGER->press(VK_LEFT) || KEYMANAGER->press(VK_RIGHT))
 	{
-		_aniBody->stop();
-		_aniArm->stop();
-		_aniLhand->stop();
-		setAnimation(_state.movement);
-	
 		_aniBody->start();
 		_aniArm->start();
 		_aniLhand->start();
@@ -155,13 +140,9 @@ void player::keyUpdate(void)
 
 	if (!KEYMANAGER->down(VK_LEFT) && !KEYMANAGER->down(VK_RIGHT) &&
 		!KEYMANAGER->down(VK_UP)   && !KEYMANAGER->down(VK_DOWN)  &&
-		_state.movement != M_NONE)
+		_state.movement != M_NONE && _state.movement != M_JUMP)
 	{
-		_aniBody->stop();
-		_aniArm->stop();
-		_aniLhand->stop();
 		setMovement(M_NONE);
-		setAnimation(_state.movement);
 		_aniBody->start();
 		_aniArm->start();
 		_aniLhand->start();
@@ -226,5 +207,18 @@ void player::setMovement(MOVEMENT movement)
 	}
 	else 
 		_movement[0] == M_NONE ? _movement[0] = movement : _movement[1] = movement;
+
+
+	switch (_movement[0] | _movement[1])
+	{
+	case M_NONE: _state.movement = M_NONE; break;
+	case M_WALK: _state.movement = M_WALK; break;
+	case M_DOWN: _state.movement = M_DOWN; break;
+	case M_JUMP: _state.movement = M_JUMP; break;
+	case M_DOWNATTACK: _state.movement = M_DOWNATTACK; break;
+	case M_JUMPATTACK: _state.movement = M_JUMPATTACK; break;
+	}
+	
+	setAnimation(_state.movement);
 }
 
