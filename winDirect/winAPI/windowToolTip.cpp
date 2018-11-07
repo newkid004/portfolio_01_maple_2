@@ -25,7 +25,7 @@ HRESULT windowToolTip::init(void)
 	TEXTMANAGER->add("UI_toolTip_head", L"µ¸¿òÃ¼", 16.f)->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 
 	_itemIconOffset = { 56.f, 73.f };	// center
-	_textMemoOffset = { 97.f, 33.f };	// left top
+	_textMemoOffset = { 100.f, 34.f };	// left top
 
 	_bodyHeight = 0;
 
@@ -46,25 +46,33 @@ UI_LIST_ITER windowToolTip::update(void)
 void windowToolTip::render(void)
 {
 	renderNormal();
+
+	close();
 }
 
 void windowToolTip::renderNormal(void)
 {
 	fPOINT offsetPos = point2fpos(_ptMouse);
 
+	if (WINSIZEX < offsetPos.x + _imgRef[0]->getSize().x)
+		offsetPos.x += WINSIZEX - (offsetPos.x + _imgRef[0]->getSize().x);
+	if (WINSIZEY < offsetPos.y + _totalHeight) 
+		offsetPos.y += WINSIZEY - (offsetPos.y + _totalHeight);
+
 	// ----- ¹ÙÅÁ ----- //
 	IMAGEMANAGER->statePos(offsetPos);
+	IMAGEMANAGER->stateScale(1.f);
 
 	// ¹ÙÅÁ : top
 	IMAGEMANAGER->getTransformState(TF_POSITION);
 	_imgRef[IT_FRAME_TOP]->render();
-	IMAGEMANAGER->statePos() += _imgRef[IT_FRAME_TOP]->getSize().y;
+	IMAGEMANAGER->statePos().y += _imgRef[IT_FRAME_TOP]->getSize().y;
 
 	// ¹ÙÅÁ : body
 	IMAGEMANAGER->getTransformState(TF_POSITION | TF_SCALE);
 	IMAGEMANAGER->stateScale(1.f, _bodyHeight);
-	_imgRef[IT_FRAME_BODY]->render();
-	IMAGEMANAGER->statePos() += _bodyHeight;
+	_imgRef[IT_FRAME_BODY]->render(1.0f, D2D1_POINT_2F{ 0.f, 0.f });
+	IMAGEMANAGER->statePos().y += _bodyHeight;
 
 	// ¹ÙÅÁ : bot
 	IMAGEMANAGER->getTransformState(TF_POSITION);
@@ -84,7 +92,7 @@ void windowToolTip::renderNormal(void)
 	// ¾ÆÀÌÄÜ : item
 	IMAGEMANAGER->getTransformState(TF_POSITION | TF_SCALE);
 	IMAGEMANAGER->stateScale(2.f);
-	IMAGEMANAGER->statePos(offsetIconCenter - _bindItem->getContent()->img->getSize());
+	IMAGEMANAGER->statePos(offsetIconCenter - _bindItem->getContent()->img->getCenterFramePos());
 	_bindItem->getContent()->img->frameRender(_bindItem->getContent()->frame);
 
 	// ¾ÆÀÌÄÜ : deco
@@ -95,24 +103,27 @@ void windowToolTip::renderNormal(void)
 	// ----- ±ÛÀÚ ----- //
 
 	// ±ÛÀÚ : name
-	IMAGEMANAGER->statePos(offsetPos.x, offsetPos.y + _imgRef[IT_FRAME_TOP]->getSize().y);
+	IMAGEMANAGER->statePos(offsetPos.x, offsetPos.y + _imgRef[IT_FRAME_TOP]->getSize().y / 2);
+	IMAGEMANAGER->setTransform();
+	TEXTMANAGER->setTextColor(&C_COLOR_WHITE);
 	TEXTMANAGER->drawText(
 		&_bindItem->getContent()->name, 
-		&RectF(0, 0, 
+		&RectF(0, 0,
 			_imgRef[IT_FRAME_TOP]->getSize().x, 
-			_imgRef[IT_FRAME_TOP]->getSize().y),
+			50),
 		NULL,
 		TEXTMANAGER->find("UI_toolTip_head"));
 
 	// ±ÛÀÚ : memo
 	IMAGEMANAGER->statePos(offsetPos + _textMemoOffset);
+	IMAGEMANAGER->setTransform();
 	TEXTMANAGER->drawText(
-		&_bindItem->getContent()->name,
+		&_bindItem->getContent()->memo,
 		&RectF(0, 0,
 			_imgRef[IT_FRAME_TOP]->getSize().x,
 			_bodyHeight),
 		NULL,
-		TEXTMANAGER->find("shopText"));
+		TEXTMANAGER->find("defaultText"));
 }
 
 void windowToolTip::renderEquip(void)
@@ -123,7 +134,7 @@ void windowToolTip::setBindItem(itemBase * item)
 {
 	_bindItem = item;
 
-	int lineCount = std::count(
+	float lineCount = std::count(
 		item->getContent()->memo.begin(),
 		item->getContent()->memo.end(),
 		'\n');
@@ -131,10 +142,12 @@ void windowToolTip::setBindItem(itemBase * item)
 	_bodyHeight = 24.f;		// head interval;
 	_bodyHeight += _imgRef[IT_FRAME_TOP]->getSize().y;
 	_bodyHeight += _imgRef[IT_FRAME_BOT]->getSize().y;
-	_bodyHeight += _bodyHeight * 16.f;
+	_bodyHeight += lineCount * 16.f;
 
 	if (_bodyHeight < INTERVAL_DEFAULT_TOOLTIP_FRAME_HEIGHT)
 		_bodyHeight = INTERVAL_DEFAULT_TOOLTIP_FRAME_HEIGHT;
+
+	_totalHeight = _bodyHeight;
 
 	_bodyHeight -= _imgRef[IT_FRAME_TOP]->getSize().y;
 	_bodyHeight -= _imgRef[IT_FRAME_BOT]->getSize().y;

@@ -5,6 +5,8 @@
 #include "player.h"
 #include "inventory.h"
 
+#include "buttonShop.h"
+
 HRESULT windowShop::init(void)
 {
 	windowBase::init();
@@ -12,6 +14,8 @@ HRESULT windowShop::init(void)
 
 	_conShop.firstItemPos = fPOINT(27.5f, 141.5f);
 	_conPlayer.firstItemPos = fPOINT(301.5f, 141.5f);
+
+	initButton();
 
 	return S_OK;
 }
@@ -21,6 +25,23 @@ void windowShop::render(void)
 	windowBase::render();
 
 	if (_shop) _shop->render();
+}
+
+void windowShop::initButton(void)
+{
+	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
+	{
+		buttonShop_itemList* b = new buttonShop_itemList;
+		b->init(i, this);
+		addButton("shop_button_" + to_string(i), b);
+	}
+	
+	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
+	{
+		buttonShop_playerItemList* b = new buttonShop_playerItemList;
+		b->init(i, this);
+		addButton("player_button_" + to_string(i), b);
+	}
 }
 
 UI_LIST_ITER windowShop::close(void)

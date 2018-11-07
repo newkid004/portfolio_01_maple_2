@@ -85,7 +85,7 @@ public :
 
 	void resetTransform(void);
 	void resetTransform(e_TRANSFORM resetValue);
-	void setTransform(void);
+	void setTransform(void) { D2D1_POINT_2F posZero = { 0.f, 0.f }; setTransform(&posZero); };
 	void setTransform(D2D1_POINT_2F * pos);
 	void setTransformZero(void);
 	void enableTransform(void) { _renderTransform = TF_ALL; };

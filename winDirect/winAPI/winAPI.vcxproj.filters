@@ -256,6 +256,9 @@
     <Filter Include="메인게임\Game Framework\Manager\window\toolTip">
       <UniqueIdentifier>{af9557a4-d77c-4bb6-a49c-6e2ac93ad619}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button\shop">
+      <UniqueIdentifier>{dc253dd0-1c78-4e10-b888-3191cfb83bf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -482,6 +485,9 @@
     </ClCompile>
     <ClCompile Include="windowToolTip.cpp">
       <Filter>메인게임\Game Framework\Manager\window\toolTip</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonShop.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -754,6 +760,9 @@
     </ClInclude>
     <ClInclude Include="effectBase.h">
       <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonShop.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

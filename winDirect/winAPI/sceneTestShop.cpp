@@ -6,6 +6,7 @@
 #include "itemBase.h"
 #include "shopBase.h"
 #include "windowShop.h"
+#include "windowToolTip.h"
 
 static fPOINT pos = fPOINT(150, 100);
 
@@ -54,8 +55,8 @@ void sceneTestShop::initItem(void)
 {
 	itemBase* item;
 
-	item = createItem(	L"빨간 포션",		L"체력 조금 회복",	fPOINT(0,	0)); item->getContent()->price = 50;
-	item = createItem(	L"주황 포션",		L"체력 보통 회복",	fPOINT(50,	0)); item->getContent()->price = 75;
+	item = createItem(	L"빨간 포션",		L"체력\n조금\n회복\n함",	fPOINT(0,	0)); item->getContent()->price = 50;
+	item = createItem(	L"주황 포션",		L"체\n\n력\n보\n통\n\n회\n복\n\n함",	fPOINT(50,	0)); item->getContent()->price = 75;
 	item = createItem(	L"하얀 포션",		L"체력 많이 회복",	fPOINT(100,	0)); item->getContent()->price = 150;
 	item = createItem(	L"파란 포션",		L"마나 조금 회복",	fPOINT(150,	0)); item->getContent()->price = 100;
 	item = createItem(	L"엘릭서",			L"체력 꽤 회복",	fPOINT(200,	0)); item->getContent()->price = 700;
@@ -79,6 +80,7 @@ void sceneTestShop::initPlayer(void)
 
 void sceneTestShop::initWindow(void)
 {
+	// ----- shop ----- //
 	windowShop* winShop = new windowShop;
 	winShop->init();
 	winShop->getImage() = IMAGEMANAGER->find("UI_shop_layout");
@@ -88,6 +90,12 @@ void sceneTestShop::initWindow(void)
 	SHOPMANAGER->getWindow() = winShop;
 
 	WINMANAGER->add("shop", winShop);
+
+	// ----- toolTip ----- //
+	windowToolTip* winToolTip = new windowToolTip;
+	winToolTip->init();
+
+	WINMANAGER->add("item_toolTip", winToolTip);
 }
 
 void sceneTestShop::initShop(void)
@@ -146,6 +154,7 @@ void sceneTestShop::renderText(void)
 	D2D1_RECT_F rc = {30, 30, 300, 100};
 	wstring str;
 
+	TEXTMANAGER->setTextColor(&C_COLOR_BLACK);
 	IMAGEMANAGER->resetTransform();
 	IMAGEMANAGER->setTransform();
 

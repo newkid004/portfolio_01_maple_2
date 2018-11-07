@@ -24,6 +24,7 @@ void shopBase::render(void)
 {
 	static windowShop *& winShop = SHOPMANAGER->getWindow();
 
+	TEXTMANAGER->setTextColor(&C_COLOR_BLACK);
 	IMAGEMANAGER->getTransformState(TF_POSITION);
 	renderShop(winShop);
 	renderPlayer(winShop);

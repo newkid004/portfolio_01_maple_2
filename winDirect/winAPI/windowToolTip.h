@@ -28,6 +28,7 @@ private :
 	fPOINT _itemIconOffset;
 	fPOINT _textMemoOffset;
 	float _bodyHeight;
+	float _totalHeight;
 
 	image* _imgRef[IT_TOTAL_COUNT];
 

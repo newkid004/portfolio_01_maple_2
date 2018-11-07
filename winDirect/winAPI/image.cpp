@@ -96,9 +96,13 @@ void image::release(void)
 }
 
 //∑ª¥ı (0, 0¡ˆ¡°ø° ∑ª¥ı)
-void image::render(float alpha)
+void image::render(float alpha, D2D1_POINT_2F center)
 {
-	D2D1_POINT_2F rotateCenter = { _imageInfo->size.x / 2, _imageInfo->size.y / 2 };
+	D2D1_POINT_2F rotateCenter;
+	if (center.x == -1.f || center.y == -1.f)
+		rotateCenter = { _imageInfo->size.x / 2, _imageInfo->size.y / 2 };
+	else
+		rotateCenter = center;
 	IMAGEMANAGER->setTransform(&rotateCenter);
 
 	_renderTarget->DrawBitmap(_imageInfo->bitmap,
@@ -155,10 +159,7 @@ void image::render(float clipX, float clipY, float clipW, float clipH, float alp
 	// ¡ﬂΩ…¡°
 	D2D1_POINT_2F rotateCenter;
 	if (center.x == -1.f || center.y == -1.f)
-	{
-	rotateCenter.x = (clipX + clipW / 2);
-	rotateCenter.y = (clipY + clipH / 2);
-	}
+		rotateCenter = { clipW / 2, clipH / 2 };
 	else
 	rotateCenter = center;
 

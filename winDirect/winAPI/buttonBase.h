@@ -27,6 +27,6 @@ public:
 
 	function<UI_LIST_ITER(void)> & getActivate(void) { return _active; };
 public:
-	buttonBase() {};
+	buttonBase() : _img(NULL) {};
 	~buttonBase() {};
 };

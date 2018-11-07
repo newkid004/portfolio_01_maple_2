@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "itemBase.h"
 
-#include "shopBase.h"
+#include "windowShop.h"
 
 // ----- ItemBase ----- //
 void itemBase::render2Field(float alphaRatio)
