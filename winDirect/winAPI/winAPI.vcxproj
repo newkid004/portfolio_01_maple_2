@@ -34,7 +34,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -175,6 +175,7 @@
     <ClCompile Include="enemyBase.cpp" />
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="enemy_0000_snail.cpp" />
+    <ClCompile Include="eventCatcher.cpp" />
     <ClCompile Include="eventManager.cpp" />
     <ClCompile Include="event_0000_test.cpp" />
     <ClCompile Include="fieldBase.cpp" />
@@ -225,6 +226,7 @@
     <ClCompile Include="txtDataManager.cpp" />
     <ClCompile Include="windowBase.cpp" />
     <ClCompile Include="windowShop.cpp" />
+    <ClCompile Include="windowToolTip.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="winManager.cpp" />
   </ItemGroup>
@@ -259,6 +261,7 @@
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="enemy_0000_snail.h" />
     <ClInclude Include="eventBase.h" />
+    <ClInclude Include="eventCatcher.h" />
     <ClInclude Include="eventDef.h" />
     <ClInclude Include="eventList.h" />
     <ClInclude Include="eventManager.h" />
@@ -316,6 +319,7 @@
     <ClInclude Include="windowBase.h" />
     <ClInclude Include="windowShop.h" />
     <ClInclude Include="windowStatus.h" />
+    <ClInclude Include="windowToolTip.h" />
     <ClInclude Include="winManager.h" />
   </ItemGroup>
   <ItemGroup>
