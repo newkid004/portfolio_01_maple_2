@@ -25,7 +25,8 @@ void itemBase::render2shop(fPOINT posOffset, int placement)
 
 	// Icon
 	IMAGEMANAGER->statePos(renderPos);
-	_content->img->frameRender(_content->frameShadow);
+	ITEMMANAGER->getImgShadow()->render();
+	_content->img->frameRender(_content->frame);
 
 	// Name
 	D2D1_RECT_F rc = {0, 0, 200, 16};
@@ -47,7 +48,8 @@ void itemBase::render2Inventory(fPOINT posOffset, fPOINT placement)
 	fPOINT renderPos = posOffset + placement * INTERVAL_ITEM_IN_INVENTORY;
 
 	IMAGEMANAGER->statePos(renderPos);
-	_content->img->frameRender(_content->frameShadow);
+	ITEMMANAGER->getImgShadow()->render();
+	_content->img->frameRender(_content->frame);
 }
 
 // ----- Weapon ----- //
