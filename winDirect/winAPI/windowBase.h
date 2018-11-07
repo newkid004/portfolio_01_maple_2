@@ -9,6 +9,7 @@ protected:
 	list<windowBase*>::iterator _managedIter;
 	string _winName;
 	fPOINT _pos;
+	fPOINT _size = -1.f;
 
 	unordered_map<string, buttonBase*> _mButton;
 
@@ -23,6 +24,7 @@ public :
 	UI_LIST_ITER & getIter(void) { return _managedIter; };
 	string & getName(void) { return _winName; };
 	fPOINT & getPos(void) { return _pos; };
+	fPOINT & getSize(void) { return _size; };
 
 public :	// ----- window ----- //
 	virtual void show(void) { WINMANAGER->show(this); };
