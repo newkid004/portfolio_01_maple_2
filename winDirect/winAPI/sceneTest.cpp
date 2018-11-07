@@ -86,5 +86,5 @@ void sceneTest::updateControl(void)
 	IMAGEMANAGER->statePos(pos);
 	IMAGEMANAGER->stateRotate(rot);
 	IMAGEMANAGER->stateFlip(flip);
-	IMAGEMANAGER->statScale(scale, scale);
+	IMAGEMANAGER->stateScale(scale, scale);
 }
