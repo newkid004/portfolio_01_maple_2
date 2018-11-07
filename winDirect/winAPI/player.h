@@ -1,5 +1,6 @@
 #pragma once
 #include "characterBase.h"
+
 enum DIRECTION
 {
 	LEFT, RIGHT
