@@ -33,7 +33,7 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("testShop", new sceneTestShop);
 
 	// change
-	SCENEMANAGER->changeScene("testShop");
+	SCENEMANAGER->changeScene("testLoading");
 	
 	//SCENEMANAGER->changeScene("buttonWindowTest");
 	//SCENEMANAGER->changeScene("playerTest");

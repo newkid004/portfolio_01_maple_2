@@ -68,8 +68,8 @@ void sceneTest::updateControl(void)
 	if (KEYMANAGER->press('A')) flip ^= IMAGE_FLIP_HORIZON;
 	if (KEYMANAGER->press('D')) flip ^= IMAGE_FLIP_VERTICAL;
 
-	if (KEYMANAGER->down('E')) scale += TIMEMANAGER->getElapsedTime() * 3;
-	if (KEYMANAGER->down('Q')) scale -= TIMEMANAGER->getElapsedTime() * 3;
+	if (KEYMANAGER->down('E')) scale += TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down('Q')) scale -= TIMEMANAGER->getElapsedTime() * 100;
 
 	if (KEYMANAGER->down('I')) offset.y -= TIMEMANAGER->getElapsedTime() * 200;
 	if (KEYMANAGER->down('K')) offset.y += TIMEMANAGER->getElapsedTime() * 200;
