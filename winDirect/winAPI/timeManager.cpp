@@ -78,5 +78,6 @@ void timeManager::render(void)
 	D2D1_RECT_F rc = {3, 3, 150, 30};
 
 	IMAGEMANAGER->setTransformZero();
+	TEXTMANAGER->setTextColor(&C_COLOR_BLACK);
 	TEXTMANAGER->drawText(&str, &rc, NULL, TEXTMANAGER->find("defaultText"));
 }
