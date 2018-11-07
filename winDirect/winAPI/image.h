@@ -70,6 +70,9 @@ public :
 	inline fPOINT getCenterPos(void) { return _imageInfo->size / 2.0f; }
 	inline fPOINT getCenterFramePos(void) { return _imageInfo->frameSize / 2.0f; };
 
+	// 이미지 정보
+	inline IMAGE_INFO*& getImageInfo(void) { return _imageInfo; };
+
 	image();
 	~image() {}
 };
