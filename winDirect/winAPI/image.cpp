@@ -156,8 +156,7 @@ void image::render(float clipX, float clipY, float clipW, float clipH, float alp
 	D2D1_POINT_2F rotateCenter;
 	if (center.x == -1.f || center.y == -1.f)
 	{
-	rotateCenter.x = (clipX + clipW / 2);
-	rotateCenter.y = (clipY + clipH / 2);
+		rotateCenter = { clipW / 2, clipH / 2 };
 	}
 	else
 	rotateCenter = center;
