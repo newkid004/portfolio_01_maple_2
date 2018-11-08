@@ -4,6 +4,7 @@
 // ¹öÆ° : 38°³
 
 #define CNT_SHOP_ITEM_LIST 9
+#define INTERVAL_ITEM_IN_SHOP 42.f
 
 struct tagShopContent
 {
@@ -30,6 +31,9 @@ private:
 public:
 	HRESULT init(void);
 	void render(void);
+
+public :
+	void initButton(void);
 
 public:
 	tagShopContent & getContentShop(void) { return _conShop; };

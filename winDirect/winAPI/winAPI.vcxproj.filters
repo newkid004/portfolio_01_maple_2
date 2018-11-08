@@ -250,8 +250,14 @@
     <Filter Include="메인게임\Game Framework\Manager\item">
       <UniqueIdentifier>{67e8ebb4-9a61-4819-8ccf-fc2d27579403}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\skill\activeSkill\luckSeven">
-      <UniqueIdentifier>{ae0ea544-ef4e-4e56-80a7-9de9deaa979b}</UniqueIdentifier>
+    <Filter Include="메인게임\Game Framework\Manager\event\_catcher">
+      <UniqueIdentifier>{6b0b6a67-1f8b-4132-be16-204e3190f8b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\toolTip">
+      <UniqueIdentifier>{af9557a4-d77c-4bb6-a49c-6e2ac93ad619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button\shop">
+      <UniqueIdentifier>{dc253dd0-1c78-4e10-b888-3191cfb83bf4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -474,10 +480,15 @@
     <ClCompile Include="sceneTestShop.cpp">
       <Filter>메인게임\Scene\test\shop</Filter>
     </ClCompile>
-    <ClCompile Include="luckySeven.cpp">
-      <Filter>메인게임\Game Framework\Manager\skill\activeSkill\luckSeven</Filter>
+    <ClCompile Include="eventCatcher.cpp">
+      <Filter>메인게임\Game Framework\Manager\event\_catcher</Filter>
     </ClCompile>
-    <ClCompile Include="mapleUtil.cpp" />
+    <ClCompile Include="windowToolTip.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\toolTip</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonShop.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -648,9 +659,6 @@
     <ClInclude Include="effectManager.h">
       <Filter>메인게임\Game Framework\Manager\effect</Filter>
     </ClInclude>
-    <ClInclude Include="effectBase.h">
-      <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
-    </ClInclude>
     <ClInclude Include="eventBase.h">
       <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
     </ClInclude>
@@ -744,10 +752,18 @@
     <ClInclude Include="sceneTestShop.h">
       <Filter>메인게임\Scene\test\shop</Filter>
     </ClInclude>
-    <ClInclude Include="luckySeven.h">
-      <Filter>메인게임\Game Framework\Manager\skill\activeSkill\luckSeven</Filter>
+    <ClInclude Include="eventCatcher.h">
+      <Filter>메인게임\Game Framework\Manager\event\_catcher</Filter>
     </ClInclude>
-    <ClInclude Include="mapleUtil.h" />
+    <ClInclude Include="windowToolTip.h">
+      <Filter>메인게임\Game Framework\Manager\window\toolTip</Filter>
+    </ClInclude>
+    <ClInclude Include="effectBase.h">
+      <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonShop.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="quest.Json">

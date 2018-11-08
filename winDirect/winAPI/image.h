@@ -39,7 +39,7 @@ public:
 	void release(void);
 
 	//렌더 (내가 지정한 좌표에 이미지 출력한다)
-	void render(float alpha = 1.0f);
+	void render(float alpha = 1.0f, D2D1_POINT_2F center = { -1.f, -1.f });
 
 	// 이미지 클리핑
 	void render(float clipX, float clipY, float clipW, float clipH, float alpha = 1.0f, D2D1_POINT_2F center = { -1.f, -1.f });
@@ -69,6 +69,9 @@ public :
 	// 중앙좌표
 	inline fPOINT getCenterPos(void) { return _imageInfo->size / 2.0f; }
 	inline fPOINT getCenterFramePos(void) { return _imageInfo->frameSize / 2.0f; };
+
+	// 이미지 정보
+	inline IMAGE_INFO*& getImageInfo(void) { return _imageInfo; };
 
 	image();
 	~image() {}

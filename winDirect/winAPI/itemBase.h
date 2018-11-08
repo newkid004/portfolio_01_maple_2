@@ -13,18 +13,16 @@ struct itemContentBase
 	image* img;
 
 	fPOINT frame;
-	fPOINT frameShadow;
 
 	wstring name;
 	wstring memo;
 
-	int price;
+	__int64 price;
 
 	itemContentBase() :
 		type(0),
 		img(NULL),
 		frame(0.f),
-		frameShadow(0.f),
 		price(0)
 	{}
 	virtual ~itemContentBase() {};
@@ -35,7 +33,6 @@ struct itemContentBase
 		this->type			= i->type;
 		this->img			= i->img;
 		this->frame			= i->frame;
-		this->frameShadow	= i->frameShadow;
 		this->name			= i->name;
 		this->memo			= i->memo;
 		this->price = i->price;

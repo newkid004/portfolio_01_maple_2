@@ -22,7 +22,7 @@
     <ProjectGuid>{7C0A3AA2-9BB1-47A6-81A6-D29200A61266}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>winAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <ProjectName>winDirect</ProjectName>
     <SccProjectName>SAK</SccProjectName>
     <SccAuxPath>SAK</SccAuxPath>
@@ -76,8 +76,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\최시영\source\repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\최시영\source\repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -162,6 +162,7 @@
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
+    <ClCompile Include="buttonShop.cpp" />
     <ClCompile Include="buttonTest.cpp" />
     <ClCompile Include="buttonTest2.cpp" />
     <ClCompile Include="buttonTest3.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="enemyBase.cpp" />
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="enemy_0000_snail.cpp" />
+    <ClCompile Include="eventCatcher.cpp" />
     <ClCompile Include="eventManager.cpp" />
     <ClCompile Include="event_0000_test.cpp" />
     <ClCompile Include="fieldBase.cpp" />
@@ -191,9 +193,7 @@
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
-    <ClCompile Include="luckySeven.cpp" />
     <ClCompile Include="mainGame.cpp" />
-    <ClCompile Include="mapleUtil.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="npcManager.cpp" />
     <ClCompile Include="passiveSkill.cpp" />
@@ -227,6 +227,7 @@
     <ClCompile Include="txtDataManager.cpp" />
     <ClCompile Include="windowBase.cpp" />
     <ClCompile Include="windowShop.cpp" />
+    <ClCompile Include="windowToolTip.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="winManager.cpp" />
   </ItemGroup>
@@ -243,6 +244,7 @@
     <ClInclude Include="buffManager.h" />
     <ClInclude Include="bulletBase.h" />
     <ClInclude Include="buttonBase.h" />
+    <ClInclude Include="buttonShop.h" />
     <ClInclude Include="buttonTest.h" />
     <ClInclude Include="buttonTest2.h" />
     <ClInclude Include="buttonTest3.h" />
@@ -261,6 +263,7 @@
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="enemy_0000_snail.h" />
     <ClInclude Include="eventBase.h" />
+    <ClInclude Include="eventCatcher.h" />
     <ClInclude Include="eventDef.h" />
     <ClInclude Include="eventList.h" />
     <ClInclude Include="eventManager.h" />
@@ -280,9 +283,7 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
-    <ClInclude Include="luckySeven.h" />
     <ClInclude Include="mainGame.h" />
-    <ClInclude Include="mapleUtil.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="npcManager.h" />
     <ClInclude Include="objectDef.h" />
@@ -320,6 +321,7 @@
     <ClInclude Include="windowBase.h" />
     <ClInclude Include="windowShop.h" />
     <ClInclude Include="windowStatus.h" />
+    <ClInclude Include="windowToolTip.h" />
     <ClInclude Include="winManager.h" />
   </ItemGroup>
   <ItemGroup>

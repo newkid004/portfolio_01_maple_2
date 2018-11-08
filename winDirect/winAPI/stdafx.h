@@ -49,6 +49,7 @@
 
 // Direct 헤더 파일
 #include <d2d1.h>
+#include <d2d1_1.h>
 #include <dwrite.h>
 
 using namespace std;

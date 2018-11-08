@@ -73,19 +73,19 @@ public :
 	fPOINT &	statePos(void)		{ return _imgPos; };
 	int &		stateFlip(void)		{ return _imgFlip; };
 	float &		stateRotate(void)	{ return _imgRotate; };
-	D2D1_SIZE_F& statScale(void)	{ return _imgScale; };
+	D2D1_SIZE_F& stateScale(void)	{ return _imgScale; };
 
 	fPOINT &	statePos(float x, float y)	{ return _imgPos = fPOINT(x, y); };
 	fPOINT &	statePos(fPOINT input)		{ return _imgPos = input; };
 	int &		stateFlip(int input)		{ return _imgFlip = input; };
 	float &		stateRotate(float input)	{ return _imgRotate = input; };
-	D2D1_SIZE_F& statScale(float xy)		{ return _imgScale = D2D1_SIZE_F{ xy, xy }; }
-	D2D1_SIZE_F& statScale(float x, float y){ return _imgScale = D2D1_SIZE_F{ x, y }; }
-	D2D1_SIZE_F& statScale(fPOINT input)	{ return _imgScale = D2D1_SIZE_F{ input.x, input.y }; }
+	D2D1_SIZE_F& stateScale(float xy)		{ return _imgScale = D2D1_SIZE_F{ xy, xy }; }
+	D2D1_SIZE_F& stateScale(float x, float y){ return _imgScale = D2D1_SIZE_F{ x, y }; }
+	D2D1_SIZE_F& stateScale(fPOINT input)	{ return _imgScale = D2D1_SIZE_F{ input.x, input.y }; }
 
 	void resetTransform(void);
 	void resetTransform(e_TRANSFORM resetValue);
-	void setTransform(void);
+	void setTransform(void) { D2D1_POINT_2F posZero = { 0.f, 0.f }; setTransform(&posZero); };
 	void setTransform(D2D1_POINT_2F * pos);
 	void setTransformZero(void);
 	void enableTransform(void) { _renderTransform = TF_ALL; };

@@ -1,10 +1,11 @@
 #pragma once
 #include "baseObject.h"
+#include "patternBase.h"
+#include "buffBase.h"
 #include "state.h"
 
-class patternBase;
-class buffBase;
-
+#define SPEED 200
+#define GRAVITY 100
 struct motionInfo
 {
 	int		maxFrameX;
@@ -24,7 +25,7 @@ protected:
 	stateBasic	_stateBasic;
 
 protected:
-	fPOINT		_velocity;						//속도			<- 중력 + 마찰속도 + 현재 속도 (최종속도)
+	fPOINT		_velocity;						//속도			<- 중력 + 현재 속도 (최종속도)
 	rayStruct	_rayStruct;						//광선 구조체(충돌검사 광선)
 
 	bool		_isCollision;					//충돌검사 여부 변수
@@ -43,8 +44,6 @@ public:
 	virtual state & getStat(void) { return _state; };
 
 	void getVelocity() {
-		_velocity = _currentPattern->getPatternVelocity();
-		_velocity.y += 1.0f;
 
 		setRayStruct();
 		rayCollision();

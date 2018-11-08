@@ -1,5 +1,6 @@
 #pragma once
 #include "characterBase.h"
+
 enum DIRECTION
 {
 	LEFT, RIGHT
@@ -27,10 +28,11 @@ private:
 	fPOINT	   _headPosition;
 	fPOINT     _facePosition;
 	fPOINT     _hairPosition;
-	int _flip;
+	fPOINT	   _tempPos;
+	inventory* _inven[PLAYER_INVENTORY_TAB_COUNT];
 
-	inventory*	_inven[PLAYER_INVENTORY_TAB_COUNT];
-
+	int		 _flip;
+	NUM_REAL _acc;
 public:
 	HRESULT init(void);
 	void release(void);
@@ -47,6 +49,9 @@ public :
 	void setAnimation(MOVEMENT movement);
 	void setMovement(MOVEMENT movement);
 	void setPartPosition(void);
+	void aniStart(void);
+	void aniStop(void);
+	void jump(void);
 
 public :	// ----- inventory ----- //
 	inventory*& getInventory(int index) { return _inven[index]; };

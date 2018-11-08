@@ -34,9 +34,16 @@ void winManager::update(void)
 void winManager::render(void)
 {
 	auto iter = _lWindow.rbegin();
-	for (; iter != _lWindow.rend(); ++iter)
+
+	while (iter != _lWindow.rend())
 	{
 		(*iter)->render();
+		auto baseIter = iter.base();
+		
+		if (baseIter == _lWindow.begin())
+			break;
+
+		++iter;
 	}
 }
 

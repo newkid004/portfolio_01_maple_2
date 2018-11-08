@@ -96,9 +96,13 @@ void image::release(void)
 }
 
 //렌더 (0, 0지점에 렌더)
-void image::render(float alpha)
+void image::render(float alpha, D2D1_POINT_2F center)
 {
-	D2D1_POINT_2F rotateCenter = { _imageInfo->size.x / 2, _imageInfo->size.y / 2 };
+	D2D1_POINT_2F rotateCenter;
+	if (center.x == -1.f || center.y == -1.f)
+		rotateCenter = { _imageInfo->size.x / 2, _imageInfo->size.y / 2 };
+	else
+		rotateCenter = center;
 	IMAGEMANAGER->setTransform(&rotateCenter);
 
 	_renderTarget->DrawBitmap(_imageInfo->bitmap,
@@ -114,6 +118,8 @@ void image::render(float alpha)
 
 void image::render(float clipX, float clipY, float clipW, float clipH, float alpha, D2D1_POINT_2F center)
 {
+	/*/ // ----- 레이어 클리핑 ----- //
+
 	// 위치 보정
 	auto tempPos = IMAGEMANAGER->statePos();
 	IMAGEMANAGER->statePos() -= fPOINT(clipX, clipY);
@@ -129,7 +135,6 @@ void image::render(float clipX, float clipY, float clipW, float clipH, float alp
 		rotateCenter = center;
 
 	IMAGEMANAGER->setTransform(&rotateCenter);
-
 
 	// 레이어 입력
 	fRECT clipArea(clipX, clipY, clipX + clipW, clipY + clipH);
@@ -148,6 +153,29 @@ void image::render(float clipX, float clipY, float clipW, float clipH, float alp
 
 	// 보정 되돌림
 	IMAGEMANAGER->statePos() = tempPos;
+	
+	/*/ // ----- 범위 지정 클리핑 ----- //
+
+	// 중심점
+	D2D1_POINT_2F rotateCenter;
+	if (center.x == -1.f || center.y == -1.f)
+		rotateCenter = { clipW / 2, clipH / 2 };
+	else
+	rotateCenter = center;
+
+	IMAGEMANAGER->setTransform(&rotateCenter);
+
+	_renderTarget->DrawBitmap(_imageInfo->bitmap,
+		RectF(
+			0, 0,
+			clipW,
+			clipH),
+		alpha,
+		D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
+		RectF(clipX, clipY,
+			clipX + clipW,
+			clipY + clipH));
+	//*/
 
 	// 렌더 상태에 따라 
 	if (IMAGEMANAGER->getRenderState() & IRS_ALWAYS_RESET_TRANSFORM)

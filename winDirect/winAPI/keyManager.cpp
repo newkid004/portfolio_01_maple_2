@@ -73,20 +73,20 @@ bool keyManager::toggle(int key)
 	return false;
 }
 
-void keyManager::setWheelUp(function<void(void)> * upFunction)
+void keyManager::setWheelUp(function<void(void)> * upFunction, bool isDelete)
 {
-	if (_callWheelUp) SAFE_DELETE(_callWheelUp);
+	if (isDelete) if (_callWheelUp) SAFE_DELETE(_callWheelUp);
 	_callWheelUp = upFunction;
 }
 
-void keyManager::setWheelDown(function<void(void)> * downFunction)
+void keyManager::setWheelDown(function<void(void)> * downFunction, bool isDelete)
 {
-	if (_callWheelDown) SAFE_DELETE(_callWheelDown);
+	if (isDelete) if (_callWheelDown) SAFE_DELETE(_callWheelDown);
 	_callWheelDown = downFunction;
 }
 
-void keyManager::setDBClick(function<void(void)>* dbClickFunction)
+void keyManager::setDBClick(function<void(void)>* dbClickFunction, bool isDelete)
 {
-	if (_callDBClick)SAFE_DELETE(_callDBClick);
+	if (isDelete) if (_callDBClick)SAFE_DELETE(_callDBClick);
 	_callDBClick = dbClickFunction;
 }

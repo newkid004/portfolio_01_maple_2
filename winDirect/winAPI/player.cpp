@@ -5,7 +5,9 @@
 
 player::player() : _headPosition(fPOINT(0.0f, 0.0f)),
 				   _facePosition(fPOINT(0.0f, 0.0f)),
-				   _hairPosition(fPOINT(0.0f, 0.0f))
+				   _hairPosition(fPOINT(0.0f, 0.0f)),
+				   _tempPos(fPOINT(0.0f, 0.0f)),
+				   _acc(0.0f)
 {
 }
 
@@ -21,7 +23,7 @@ HRESULT player::init(void)
 
 	setMotions(M_NONE, 3, 0, 0.510f);
 	setMotions(M_WALK, 4, 1, 0.180f);
-	setMotions(M_JUMP, 0, 2, 0);
+	setMotions(M_JUMP, 1, 2, 0.1f);
 
 	_aniBody = new animation;
 	_aniArm = new animation;
@@ -30,8 +32,9 @@ HRESULT player::init(void)
 	_aniBody->init(IMAGEMANAGER->find("p_body"));
 	_aniArm->init(IMAGEMANAGER->find("p_arm"));
 	_aniLhand->init(IMAGEMANAGER->find("p_lHand"));
-	
+
  	_position = fPOINT(WINSIZEX / 2, WINSIZEY / 2);
+	_velocity = fPOINT(0.0f, 0.0f);
 	_state.movement = M_NONE;
 	_movement[0] = _movement[1] = M_NONE;
 	_dir = LEFT;
@@ -56,18 +59,23 @@ void player::release(void)
 
 void player::update(void)
 {
+	if (_state.movement == M_JUMP)
+	{
+		jump();
+		if (_position.y > _tempPos.y)
+		{
+			_position.y = _tempPos.y;
+			_velocity = 0;
+			_acc = 0.0f;
+			setMovement(M_NONE);
+			aniStart();
+		}
+	}
+	_position += _velocity * TIMEMANAGER->getElapsedTime();
+	_velocity = 0;
+
 	keyUpdate();
 	setPartPosition();
-
-	switch (_movement[0] | _movement[1])
-	{
-	case M_NONE: _state.movement = M_NONE; break;
-	case M_WALK: _state.movement = M_WALK; break;
-	case M_DOWN: _state.movement = M_DOWN; break;
-	case M_JUMP: _state.movement = M_JUMP; break;
-	case M_DOWNATTACK: _state.movement = M_DOWNATTACK; break;
-	case M_JUMPATTACK: _state.movement = M_JUMPATTACK; break;
-	}
 }
 
 void player::render(void)
@@ -106,65 +114,53 @@ void player::releaseInventory(void)
 
 void player::keyUpdate(void)
 {
-	_movement[0] = _movement[1] = M_NONE;
 	if (KEYMANAGER->press(VK_SPACE))
 	{
-		_aniBody->start();
-		_aniArm->start();
-		_aniLhand->start();
+		aniStart();
 	}
 
 	if (KEYMANAGER->press('s'))
 	{
-		_aniBody->stop();
-		_aniArm->stop();
-		_aniLhand->stop();
+		aniStop();
 	}
 
 	if (KEYMANAGER->down(VK_LEFT))
 	{
-		_position.x -= TIMEMANAGER->getElapsedTime() * 200;
+		_velocity.x = -SPEED;
 		_dir = LEFT;
 		if (_movement[0] != M_JUMP && _movement[1] != M_JUMP)
 			setMovement(M_WALK);
 	}
 	if (KEYMANAGER->down(VK_RIGHT))
 	{
-		_position.x += TIMEMANAGER->getElapsedTime() * 200; 
+		_velocity.x = SPEED;
 		_dir = RIGHT;
 		if (_movement[0] != M_JUMP && _movement[1] != M_JUMP)
 			setMovement(M_WALK);
 	}
 
-	if (KEYMANAGER->press('c'))
+	if (KEYMANAGER->press('c') || KEYMANAGER->press('C'))
 	{
-		setMovement(M_JUMP);
+		if (_state.movement != M_JUMP)
+		{
+			_tempPos.y = _position.y;
+			aniStop();
+			setMovement(M_JUMP);
+			aniStart();
+		}
 	}
 
 	if (KEYMANAGER->press(VK_LEFT) || KEYMANAGER->press(VK_RIGHT))
 	{
-		_aniBody->stop();
-		_aniArm->stop();
-		_aniLhand->stop();
-		setAnimation(_state.movement);
-	
-		_aniBody->start();
-		_aniArm->start();
-		_aniLhand->start();
+		aniStart();
 	}
 
 	if (!KEYMANAGER->down(VK_LEFT) && !KEYMANAGER->down(VK_RIGHT) &&
 		!KEYMANAGER->down(VK_UP)   && !KEYMANAGER->down(VK_DOWN)  &&
-		_state.movement != M_NONE)
+		_state.movement != M_NONE && _state.movement != M_JUMP)
 	{
-		_aniBody->stop();
-		_aniArm->stop();
-		_aniLhand->stop();
 		setMovement(M_NONE);
-		setAnimation(_state.movement);
-		_aniBody->start();
-		_aniArm->start();
-		_aniLhand->start();
+		aniStart();
 	}
 }
 
@@ -182,7 +178,7 @@ void player::setAnimation(MOVEMENT movement)
 {
 	_aniBody->setFPS(1.0f / _Mmotions.find(movement)->second.delay);
 	_aniArm->setFPS(1.0f / _Mmotions.find(movement)->second.delay);
-	_aniArm->setFPS(1.0f / _Mmotions.find(movement)->second.delay);
+	_aniLhand->setFPS(1.0f / _Mmotions.find(movement)->second.delay);
 
 	_aniBody->setPlayFrame(
 		PointMake(0, _Mmotions.find(movement)->second.frameY),
@@ -215,6 +211,26 @@ void player::setPartPosition(void)
 	}
 }
 
+void player::aniStart(void)
+{
+	_aniBody->start();
+	_aniArm->start();
+	_aniLhand->start();
+}
+
+void player::aniStop(void)
+{
+	_aniBody->stop();
+	_aniArm->stop();
+	_aniLhand->stop();
+}
+
+void player::jump(void)
+{ 
+	_velocity.y = -SPEED * 4 + (GRAVITY + _acc);
+	_acc += 20;
+}
+;
 void player::setMovement(MOVEMENT movement)
 {
 	if (movement == M_NONE)
@@ -224,7 +240,15 @@ void player::setMovement(MOVEMENT movement)
 		_movement[0] = M_WALK;
 		_movement[1] = M_NONE;
 	}
+	else if (movement == M_JUMP)
+	{
+		_movement[0] = M_JUMP;
+		_movement[1] = M_NONE;
+	}
 	else 
 		_movement[0] == M_NONE ? _movement[0] = movement : _movement[1] = movement;
+
+	_state.movement = (MOVEMENT)(_movement[0] | _movement[1]);
+	setAnimation(_state.movement);
 }
 
