@@ -90,3 +90,19 @@ void keyManager::setDBClick(function<void(void)>* dbClickFunction, bool isDelete
 	if (isDelete) if (_callDBClick)SAFE_DELETE(_callDBClick);
 	_callDBClick = dbClickFunction;
 }
+
+void keyManager::resetFunctional(bool isDelete)
+{
+	if (isDelete)
+	{
+		SAFE_DELETE(_callWheelUp);
+		SAFE_DELETE(_callWheelDown);
+		SAFE_DELETE(_callDBClick);
+	}
+	else
+	{
+		_callWheelUp = NULL;
+		_callWheelDown = NULL;
+		_callDBClick = NULL;
+	}
+}

@@ -47,7 +47,9 @@ private :
 	player*			_player;
 
 	unordered_map<string, tagShortcut*>	_mShortcutTotal;
-	vector<tagShortcut*>		_vShortcutSetting;
+	vector<tagShortcut*>				_vShortcutSetting;
+
+	unordered_map<string, function<void(void)>*>	_mCallback;
 
 public :
 	HRESULT init(void);
@@ -61,6 +63,7 @@ private :	// * framework * //
 
 	// release
 	void releaseShortcut(void);
+	void releaseDbClick(void);
 
 	// update
 	void updateShortcut(void);
@@ -90,6 +93,10 @@ public :	// * shortcut * //
 	void pickShortcut(string name)		{ pickShortcut(findShortcut(name)); };
 	void pickShortcut(tagShortcut* sc)	{ if (sc) sc->putIndex = -1; };
 	void useShortcut(int virtualKey)	{ tagShortcut* sc = _vShortcutSetting[virtualKey]; if (sc) _vShortcutSetting[virtualKey]->active(); };
+
+public :	// * call back * //
+	function<void(void)>* addCallback(string name, function<void(void)> & addition);
+	function<void(void)>* findCallback(string name);
 
 private :
 	tagShortcut* findShortcut(string name);

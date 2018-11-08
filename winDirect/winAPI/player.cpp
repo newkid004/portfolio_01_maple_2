@@ -40,6 +40,7 @@ HRESULT player::init(void)
 	_dir = LEFT;
 	setAnimation(_state.movement);
 	initInventory();
+	_money = 0LL;
 
 	return S_OK;
 }

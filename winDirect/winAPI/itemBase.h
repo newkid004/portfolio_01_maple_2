@@ -105,6 +105,7 @@ public :
 	itemContentBase*& getContent(void)				{ return _content; };
 	static int getContentType(itemBase* i)			{ return i->getContent()->type & itemDef::ITEM_TYPE_CHECK; };
 	static int getContentType(itemContentBase* i)	{ return i->type & itemDef::ITEM_TYPE_CHECK; };
+	static int getInventoryTap2type(int type);
 
 public:
 	itemBase() {};

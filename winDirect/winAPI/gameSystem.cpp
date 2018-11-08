@@ -44,6 +44,10 @@ void gameSystem::releaseShortcut(void)
 	}
 }
 
+void gameSystem::releaseDbClick(void)
+{
+}
+
 void gameSystem::updateShortcut(void)
 {
 	useShortcut(KEYMANAGER->getInputKey());		// 단축키 사용
@@ -74,6 +78,27 @@ void gameSystem::putShortcut(string name, int virtualKey)
 		swaper(sc->putIndex, (*settedSc)->putIndex);
 
 	*settedSc = sc;
+}
+
+function<void(void)>* gameSystem::addCallback(string name, function<void(void)>& addition)
+{
+	function<void(void)>* f = findCallback(name);
+	if (f != NULL) return f;
+
+	f = new function<void(void)>;
+	*f = addition;
+
+	_mCallback.insert(make_pair(name, f));
+
+	return f;
+}
+
+function<void(void)>* gameSystem::findCallback(string name)
+{
+	auto iter = _mCallback.find(name);
+	if (iter == _mCallback.end()) return NULL;
+
+	return iter->second;
 }
 
 gameSystem::tagShortcut * gameSystem::findShortcut(string name)

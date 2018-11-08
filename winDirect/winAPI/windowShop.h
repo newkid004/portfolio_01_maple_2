@@ -21,6 +21,7 @@ struct tagShopContent
 };
 
 class shopBase;
+class buttonShop_itemList;
 class windowShop : public windowBase
 {
 private:
@@ -28,17 +29,25 @@ private:
 	tagShopContent _conPlayer;
 	shopBase* _shop;
 
-public:
-	HRESULT init(void);
-	void render(void);
+	buttonShop_itemList* _currentButton;
 
-public :
+public:
+	HRESULT init(void) override;
+	UI_LIST_ITER update(void) override;
+	void render(void) override;
+
+protected :
 	void initButton(void);
+	void initDbClick(void);
+	void initWheel(void);
+
+	void renderInfo(void);
 
 public:
 	tagShopContent & getContentShop(void) { return _conShop; };
 	tagShopContent & getContentPlayer(void) { return _conPlayer; };
 	shopBase*& getShop(void) { return _shop; };
+	buttonShop_itemList*& getCurrentButton(void) { return _currentButton; };
 
 	UI_LIST_ITER close(void) override;
 

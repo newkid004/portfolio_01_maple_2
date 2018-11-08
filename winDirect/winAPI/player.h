@@ -31,6 +31,8 @@ private:
 	fPOINT	   _tempPos;
 	inventory* _inven[PLAYER_INVENTORY_TAB_COUNT];
 
+	__int64	 _money;
+
 	int		 _flip;
 	NUM_REAL _acc;
 public:
@@ -53,8 +55,9 @@ public :
 	void aniStop(void);
 	void jump(void);
 
-public :	// ----- inventory ----- //
+public :	// ----- inventory, item ----- //
 	inventory*& getInventory(int index) { return _inven[index]; };
+	__int64 & getMoney(void) { return _money; };
 
 public :
 	player();

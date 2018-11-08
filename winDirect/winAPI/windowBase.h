@@ -26,6 +26,8 @@ public :
 	fPOINT & getPos(void) { return _pos; };
 	fPOINT & getSize(void) { return _size; };
 
+	fRECT getAbsRect(void) { return fRECT(_pos, _pos + (_size.x < 0 ? _img->getSize() : _size)); }
+
 public :	// ----- window ----- //
 	virtual void show(void) { WINMANAGER->show(this); };
 	virtual UI_LIST_ITER close(void) { return WINMANAGER->close(this); };

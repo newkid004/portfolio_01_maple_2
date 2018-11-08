@@ -87,3 +87,18 @@ void inventory::resetFront(void)
 		}
 	}
 }
+
+POINT inventory::findItemPos(itemBase * item)
+{
+	POINT view; ZeroMemory(&view, sizeof(POINT));
+	for (view.y = 0; view.y < _vInventory.size(); ++view.y)
+	{
+		for (view.x = 0; view.x < _vInventory[view.y].size(); ++view.x)
+		{
+			if (_vInventory[view.y][view.x] == item)
+				return view;
+		}
+	}
+
+	return view;
+}
