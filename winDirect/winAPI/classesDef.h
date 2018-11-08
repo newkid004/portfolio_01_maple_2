@@ -4,7 +4,8 @@ namespace classesDef
 {
 	enum class CLASSES
 	{
-		CLASSES_GLOBAL				= 0x100000,
+
+		CLASSES_BEGINNER			= 0x100000,
 		CLASSES_WARRIER				= 0x000001,
 		CLASSES_WIZARD				= 0x000002,
 		CLASSES_THIEF				= 0x000004,
@@ -14,7 +15,7 @@ namespace classesDef
 	enum CLASSES_TYPE
 	{
 		//초보자
-		CLASSES_TYPE_GLOBAL			= 0x100000,		
+		CLASSES_TYPE_BEGINNER		= 0x100000,		
 		
 		//1차
 		CLASSES_TYPE_WARRIER		= 0x0001,

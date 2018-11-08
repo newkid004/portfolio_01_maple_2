@@ -21,7 +21,7 @@ protected:
 	list<buffBase*>::iterator _Libuff;
 
 	map<MOVEMENT, motionInfo> _Mmotions;
-	state		_state;
+	state		_state;							//
 	stateBasic	_stateBasic;
 
 protected:
@@ -40,7 +40,8 @@ public:
 	list<buffBase*>&getBuffList() { return _LbuffList; }
 	patternBase* getPattern() { return _currentPattern; }
 
-	stateBasic & getStat(void) { return _stateBasic; };
+	virtual stateBasic & getBasicStat(void) { return _stateBasic; };
+	virtual state & getStat(void) { return _state; };
 
 	void getVelocity() {
 

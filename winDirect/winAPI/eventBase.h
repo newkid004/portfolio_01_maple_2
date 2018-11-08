@@ -9,6 +9,7 @@
 #define destParam(param) (param & 0xffffUL)
 #define makeEventParam(type, kind, act, call) ((type & 0x000f) | (kind & 0x00f0) | (act & 0x0f00) | (call & 0xf000))
 
+
 class eventBase
 {
 protected:

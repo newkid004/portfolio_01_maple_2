@@ -2,6 +2,19 @@
 #include "stdafx.h"
 #include "classesDef.h"
 
+enum ELEMENT
+{
+	ELEMENT_NONE				= 0x0000,		//무속성
+	ELEMENT_MELEE				= 0x0001,		//물리 속성
+	ELEMENT_SPELL				= 0x0002,		//마법 속송
+	ELEMENT_FIRE				= 0x0004,		//불 속성
+	ELEMENT_ICE					= 0x0008,		//얼음 속성
+	ELEMENT_ELECTRICITY			= 0x0010,		//전기 속성
+	ELEMENT_POSION				= 0x0020,		//독 속성
+	ELEMENT_LIGHT				= 0x0040,		//성 속성
+	ELEMENT_DARKNESS			= 0x0080,		//암 속성
+	ELEMENT_DARK				= 0x0100,		//흑 속성
+};
 
 enum MOVEMENT
 {
@@ -35,6 +48,8 @@ struct stateBasic
 	NUM_REAL			moveSpeed;						//현재 이동속도
 	NUM_REAL			jumpSpeed;						//현재 점프속도
 
+	ELEMENT				element;						//고유 속성
+
 	stateBasic()
 	{
 		ZeroMemory(this, sizeof(stateBasic));
@@ -44,6 +59,8 @@ struct stateBasic
 struct stateLimit
 {
 	classesDef::CLASSES	classes;						//분류(직업)
+	
+
 	int					Lv;								//레벨
 
 	stateLimit()
@@ -65,15 +82,32 @@ struct statePoint
 	}
 };
 
+struct subStatePoint
+{
+	unsigned int		STR;							//부스텟 힘
+	unsigned int		DEX;							//부스텟 민첩
+	unsigned int		INT;							//부스텟 지력
+	unsigned int		LUK;							//부스텟 운
+
+	subStatePoint()
+	{
+		ZeroMemory(this, sizeof(subStatePoint));
+	}
+};
+
 struct statePersent
 {
 	NUM_REAL		damage;								//데미지 퍼센트
 	NUM_REAL		meleeAtk;							//공격력 퍼센트
 	NUM_REAL		spellAtk;							//마력	퍼센트
 	NUM_REAL		bossDamage;							//보스 공격력 퍼센트
+	NUM_REAL		defIgnore;							//방어력 무시 퍼센트
+	NUM_REAL		elementToleranceIgnore;				//속성내성 무시 퍼센트
+	NUM_REAL		finalDamage;						//최종 데미지 퍼센트
 
 	NUM_REAL		meleeDef;							//물리 방어력 퍼센트
 	NUM_REAL		spellDef;							//마법 방어력 퍼센트
+	NUM_REAL		elementTolerance;					//속성 내성 퍼센트
 
 	NUM_REAL		allStatePoint;						//주스텟(모든) 퍼센트
 	
@@ -87,6 +121,7 @@ struct statePersent
 
 	NUM_REAL		maxHp;								//최대 Hp 퍼센트
 	NUM_REAL		maxMp;								//최대 mp 퍼센트
+	NUM_REAL		proficiency;						//숙련도 퍼센트
 
 	statePersent()
 	{
@@ -102,13 +137,19 @@ struct state
 
 	stateBasic			permanentBasic;
 	stateBasic			adjStateBasic;
-	stateBasic			totalStateBasic;
+	stateBasic			totalStateBasic;		//
 
-	statePoint			permanentPoint;
-	statePoint			itemStatePoint;
-	statePoint			totalStatePoint;
+	statePoint			permanentPoint;			// 직접 찍은 주스텟
+	statePoint			itemStatePoint;			// 아이템 장비 스킬 버프 등등 다 적용시켜서 올라간 주스텟
+	statePoint			totalStatePoint;		// 두개다 더한 토탈 주스텟
+
+	subStatePoint		permanentSubPoint;		// 직접 찍은 주스텟
+	subStatePoint		itemStateSubPoint;		// 아이템 장비 스킬 버프 등등 다 적용시켜서 올라간 주스텟
+	subStatePoint		totalStateSubPoint;		// 두개다 더한 토탈 주스텟
 
 	statePersent		permanentPersent;
 	statePersent		itemStatePersent;
-	statePersent		totalStatePersent;
+	statePersent		totalStatePersent;		//
+
+
 };

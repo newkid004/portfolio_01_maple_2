@@ -33,6 +33,7 @@ class attackSkill :public activeSkill
 {
 protected:
 	NUM_REAL					_hitbyhitTime;					//데미지 뜨는 속도
+	NUM_REAL					_hitDmgPer;						//데미지 퍼센트
 
 	int							_hitNum;						//한 몬스터에 때리는 타수
 	int							_hitMonsterNum;					//때릴수 있는 몬스터 수
@@ -40,6 +41,8 @@ public:
 	virtual HRESULT init();
 	virtual void release();
 	virtual void render();
+
+	virtual NUM_REAL getHitDmgPer() { return _hitDmgPer; };
 
 	attackSkill() {}
 	~attackSkill() {}
