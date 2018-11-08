@@ -22,8 +22,8 @@ protected:
 	}SPEND;
 
 protected:
-	string						_name;								//스킬 이름
-	string						_explain;							//스킬 설명
+	wstring						_name;								//스킬 이름
+	wstring						_explain;							//스킬 설명
 
 	SKILLTYPE					_skillType;							//스킬 타입 (패시브,액티브)		<- 건들지 말것
 	SPEND						_spendStruct;						//스킬 사용 비용 구조체

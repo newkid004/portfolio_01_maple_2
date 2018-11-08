@@ -59,6 +59,7 @@ using namespace D2D1;
 //===================================
 // #include "triFunction.h"
 #include "utils.h"
+#include "mapleUtil.h"
 
 // json
 #include "jsoncpp/include/json/forwards.h"

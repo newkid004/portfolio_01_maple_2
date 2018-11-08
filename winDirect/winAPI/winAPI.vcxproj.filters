@@ -250,6 +250,9 @@
     <Filter Include="메인게임\Game Framework\Manager\item">
       <UniqueIdentifier>{67e8ebb4-9a61-4819-8ccf-fc2d27579403}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\skill\activeSkill\luckSeven">
+      <UniqueIdentifier>{ae0ea544-ef4e-4e56-80a7-9de9deaa979b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -471,6 +474,10 @@
     <ClCompile Include="sceneTestShop.cpp">
       <Filter>메인게임\Scene\test\shop</Filter>
     </ClCompile>
+    <ClCompile Include="luckySeven.cpp">
+      <Filter>메인게임\Game Framework\Manager\skill\activeSkill\luckSeven</Filter>
+    </ClCompile>
+    <ClCompile Include="mapleUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -737,6 +744,10 @@
     <ClInclude Include="sceneTestShop.h">
       <Filter>메인게임\Scene\test\shop</Filter>
     </ClInclude>
+    <ClInclude Include="luckySeven.h">
+      <Filter>메인게임\Game Framework\Manager\skill\activeSkill\luckSeven</Filter>
+    </ClInclude>
+    <ClInclude Include="mapleUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="quest.Json">

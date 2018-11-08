@@ -34,7 +34,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -76,8 +76,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\msc20\source\repos\maplestory\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\msc20\source\repos\maplestory\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\include\json;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\zoddl\Source\Repos\portfolio_01_maple_2\winDirect\winAPI\jsoncpp\lib_json;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -191,7 +191,9 @@
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
+    <ClCompile Include="luckySeven.cpp" />
     <ClCompile Include="mainGame.cpp" />
+    <ClCompile Include="mapleUtil.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="npcManager.cpp" />
     <ClCompile Include="passiveSkill.cpp" />
@@ -278,7 +280,9 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
+    <ClInclude Include="luckySeven.h" />
     <ClInclude Include="mainGame.h" />
+    <ClInclude Include="mapleUtil.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="npcManager.h" />
     <ClInclude Include="objectDef.h" />

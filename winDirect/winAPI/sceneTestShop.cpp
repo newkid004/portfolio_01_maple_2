@@ -109,7 +109,7 @@ void sceneTestShop::initShortcut(void)
 	{
 		if (KEYMANAGER->press('Q')) 
 			WINMANAGER->trans("shop");
-
+		
 		SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(0));
 	});
 	GAMESYSTEM->putShortcut("transShopWindow", 'Q');
