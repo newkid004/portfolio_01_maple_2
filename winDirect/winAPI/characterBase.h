@@ -1,8 +1,9 @@
 #pragma once
 #include "baseObject.h"
-#include "patternBase.h"
-#include "buffBase.h"
 #include "state.h"
+
+class patternBase;
+class buffBase;
 
 #define SPEED 200
 #define GRAVITY 100
