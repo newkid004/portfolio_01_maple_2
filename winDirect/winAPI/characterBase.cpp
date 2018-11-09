@@ -21,8 +21,8 @@ void characterBase::setRayStruct()
 	{
 		for (int i = 0; i < RAY_NUM; i++)
 		{
-			_rayStruct.rightRay[i].sourfPos		= fPOINT{ _collision.RB.x,_collision.LT.y+(_height*i/(RAY_NUM-1)) };
-			_rayStruct.rightRay[i].destfPos		= fPOINT{ _collision.RB.x + _deltaDistance.x,_collision.LT.y + (_height*i / (RAY_NUM - 1)) };
+			_rayStruct.rightRay[i].sourfPos		= fPOINT{ _collision.RB.x, _collision.LT.y + (_height * i/ (RAY_NUM - 1)) };
+			_rayStruct.rightRay[i].destfPos		= fPOINT{ _collision.RB.x + _deltaDistance.x,_collision.LT.y + (_height * i / (RAY_NUM - 1)) };
 			_rayStruct.rightRay[i].distance		= abs(_rayStruct.rightRay[i].destfPos.x - _rayStruct.rightRay[i].sourfPos.x);
 		}
 	}
@@ -31,8 +31,8 @@ void characterBase::setRayStruct()
 		for (int i = 0; i < RAY_NUM; i++)
 		{
 			_rayStruct.leftRay[i].sourfPos		= fPOINT{ _collision.LT.x,_collision.LT.y + (_height*i / (RAY_NUM - 1)) };
-			_rayStruct.leftRay[i].destfPos		= fPOINT{ _collision.LT.x + _deltaDistance.x,_collision.LT.y + (_height*i / (RAY_NUM - 1)) };
-			_rayStruct.leftRay[i].distance		= abs(_rayStruct.rightRay[i].destfPos.x - _rayStruct.rightRay[i].sourfPos.x);
+			_rayStruct.leftRay[i].destfPos		= fPOINT{ _collision.LT.x - _deltaDistance.x,_collision.LT.y + (_height * i / (RAY_NUM - 1)) };
+			_rayStruct.leftRay[i].distance		= abs(_rayStruct.leftRay[i].destfPos.x - _rayStruct.leftRay[i].sourfPos.x);
 		}
 	}
 
@@ -41,8 +41,8 @@ void characterBase::setRayStruct()
 		for (int i = 0; i < RAY_NUM; i++)
 		{
 			_rayStruct.bottomRay[i].sourfPos	= fPOINT{ _collision.LT.x + (_width*i / (RAY_NUM - 1)),_collision.RB.y  };
-			_rayStruct.bottomRay[i].destfPos	= fPOINT{ _collision.LT.x + (_width*i / (RAY_NUM - 1)),_collision.RB.y+_deltaDistance.y };
-			_rayStruct.bottomRay[i].distance	= abs(_rayStruct.bottomRay[i].destfPos.x - _rayStruct.bottomRay[i].sourfPos.x);
+			_rayStruct.bottomRay[i].destfPos	= fPOINT{ _collision.LT.x + (_width*i / (RAY_NUM - 1)),_collision.RB.y + _deltaDistance.y };
+			_rayStruct.bottomRay[i].distance	= abs(_rayStruct.bottomRay[i].destfPos.y - _rayStruct.bottomRay[i].sourfPos.y);
 		}
 	}
 	else if (_deltaDistance.y < 0)
@@ -50,8 +50,8 @@ void characterBase::setRayStruct()
 		for (int i = 0; i < RAY_NUM; i++)
 		{
 			_rayStruct.upperRay[i].sourfPos		= fPOINT{ _collision.LT.x + (_width*i / (RAY_NUM - 1)),_collision.LT.y };
-			_rayStruct.upperRay[i].destfPos		= fPOINT{ _collision.LT.x + (_width*i / (RAY_NUM - 1)),_collision.LT.y + _deltaDistance.y };
-			_rayStruct.upperRay[i].distance		= abs(_rayStruct.upperRay[i].destfPos.x - _rayStruct.upperRay[i].sourfPos.x);
+			_rayStruct.upperRay[i].destfPos		= fPOINT{ _collision.LT.x + (_width*i / (RAY_NUM - 1)),_collision.LT.y - _deltaDistance.y };
+			_rayStruct.upperRay[i].distance		= abs(_rayStruct.upperRay[i].destfPos.y - _rayStruct.upperRay[i].sourfPos.y);
 		}
 	}
 
