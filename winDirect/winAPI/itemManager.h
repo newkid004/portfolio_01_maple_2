@@ -22,6 +22,9 @@ public :
 	itemBase* find(itemBase* item);
 	itemBase* find(wstring name);
 
+	itemBase* create(itemBase* viewItem);
+	itemBase* create(int type);
+
 	image*& getImgShadow(void) { return _imgShadow; };
 
 public:

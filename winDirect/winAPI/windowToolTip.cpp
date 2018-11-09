@@ -21,8 +21,8 @@ HRESULT windowToolTip::init(void)
 	_imgRef[++refCount] = IMAGEMANAGER->add("UI_toolTip_item_deco", L"image/UI/toolTip/UI_toolTip_item_deco.png");
 	_imgRef[++refCount] = IMAGEMANAGER->add("UI_toolTip_item_shadow",	L"image/UI/toolTip/UI_toolTip_item_shadow.png");
 
-	// itemFont : Áß¾Ó Á¤·Ä
-	TEXTMANAGER->add("UI_toolTip_head", L"µ¸¿òÃ¼", 16.f)->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	// itemFont : ±½°Ô, Áß¾Ó Á¤·Ä
+	TEXTMANAGER->add("UI_toolTip_head", L"µ¸¿òÃ¼", 16.f, DWRITE_FONT_WEIGHT_BOLD)->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 
 	_itemIconOffset = { 56.f, 73.f };	// center
 	_textMemoOffset = { 100.f, 34.f };	// left top

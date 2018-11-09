@@ -15,9 +15,18 @@ HRESULT buttonShop_itemList::init(int slot, windowShop* bindWindow)
 	initPosition(bindWindow);
 	_pos.y += INTERVAL_ITEM_IN_SHOP * _slot;
 
-	_size = (243.f, 33.f);
-
 	return S_OK;
+}
+
+UI_LIST_ITER buttonShop_itemList::update(void)
+{
+	if (IsClickRect(getAbsRect(), _ptMouse))
+	{
+		((windowShop*)_bindWindow)->getCurrentButton() = this;
+		updateDbClick();
+	}
+
+	return _bindWindow->getIter();
 }
 
 void buttonShop_itemList::render(void)
@@ -38,6 +47,7 @@ void buttonShop_itemList::render(void)
 void buttonShop_itemList::initPosition(windowShop* bindWindow)
 {
 	_pos = bindWindow->getContentShop().firstItemPos - 16.5f;
+	_size = { 243.f, 33.f };
 }
 
 itemBase * buttonShop_itemList::getRenderContent(void)
@@ -51,6 +61,7 @@ itemBase * buttonShop_itemList::getRenderContent(void)
 void buttonShop_playerItemList::initPosition(windowShop * bindWindow)
 {
 	_pos = bindWindow->getContentPlayer().firstItemPos - 16.5f;
+	_size = { 201.f, 33.f };
 }
 
 itemBase * buttonShop_playerItemList::getRenderContent(void)

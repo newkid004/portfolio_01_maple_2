@@ -16,7 +16,10 @@ public :
 	void release(void);
 
 public :
-	IDWriteTextFormat* add(string name, wchar_t* fontStyle, float size);
+	IDWriteTextFormat* add(string name, wchar_t* fontStyle, float size, 
+		DWRITE_FONT_WEIGHT weight = DWRITE_FONT_WEIGHT_REGULAR,
+		DWRITE_FONT_STYLE style = DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH stretch = DWRITE_FONT_STRETCH_NORMAL);
 	IDWriteTextFormat* find(string name);
 	IDWriteTextFormat* setFont(string name);
 

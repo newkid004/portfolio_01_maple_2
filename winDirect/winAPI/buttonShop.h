@@ -13,11 +13,16 @@ private :
 
 public :
 	virtual HRESULT init(int slot, windowShop* bindWindow);
-	virtual UI_LIST_ITER update(void) { return _bindWindow->getIter(); };
+	virtual UI_LIST_ITER update(void);
 	virtual void render(void) override;
+
+public :
+	int & getSlot(void) { return _slot; };
 
 protected :
 	virtual void initPosition(windowShop* bindWindow);
+	virtual void updateDbClick(void) { KEYMANAGER->setDBClick(GAMESYSTEM->findCallback("UI_shop_button_buy"), false); };
+
 	virtual itemBase* getRenderContent(void);
 
 public:
@@ -29,6 +34,8 @@ class buttonShop_playerItemList : public buttonShop_itemList
 {
 protected :
 	virtual void initPosition(windowShop* bindWindow) override;
+	virtual void updateDbClick(void) override { KEYMANAGER->setDBClick(GAMESYSTEM->findCallback("UI_shop_button_sell"), false); };
+
 	virtual itemBase* getRenderContent(void) override;
 
 public :
