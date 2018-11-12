@@ -57,6 +57,13 @@ void shopBase::renderPlayer(windowShop * winShop)
 		if (playerItemView.size() <= viewIndex) return;
 		
 		itemBase* viewItem = playerItemView[viewIndex];
+
+		// ¹Ý°ª
+		auto tempPrice = viewItem->getContent()->price;
+		viewItem->getContent()->price /= 2;
+
 		viewItem->render2shop(posOffset, i);
+
+		viewItem->getContent()->price = tempPrice;
 	}
 }

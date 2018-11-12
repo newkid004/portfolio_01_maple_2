@@ -13,12 +13,18 @@ public:
 		POINT			maxFrame;		// 최대 프레임 수
 		fPOINT			frameSize;		// 프레임 크기
 
+		fPOINT			centerPos;		// 중앙
+		fPOINT			centerFramePos;	// 프레임 중앙
+
 		tagImage()
 		{
-			bitmap		= NULL;
-			size		= { 0.f, 0.f };
-			maxFrame	= { 0, 0 };
-			frameSize	= { 0.f, 0.f };
+			bitmap			= NULL;
+			size			= { 0.f, 0.f };
+			maxFrame		= { 0, 0 };
+			frameSize		= { 0.f, 0.f };
+
+			centerPos		= { 0.f, 0.f };
+			centerFramePos	= { 0.f, 0.f };
 		}
 	}IMAGE_INFO, *LPIMAGE_INFO;
 
@@ -67,11 +73,11 @@ public :
 	inline const POINT & getMaxFrame(void) { return _imageInfo->maxFrame; };
 
 	// 중앙좌표
-	inline fPOINT getCenterPos(void) { return _imageInfo->size / 2.0f; }
-	inline fPOINT getCenterFramePos(void) { return _imageInfo->frameSize / 2.0f; };
+	inline const fPOINT & getCenterPos(void) { return _imageInfo->centerPos; }
+	inline const fPOINT & getCenterFramePos(void) { return _imageInfo->centerFramePos; };
 
 	// 이미지 정보
-	inline IMAGE_INFO*& getImageInfo(void) { return _imageInfo; };
+	inline const IMAGE_INFO* getImageInfo(void) { return _imageInfo; };
 
 	image();
 	~image() {}
