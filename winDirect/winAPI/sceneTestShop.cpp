@@ -49,8 +49,8 @@ void sceneTestShop::render(void)
 
 void sceneTestShop::initResource(void)
 {
-	IMAGEMANAGER->add("UI_shop_button", L"image/UI/shop/UI_shop_button.png", 4, 3);
 	IMAGEMANAGER->add("UI_shop_layout", L"image/UI/shop/UI_shop_layout.png");
+	IMAGEMANAGER->add("UI_shop_button", L"image/UI/shop/UI_shop_button.png", 4, 3);
 	IMAGEMANAGER->add("UI_shop_tab_shop", L"image/UI/shop/UI_shop_tab_shop.png", 2, 2);
 	IMAGEMANAGER->add("UI_shop_tab_player", L"image/UI/shop/UI_shop_tab_player.png", 5, 2);
 	IMAGEMANAGER->add("UI_shop_selected_shop", L"image/UI/shop/UI_shop_selected_shop.png");

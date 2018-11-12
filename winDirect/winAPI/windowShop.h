@@ -41,9 +41,12 @@ public:
 
 protected :
 	void initButton(void);
+	void initButtonEtc(void);
+
 	void initDbClick(void);
 	void initWheel(void);
 
+	void renderSelect(void);
 	void renderInfo(void);
 
 public:

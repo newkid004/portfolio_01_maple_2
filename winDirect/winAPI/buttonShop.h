@@ -1,6 +1,7 @@
 #pragma once
 #include "buttonBase.h"
 
+struct tagShopContent;
 class windowShop;
 
 // ----- item slot ----- //
@@ -24,6 +25,7 @@ protected :
 	virtual void initPosition(windowShop* bindWindow);
 	virtual void updateDbClick(void) { KEYMANAGER->setDBClick(GAMESYSTEM->findCallback("UI_shop_button_buy"), false); };
 	virtual void updateRightClick(void);
+	virtual void updateSelectClick(void);
 
 	virtual itemBase* getRenderContent(void);
 
@@ -38,6 +40,7 @@ protected :
 	virtual void initPosition(windowShop* bindWindow) override;
 	virtual void updateDbClick(void) override { KEYMANAGER->setDBClick(GAMESYSTEM->findCallback("UI_shop_button_sell"), false); };
 	virtual void updateRightClick(void);
+	virtual void updateSelectClick(void);
 
 	virtual itemBase* getRenderContent(void) override;
 
@@ -51,7 +54,7 @@ class buttonShop_itemTab : public buttonBase
 {
 protected :
 	int _type;
-	int* _bindTab;
+	tagShopContent* _bindContent;
 
 protected:
 	virtual HRESULT init(void) override { return S_OK; };
@@ -67,7 +70,6 @@ protected :
 
 public :
 	int & getType(void) { return _type; };
-	int* & getBindType(void) { return _bindTab; };
 
 public : 
 	buttonShop_itemTab() {};

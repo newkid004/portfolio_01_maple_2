@@ -18,6 +18,9 @@ HRESULT windowShop::init(void)
 	_conShop.firstItemPos = fPOINT(27.5f, 141.5f);
 	_conPlayer.firstItemPos = fPOINT(301.5f, 141.5f);
 
+	_conShop.selectedItem.x = -1;
+	_conPlayer.selectedItem.x = -1;
+
 	initButton();
 	initDbClick();
 	initWheel();
@@ -42,6 +45,9 @@ UI_LIST_ITER windowShop::update(void)
 void windowShop::render(void)
 {
 	windowBase::render();
+
+	// 선택 아이템
+	renderSelect();
 
 	// 아이템 목록 render
 	if (_shop) _shop->render();
@@ -112,9 +118,41 @@ void windowShop::initButton(void)
 	}
 
 	// ---- right click ----- //
-	buttonCheckBox* b = new buttonCheckBox;
-	b->init(); b->getPos() = { 249.f, 18.f };
-	addButton("shop_isRight", b);
+	buttonCheckBox* btnRight = new buttonCheckBox;
+	btnRight->init(); btnRight->getPos() = { 249.f, 18.f };
+	addButton("shop_isRight", btnRight);
+	
+	// ----- etc ----- //
+	initButtonEtc();
+}
+
+void windowShop::initButtonEtc(void)
+{
+	// 상점 나가기
+	buttonBaseFrame* btnExit = new buttonBaseFrame;
+	btnExit->init(IMAGEMANAGER->find("UI_shop_button"));
+	btnExit->getPos() = { 201.f, 53.f };
+	btnExit->getActivate() = [&](void)->UI_LIST_ITER {
+		buttonBaseFrame* btn = (buttonBaseFrame*)findButton("exit");
+		if (IsClickRect(btn->getAbsRect(), _ptMouse))
+		{
+			if (KEYMANAGER->up(VK_LBUTTON))
+				close();
+			else if (KEYMANAGER->press(VK_LBUTTON))
+			{
+				// 사운드 추가
+			}
+			else if (KEYMANAGER->down(VK_LBUTTON))
+				btn->getCurFrame() = { 2, 0 };
+			else
+				btn->getCurFrame() = { 1, 0 };
+		}
+		else
+			btn->getCurFrame() = { 0, 0 };
+
+		return _managedIter;
+	};
+	addButton("exit", btnExit);
 }
 
 void windowShop::initDbClick(void)
@@ -225,6 +263,25 @@ void windowShop::initWheel(void)
 		if (IsClickRect(viewPlayer, _ptMouse))	scrollPlayer(1);
 	};
 	GAMESYSTEM->addCallback("UI_shop_scroll_down", f);
+}
+
+void windowShop::renderSelect(void)
+{
+	static fPOINT intervalShop = { 47.f, 124.f };
+	static fPOINT intervalPlayer = { 321.f, 124.f };
+
+	if (-1 < _conShop.selectedItem.x)
+	{
+		IMAGEMANAGER->statePos(_pos + intervalShop).y += _conShop.selectedItem.y * 42.f;
+		IMAGEMANAGER->find("UI_shop_selected_shop")->render();
+	}
+
+	if (-1 < _conPlayer.selectedItem.x)
+	{
+		IMAGEMANAGER->statePos(_pos + intervalPlayer).y += _conPlayer.selectedItem.y * 42.f;
+		IMAGEMANAGER->find("UI_shop_selected_player")->render();
+	}
+
 }
 
 void windowShop::renderInfo(void)
