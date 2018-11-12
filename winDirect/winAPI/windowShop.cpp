@@ -6,6 +6,7 @@
 #include "inventory.h"
 
 #include "buttonShop.h"
+#include "buttonCheckBox.h"
 
 #include "itemBase.h"
 
@@ -16,8 +17,6 @@ HRESULT windowShop::init(void)
 
 	_conShop.firstItemPos = fPOINT(27.5f, 141.5f);
 	_conPlayer.firstItemPos = fPOINT(301.5f, 141.5f);
-
-	_isSell2rightClick = false;
 
 	initButton();
 	initDbClick();
@@ -111,6 +110,11 @@ void windowShop::initButton(void)
 			addButton("player_scroll_head", b);
 		}
 	}
+
+	// ---- right click ----- //
+	buttonCheckBox* b = new buttonCheckBox;
+	b->init(); b->getPos() = { 249.f, 18.f };
+	addButton("shop_isRight", b);
 }
 
 void windowShop::initDbClick(void)

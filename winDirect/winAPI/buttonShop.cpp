@@ -6,6 +6,8 @@
 
 #include "shopBase.h"
 
+#include "buttonCheckBox.h"
+
 HRESULT buttonShop_itemList::init(int slot, windowShop* bindWindow)
 {
 	_bindWindow = bindWindow;
@@ -24,6 +26,7 @@ UI_LIST_ITER buttonShop_itemList::update(void)
 	{
 		((windowShop*)_bindWindow)->getCurrentSlotButton() = this;
 		updateDbClick();
+		updateRightClick();
 	}
 
 	return _bindWindow->getIter();
@@ -50,6 +53,15 @@ void buttonShop_itemList::initPosition(windowShop* bindWindow)
 	_size = { 243.f, 33.f };
 }
 
+void buttonShop_itemList::updateRightClick(void)
+{
+	if (((buttonCheckBox*)((windowShop*)_bindWindow)->findButton("shop_isRight"))->getIsCheck())
+	{
+		if (KEYMANAGER->press(VK_RBUTTON))
+			(*GAMESYSTEM->findCallback("UI_shop_button_buy"))();
+	}
+}
+
 itemBase * buttonShop_itemList::getRenderContent(void)
 {
 	windowShop* bindWindow = (windowShop*)_bindWindow;
@@ -62,6 +74,15 @@ void buttonShop_playerItemList::initPosition(windowShop * bindWindow)
 {
 	_pos = bindWindow->getContentPlayer().firstItemPos - 16.5f;
 	_size = { 201.f, 33.f };
+}
+
+void buttonShop_playerItemList::updateRightClick(void)
+{
+	if (((buttonCheckBox*)((windowShop*)_bindWindow)->findButton("shop_isRight"))->getIsCheck())
+	{
+		if (KEYMANAGER->press(VK_RBUTTON))
+			(*GAMESYSTEM->findCallback("UI_shop_button_sell"))();
+	}
 }
 
 itemBase * buttonShop_playerItemList::getRenderContent(void)

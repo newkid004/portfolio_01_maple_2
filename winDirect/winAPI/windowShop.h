@@ -34,8 +34,6 @@ private:
 
 	buttonShop_itemList* _currentSlotButton;
 
-	bool _isSell2rightClick;
-
 public:
 	HRESULT init(void) override;
 	UI_LIST_ITER update(void) override;
@@ -53,8 +51,6 @@ public:
 	tagShopContent & getContentPlayer(void) { return _conPlayer; };
 	shopBase*& getShop(void) { return _shop; };
 	buttonShop_itemList*& getCurrentSlotButton(void) { return _currentSlotButton; };
-
-	bool & getIsSell2RightClick(void) { return _isSell2rightClick; };
 
 public :	// 
 	UI_LIST_ITER close(void) override;

@@ -23,6 +23,7 @@ public :
 protected :
 	virtual void initPosition(windowShop* bindWindow);
 	virtual void updateDbClick(void) { KEYMANAGER->setDBClick(GAMESYSTEM->findCallback("UI_shop_button_buy"), false); };
+	virtual void updateRightClick(void);
 
 	virtual itemBase* getRenderContent(void);
 
@@ -36,6 +37,7 @@ class buttonShop_playerItemList : public buttonShop_itemList
 protected :
 	virtual void initPosition(windowShop* bindWindow) override;
 	virtual void updateDbClick(void) override { KEYMANAGER->setDBClick(GAMESYSTEM->findCallback("UI_shop_button_sell"), false); };
+	virtual void updateRightClick(void);
 
 	virtual itemBase* getRenderContent(void) override;
 
