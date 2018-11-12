@@ -12,7 +12,8 @@ private :
 	windowShop * _bindWindow;
 	unordered_map<string, shopBase*> _mShop;
 
-	vector<itemBase*> _lPlayerItemView;
+	vector<itemBase*> _vPlayerItemView;
+	vector<itemBase*> _vRePurchase;
 
 	image* _imgMeso;
 
@@ -25,7 +26,8 @@ public :
 	shopBase * find(string name);
 
 	windowShop *& getWindow(void) { return _bindWindow; };
-	vector<itemBase*> & getPlayerView(void) { return _lPlayerItemView; };
+	vector<itemBase*> & getPlayerView(void) { return _vPlayerItemView; };
+	vector<itemBase*> & getRePurchase(void) { return _vRePurchase; };
 
 	image* & getImageMeso(void) { return _imgMeso; };
 

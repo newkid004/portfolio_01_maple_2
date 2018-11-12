@@ -6,6 +6,7 @@ class itemBase;
 class itemManager : public singletonBase<itemManager>
 {
 private :
+	image* _imgShadow;	// bind
 	unordered_map<wstring, itemBase*> _mItem;
 
 public :
@@ -20,6 +21,11 @@ public :
 	itemBase* add(wstring name, itemBase* addition);
 	itemBase* find(itemBase* item);
 	itemBase* find(wstring name);
+
+	itemBase* create(itemBase* viewItem);
+	itemBase* create(int type);
+
+	image*& getImgShadow(void) { return _imgShadow; };
 
 public:
 	itemManager() {};

@@ -43,7 +43,7 @@ shopBase * shopManager::find(string name)
 
 void shopManager::makePlayerView(inventory * inven)
 {
-	_lPlayerItemView.clear();
+	_vPlayerItemView.clear();
 	auto & itemArray = inven->getTotalInven();
 
 	for (int y = 0; y < itemArray.size(); ++y)
@@ -51,7 +51,7 @@ void shopManager::makePlayerView(inventory * inven)
 		for (int x = 0; x < itemArray[y].size(); ++x)
 		{
 			itemBase* i = itemArray[y][x];
-			if (i) _lPlayerItemView.push_back(i);
+			if (i) _vPlayerItemView.push_back(i);
 		}
 	}
 }

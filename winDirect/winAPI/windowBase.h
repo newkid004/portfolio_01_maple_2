@@ -9,6 +9,7 @@ protected:
 	list<windowBase*>::iterator _managedIter;
 	string _winName;
 	fPOINT _pos;
+	fPOINT _size = -1.f;
 
 	unordered_map<string, buttonBase*> _mButton;
 
@@ -18,11 +19,16 @@ public :
 	virtual UI_LIST_ITER update(void);
 	virtual void render(void);
 
+	virtual void updateAlways(void) {};
+
 public :
 	image* & getImage(void) { return _img; }
 	UI_LIST_ITER & getIter(void) { return _managedIter; };
 	string & getName(void) { return _winName; };
 	fPOINT & getPos(void) { return _pos; };
+	fPOINT & getSize(void) { return _size; };
+
+	fRECT getAbsRect(void) { return fRECT(_pos, _pos + (_size.x < 0 ? _img->getSize() : _size)); }
 
 public :	// ----- window ----- //
 	virtual void show(void) { WINMANAGER->show(this); };

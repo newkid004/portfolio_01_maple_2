@@ -8,7 +8,7 @@ public:
 	HRESULT init(void);
 	UI_LIST_ITER update(void);
 	void render(void);
-	buttonTest3(){}
-	~buttonTest3(){}
+	buttonTest3() {}
+	~buttonTest3() {}
 };
 

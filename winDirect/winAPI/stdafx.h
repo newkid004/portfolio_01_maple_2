@@ -49,6 +49,7 @@
 
 // Direct 헤더 파일
 #include <d2d1.h>
+#include <d2d1_1.h>
 #include <dwrite.h>
 
 using namespace std;
@@ -59,6 +60,7 @@ using namespace D2D1;
 //===================================
 // #include "triFunction.h"
 #include "utils.h"
+#include "mapleUtil.h"
 
 // json
 #include "jsoncpp/include/json/forwards.h"

@@ -16,7 +16,11 @@ HRESULT textManager::init(void)
 
 	// ±âº» ÅØ½ºÆ® »ý¼º
 	_currentFormat = gameNode::getTextFormat() = add("defaultText", L"µ¸¿òÃ¼", 12.f);
-	TEXTMANAGER->add("shopText", L"µ¸¿òÃ¼", 10.f);
+
+	IDWriteTextFormat* text;
+	text = add("defaultText_right", L"µ¸¿òÃ¼", 12.f);	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
+	text = add("defaultText_center", L"µ¸¿òÃ¼", 12.f);	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	text = add("shopText", L"µ¸¿òÃ¼", 10.f);
 
 	return S_OK;
 }
@@ -33,7 +37,7 @@ void textManager::release(void)
 	_writeFactory->Release();
 }
 
-IDWriteTextFormat * textManager::add(string name, wchar_t* fontStyle, float size)
+IDWriteTextFormat * textManager::add(string name, wchar_t* fontStyle, float size, DWRITE_FONT_WEIGHT weight, DWRITE_FONT_STYLE style, DWRITE_FONT_STRETCH stretch)
 {
 	IDWriteTextFormat* t = find(name);
 	if (t) return t;
@@ -42,9 +46,9 @@ IDWriteTextFormat * textManager::add(string name, wchar_t* fontStyle, float size
 	_writeFactory->CreateTextFormat(
 		fontStyle,
 		NULL,
-		DWRITE_FONT_WEIGHT_REGULAR,
-		DWRITE_FONT_STYLE_NORMAL,
-		DWRITE_FONT_STRETCH_NORMAL,
+		weight,
+		style,
+		stretch,
 		size,
 		L"",
 		&t);

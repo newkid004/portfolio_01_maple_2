@@ -18,6 +18,7 @@ public:
 	HRESULT init(void);
 	void release(void);
 
+public :
 	//키가 한번만 눌렸는지
 	bool press(int key);
 	//한번 누르고 띄었는지
@@ -27,9 +28,10 @@ public:
 	//토글키
 	bool toggle(int key);
 
+public :
 	// 마우스 휠
-	void setWheelUp(function<void(void)> * upFunction);
-	void setWheelDown(function<void(void)> * downFunction);
+	void setWheelUp(function<void(void)> * upFunction, bool isDelete = true);
+	void setWheelDown(function<void(void)> * downFunction, bool isDelete = true);
 	void wheelUp(void) { if (_callWheelUp) (*_callWheelUp)(); };
 	void wheelDown(void) { if (_callWheelDown) (*_callWheelDown)(); };
 
@@ -38,8 +40,13 @@ public:
 	int getInputKey(void) { return _inputKey; };
 
 	// 마우스 더블클릭
-	void setDBClick(function<void(void)>* dbClickFunction);
+	void setDBClick(function<void(void)>* dbClickFunction, bool isDelete = true);
 	void dbClick(void) {if (_callDBClick)(*_callDBClick)();}
+
+	// 키 초기화
+	void resetFunctional(bool isDelete = false);
+
+public :
 	keyManager() {}
 	~keyManager() {}
 };
