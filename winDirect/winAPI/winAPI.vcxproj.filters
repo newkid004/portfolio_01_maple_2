@@ -202,12 +202,6 @@
     <Filter Include="API Framework\매니져\이미지\direct">
       <UniqueIdentifier>{41cce586-91e0-4109-8535-80e9a6a1e21f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\button">
-      <UniqueIdentifier>{f8ad0bc4-0173-4e80-b704-01f52011517a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\button\_base">
-      <UniqueIdentifier>{c78512d1-0388-4158-90ad-f540d75d01c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="메인게임\Scene\test\loading">
       <UniqueIdentifier>{a5477802-2aba-4400-880c-5a6b742865dc}</UniqueIdentifier>
     </Filter>
@@ -219,6 +213,51 @@
     </Filter>
     <Filter Include="메인게임\Scene\test\button">
       <UniqueIdentifier>{78092c5e-646d-42da-9583-2181db270ef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button">
+      <UniqueIdentifier>{f8ad0bc4-0173-4e80-b704-01f52011517a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button\_base">
+      <UniqueIdentifier>{c78512d1-0388-4158-90ad-f540d75d01c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button\_test">
+      <UniqueIdentifier>{2872e89d-1d46-462c-bc35-e98fe2f3778d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\status">
+      <UniqueIdentifier>{fa7bfa71-83ba-41f8-8f82-134b92784563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\status\_button">
+      <UniqueIdentifier>{8635f76e-28bc-4132-806a-b17b2db66152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\status\_button\statUp">
+      <UniqueIdentifier>{20a730b0-4b49-47bc-8b3a-77e779f390d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\event\_test">
+      <UniqueIdentifier>{71637455-87ac-43c5-b868-9d23926d9729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\inventory">
+      <UniqueIdentifier>{5cdbe08e-3dc6-408f-a0d0-b4379dc02b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Scene\test\player">
+      <UniqueIdentifier>{1353263f-cec2-4479-ad32-6c158ebf8378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\shop">
+      <UniqueIdentifier>{b23b97a8-f57f-46a7-936d-0f4a39f1a1c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Scene\test\shop">
+      <UniqueIdentifier>{28e2d6c6-eb86-446f-8217-988d8decd3d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\item">
+      <UniqueIdentifier>{67e8ebb4-9a61-4819-8ccf-fc2d27579403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\event\_catcher">
+      <UniqueIdentifier>{6b0b6a67-1f8b-4132-be16-204e3190f8b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\toolTip">
+      <UniqueIdentifier>{af9557a4-d77c-4bb6-a49c-6e2ac93ad619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button\shop">
+      <UniqueIdentifier>{dc253dd0-1c78-4e10-b888-3191cfb83bf4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -369,9 +408,6 @@
     <ClCompile Include="effectBase.cpp">
       <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
     </ClCompile>
-    <ClCompile Include="eventBase.cpp">
-      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
-    </ClCompile>
     <ClCompile Include="eventManager.cpp">
       <Filter>메인게임\Game Framework\Manager\event</Filter>
     </ClCompile>
@@ -390,9 +426,6 @@
     <ClCompile Include="sceneTestPixelCrash.cpp">
       <Filter>메인게임\Scene\test\pixel</Filter>
     </ClCompile>
-    <ClCompile Include="buttonTest.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
-    </ClCompile>
     <ClCompile Include="sceneLoadingTest.cpp">
       <Filter>메인게임\Scene\test\loading</Filter>
     </ClCompile>
@@ -408,17 +441,53 @@
     <ClCompile Include="buttonWindowTest.cpp">
       <Filter>메인게임\Scene\test\button</Filter>
     </ClCompile>
+    <ClCompile Include="buttonTest.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
+    </ClCompile>
     <ClCompile Include="buttonTest2.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClCompile>
     <ClCompile Include="buttonTest3.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClCompile>
     <ClCompile Include="settingButtonTest.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClCompile>
-    <ClCompile Include="buttonBase.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
+    <ClCompile Include="btDetails.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\status\_button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="btnStatUp.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\status\_button\statUp</Filter>
+    </ClCompile>
+    <ClCompile Include="event_0000_test.cpp">
+      <Filter>메인게임\Game Framework\Manager\event\_test</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>메인게임\Game Framework\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>메인게임\Game Framework\object\_character</Filter>
+    </ClCompile>
+    <ClCompile Include="playerTestScene.cpp">
+      <Filter>메인게임\Scene\test\player</Filter>
+    </ClCompile>
+    <ClCompile Include="windowShop.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\shop</Filter>
+    </ClCompile>
+    <ClCompile Include="itemManager.cpp">
+      <Filter>메인게임\Game Framework\Manager\item</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneTestShop.cpp">
+      <Filter>메인게임\Scene\test\shop</Filter>
+    </ClCompile>
+    <ClCompile Include="eventCatcher.cpp">
+      <Filter>메인게임\Game Framework\Manager\event\_catcher</Filter>
+    </ClCompile>
+    <ClCompile Include="windowToolTip.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\toolTip</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonShop.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -590,9 +659,6 @@
     <ClInclude Include="effectManager.h">
       <Filter>메인게임\Game Framework\Manager\effect</Filter>
     </ClInclude>
-    <ClInclude Include="effectBase.h">
-      <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
-    </ClInclude>
     <ClInclude Include="eventBase.h">
       <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
     </ClInclude>
@@ -621,10 +687,7 @@
       <Filter>메인게임\Scene\test\pixel</Filter>
     </ClInclude>
     <ClInclude Include="buttonBase.h">
-      <Filter>메인게임\Game Framework\Manager\window\button\_base</Filter>
-    </ClInclude>
-    <ClInclude Include="buttonTest.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_base</Filter>
     </ClInclude>
     <ClInclude Include="sceneLoadingTest.h">
       <Filter>메인게임\Scene\test\loading</Filter>
@@ -641,14 +704,65 @@
     <ClInclude Include="buttonWindowTest.h">
       <Filter>메인게임\Scene\test\button</Filter>
     </ClInclude>
+    <ClInclude Include="buttonTest.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
+    </ClInclude>
     <ClInclude Include="buttonTest2.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClInclude>
     <ClInclude Include="buttonTest3.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
     </ClInclude>
     <ClInclude Include="settingButtonTest.h">
-      <Filter>메인게임\Game Framework\Manager\window\button</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button\_test</Filter>
+    </ClInclude>
+    <ClInclude Include="btDetails.h">
+      <Filter>메인게임\Game Framework\Manager\window\status\_button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="btnStatUp.h">
+      <Filter>메인게임\Game Framework\Manager\window\status\_button\statUp</Filter>
+    </ClInclude>
+    <ClInclude Include="windowStatus.h">
+      <Filter>메인게임\Game Framework\Manager\window\status</Filter>
+    </ClInclude>
+    <ClInclude Include="eventDef.h">
+      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="eventList.h">
+      <Filter>메인게임\Game Framework\Manager\event\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="event_0000_test.h">
+      <Filter>메인게임\Game Framework\Manager\event\_test</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>메인게임\Game Framework\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>메인게임\Game Framework\object\_character</Filter>
+    </ClInclude>
+    <ClInclude Include="playerTestScene.h">
+      <Filter>메인게임\Scene\test\player</Filter>
+    </ClInclude>
+    <ClInclude Include="windowShop.h">
+      <Filter>메인게임\Game Framework\Manager\window\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="itemManager.h">
+      <Filter>메인게임\Game Framework\Manager\item</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneTestShop.h">
+      <Filter>메인게임\Scene\test\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="eventCatcher.h">
+      <Filter>메인게임\Game Framework\Manager\event\_catcher</Filter>
+    </ClInclude>
+    <ClInclude Include="windowToolTip.h">
+      <Filter>메인게임\Game Framework\Manager\window\toolTip</Filter>
+    </ClInclude>
+    <ClInclude Include="effectBase.h">
+      <Filter>메인게임\Game Framework\Manager\effect\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonShop.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,9 @@
 #include "shopBase.h"
 
 #include "itemBase.h"
-#include "windowBase.h"
+#include "windowShop.h"
+#include "player.h"
+#include "inventory.h"
 
 HRESULT shopBase::init(void)
 {
@@ -11,11 +13,7 @@ HRESULT shopBase::init(void)
 
 void shopBase::release(void)
 {
-	for (auto i : _vItem)
-	{
-		i->release();
-		SAFE_DELETE(i);
-	}
+	_vItem.clear();
 }
 
 void shopBase::update(void)
@@ -25,15 +23,47 @@ void shopBase::update(void)
 void shopBase::render(void)
 {
 	static windowShop *& winShop = SHOPMANAGER->getWindow();
-	fPOINT posOffset = winShop->getPos();	// 윈도우 <-> 상점 간격만큼 더하기 필요
+
+	TEXTMANAGER->setTextColor(&C_COLOR_BLACK);
+	IMAGEMANAGER->getTransformState(TF_POSITION);
+	renderShop(winShop);
+	renderPlayer(winShop);
+}
+
+void shopBase::renderShop(windowShop * winShop)
+{
+	fPOINT & posOffset = winShop->getPos() + SHOPMANAGER->getWindow()->getContentShop().firstItemPos;
 
 	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
 	{
-		itemBase* viewItem = find(i + winShop->getScroll());
+		itemBase* viewItem = find(i + winShop->getContentShop().scroll);
 
 		if (viewItem)
-			viewItem->render2Inventory(posOffset, i);
+			viewItem->render2shop(posOffset, i);
 		else
 			break;
+	}
+}
+
+void shopBase::renderPlayer(windowShop * winShop)
+{
+	fPOINT & posOffset = winShop->getPos() + SHOPMANAGER->getWindow()->getContentPlayer().firstItemPos;
+	static auto & playerItemView = SHOPMANAGER->getPlayerView();
+
+	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
+	{
+		int viewIndex = i + winShop->getContentPlayer().scroll;
+
+		if (playerItemView.size() <= viewIndex) return;
+		
+		itemBase* viewItem = playerItemView[viewIndex];
+
+		// 반값
+		auto tempPrice = viewItem->getContent()->price;
+		viewItem->getContent()->price /= 2;
+
+		viewItem->render2shop(posOffset, i);
+
+		viewItem->getContent()->price = tempPrice;
 	}
 }

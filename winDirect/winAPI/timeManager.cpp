@@ -1,10 +1,13 @@
 #include "stdafx.h"
 #include "timeManager.h"
 
+#define T_FONT_STYLE "timeManagerText"
+
 HRESULT timeManager::init(void)
 {
 	_timer = new timer;
 	_timer->init();
+
 
 	return S_OK;
 }
@@ -67,4 +70,14 @@ void timeManager::render(HDC hdc)
 
 	SetTextColor(hdc, oColor);
 	SetTextAlign(hdc, oAlign);
+}
+
+void timeManager::render(void)
+{
+	wstring str = L"FramePerSec : " + to_wstring(_timer->getFrameRate());
+	D2D1_RECT_F rc = {3, 3, 150, 30};
+
+	IMAGEMANAGER->setTransformZero();
+	TEXTMANAGER->setTextColor(&C_COLOR_BLACK);
+	TEXTMANAGER->drawText(&str, &rc, NULL, TEXTMANAGER->find("defaultText"));
 }

@@ -4,7 +4,7 @@
 class textManager : public singletonBase<textManager>
 {
 private :
-	map<string, IDWriteTextFormat*> _mTextFormat;
+	unordered_map<string, IDWriteTextFormat*> _mTextFormat;
 
 private :
 	ID2D1SolidColorBrush*	_brush;
@@ -16,12 +16,16 @@ public :
 	void release(void);
 
 public :
-	IDWriteTextFormat* add(string name, wchar_t* fontStyle, float size);
+	IDWriteTextFormat* add(string name, wchar_t* fontStyle, float size, 
+		DWRITE_FONT_WEIGHT weight = DWRITE_FONT_WEIGHT_REGULAR,
+		DWRITE_FONT_STYLE style = DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH stretch = DWRITE_FONT_STRETCH_NORMAL);
 	IDWriteTextFormat* find(string name);
 	IDWriteTextFormat* setFont(string name);
 
 public :
-	void drawText(const wchar_t* text, int length, D2D1_RECT_F range, function<void(void)> * callBefore = NULL, IDWriteTextFormat* format = NULL);
+	void drawText(wstring * str, D2D1_RECT_F * range, function<void(void)> * callBefore = NULL, IDWriteTextFormat* format = NULL) { drawText(str->c_str(), str->length(), range, callBefore, format); };
+	void drawText(const wchar_t* text, int length, D2D1_RECT_F * range, function<void(void)> * callBefore = NULL, IDWriteTextFormat* format = NULL);
 
 public :
 	void setTextColor(D2D1_COLOR_F * color) { _brush->SetColor(*color); };

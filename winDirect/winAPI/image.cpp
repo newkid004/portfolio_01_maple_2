@@ -45,6 +45,9 @@ void image::_putImageInfo(void)
 	_imageInfo->size.y = _imageInfo->bitmap->GetSize().height;
 	_imageInfo->frameSize.x = _imageInfo->size.x / _imageInfo->maxFrame.x;
 	_imageInfo->frameSize.y = _imageInfo->size.y / _imageInfo->maxFrame.y;
+
+	_imageInfo->centerPos = _imageInfo->size / 2.f;
+	_imageInfo->centerFramePos = _imageInfo->frameSize / 2.f;
 }
 
 HRESULT image::init(const wchar_t * fileName)
@@ -96,9 +99,13 @@ void image::release(void)
 }
 
 //렌더 (0, 0지점에 렌더)
-void image::render(float alpha)
+void image::render(float alpha, D2D1_POINT_2F center)
 {
-	D2D1_POINT_2F rotateCenter = { _imageInfo->size.x / 2, _imageInfo->size.y / 2 };
+	D2D1_POINT_2F rotateCenter;
+	if (center.x == -1.f || center.y == -1.f)
+		rotateCenter = { _imageInfo->size.x / 2, _imageInfo->size.y / 2 };
+	else
+		rotateCenter = center;
 	IMAGEMANAGER->setTransform(&rotateCenter);
 
 	_renderTarget->DrawBitmap(_imageInfo->bitmap,
@@ -112,16 +119,24 @@ void image::render(float alpha)
 		IMAGEMANAGER->resetTransform();
 }
 
-void image::render(float clipX, float clipY, float clipW, float clipH, float alpha)
+void image::render(float clipX, float clipY, float clipW, float clipH, float alpha, D2D1_POINT_2F center)
 {
+	/*/ // ----- 레이어 클리핑 ----- //
+
 	// 위치 보정
 	auto tempPos = IMAGEMANAGER->statePos();
-	IMAGEMANAGER->statePos() -= fPOINT(clipX , clipY);
+	IMAGEMANAGER->statePos() -= fPOINT(clipX, clipY);
 
 	// 중심점
 	D2D1_POINT_2F rotateCenter;
-	rotateCenter.x = (clipX + clipW / 2);
-	rotateCenter.y = (clipY + clipH / 2);
+	if (center.x == -1.f || center.y == -1.f)
+	{
+		rotateCenter.x = (clipX + clipW / 2);
+		rotateCenter.y = (clipY + clipH / 2);
+	}
+	else
+		rotateCenter = center;
+
 	IMAGEMANAGER->setTransform(&rotateCenter);
 
 	// 레이어 입력
@@ -141,6 +156,29 @@ void image::render(float clipX, float clipY, float clipW, float clipH, float alp
 
 	// 보정 되돌림
 	IMAGEMANAGER->statePos() = tempPos;
+	
+	/*/ // ----- 범위 지정 클리핑 ----- //
+
+	// 중심점
+	D2D1_POINT_2F rotateCenter;
+	if (center.x == -1.f || center.y == -1.f)
+		rotateCenter = { clipW / 2, clipH / 2 };
+	else
+	rotateCenter = center;
+
+	IMAGEMANAGER->setTransform(&rotateCenter);
+
+	_renderTarget->DrawBitmap(_imageInfo->bitmap,
+		RectF(
+			0, 0,
+			clipW,
+			clipH),
+		alpha,
+		D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
+		RectF(clipX, clipY,
+			clipX + clipW,
+			clipY + clipH));
+	//*/
 
 	// 렌더 상태에 따라 
 	if (IMAGEMANAGER->getRenderState() & IRS_ALWAYS_RESET_TRANSFORM)
@@ -174,4 +212,132 @@ void image::aniRender(animation * ani, float alpha)
 			(float)ani->getFramePos().x, (float)ani->getFramePos().y,
 			(float)ani->getFrameWidth(), (float)ani->getFrameHeight(),
 			alpha);
+}
+
+void image::loopRender(fRECT * range, fPOINT offset, int frameX, int frameY, float alpha)
+{
+	// 기존 렌더 상태 저장
+	fPOINT oPosition = IMAGEMANAGER->statePos();
+	int oTransState = IMAGEMANAGER->getTransformState();
+
+	// 렌더 형태 : 위치만
+	IMAGEMANAGER->getTransformState(TF_POSITION);
+
+	// ----- 실행 ----- //
+
+	// offset < 0 교정
+	if (offset.x < 0.f) offset.x = _imageInfo->frameSize.x + rMod(offset.x, _imageInfo->frameSize.x);
+	if (offset.y < 0.f) offset.y = _imageInfo->frameSize.y + rMod(offset.y, _imageInfo->frameSize.y);
+
+	fPOINT currentPos;								// 화면 내 그려질 위치
+	fPOINT currentSize = _imageInfo->frameSize;		// 화면 내 그려질 크기
+
+	fPOINT drawPos;									// 이미지 내 그려질 위치
+	fPOINT drawSize;								// 이미지 내 그려질 크기
+
+	fPOINT drawRange = fRECT::size(range);			// 화면 내 그려질 범위 크기
+	for (float y = 0; y < drawRange.y; y += drawSize.y)
+	{
+		drawPos.y = rMod(y + offset.y, currentSize.y);
+		drawSize.y = currentSize.y - drawPos.y;
+
+		if (0 < frameY) drawPos.y += frameY * currentSize.y;
+
+		if (drawRange.y < y + drawSize.y)
+		{
+			drawSize.y -= (y + drawSize.y) - drawRange.y;
+			if (drawSize.y <= 0.f) return;
+		}
+
+		currentPos.y = y + range->LT.y;
+
+		for (float x = 0; x < drawRange.x; x += drawSize.x)
+		{
+			drawPos.x = rMod(x + offset.x, currentSize.x);
+			drawSize.x = currentSize.x - drawPos.x;
+
+			if (0 < frameX) drawPos.x += frameX * currentSize.x;
+
+			if (drawRange.x < x + drawSize.x)
+			{
+				drawSize.x -= (x + drawSize.x) - drawRange.x;
+				if (drawSize.x <= 0.f) return;
+			}
+
+			currentPos.x = x + range->LT.x;
+
+			IMAGEMANAGER->statePos(currentPos);
+			render(drawPos.x, drawPos.y, drawSize.x, drawSize.y, alpha);
+		}
+	}
+
+	// ----- 종료 ----- //
+
+	// 렌더 상태 복구
+	IMAGEMANAGER->statePos(oPosition);
+	IMAGEMANAGER->getTransformState() = oTransState;
+}
+
+void image::loopRender(fRECT * range, fPOINT offset, float frameSizeX, float frameSizeY, float alpha)
+{
+	// 기존 렌더 상태 저장
+	fPOINT oPosition = IMAGEMANAGER->statePos();
+	int oTransState = IMAGEMANAGER->getTransformState();
+
+	// 렌더 형태 : 위치만
+	IMAGEMANAGER->getTransformState(TF_POSITION);
+
+	// ----- 실행 ----- //
+
+	// offset < 0 교정
+	if (offset.x < 0.f) offset.x = _imageInfo->frameSize.x + rMod(offset.x, _imageInfo->frameSize.x);
+	if (offset.y < 0.f) offset.y = _imageInfo->frameSize.y + rMod(offset.y, _imageInfo->frameSize.y);
+
+	fPOINT currentPos;								// 화면 내 그려질 위치
+	fPOINT currentSize = _imageInfo->frameSize;		// 화면 내 그려질 크기
+
+	fPOINT drawPos;									// 이미지 내 그려질 위치
+	fPOINT drawSize;								// 이미지 내 그려질 크기
+
+	fPOINT drawRange = fRECT::size(range);			// 화면 내 그려질 범위 크기
+	for (float y = 0; y < drawRange.y; y += drawSize.y)
+	{
+		drawPos.y = rMod(y + offset.y, currentSize.y);
+		drawSize.y = currentSize.y - drawPos.y;
+
+		drawPos.y += frameSizeY;
+
+		if (drawRange.y < y + drawSize.y)
+		{
+			drawSize.y -= (y + drawSize.y) - drawRange.y;
+			if (drawSize.y <= 0.f) return;
+		}
+
+		currentPos.y = y + range->LT.y;
+
+		for (float x = 0; x < drawRange.x; x += drawSize.x)
+		{
+			drawPos.x = rMod(x + offset.x, currentSize.x);
+			drawSize.x = currentSize.x - drawPos.x;
+
+			drawPos.x += frameSizeX;
+
+			if (drawRange.x < x + drawSize.x)
+			{
+				drawSize.x -= (x + drawSize.x) - drawRange.x;
+				if (drawSize.x <= 0.f) return;
+			}
+
+			currentPos.x = x + range->LT.x;
+
+			IMAGEMANAGER->statePos(currentPos);
+			render(drawPos.x, drawPos.y, drawSize.x, drawSize.y, alpha);
+		}
+	}
+
+	// ----- 종료 ----- //
+
+	// 렌더 상태 복구
+	IMAGEMANAGER->statePos(oPosition);
+	IMAGEMANAGER->getTransformState() = oTransState;
 }

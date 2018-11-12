@@ -13,12 +13,18 @@ public:
 		POINT			maxFrame;		// 최대 프레임 수
 		fPOINT			frameSize;		// 프레임 크기
 
+		fPOINT			centerPos;		// 중앙
+		fPOINT			centerFramePos;	// 프레임 중앙
+
 		tagImage()
 		{
-			bitmap		= NULL;
-			size		= { 0.f, 0.f };
-			maxFrame	= { 0, 0 };
-			frameSize	= { 0.f, 0.f };
+			bitmap			= NULL;
+			size			= { 0.f, 0.f };
+			maxFrame		= { 0, 0 };
+			frameSize		= { 0.f, 0.f };
+
+			centerPos		= { 0.f, 0.f };
+			centerFramePos	= { 0.f, 0.f };
 		}
 	}IMAGE_INFO, *LPIMAGE_INFO;
 
@@ -39,10 +45,10 @@ public:
 	void release(void);
 
 	//렌더 (내가 지정한 좌표에 이미지 출력한다)
-	void render(float alpha = 1.0f);
+	void render(float alpha = 1.0f, D2D1_POINT_2F center = { -1.f, -1.f });
 
 	// 이미지 클리핑
-	void render(float clipX, float clipY, float clipW, float clipH, float alpha = 1.0f);
+	void render(float clipX, float clipY, float clipW, float clipH, float alpha = 1.0f, D2D1_POINT_2F center = { -1.f, -1.f });
 
 	// 프레임 렌더
 	void frameRender(int frameX, int frameY, float alpha = 1.0f);
@@ -50,6 +56,10 @@ public:
 
 	// 애니 렌더
 	void aniRender(animation * ani, float alpha = 1.0f);
+
+	// 루프 렌더 : 회전 무효화
+	void loopRender(fRECT * range, fPOINT offset = 0.f, int frameX = 0, int frameY = 0, float alpha = 1.f);
+	void loopRender(fRECT * range, fPOINT offset = 0.f, float frameSizeX = 0, float frameSizeY = 0, float alpha = 1.f);
 
 public :
 	// =========================== inline ============================== //
@@ -63,8 +73,11 @@ public :
 	inline const POINT & getMaxFrame(void) { return _imageInfo->maxFrame; };
 
 	// 중앙좌표
-	inline fPOINT getCenterPos(void) { return _imageInfo->size / 2.0f; }
-	inline fPOINT getCenterFramePos(void) { return _imageInfo->frameSize / 2.0f; };
+	inline const fPOINT & getCenterPos(void) { return _imageInfo->centerPos; }
+	inline const fPOINT & getCenterFramePos(void) { return _imageInfo->centerFramePos; };
+
+	// 이미지 정보
+	inline const IMAGE_INFO* getImageInfo(void) { return _imageInfo; };
 
 	image();
 	~image() {}

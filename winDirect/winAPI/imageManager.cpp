@@ -154,6 +154,11 @@ void imageManager::setTransform(D2D1_POINT_2F * pos)
 	_renderTarget->SetTransform(m);
 }
 
+void imageManager::setTransformZero(void)
+{
+	_renderTarget->SetTransform(Matrix3x2F::Identity());
+}
+
 void imageManager::setRenderState(e_IMG_RENDER_STATE state, int value)
 {
 	switch (state)

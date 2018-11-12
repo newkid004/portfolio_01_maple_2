@@ -40,6 +40,7 @@
 #include <functional>
 #include <string>
 #include <map>
+#include <unordered_map>
 #include <set>
 #include <vector>
 #include <list>
@@ -48,6 +49,7 @@
 
 // Direct 헤더 파일
 #include <d2d1.h>
+#include <d2d1_1.h>
 #include <dwrite.h>
 
 using namespace std;
@@ -58,6 +60,7 @@ using namespace D2D1;
 //===================================
 // #include "triFunction.h"
 #include "utils.h"
+#include "mapleUtil.h"
 
 // json
 #include "jsoncpp/include/json/forwards.h"
@@ -93,6 +96,8 @@ using namespace MY_UTIL;
 #include "shopManager.h"
 #include "enemyManager.h"
 #include "textManager.h"
+#include "eventManager.h"
+#include "itemManager.h"
 
 #include "gameSystem.h"
 
@@ -121,6 +126,8 @@ using namespace MY_UTIL;
 #define SHOPMANAGER		shopManager::getSingleton()
 #define ENEMYMANAGER	enemyManager::getSingleton()
 #define TEXTMANAGER		textManager::getSingleton()
+#define EVENTMANAGER	eventManager::getSingleton()
+#define ITEMMANAGER		itemManager::getSingleton()
 
 #define GAMESYSTEM		gameSystem::getSingleton()
 

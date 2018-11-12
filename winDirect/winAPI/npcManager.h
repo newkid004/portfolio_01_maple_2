@@ -5,8 +5,8 @@
 class npcManager:public singletonBase<npcManager>
 {
 private:
-	typedef map<string, npcBase*> mNpc;
-	typedef map<string, npcBase*>::iterator miNpc;
+	typedef unordered_map<string, npcBase*> mNpc;
+	typedef unordered_map<string, npcBase*>::iterator miNpc;
 private:
 
 	mNpc	_mNpc;

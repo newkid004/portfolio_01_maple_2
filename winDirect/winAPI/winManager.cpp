@@ -24,19 +24,31 @@ void winManager::update(void)
 {
 	auto iter = _lWindow.begin();
 
+	// normal
 	for (; iter != _lWindow.end(); )
 	{
 		iter = (*iter)->update();
 	} 
 
+	// always
+	iter = _lWindow.begin();
+	for (; iter != _lWindow.end(); ++iter)
+		(*iter)->updateAlways();
 }
 
 void winManager::render(void)
 {
 	auto iter = _lWindow.rbegin();
-	for (; iter != _lWindow.rend(); ++iter)
+
+	while (iter != _lWindow.rend())
 	{
 		(*iter)->render();
+		auto baseIter = iter.base();
+		
+		if (baseIter == _lWindow.begin())
+			break;
+
+		++iter;
 	}
 }
 

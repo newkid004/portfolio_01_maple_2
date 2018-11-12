@@ -1,6 +1,6 @@
 #pragma once
 
-#include "buttonBase.h"
+class buttonBase;
 
 class windowBase
 {
@@ -9,8 +9,9 @@ protected:
 	list<windowBase*>::iterator _managedIter;
 	string _winName;
 	fPOINT _pos;
+	fPOINT _size = -1.f;
 
-	map<string, buttonBase*> _mButton;
+	unordered_map<string, buttonBase*> _mButton;
 
 public :
 	virtual HRESULT init(void);
@@ -18,15 +19,21 @@ public :
 	virtual UI_LIST_ITER update(void);
 	virtual void render(void);
 
+	virtual void updateAlways(void) {};
+
 public :
 	image* & getImage(void) { return _img; }
 	UI_LIST_ITER & getIter(void) { return _managedIter; };
 	string & getName(void) { return _winName; };
 	fPOINT & getPos(void) { return _pos; };
+	fPOINT & getSize(void) { return _size; };
+
+	fRECT getAbsRect(void) { return fRECT(_pos, _pos + (_size.x < 0 ? _img->getSize() : _size)); }
 
 public :	// ----- window ----- //
 	virtual void show(void) { WINMANAGER->show(this); };
-	virtual UI_LIST_ITER close(void) {return WINMANAGER->close(this); };
+	virtual UI_LIST_ITER close(void) { return WINMANAGER->close(this); };
+	virtual UI_LIST_ITER trans(void) { return WINMANAGER->trans(this); };
 	virtual bool isShow(void) { return !(_managedIter == WINMANAGER->getIgnoreIter()); };
 	virtual bool isClose(void) { return _managedIter == WINMANAGER->getIgnoreIter(); };
 
@@ -37,28 +44,4 @@ public :	// ----- button ----- //
 public :
 	windowBase() {};
 	~windowBase() {};
-};
-
-// ----- window : shop ----- //
-#define CNT_SHOP_ITEM_LIST 9
-class shopBase;
-class windowShop : public windowBase
-{
-private :
-	int _scroll;
-	shopBase* _shop;
-
-public :
-	HRESULT init(void);
-	void render(void);
-
-public :
-	int & getScroll(void) { return _scroll; };
-	shopBase*& getShop(void) { return _shop; };
-
-	UI_LIST_ITER close(void) override { _scroll = 0; return windowBase::close(); };
-
-public:
-	windowShop() {};
-	~windowShop() {};
 };
