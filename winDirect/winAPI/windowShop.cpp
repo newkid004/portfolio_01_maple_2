@@ -10,9 +10,11 @@
 
 #include "itemBase.h"
 
+
 HRESULT windowShop::init(void)
 {
-	windowBase::init();
+	windowMovable::init();
+	
 	_shop = NULL;
 
 	_conShop.firstItemPos = fPOINT(27.5f, 141.5f);
@@ -38,8 +40,8 @@ UI_LIST_ITER windowShop::update(void)
 		KEYMANAGER->setWheelUp(GAMESYSTEM->findCallback("UI_shop_scroll_up"), false);
 		KEYMANAGER->setWheelDown(GAMESYSTEM->findCallback("UI_shop_scroll_down"), false);
 	}
-
-	return windowBase::update();
+	
+	return windowMovable::update();
 }
 
 void windowShop::render(void)
@@ -54,6 +56,7 @@ void windowShop::render(void)
 
 	// 소지금 등
 	renderInfo();
+	
 }
 
 void windowShop::initButton(void)

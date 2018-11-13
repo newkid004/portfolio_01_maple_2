@@ -626,9 +626,6 @@
     <ClInclude Include="winManager.h">
       <Filter>메인게임\Game Framework\Manager\window</Filter>
     </ClInclude>
-    <ClInclude Include="windowBase.h">
-      <Filter>메인게임\Game Framework\Manager\window\_base</Filter>
-    </ClInclude>
     <ClInclude Include="gameSystem.h">
       <Filter>메인게임\Game Framework\Manager\_sington\gameSystem</Filter>
     </ClInclude>
@@ -755,9 +752,6 @@
     <ClInclude Include="playerTestScene.h">
       <Filter>메인게임\Scene\test\player</Filter>
     </ClInclude>
-    <ClInclude Include="windowShop.h">
-      <Filter>메인게임\Game Framework\Manager\window\shop</Filter>
-    </ClInclude>
     <ClInclude Include="itemManager.h">
       <Filter>메인게임\Game Framework\Manager\item</Filter>
     </ClInclude>
@@ -778,6 +772,12 @@
     </ClInclude>
     <ClInclude Include="buttonCheckBox.h">
       <Filter>메인게임\Game Framework\Manager\window\_button\checkBox</Filter>
+    </ClInclude>
+    <ClInclude Include="windowBase.h">
+      <Filter>메인게임\Game Framework\Manager\window\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="windowShop.h">
+      <Filter>메인게임\Game Framework\Manager\window\shop</Filter>
     </ClInclude>
     <ClInclude Include="buttonInventory.h" />
     <ClInclude Include="sceneTestInventory.h" />
