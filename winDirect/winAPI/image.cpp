@@ -45,6 +45,9 @@ void image::_putImageInfo(void)
 	_imageInfo->size.y = _imageInfo->bitmap->GetSize().height;
 	_imageInfo->frameSize.x = _imageInfo->size.x / _imageInfo->maxFrame.x;
 	_imageInfo->frameSize.y = _imageInfo->size.y / _imageInfo->maxFrame.y;
+
+	_imageInfo->centerPos = _imageInfo->size / 2.f;
+	_imageInfo->centerFramePos = _imageInfo->frameSize / 2.f;
 }
 
 HRESULT image::init(const wchar_t * fileName)

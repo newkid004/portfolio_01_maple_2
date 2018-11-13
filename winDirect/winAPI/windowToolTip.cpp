@@ -86,8 +86,8 @@ void windowToolTip::renderNormal(void)
 	_imgRef[IT_ITEM_BASE]->render();
 
 	// 아이콘 : shadow
-	IMAGEMANAGER->statePos(offsetIconCenter - _imgRef[IT_ITEM_SHADOW]->getCenterPos());
-	_imgRef[IT_ITEM_SHADOW]->render();
+	IMAGEMANAGER->statePos(offsetIconCenter - _imgRef[IT_ITEM_SHADOW]->getCenterPos()).y += 30.f;
+	_imgRef[IT_ITEM_SHADOW]->render(0.5f);
 
 	// 아이콘 : item
 	IMAGEMANAGER->getTransformState(TF_POSITION | TF_SCALE);

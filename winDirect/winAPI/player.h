@@ -1,4 +1,5 @@
 #pragma once
+#include "gameNode.h"
 #include "characterBase.h"
 
 enum DIRECTION
@@ -30,7 +31,6 @@ private:
 	fPOINT     _hairPosition;
 	fPOINT	   _tempPos;
 	inventory* _inven[PLAYER_INVENTORY_TAB_COUNT];
-
 	__int64	 _money;
 
 	int		 _flip;

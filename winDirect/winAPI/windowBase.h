@@ -19,6 +19,8 @@ public :
 	virtual UI_LIST_ITER update(void);
 	virtual void render(void);
 
+	virtual void updateAlways(void) {};
+
 public :
 	image* & getImage(void) { return _img; }
 	UI_LIST_ITER & getIter(void) { return _managedIter; };

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "sceneTestShop.h"
 
+#include "itemDef.h"
 #include "player.h"
 #include "inventory.h"
 #include "itemBase.h"
@@ -49,7 +50,18 @@ void sceneTestShop::render(void)
 void sceneTestShop::initResource(void)
 {
 	IMAGEMANAGER->add("UI_shop_layout", L"image/UI/shop/UI_shop_layout.png");
+	IMAGEMANAGER->add("UI_shop_button", L"image/UI/shop/UI_shop_button.png", 4, 3);
+	IMAGEMANAGER->add("UI_shop_tab_shop", L"image/UI/shop/UI_shop_tab_shop.png", 2, 2);
+	IMAGEMANAGER->add("UI_shop_tab_player", L"image/UI/shop/UI_shop_tab_player.png", 5, 2);
+	IMAGEMANAGER->add("UI_shop_selected_shop", L"image/UI/shop/UI_shop_selected_shop.png");
+	IMAGEMANAGER->add("UI_shop_selected_player", L"image/UI/shop/UI_shop_selected_player.png");
+
+	IMAGEMANAGER->add("UI_shop_scroll_body", L"image/UI/shop/UI_shop_scroll_body.png");
+	IMAGEMANAGER->add("UI_shop_scroll_head", L"image/UI/shop/UI_shop_scroll_head.png");
+	IMAGEMANAGER->add("UI_shop_scroll_direction", L"image/UI/shop/UI_shop_scroll_direction.png", 2, 2);
+
 	IMAGEMANAGER->add("UI_meso", L"image/UI/UI_meso.png");
+	IMAGEMANAGER->add("UI_checkBox", L"image/UI/UI_checkBox.png", 2);
 
 	IMAGEMANAGER->add("item", L"image/item/xcf/item_consume.png", 10, 3);
 	IMAGEMANAGER->add("item_shadow", L"image/item/item_shadow.png");
@@ -59,16 +71,16 @@ void sceneTestShop::initItem(void)
 {
 	itemBase* item;
 
-	item = createItem(	L"빨간 포션",		L"체력\n조금\n회복\n함",	fPOINT(0,	0));				item->getContent()->type = 1;	item->getContent()->price = 50;
-	item = createItem(	L"주황 포션",		L"체\n\n력\n보\n통\n\n회\n복\n\n함",	fPOINT(50,	0));	item->getContent()->type = 1;	item->getContent()->price = 75;
-	item = createItem(	L"하얀 포션",		L"체력 많이 회복",	fPOINT(100,	0));						item->getContent()->type = 1;	item->getContent()->price = 150;
-	item = createItem(	L"파란 포션",		L"마나 조금 회복",	fPOINT(150,	0));						item->getContent()->type = 1;	item->getContent()->price = 100;
-	item = createItem(	L"엘릭서",			L"체력 꽤 회복",	fPOINT(200,	0));						item->getContent()->type = 1;	item->getContent()->price = 700;
-	item = createItem(	L"좋은 엘릭서",		L"체력 전부 회복",	fPOINT(250,	0));						item->getContent()->type = 1;	item->getContent()->price = 1000;
-	item = createItem(	L"마나 엘릭서",		L"마나 전부 회복",	fPOINT(300,	0));						item->getContent()->type = 1;	item->getContent()->price = 2000;
-	item = createItem(	L"순록의 우유",		L"우유",			fPOINT(350,	0));						item->getContent()->type = 1;	item->getContent()->price = 5000;
-	item = createItem(	L"아침 이슬",		L"어느 잎의 이슬",	fPOINT(400,	0));						item->getContent()->type = 1;	item->getContent()->price = 60000;
-	item = createItem(	L"수박",			L"달다",			fPOINT(450,	0));						item->getContent()->type = 1;	item->getContent()->price = 12000;
+	item = createItem(	L"빨간 포션",		L"체력\n조금\n회복\n함",	fPOINT(0,	0));				item->getContent()->type = itemDef::ITEM_TYPE_ARMOR;		item->getContent()->price = 50;
+	item = createItem(	L"주황 포션",		L"체\n\n력\n보\n통\n\n회\n복\n\n함",	fPOINT(50,	0));	item->getContent()->type = itemDef::ITEM_TYPE_ARMOR;		item->getContent()->price = 75;
+	item = createItem(	L"하얀 포션",		L"체력 많이 회복",	fPOINT(100,	0));						item->getContent()->type = itemDef::ITEM_TYPE_CONSUMABLE;	item->getContent()->price = 150;
+	item = createItem(	L"파란 포션",		L"마나 조금 회복",	fPOINT(150,	0));						item->getContent()->type = itemDef::ITEM_TYPE_CONSUMABLE;	item->getContent()->price = 100;
+	item = createItem(	L"엘릭서",			L"체력 꽤 회복",	fPOINT(200,	0));						item->getContent()->type = itemDef::ITEM_TYPE_FIT;			item->getContent()->price = 700;
+	item = createItem(	L"좋은 엘릭서",		L"체력 전부 회복",	fPOINT(250,	0));						item->getContent()->type = itemDef::ITEM_TYPE_FIT;			item->getContent()->price = 1000;
+	item = createItem(	L"마나 엘릭서",		L"마나 전부 회복",	fPOINT(300,	0));						item->getContent()->type = itemDef::ITEM_TYPE_ETC;			item->getContent()->price = 2000;
+	item = createItem(	L"순록의 우유",		L"우유",			fPOINT(350,	0));						item->getContent()->type = itemDef::ITEM_TYPE_ETC;			item->getContent()->price = 5000;
+	item = createItem(	L"아침 이슬",		L"어느 잎의 이슬",	fPOINT(400,	0));						item->getContent()->type = itemDef::ITEM_TYPE_CACHE;		item->getContent()->price = 60000;
+	item = createItem(	L"수박",			L"달다",			fPOINT(450,	0));						item->getContent()->type = itemDef::ITEM_TYPE_CACHE;		item->getContent()->price = 12000;
 
 	// bind
 	ITEMMANAGER->getImgShadow() = IMAGEMANAGER->find("item_shadow");

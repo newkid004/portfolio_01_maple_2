@@ -13,6 +13,8 @@ player::player() : _headPosition(fPOINT(0.0f, 0.0f)),
 
 HRESULT player::init(void)
 {
+	IMAGEMANAGER->add("henesys", L"image/map/henesys.png");
+	IMAGEMANAGER->add("henesys_pixel", L"image/map/henesys_pixel.png");
 	IMAGEMANAGER->add("p_body", L"image/character/player/body.png", 4, 3);
 	IMAGEMANAGER->add("p_arm", L"image/character/player/arm.png", 4, 3);
 	IMAGEMANAGER->add("p_head", L"image/character/player/head.png");
@@ -33,13 +35,15 @@ HRESULT player::init(void)
 	_aniArm->init(IMAGEMANAGER->find("p_arm"));
 	_aniLhand->init(IMAGEMANAGER->find("p_lHand"));
 
- 	_position = fPOINT(WINSIZEX / 2, WINSIZEY / 2);
+ 	_position = fPOINT(WINSIZEX / 2, WINSIZEY / 2 - 100);
 	_velocity = fPOINT(0.0f, 0.0f);
+	_collision = fRECT(_position + 50, _position + 100);
 	_state.movement = M_NONE;
 	_movement[0] = _movement[1] = M_NONE;
 	_dir = LEFT;
 	setAnimation(_state.movement);
 	initInventory();
+	aniStart();
 	_money = 0LL;
 
 	return S_OK;
@@ -72,15 +76,24 @@ void player::update(void)
 			aniStart();
 		}
 	}
+	_velocity *= TIMEMANAGER->getElapsedTime();
 	_position += _velocity * TIMEMANAGER->getElapsedTime();
 	_velocity = 0;
+	_collision = fRECT(_position + 30, _position + 70);
 
 	keyUpdate();
 	setPartPosition();
+	setRayStruct();
 }
 
 void player::render(void)
 {
+	IMAGEMANAGER->statePos(-500, -500);
+	IMAGEMANAGER->find("henesys")->render();
+	if (KEYMANAGER->toggle(VK_F1))
+	{
+		IMAGEMANAGER->find("henesys_pixel")->render();
+	}
 	_flip = _dir == RIGHT ? IMAGE_FLIP_VERTICAL : 0;
 	IMAGEMANAGER->statePos(_position);
 	IMAGEMANAGER->stateFlip(_flip);
@@ -93,6 +106,35 @@ void player::render(void)
 	IMAGEMANAGER->find("p_face")->frameRender(fPOINT(0,0));
 	IMAGEMANAGER->statePos(_hairPosition);
 	IMAGEMANAGER->find("p_hair")->render();
+
+	IMAGEMANAGER->resetTransform();
+	for (int i = 0; i < RAY_NUM; i++)
+	{
+		ID2D1SolidColorBrush*   g_pBlackBrush = NULL;
+		_renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Black), &g_pBlackBrush);
+		_renderTarget->DrawLine(
+			D2D1::Point2F(_rayStruct.rightRay[i].sourfPos.x, _rayStruct.rightRay[i].sourfPos.y),
+			D2D1::Point2F(_rayStruct.rightRay[i].destfPos.x, _rayStruct.rightRay[i].destfPos.y),
+			g_pBlackBrush, 0.5f);
+		_renderTarget->DrawLine(
+			D2D1::Point2F(_rayStruct.leftRay[i].sourfPos.x, _rayStruct.leftRay[i].sourfPos.y),
+			D2D1::Point2F(_rayStruct.leftRay[i].destfPos.x, _rayStruct.leftRay[i].destfPos.y),
+			g_pBlackBrush, 0.5f);
+		_renderTarget->DrawLine(
+			D2D1::Point2F(_rayStruct.upperRay[i].sourfPos.x, _rayStruct.upperRay[i].sourfPos.y),
+			D2D1::Point2F(_rayStruct.upperRay[i].destfPos.x, _rayStruct.upperRay[i].destfPos.y),
+			g_pBlackBrush, 0.5f);
+		_renderTarget->DrawLine(
+			D2D1::Point2F(_rayStruct.bottomRay[i].sourfPos.x, _rayStruct.bottomRay[i].sourfPos.y),
+			D2D1::Point2F(_rayStruct.bottomRay[i].destfPos.x, _rayStruct.bottomRay[i].destfPos.y),
+			g_pBlackBrush, 0.5f);
+		g_pBlackBrush->Release();
+		g_pBlackBrush = NULL;
+		if (_rayStruct.rightRay[i].distance > 0)
+		{
+			int n = 0;
+		}
+	}
 }
 
 void player::initInventory(void)

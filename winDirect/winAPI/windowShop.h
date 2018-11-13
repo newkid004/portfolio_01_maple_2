@@ -13,10 +13,13 @@ struct tagShopContent
 
 	fPOINT firstItemPos;
 
+	POINT selectedItem;		// x : tab, y : scroll
+
 	tagShopContent()
 	{
 		scroll = 0;
 		tabIndex = 0;
+		selectedItem = { 0L };
 	}
 };
 
@@ -29,7 +32,7 @@ private:
 	tagShopContent _conPlayer;
 	shopBase* _shop;
 
-	buttonShop_itemList* _currentButton;
+	buttonShop_itemList* _currentSlotButton;
 
 public:
 	HRESULT init(void) override;
@@ -38,17 +41,21 @@ public:
 
 protected :
 	void initButton(void);
+	void initButtonEtc(void);
+
 	void initDbClick(void);
 	void initWheel(void);
 
+	void renderSelect(void);
 	void renderInfo(void);
 
 public:
 	tagShopContent & getContentShop(void) { return _conShop; };
 	tagShopContent & getContentPlayer(void) { return _conPlayer; };
 	shopBase*& getShop(void) { return _shop; };
-	buttonShop_itemList*& getCurrentButton(void) { return _currentButton; };
+	buttonShop_itemList*& getCurrentSlotButton(void) { return _currentSlotButton; };
 
+public :	// 
 	UI_LIST_ITER close(void) override;
 
 public :

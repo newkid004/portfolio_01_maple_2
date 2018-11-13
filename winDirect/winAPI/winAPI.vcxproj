@@ -162,6 +162,7 @@
     <ClCompile Include="buffBase.cpp" />
     <ClCompile Include="buffManager.cpp" />
     <ClCompile Include="bulletBase.cpp" />
+    <ClCompile Include="buttonCheckBox.cpp" />
     <ClCompile Include="buttonShop.cpp" />
     <ClCompile Include="buttonTest.cpp" />
     <ClCompile Include="buttonTest2.cpp" />
@@ -244,6 +245,7 @@
     <ClInclude Include="buffManager.h" />
     <ClInclude Include="bulletBase.h" />
     <ClInclude Include="buttonBase.h" />
+    <ClInclude Include="buttonCheckBox.h" />
     <ClInclude Include="buttonShop.h" />
     <ClInclude Include="buttonTest.h" />
     <ClInclude Include="buttonTest2.h" />

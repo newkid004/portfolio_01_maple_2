@@ -6,6 +6,7 @@
 #include "inventory.h"
 
 #include "buttonShop.h"
+#include "buttonCheckBox.h"
 
 #include "itemBase.h"
 
@@ -17,6 +18,9 @@ HRESULT windowShop::init(void)
 	_conShop.firstItemPos = fPOINT(27.5f, 141.5f);
 	_conPlayer.firstItemPos = fPOINT(301.5f, 141.5f);
 
+	_conShop.selectedItem.x = -1;
+	_conPlayer.selectedItem.x = -1;
+
 	initButton();
 	initDbClick();
 	initWheel();
@@ -26,10 +30,10 @@ HRESULT windowShop::init(void)
 
 UI_LIST_ITER windowShop::update(void)
 {
-	_currentButton = NULL;
+	_currentSlotButton = NULL;
 	
 	fRECT rcAbs = getAbsRect();
-	if (IsClickRect(rcAbs, _ptMouse))
+	if (this == WINMANAGER->getFocus() && IsClickRect(rcAbs, _ptMouse))
 	{
 		KEYMANAGER->setWheelUp(GAMESYSTEM->findCallback("UI_shop_scroll_up"), false);
 		KEYMANAGER->setWheelDown(GAMESYSTEM->findCallback("UI_shop_scroll_down"), false);
@@ -42,6 +46,9 @@ void windowShop::render(void)
 {
 	windowBase::render();
 
+	// 선택 아이템
+	renderSelect();
+
 	// 아이템 목록 render
 	if (_shop) _shop->render();
 
@@ -51,21 +58,101 @@ void windowShop::render(void)
 
 void windowShop::initButton(void)
 {
+	// ----- slot ----- //
 	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
 	{
 		buttonShop_itemList* b = new buttonShop_itemList;
 		b->init(i, this);
-		addButton("shop_button_" + to_string(i), b);
+		addButton("shop_slot_" + to_string(i), b);
 	}
-	
 	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
 	{
 		buttonShop_playerItemList* b = new buttonShop_playerItemList;
 		b->init(i, this);
-		addButton("player_button_" + to_string(i), b);
+		addButton("player_slot_" + to_string(i), b);
+	}
+	_currentSlotButton = NULL;
+
+	// ----- tab ----- //
+	for (int i = 0; i <= IMAGEMANAGER->find("UI_shop_tab_shop")->getMaxFrame().x; ++i)
+	{
+		buttonShop_itemTab* b = new buttonShop_itemTab;
+		b->init(i, this);
+		addButton("shop_tab_" + to_string(i), b);
+	}
+	for (int i = 0; i <= IMAGEMANAGER->find("UI_shop_tab_player")->getMaxFrame().x; ++i)
+	{
+		buttonShop_playerItemTab* b = new buttonShop_playerItemTab;
+		b->init(i, this);
+		addButton("player_tab_" + to_string(i), b);
 	}
 
-	_currentButton = NULL;
+	// ----- scroll ----- //
+	for (int i = -1; i <= 1; i += 2)
+	{
+		buttonShop_scroll_direction* b = new buttonShop_scroll_direction;
+		b->init(i, this);
+		addButton("shop_direction_" + to_string((i + 1) / 2), b);
+	}
+	for (int i = -1; i <= 1; i += 2)
+	{
+		buttonShop_scroll_direction_Player* b = new buttonShop_scroll_direction_Player;
+		b->init(i, this);
+		addButton("player_direction_" + to_string((i + 1) / 2), b);
+	}
+
+	for (int i = 0; i < 2; ++i)
+	{
+		if (i)
+		{
+			buttonShop_scroll_head* b = new buttonShop_scroll_head;
+			b->init(findButton("shop_direction_0"), findButton("shop_direction_1"), this);
+			addButton("shop_scroll_head", b);
+		}
+		else
+		{
+			buttonShop_scroll_head_Player* b = new buttonShop_scroll_head_Player;
+			b->init(findButton("player_direction_0"), findButton("player_direction_1"), this);
+			addButton("player_scroll_head", b);
+		}
+	}
+
+	// ---- right click ----- //
+	buttonCheckBox* btnRight = new buttonCheckBox;
+	btnRight->init(); btnRight->getPos() = { 249.f, 18.f };
+	addButton("shop_isRight", btnRight);
+	
+	// ----- etc ----- //
+	initButtonEtc();
+}
+
+void windowShop::initButtonEtc(void)
+{
+	// 상점 나가기
+	buttonBaseFrame* btnExit = new buttonBaseFrame;
+	btnExit->init(IMAGEMANAGER->find("UI_shop_button"));
+	btnExit->getPos() = { 201.f, 53.f };
+	btnExit->getActivate() = [&](void)->UI_LIST_ITER {
+		buttonBaseFrame* btn = (buttonBaseFrame*)findButton("exit");
+		if (IsClickRect(btn->getAbsRect(), _ptMouse))
+		{
+			if (KEYMANAGER->up(VK_LBUTTON))
+				close();
+			else if (KEYMANAGER->press(VK_LBUTTON))
+			{
+				// 사운드 추가
+			}
+			else if (KEYMANAGER->down(VK_LBUTTON))
+				btn->getCurFrame() = { 2, 0 };
+			else
+				btn->getCurFrame() = { 1, 0 };
+		}
+		else
+			btn->getCurFrame() = { 0, 0 };
+
+		return _managedIter;
+	};
+	addButton("exit", btnExit);
 }
 
 void windowShop::initDbClick(void)
@@ -75,7 +162,7 @@ void windowShop::initDbClick(void)
 	// buy
 	f = [&](void)->void {
 		// 현 상점 슬롯 가져옴
-		itemBase* viewItem = _shop->find(_conShop.scroll + _currentButton->getSlot());
+		itemBase* viewItem = _shop->find(_conShop.scroll + _currentSlotButton->getSlot());
 
 		if (viewItem == NULL) return;
 		int type = itemBase::getInventoryTap2type(itemBase::getContentType(viewItem));
@@ -88,6 +175,13 @@ void windowShop::initDbClick(void)
 		// 인벤토리 자리 여부
 		inventory* inven = GAMESYSTEM->getPlayer()->getInventory(type);
 		if (inven->isFull()) return;
+
+		// 인벤토리 종류 변경
+		if (_conPlayer.tabIndex != type)
+		{
+			_conPlayer.tabIndex = type;
+			_conPlayer.scroll = 0;
+		}
 
 		// 아이템 추가 / 금액 지불
 		itemBase* addition = ITEMMANAGER->create(viewItem);
@@ -108,11 +202,11 @@ void windowShop::initDbClick(void)
 
 			++insertIndex;
 		}
-		int scrollMaximum = _conPlayer.scroll + CNT_SHOP_ITEM_LIST - 1;
+		int scrollMaximum = _conPlayer.scroll + CNT_SHOP_ITEM_LIST;
+		if (scrollMaximum <= insertIndex)
+			_conPlayer.scroll = insertIndex - CNT_SHOP_ITEM_LIST + 1;
 		if (insertIndex < _conPlayer.scroll)
 			_conPlayer.scroll = insertIndex;
-		if (scrollMaximum < insertIndex)
-			scrollPlayer(scrollMaximum);
 	};
 	GAMESYSTEM->addCallback("UI_shop_button_buy", f);
 
@@ -120,7 +214,7 @@ void windowShop::initDbClick(void)
 	f = [&](void)->void {
 		// 현 플레이어 슬롯에 해당하는 아이템 가져옴
 		auto & itemView = SHOPMANAGER->getPlayerView();
-		int index = _conPlayer.scroll + _currentButton->getSlot();
+		int index = _conPlayer.scroll + _currentSlotButton->getSlot();
 
 		if (itemView.size() <= index) return;
 		itemBase* viewItem = itemView[index];
@@ -141,7 +235,8 @@ void windowShop::initDbClick(void)
 		GAMESYSTEM->getPlayer()->getMoney() += takedItem->getContent()->price / 2;
 
 		// 스크롤 재정렬
-		scrollPlayer(SHOPMANAGER->getPlayerView().size() - CNT_SHOP_ITEM_LIST);
+		if (SHOPMANAGER->getPlayerView().size() <= _conPlayer.scroll + CNT_SHOP_ITEM_LIST)
+			scrollPlayer(-1);
 	};
 	GAMESYSTEM->addCallback("UI_shop_button_sell", f);
 }
@@ -168,6 +263,25 @@ void windowShop::initWheel(void)
 		if (IsClickRect(viewPlayer, _ptMouse))	scrollPlayer(1);
 	};
 	GAMESYSTEM->addCallback("UI_shop_scroll_down", f);
+}
+
+void windowShop::renderSelect(void)
+{
+	static fPOINT intervalShop = { 47.f, 124.f };
+	static fPOINT intervalPlayer = { 321.f, 124.f };
+
+	if (-1 < _conShop.selectedItem.x)
+	{
+		IMAGEMANAGER->statePos(_pos + intervalShop).y += _conShop.selectedItem.y * 42.f;
+		IMAGEMANAGER->find("UI_shop_selected_shop")->render();
+	}
+
+	if (-1 < _conPlayer.selectedItem.x)
+	{
+		IMAGEMANAGER->statePos(_pos + intervalPlayer).y += _conPlayer.selectedItem.y * 42.f;
+		IMAGEMANAGER->find("UI_shop_selected_player")->render();
+	}
+
 }
 
 void windowShop::renderInfo(void)
