@@ -262,6 +262,9 @@
     <Filter Include="메인게임\Game Framework\Manager\window\_button\checkBox">
       <UniqueIdentifier>{70af5937-6349-4638-8b9d-08b606f80752}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Scene\test\inventory">
+      <UniqueIdentifier>{f9a3cfb1-58d0-4eef-b892-e29803cdf529}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -495,6 +498,9 @@
     <ClCompile Include="buttonCheckBox.cpp">
       <Filter>메인게임\Game Framework\Manager\window\_button\checkBox</Filter>
     </ClCompile>
+    <ClCompile Include="buttonInventory.cpp" />
+    <ClCompile Include="sceneTestInventory.cpp" />
+    <ClCompile Include="windowInventory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -773,6 +779,9 @@
     <ClInclude Include="buttonCheckBox.h">
       <Filter>메인게임\Game Framework\Manager\window\_button\checkBox</Filter>
     </ClInclude>
+    <ClInclude Include="buttonInventory.h" />
+    <ClInclude Include="sceneTestInventory.h" />
+    <ClInclude Include="windowInventory.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="quest.Json">
