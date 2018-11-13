@@ -22,7 +22,7 @@ struct tagShopContent
 
 class shopBase;
 class buttonShop_itemList;
-class windowShop : public windowBase
+class windowShop : public windowMovable
 {
 private:
 	tagShopContent _conShop;
