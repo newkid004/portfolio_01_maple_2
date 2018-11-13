@@ -5,6 +5,8 @@ class windowShop;
 class shopBase;
 class inventory;
 class itemBase;
+class windowInventory;
+
 
 class shopManager : public singletonBase<shopManager>
 {
@@ -15,6 +17,8 @@ private :
 	vector<itemBase*> _vPlayerItemView;
 	vector<itemBase*> _vRePurchase;
 
+	windowInventory * _invenWindow;
+	
 	image* _imgMeso;
 
 public :
@@ -28,6 +32,7 @@ public :
 	windowShop *& getWindow(void) { return _bindWindow; };
 	vector<itemBase*> & getPlayerView(void) { return _vPlayerItemView; };
 	vector<itemBase*> & getRePurchase(void) { return _vRePurchase; };
+	windowInventory *& getInvenWindow(void) { return _invenWindow; };
 
 	image* & getImageMeso(void) { return _imgMeso; };
 

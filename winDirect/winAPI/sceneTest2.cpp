@@ -17,22 +17,22 @@ void sceneTest2::release()
 void sceneTest2::update()
 {
 	
-	if (KEYMANAGER->press(VK_LEFT))
+	if (KEYMANAGER->down(VK_LEFT))
 	{
 		pos.x -= 10;
 		x--;
 	}
-	if (KEYMANAGER->press(VK_RIGHT))
+	if (KEYMANAGER->down(VK_RIGHT))
 	{
 		pos.x += 10;
 		x++;
 	}
-	if (KEYMANAGER->press(VK_UP))
+	if (KEYMANAGER->down(VK_UP))
 	{
 		pos.y -= 10;
 		y--;
 	}
-	if (KEYMANAGER->press(VK_DOWN))
+	if (KEYMANAGER->down(VK_DOWN))
 	{
 		pos.y += 10;
 		y++;
@@ -70,5 +70,5 @@ void sceneTest2::render()
 	IMAGEMANAGER->find("start")->render();
 
 	IMAGEMANAGER->statePos(300, 500);
-	IMAGEMANAGER->find("buttonTest")->frameRender(x, y, 1.0f);
+	IMAGEMANAGER->find("buttonTest")->frameRender(0, 0, 1.0f);
 }

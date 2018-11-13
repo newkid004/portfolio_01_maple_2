@@ -5,6 +5,7 @@
 #include "windowShop.h"
 #include "player.h"
 #include "inventory.h"
+#include "windowInventory.h"
 
 HRESULT shopBase::init(void)
 {
@@ -49,7 +50,7 @@ void shopBase::renderPlayer(windowShop * winShop)
 {
 	fPOINT & posOffset = winShop->getPos() + SHOPMANAGER->getWindow()->getContentPlayer().firstItemPos;
 	static auto & playerItemView = SHOPMANAGER->getPlayerView();
-
+	
 	for (int i = 0; i < CNT_SHOP_ITEM_LIST; ++i)
 	{
 		int viewIndex = i + winShop->getContentPlayer().scroll;

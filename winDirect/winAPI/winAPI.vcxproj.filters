@@ -259,6 +259,15 @@
     <Filter Include="메인게임\Game Framework\Manager\window\_button\shop">
       <UniqueIdentifier>{dc253dd0-1c78-4e10-b888-3191cfb83bf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Scene\test\inventory">
+      <UniqueIdentifier>{277a6243-2ee1-4fab-ac1f-cf0b3c56a27d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\inventory">
+      <UniqueIdentifier>{dc01bd87-4a18-42ce-8657-8201aa4b587d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\_button\inventory">
+      <UniqueIdentifier>{446a0439-643d-43fb-a986-092d25b88aca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -488,6 +497,15 @@
     </ClCompile>
     <ClCompile Include="buttonShop.cpp">
       <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneTestInventory.cpp">
+      <Filter>메인게임\Scene\test\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="windowInventory.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonInventory.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\_button\inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -763,6 +781,15 @@
     </ClInclude>
     <ClInclude Include="buttonShop.h">
       <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneTestInventory.h">
+      <Filter>메인게임\Scene\test\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="windowInventory.h">
+      <Filter>메인게임\Game Framework\Manager\window\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonInventory.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button\inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@ UI_LIST_ITER buttonShop_itemList::update(void)
 		((windowShop*)_bindWindow)->getCurrentButton() = this;
 		updateDbClick();
 	}
-
+	
 	return _bindWindow->getIter();
 }
 

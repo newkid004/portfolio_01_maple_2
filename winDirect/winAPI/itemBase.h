@@ -3,7 +3,7 @@
 #include "itemDef.h"
 #include "state.h"
 
-#define INTERVAL_ITEM_IN_INVENTORY		50.0f
+#define INTERVAL_ITEM_IN_INVENTORY		fPOINT(36.f,35.f)
 #define INTERVAL_INVENTORY_TASK_BAR		fPOINT(5.0f, 10.0f)
 
 struct itemContentBase
