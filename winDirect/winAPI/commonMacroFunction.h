@@ -242,11 +242,11 @@ inline void insertComma(string * sour, string * dest)
 
 	int process = 0;
 	int iSour = sour->size() - 1;
-	int iDest = dest->size() - 1 - ((sour->size() % 3) ? 0 : 1);
+	int iDest = dest->size() - 1 - !(sour->size() % 3);
 
 	while (0 <= iSour)
 	{
-		if (process % 3 == 0 && process != 0)
+		if (!(process % 3) && process)
 			(*dest)[iDest--] = ',';
 
 		++process;
@@ -259,11 +259,11 @@ inline void insertComma(wstring * sour, wstring * dest)
 
 	int process = 0;
 	int iSour = sour->size() - 1;
-	int iDest = dest->size() - 1 - ((sour->size() % 3) ? 0 : 1);
+	int iDest = dest->size() - 1 - !(sour->size() % 3);
 
 	while (0 <= iSour)
 	{
-		if (process % 3 == 0 && process != 0)
+		if (!(process % 3) && process)
 			(*dest)[iDest--] = L',';
 
 		++process;
