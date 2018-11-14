@@ -1,5 +1,8 @@
 #pragma once
 
+// ----- player ----- //
+#include "eventPlayerLevelUp.h"
+
 // ----- normal ----- //
 
 // ----- test ----- //
