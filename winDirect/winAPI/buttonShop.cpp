@@ -114,6 +114,7 @@ itemBase * buttonShop_playerItemList::getRenderContent(void)
 	if (playerItemView.size() <= index) return NULL;
 
 	return playerItemView[_slot + bindWindow->getContentPlayer().scroll];
+
 }
 
 HRESULT buttonShop_itemTab::init(int tabType, windowShop * bindWindow)
