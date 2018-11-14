@@ -40,6 +40,8 @@ public:
 	// 프레임 초기화
 	HRESULT init(const wchar_t * fileName);
 	HRESULT init(const wchar_t * fileName, int maxFrameX, int maxFrameY);
+	HRESULT init(const wchar_t * fileName, fPOINT frameSize);	// init to frameSize
+	HRESULT init(const wchar_t * fileName, float frameWidth, float frameHeight);	// init to frameSize
 
 	//해제
 	void release(void);
