@@ -233,6 +233,7 @@
     <ClCompile Include="windowBase.cpp" />
     <ClCompile Include="windowInventory.cpp" />
     <ClCompile Include="windowShop.cpp" />
+    <ClCompile Include="windowStatus.cpp" />
     <ClCompile Include="windowToolTip.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="winManager.cpp" />

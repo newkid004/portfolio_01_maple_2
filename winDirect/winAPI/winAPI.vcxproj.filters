@@ -244,6 +244,9 @@
     <Filter Include="메인게임\Game Framework\Manager\window\shop">
       <UniqueIdentifier>{b23b97a8-f57f-46a7-936d-0f4a39f1a1c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Scene\test\shop">
+      <UniqueIdentifier>{28e2d6c6-eb86-446f-8217-988d8decd3d5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="메인게임\Game Framework\Manager\item">
       <UniqueIdentifier>{67e8ebb4-9a61-4819-8ccf-fc2d27579403}</UniqueIdentifier>
     </Filter>
@@ -258,15 +261,6 @@
     </Filter>
     <Filter Include="메인게임\Game Framework\Manager\window\_button\checkBox">
       <UniqueIdentifier>{70af5937-6349-4638-8b9d-08b606f80752}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Scene\test\window\status">
-      <UniqueIdentifier>{46410077-3c42-44d6-a330-f1e661ec1730}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Scene\test\window\shop">
-      <UniqueIdentifier>{28e2d6c6-eb86-446f-8217-988d8decd3d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\event\_base\player">
-      <UniqueIdentifier>{6d3b8ff9-1c91-45f4-bdf7-8311126abafe}</UniqueIdentifier>
     </Filter>
     <Filter Include="메인게임\Scene\test\inventory">
       <UniqueIdentifier>{f9a3cfb1-58d0-4eef-b892-e29803cdf529}</UniqueIdentifier>
@@ -499,7 +493,7 @@
       <Filter>메인게임\Game Framework\Manager\item</Filter>
     </ClCompile>
     <ClCompile Include="sceneTestShop.cpp">
-      <Filter>메인게임\Scene\test\window\shop</Filter>
+      <Filter>메인게임\Scene\test\shop</Filter>
     </ClCompile>
     <ClCompile Include="eventCatcher.cpp">
       <Filter>메인게임\Game Framework\Manager\event\_catcher</Filter>
@@ -528,16 +522,9 @@
     <ClCompile Include="sceneTestShopInven.cpp">
       <Filter>메인게임\Scene\test\inventory</Filter>
     </ClCompile>
-    <ClCompile Include="sceneTestWindowStatus.cpp">
-      <Filter>메인게임\Scene\test\window\status</Filter>
-    </ClCompile>
     <ClCompile Include="windowStatus.cpp">
       <Filter>메인게임\Game Framework\Manager\window\status</Filter>
     </ClCompile>
-    <ClCompile Include="eventPlayerLevelUp.cpp" />
-    <ClCompile Include="buttonInventory.cpp" />
-    <ClCompile Include="sceneTestInventory.cpp" />
-    <ClCompile Include="windowInventory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -799,7 +786,7 @@
       <Filter>메인게임\Game Framework\Manager\item</Filter>
     </ClInclude>
     <ClInclude Include="sceneTestShop.h">
-      <Filter>메인게임\Scene\test\window\shop</Filter>
+      <Filter>메인게임\Scene\test\shop</Filter>
     </ClInclude>
     <ClInclude Include="eventCatcher.h">
       <Filter>메인게임\Game Framework\Manager\event\_catcher</Filter>
@@ -830,15 +817,6 @@
     </ClInclude>
     <ClInclude Include="sceneTestShopInven.h">
       <Filter>메인게임\Scene\test\inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="buttonInventory.h" />
-    <ClInclude Include="sceneTestInventory.h" />
-    <ClInclude Include="windowInventory.h" />
-    <ClInclude Include="sceneTestWindowStatus.h">
-      <Filter>메인게임\Scene\test\window\status</Filter>
-    </ClInclude>
-    <ClInclude Include="eventPlayerLevelUp.h">
-      <Filter>메인게임\Game Framework\Manager\event\_base\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
