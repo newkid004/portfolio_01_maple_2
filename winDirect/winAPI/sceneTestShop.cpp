@@ -72,7 +72,7 @@ void sceneTestShop::initResource(void)
 	IMAGEMANAGER->add("UI_meso", L"image/UI/UI_meso.png");
 	IMAGEMANAGER->add("UI_checkBox", L"image/UI/UI_checkBox.png", 2);
 
-	IMAGEMANAGER->add("item", L"image/item/xcf/item_consume.png", 10, 3);
+	IMAGEMANAGER->add("item", L"image/item/icon/item_icon_consume.png", fPOINT(50.f));
 	IMAGEMANAGER->add("item_shadow", L"image/item/item_shadow.png");
 }
 
