@@ -196,6 +196,7 @@
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="mainGame.cpp" />
+    <ClCompile Include="mapleUtil.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="npcManager.cpp" />
     <ClCompile Include="passiveSkill.cpp" />
@@ -213,6 +214,7 @@
     <ClCompile Include="sceneTestInventory.cpp" />
     <ClCompile Include="sceneTestPixelCrash.cpp" />
     <ClCompile Include="sceneTestShop.cpp" />
+    <ClCompile Include="sceneTestShopInven.cpp" />
     <ClCompile Include="sceneWindowTest.cpp" />
     <ClCompile Include="settingButtonTest.cpp" />
     <ClCompile Include="shopBase.cpp" />
@@ -290,6 +292,7 @@
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="mainGame.h" />
+    <ClInclude Include="mapleUtil.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="npcManager.h" />
     <ClInclude Include="objectDef.h" />
@@ -309,6 +312,7 @@
     <ClInclude Include="sceneTestInventory.h" />
     <ClInclude Include="sceneTestPixelCrash.h" />
     <ClInclude Include="sceneTestShop.h" />
+    <ClInclude Include="sceneTestShopInven.h" />
     <ClInclude Include="sceneWindowTest.h" />
     <ClInclude Include="settingButtonTest.h" />
     <ClInclude Include="shopBase.h" />

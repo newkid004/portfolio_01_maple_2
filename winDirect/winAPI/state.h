@@ -82,19 +82,6 @@ struct statePoint
 	}
 };
 
-struct subStatePoint
-{
-	unsigned int		STR;							//부스텟 힘
-	unsigned int		DEX;							//부스텟 민첩
-	unsigned int		INT;							//부스텟 지력
-	unsigned int		LUK;							//부스텟 운
-
-	subStatePoint()
-	{
-		ZeroMemory(this, sizeof(subStatePoint));
-	}
-};
-
 struct statePersent
 {
 	NUM_REAL		damage;								//데미지 퍼센트
@@ -143,9 +130,9 @@ struct state
 	statePoint			itemStatePoint;			// 아이템 장비 스킬 버프 등등 다 적용시켜서 올라간 주스텟
 	statePoint			totalStatePoint;		// 두개다 더한 토탈 주스텟
 
-	subStatePoint		permanentSubPoint;		// 직접 찍은 주스텟
-	subStatePoint		itemStateSubPoint;		// 아이템 장비 스킬 버프 등등 다 적용시켜서 올라간 주스텟
-	subStatePoint		totalStateSubPoint;		// 두개다 더한 토탈 주스텟
+	statePoint			permanentSubPoint;		// 직접 찍은 주스텟
+	statePoint			itemStateSubPoint;		// 아이템 장비 스킬 버프 등등 다 적용시켜서 올라간 주스텟
+	statePoint			totalStateSubPoint;		// 두개다 더한 토탈 주스텟
 
 	statePersent		permanentPersent;
 	statePersent		itemStatePersent;

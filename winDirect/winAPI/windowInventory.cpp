@@ -21,7 +21,7 @@ UI_LIST_ITER windowInventory::update(void)
 {
 
 
-	return windowBase::update();
+	return windowMovable::update();
 }
 
 void windowInventory::render(void)

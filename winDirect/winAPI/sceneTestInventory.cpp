@@ -7,7 +7,7 @@
 #include "windowInventory.h"
 #include "windowToolTip.h"
 
-static fPOINT pos = fPOINT(150, 100);
+static fPOINT pos = fPOINT(900, 100);
 
 HRESULT sceneTestInventory::init(void)
 {
@@ -46,13 +46,12 @@ void sceneTestInventory::initImage(void)
 
 void sceneTestInventory::initWindow(void)
 {
-
 	windowInventory* wInven;
 	wInven = new windowInventory;	wInven->init();
 
 	wInven->getImage() = IMAGEMANAGER->find("UI_inventory");
-	wInven->getPos().x = 300;
-	wInven->getPos().y = 200;
+	wInven->getPos().x = pos.x;
+	wInven->getPos().y = pos.y;
 
 	WINMANAGER->add("UI_inventory", wInven);
 	WINMANAGER->show(wInven);

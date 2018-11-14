@@ -9,7 +9,7 @@
 struct tagShopContent;
 
 class buttonInventory;
-class windowInventory : public windowBase
+class windowInventory : public windowMovable
 {
 private:
 
