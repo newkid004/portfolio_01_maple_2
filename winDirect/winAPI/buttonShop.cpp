@@ -28,15 +28,7 @@ UI_LIST_ITER buttonShop_itemList::update(void)
 		updateDbClick();
 		updateRightClick();
 		updateSelectClick();
-	}
 
-	return _bindWindow->getIter();
-}
-
-void buttonShop_itemList::render(void)
-{
-	if (IsClickRect(getAbsRect(), _ptMouse))
-	{
 		windowToolTip* winTT = (windowToolTip*)WINMANAGER->find("item_toolTip");
 		itemBase* viewItem = getRenderContent();
 
@@ -46,6 +38,8 @@ void buttonShop_itemList::render(void)
 			winTT->show();
 		}
 	}
+
+	return _bindWindow->getIter();
 }
 
 void buttonShop_itemList::initPosition(windowShop* bindWindow)

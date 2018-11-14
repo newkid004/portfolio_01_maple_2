@@ -16,7 +16,6 @@ protected:
 public :
 	virtual HRESULT init(int slot, windowShop* bindWindow);
 	virtual UI_LIST_ITER update(void) override;
-	virtual void render(void) override;
 
 public :
 	int & getSlot(void) { return _slot; };
