@@ -72,7 +72,7 @@ void sceneTestShop::initResource(void)
 	IMAGEMANAGER->add("UI_meso", L"image/UI/UI_meso.png");
 	IMAGEMANAGER->add("UI_checkBox", L"image/UI/UI_checkBox.png", 2);
 
-	IMAGEMANAGER->add("item", L"image/item/xcf/item_consume.png", 10, 3);
+	IMAGEMANAGER->add("item", L"image/item/icon/item_icon_consume.png", fPOINT(50.f));
 	IMAGEMANAGER->add("item_shadow", L"image/item/item_shadow.png");
 }
 
@@ -110,8 +110,7 @@ void sceneTestShop::initWindow(void)
 	// ----- shop ----- //
 	winShop = new windowShop;
 	winShop->init();
-	winShop->getImage() = IMAGEMANAGER->find("UI_shop_layout");
-	winShop->getPos() = { 150,100 };
+	winShop->getPos() = { 200, 50 };
 
 	// bind
 	SHOPMANAGER->getWindow() = winShop;
@@ -178,7 +177,7 @@ void sceneTestShop::renderText(void)
 {
 	D2D1_RECT_F rc = {30, 30, 300, 100};
 	wstring str;
-	
+
 	TEXTMANAGER->setTextColor(&C_COLOR_BLACK);
 	IMAGEMANAGER->resetTransform();
 	IMAGEMANAGER->setTransform();

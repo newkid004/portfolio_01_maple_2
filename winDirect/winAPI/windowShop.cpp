@@ -17,6 +17,8 @@ HRESULT windowShop::init(void)
 	
 	_shop = NULL;
 
+	_img = IMAGEMANAGER->add("UI_shop_layout", L"image/UI/shop/UI_shop_layout.png");
+
 	_conShop.firstItemPos = fPOINT(27.5f, 141.5f);
 	_conPlayer.firstItemPos = fPOINT(301.5f, 141.5f);
 
@@ -24,7 +26,7 @@ HRESULT windowShop::init(void)
 	_conPlayer.selectedItem.x = -1;
 
 	initButton();
-	initDbClick();
+	initCallback();
 	initWheel();
 
 	return S_OK;
@@ -131,11 +133,12 @@ void windowShop::initButton(void)
 
 void windowShop::initButtonEtc(void)
 {
-	// 상점 나가기
+	// button : 상점 나가기
 	buttonBaseFrame* btnExit = new buttonBaseFrame;
 	btnExit->init(IMAGEMANAGER->find("UI_shop_button"));
 	btnExit->getPos() = { 201.f, 53.f };
-	btnExit->getActivate() = [&](void)->UI_LIST_ITER {
+	btnExit->getActive() = [&](void)->UI_LIST_ITER {
+
 		buttonBaseFrame* btn = (buttonBaseFrame*)findButton("exit");
 		if (IsClickRect(btn->getAbsRect(), _ptMouse))
 		{
@@ -156,9 +159,82 @@ void windowShop::initButtonEtc(void)
 		return _managedIter;
 	};
 	addButton("exit", btnExit);
+
+	// button : 아이템 구입
+	buttonBaseFrame* btnBuy = new buttonBaseFrame;
+	btnBuy->init(IMAGEMANAGER->find("UI_shop_button"));
+	btnBuy->getPos() = { 201.f, 73.f };
+	btnBuy->getActive() = [&](void)->UI_LIST_ITER {
+
+		buttonBaseFrame* btn = (buttonBaseFrame*)findButton("buy");
+		if (IsClickRect(btn->getAbsRect(), _ptMouse))
+		{
+			if (-1 < _conShop.selectedItem.x && KEYMANAGER->up(VK_LBUTTON))
+			{
+				_currentSlotButton = (buttonShop_itemList*)findButton("shop_slot_" + to_string(_conShop.selectedItem.y - _conShop.scroll));
+				if (_currentSlotButton)
+					(*GAMESYSTEM->findCallback("UI_shop_button_buy"))();
+
+				return WINMANAGER->getIgnoreIter();
+			}
+			else if (KEYMANAGER->press(VK_LBUTTON))
+			{
+				// 사운드 추가
+			}
+			else if (KEYMANAGER->down(VK_LBUTTON))
+				btn->getCurFrame() = { 2, 1 };
+			else
+				btn->getCurFrame() = { 1, 1 };
+		}
+		else
+			btn->getCurFrame() = { 0, 1 };
+
+		return _managedIter;
+	};
+	addButton("buy", btnBuy);
+
+	// button : 아이템 판매
+	buttonBaseFrame* btnSell = new buttonBaseFrame;
+	btnSell->init(IMAGEMANAGER->find("UI_shop_button"));
+	btnSell->getPos() = { 433.f, 73.f };
+	btnSell->getActive() = [&](void)->UI_LIST_ITER {
+
+		buttonBaseFrame* btn = (buttonBaseFrame*)findButton("sell");
+		if (IsClickRect(btn->getAbsRect(), _ptMouse))
+		{
+			if (-1 < _conPlayer.selectedItem.x && KEYMANAGER->up(VK_LBUTTON))
+			{
+				// 인벤토리 재정렬
+				_conPlayer.tabIndex = _conPlayer.selectedItem.x;
+				_conPlayer.scroll = _conPlayer.selectedItem.y;
+				SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(_conPlayer.selectedItem.x));
+
+				// 판매
+				_currentSlotButton = (buttonShop_itemList*)findButton("player_slot_0");
+				(*GAMESYSTEM->findCallback("UI_shop_button_sell"))();
+
+				_conPlayer.selectedItem.x = -1;
+
+				return WINMANAGER->getIgnoreIter();
+			}
+			else if (KEYMANAGER->press(VK_LBUTTON))
+			{
+				// 사운드 추가
+			}
+			else if (KEYMANAGER->down(VK_LBUTTON))
+				btn->getCurFrame() = { 2, 2 };
+			else
+				btn->getCurFrame() = { 1, 2 };
+		}
+		else
+			btn->getCurFrame() = { 0, 2 };
+
+		return _managedIter;
+	};
+	addButton("sell", btnSell);
 }
 
-void windowShop::initDbClick(void)
+void windowShop::initCallback(void)
 {
 	function<void(void)> f;
 
@@ -273,18 +349,22 @@ void windowShop::renderSelect(void)
 	static fPOINT intervalShop = { 47.f, 124.f };
 	static fPOINT intervalPlayer = { 321.f, 124.f };
 
-	if (-1 < _conShop.selectedItem.x)
+	int selectedShop	= _conShop.selectedItem.y - _conShop.scroll;
+	int selectedPlayer	= _conPlayer.selectedItem.y - _conPlayer.scroll;
+
+	if (_conShop.selectedItem.x == _conShop.tabIndex  &&
+		-1 < selectedShop && selectedShop < CNT_SHOP_ITEM_LIST)
 	{
-		IMAGEMANAGER->statePos(_pos + intervalShop).y += _conShop.selectedItem.y * 42.f;
+		IMAGEMANAGER->statePos(_pos + intervalShop).y += selectedShop * 42.f;
 		IMAGEMANAGER->find("UI_shop_selected_shop")->render();
 	}
 
-	if (-1 < _conPlayer.selectedItem.x)
+	if (_conPlayer.selectedItem.x == _conPlayer.tabIndex &&
+		-1 < selectedPlayer && selectedPlayer < CNT_SHOP_ITEM_LIST)
 	{
-		IMAGEMANAGER->statePos(_pos + intervalPlayer).y += _conPlayer.selectedItem.y * 42.f;
+		IMAGEMANAGER->statePos(_pos + intervalPlayer).y += selectedPlayer * 42.f;
 		IMAGEMANAGER->find("UI_shop_selected_player")->render();
 	}
-
 }
 
 void windowShop::renderInfo(void)

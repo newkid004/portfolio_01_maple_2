@@ -2,6 +2,7 @@
 #include "eventDef.h"
 
 #define eventBaseCreate2Writter (void* sour, void* dest, unsigned long paramType = 0UL, float timeAlive = 0.f) : eventBase(sour, dest, paramType, timeAlive) {}
+
 #define makeSourParam(param) ((param & 0xffffUL) << 16)
 #define makeDestParam(param) (param & 0xffffUL)
 #define makeParamType(sour, dest) (makeSourParam(sour) | makeDestParam(dest))
@@ -25,7 +26,10 @@ public:
 	virtual void render() {}
 
 public: // getter, setter
-	float getTimeAlive() { return _timeAlive; }
+	void* getSour(void) { return _sour; };
+	void* getDest(void) { return _dest; };
+	unsigned long getParamType(void) { return _paramType; };
+	float getTimeAlive(void) { return _timeAlive; }
 
 protected :
 	eventBase() {};

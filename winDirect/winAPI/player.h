@@ -18,7 +18,7 @@ enum e_PLAYER_INVENTORY_TAB
 };
 class inventory;
 
-class player : characterBase
+class player : public characterBase
 {
 private:
 	animation* _aniBody;
@@ -31,7 +31,8 @@ private:
 	fPOINT     _hairPosition;
 	fPOINT	   _tempPos;
 	inventory* _inven[PLAYER_INVENTORY_TAB_COUNT];
-	__int64	 _money;
+	__int64		_money;
+	int			_statPoint = 0;
 
 	int		 _flip;
 	NUM_REAL _acc;
@@ -58,6 +59,7 @@ public :
 public :	// ----- inventory, item ----- //
 	inventory*& getInventory(int index) { return _inven[index]; };
 	__int64 & getMoney(void) { return _money; };
+	int & getStatPoint(void) { return _statPoint; };
 
 public :
 	player();
