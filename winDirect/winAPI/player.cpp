@@ -1,13 +1,14 @@
 #include "stdafx.h"
 #include "player.h"
-
+#include "fieldBase.h"
 #include "inventory.h"
 
 player::player() : _headPosition(fPOINT(0.0f, 0.0f)),
-				   _facePosition(fPOINT(0.0f, 0.0f)),
-				   _hairPosition(fPOINT(0.0f, 0.0f)),
-				   _tempPos(fPOINT(0.0f, 0.0f)),
-				   _acc(0.0f)
+_facePosition(fPOINT(0.0f, 0.0f)),
+_hairPosition(fPOINT(0.0f, 0.0f)),
+_tempPos(fPOINT(0.0f, 0.0f)),
+_acc(0.0f),
+g_pBlackBrush(NULL)
 {
 }
 
@@ -15,6 +16,7 @@ HRESULT player::init(void)
 {
 	IMAGEMANAGER->add("henesys", L"image/map/henesys.png");
 	IMAGEMANAGER->add("henesys_pixel", L"image/map/henesys_pixel.png");
+	IMAGEMANAGER->add("henesys_pixelBmp", L"image/map/henesys_pixel.bmp");
 	IMAGEMANAGER->add("p_body", L"image/character/player/body.png", 4, 3);
 	IMAGEMANAGER->add("p_arm", L"image/character/player/arm.png", 4, 3);
 	IMAGEMANAGER->add("p_head", L"image/character/player/head.png");
@@ -27,6 +29,7 @@ HRESULT player::init(void)
 	setMotions(M_WALK, 4, 1, 0.180f);
 	setMotions(M_JUMP, 1, 2, 0.1f);
 
+	_fieldBase = new fieldBase;
 	_aniBody = new animation;
 	_aniArm = new animation;
 	_aniLhand = new animation;
@@ -34,17 +37,23 @@ HRESULT player::init(void)
 	_aniBody->init(IMAGEMANAGER->find("p_body"));
 	_aniArm->init(IMAGEMANAGER->find("p_arm"));
 	_aniLhand->init(IMAGEMANAGER->find("p_lHand"));
+	_fieldBase->init();
 
- 	_position = fPOINT(WINSIZEX / 2, WINSIZEY / 2 - 100);
+	_fieldBase->pushImage(IMAGEMANAGER->find("henesys_pixelBmp"), RO_BACK_0, -500);
+	_fieldBase->setPixelImage("image/map/henesys_pixel.bmp");
+
+	_position = fPOINT(WINSIZEX / 2, WINSIZEY / 2 - 100);
 	_velocity = fPOINT(0.0f, 0.0f);
-	_collision = fRECT(_position + 50, _position + 100);
-	_state.movement = M_NONE;
+	_collision = fRECT(_position + 50, _position + 80);
+
 	_movement[0] = _movement[1] = M_NONE;
+	_state.movement = M_NONE;
 	_dir = LEFT;
+	_money = 0LL;
+
 	setAnimation(_state.movement);
 	initInventory();
 	aniStart();
-	_money = 0LL;
 
 	return S_OK;
 }
@@ -54,42 +63,34 @@ void player::release(void)
 	_aniBody->release();
 	_aniArm->release();
 	_aniLhand->release();
+	_fieldBase->release();
 
 	SAFE_DELETE(_aniBody);
 	SAFE_DELETE(_aniArm);
 	SAFE_DELETE(_aniLhand);
+	SAFE_DELETE(_fieldBase);
 
 	releaseInventory();
 }
 
 void player::update(void)
 {
-	if (_state.movement == M_JUMP)
-	{
-		jump();
-		if (_position.y > _tempPos.y)
-		{
-			_position.y = _tempPos.y;
-			_velocity = 0;
-			_acc = 0.0f;
-			setMovement(M_NONE);
-			aniStart();
-		}
-	}
-	_velocity *= TIMEMANAGER->getElapsedTime();
-	_position += _velocity * TIMEMANAGER->getElapsedTime();
-	_velocity = 0;
-	_collision = fRECT(_position + 30, _position + 70);
+	_collision = fRECT(_position + 50, _position + 80);
 
 	keyUpdate();
+	move();
 	setPartPosition();
+	convertToFixedVel();
 	setRayStruct();
+	convertToUnFixedVel();
+	pixelCollision();
+	_velocity = 0;
 }
 
 void player::render(void)
 {
 	IMAGEMANAGER->statePos(-500, -500);
-	IMAGEMANAGER->find("henesys")->render();
+	IMAGEMANAGER->find("henesys_pixel")->render();
 	if (KEYMANAGER->toggle(VK_F1))
 	{
 		IMAGEMANAGER->find("henesys_pixel")->render();
@@ -97,43 +98,52 @@ void player::render(void)
 	_flip = _dir == RIGHT ? IMAGE_FLIP_VERTICAL : 0;
 	IMAGEMANAGER->statePos(_position);
 	IMAGEMANAGER->stateFlip(_flip);
+	IMAGEMANAGER->enableTransform(TF_FLIP);
 	IMAGEMANAGER->find("p_body")->aniRender(_aniBody->update());
 	IMAGEMANAGER->find("p_arm")->aniRender(_aniArm->update());
 	IMAGEMANAGER->find("p_lHand")->aniRender(_aniLhand->update());
 	IMAGEMANAGER->statePos(_headPosition);
 	IMAGEMANAGER->find("p_head")->render();
 	IMAGEMANAGER->statePos(_facePosition);
-	IMAGEMANAGER->find("p_face")->frameRender(fPOINT(0,0));
+	IMAGEMANAGER->find("p_face")->frameRender(fPOINT(0, 0));
 	IMAGEMANAGER->statePos(_hairPosition);
 	IMAGEMANAGER->find("p_hair")->render();
 
-	IMAGEMANAGER->resetTransform();
+	IMAGEMANAGER->disableTransform(TF_FLIP);
+	IMAGEMANAGER->setTransform();
 	for (int i = 0; i < RAY_NUM; i++)
 	{
-		ID2D1SolidColorBrush*   g_pBlackBrush = NULL;
+		_renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Red), &g_pBlackBrush);
+		IMAGEMANAGER->statePos(_collision.RB.x, _collision.LT.y);
+		_renderTarget->DrawLine(
+			D2D1::Point2F(_rayStruct.rightRay[i].sourfPos.x - _collision.LT.x, _rayStruct.rightRay[i].sourfPos.y - _collision.LT.y),
+			D2D1::Point2F(_rayStruct.rightRay[i].destfPos.x - _collision.LT.x, _rayStruct.rightRay[i].destfPos.y - _collision.LT.y),
+			g_pBlackBrush);
+		IMAGEMANAGER->statePos(_collision.LT.x, _collision.LT.y);
+		_renderTarget->DrawLine(
+			D2D1::Point2F(_rayStruct.leftRay[i].sourfPos.x - _collision.LT.x, _rayStruct.leftRay[i].sourfPos.y - _collision.LT.y),
+			D2D1::Point2F(_rayStruct.leftRay[i].destfPos.x - _collision.LT.x, _rayStruct.leftRay[i].destfPos.y - _collision.LT.y),
+			g_pBlackBrush);
+		IMAGEMANAGER->statePos(_collision.LT.x, _collision.LT.y);
+		_renderTarget->DrawLine(
+			D2D1::Point2F(_rayStruct.upperRay.sourfPos.x - _collision.LT.x, _rayStruct.upperRay.sourfPos.y - _collision.LT.y),
+			D2D1::Point2F(_rayStruct.upperRay.destfPos.x - _collision.LT.x, _rayStruct.upperRay.destfPos.y - _collision.LT.y),
+			g_pBlackBrush);
+		IMAGEMANAGER->statePos(_collision.LT.x, _collision.RB.y);
+		_renderTarget->DrawLine(
+			D2D1::Point2F(_rayStruct.bottomRay.sourfPos.x - _collision.LT.x, _rayStruct.bottomRay.sourfPos.y - _collision.LT.y),
+			D2D1::Point2F(_rayStruct.bottomRay.destfPos.x - _collision.LT.x, _rayStruct.bottomRay.destfPos.y - _collision.LT.y),
+			g_pBlackBrush);
 		_renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Black), &g_pBlackBrush);
-		_renderTarget->DrawLine(
-			D2D1::Point2F(_rayStruct.rightRay[i].sourfPos.x, _rayStruct.rightRay[i].sourfPos.y),
-			D2D1::Point2F(_rayStruct.rightRay[i].destfPos.x, _rayStruct.rightRay[i].destfPos.y),
-			g_pBlackBrush, 0.5f);
-		_renderTarget->DrawLine(
-			D2D1::Point2F(_rayStruct.leftRay[i].sourfPos.x, _rayStruct.leftRay[i].sourfPos.y),
-			D2D1::Point2F(_rayStruct.leftRay[i].destfPos.x, _rayStruct.leftRay[i].destfPos.y),
-			g_pBlackBrush, 0.5f);
-		_renderTarget->DrawLine(
-			D2D1::Point2F(_rayStruct.upperRay[i].sourfPos.x, _rayStruct.upperRay[i].sourfPos.y),
-			D2D1::Point2F(_rayStruct.upperRay[i].destfPos.x, _rayStruct.upperRay[i].destfPos.y),
-			g_pBlackBrush, 0.5f);
-		_renderTarget->DrawLine(
-			D2D1::Point2F(_rayStruct.bottomRay[i].sourfPos.x, _rayStruct.bottomRay[i].sourfPos.y),
-			D2D1::Point2F(_rayStruct.bottomRay[i].destfPos.x, _rayStruct.bottomRay[i].destfPos.y),
-			g_pBlackBrush, 0.5f);
+		_renderTarget->DrawRectangle(D2D1::RectF(0, 0, 30, 30), g_pBlackBrush);
 		g_pBlackBrush->Release();
 		g_pBlackBrush = NULL;
-		if (_rayStruct.rightRay[i].distance > 0)
-		{
-			int n = 0;
-		}
+
+		if (_rayStruct.rightRay[i].distance > 0)  int n = 0;
+		if (_rayStruct.leftRay[i].distance > 0)	  int n = 0;
+		if (_rayStruct.upperRay.distance > 0)	  int n = 0;
+		if (_rayStruct.bottomRay.distance > 0)    int n = 0;
+
 	}
 }
 
@@ -199,7 +209,7 @@ void player::keyUpdate(void)
 	}
 
 	if (!KEYMANAGER->down(VK_LEFT) && !KEYMANAGER->down(VK_RIGHT) &&
-		!KEYMANAGER->down(VK_UP)   && !KEYMANAGER->down(VK_DOWN)  &&
+		!KEYMANAGER->down(VK_UP) && !KEYMANAGER->down(VK_DOWN) &&
 		_state.movement != M_NONE && _state.movement != M_JUMP)
 	{
 		setMovement(M_NONE);
@@ -245,7 +255,7 @@ void player::setPartPosition(void)
 		_facePosition = fPOINT(_position.x + 24, _position.y - 1);
 		_hairPosition = fPOINT(_position.x + 34, _position.y + 1);
 	}
-	
+
 	if (_dir == RIGHT)
 	{
 		_headPosition = fPOINT(_position.x + 28, _position.y + 1);
@@ -268,12 +278,69 @@ void player::aniStop(void)
 	_aniLhand->stop();
 }
 
+void player::move(void)
+{
+	convertToFixedVel();
+
+	if (_state.movement == M_JUMP)
+	{
+		jump();
+		if (_position.y > _tempPos.y)
+		{
+			_position.y = _tempPos.y;
+			_velocity = 0;
+			_acc = 0.0f;
+			setMovement(M_NONE);
+			aniStart();
+		}
+	}
+	else
+	{
+		_velocity.y += 5;
+	}
+	//_velocity *= TIMEMANAGER->getElapsedTime();
+	_position += _velocity;
+
+	convertToUnFixedVel();
+}
+
 void player::jump(void)
-{ 
+{
 	_velocity.y = -SPEED * 4 + (GRAVITY + _acc);
 	_acc += 20;
 }
-;
+void player::pixelCollision(void)
+{
+	for (int i = 0; i < RAY_NUM; i++)
+	{
+		for (int j = _rayStruct.leftRay[i].destfPos.x; j < _rayStruct.leftRay[i].sourfPos.x; j++)
+		{
+			int r = _fieldBase->getPixel(fPOINT(j + 500, _rayStruct.leftRay[i].destfPos.y + 500)) & 0x0000ff;
+			int g = (_fieldBase->getPixel(fPOINT(j + 500, _rayStruct.leftRay[i].destfPos.y + 500)) & 0x00ff00) >> 8;
+			int b = (_fieldBase->getPixel(fPOINT(j + 500, _rayStruct.leftRay[i].destfPos.y + 500)) & 0xff0000) >> 16;
+
+			if (r == 0 && g == 0 && b == 255)
+			{
+				_position.x = j + 80;
+				//_position.y = _rayStruct.leftRay[i].destfPos.y - 80;
+				break;
+			}
+		}
+	}
+	for (int i = _rayStruct.bottomRay.sourfPos.y; i < _rayStruct.bottomRay.destfPos.y; i++)
+	{
+		int r = _fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 500, i + 500)) & 0x0000ff;
+		int g = (_fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 500, i + 500)) & 0x00ff00) >> 8;
+		int b = (_fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 500, i + 500)) & 0xff0000) >> 16;
+
+		if (r == 0 && g == 0 && b == 255)
+		{
+			_position.y = i - 80;
+			break;
+		}
+	}
+}
+
 void player::setMovement(MOVEMENT movement)
 {
 	if (movement == M_NONE)
@@ -288,7 +355,7 @@ void player::setMovement(MOVEMENT movement)
 		_movement[0] = M_JUMP;
 		_movement[1] = M_NONE;
 	}
-	else 
+	else
 		_movement[0] == M_NONE ? _movement[0] = movement : _movement[1] = movement;
 
 	_state.movement = (MOVEMENT)(_movement[0] | _movement[1]);

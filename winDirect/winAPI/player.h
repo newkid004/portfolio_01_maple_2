@@ -17,7 +17,7 @@ enum e_PLAYER_INVENTORY_TAB
 	PLAYER_INVENTORY_TAB_COUNT
 };
 class inventory;
-
+class fieldBase;
 class player : public characterBase
 {
 private:
@@ -30,6 +30,8 @@ private:
 	fPOINT     _facePosition;
 	fPOINT     _hairPosition;
 	fPOINT	   _tempPos;
+	fieldBase* _fieldBase;
+	ID2D1SolidColorBrush*   g_pBlackBrush;
 	inventory* _inven[PLAYER_INVENTORY_TAB_COUNT];
 	__int64		_money;
 	int			_statPoint = 0;
@@ -54,7 +56,11 @@ public :
 	void setPartPosition(void);
 	void aniStart(void);
 	void aniStop(void);
+	void move(void);
 	void jump(void);
+	void pixelCollision(void);
+	void convertToFixedVel(void) { _velocity *= TIMEMANAGER->getElapsedTime(); }
+	void convertToUnFixedVel(void) { _velocity /= TIMEMANAGER->getElapsedTime(); }
 
 public :	// ----- inventory, item ----- //
 	inventory*& getInventory(int index) { return _inven[index]; };
