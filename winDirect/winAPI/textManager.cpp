@@ -20,6 +20,7 @@ HRESULT textManager::init(void)
 	IDWriteTextFormat* text;
 	text = add("defaultText_right", L"µ¸¿òÃ¼", 12.f);	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
 	text = add("defaultText_center", L"µ¸¿òÃ¼", 12.f);	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	text = add("statusText", L"µ¸¿òÃ¼", 11.f);
 	text = add("shopText", L"µ¸¿òÃ¼", 10.f);
 
 	return S_OK;

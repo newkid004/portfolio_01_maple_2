@@ -179,6 +179,7 @@
     <ClCompile Include="enemy_0000_snail.cpp" />
     <ClCompile Include="eventCatcher.cpp" />
     <ClCompile Include="eventManager.cpp" />
+    <ClCompile Include="eventPlayerLevelUp.cpp" />
     <ClCompile Include="event_0000_test.cpp" />
     <ClCompile Include="fieldBase.cpp" />
     <ClCompile Include="fieldManager.cpp" />
@@ -211,6 +212,7 @@
     <ClCompile Include="sceneTest2.cpp" />
     <ClCompile Include="sceneTestPixelCrash.cpp" />
     <ClCompile Include="sceneTestShop.cpp" />
+    <ClCompile Include="sceneTestWindowStatus.cpp" />
     <ClCompile Include="sceneWindowTest.cpp" />
     <ClCompile Include="settingButtonTest.cpp" />
     <ClCompile Include="shopBase.cpp" />
@@ -228,6 +230,7 @@
     <ClCompile Include="txtDataManager.cpp" />
     <ClCompile Include="windowBase.cpp" />
     <ClCompile Include="windowShop.cpp" />
+    <ClCompile Include="windowStatus.cpp" />
     <ClCompile Include="windowToolTip.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="winManager.cpp" />
@@ -269,6 +272,7 @@
     <ClInclude Include="eventDef.h" />
     <ClInclude Include="eventList.h" />
     <ClInclude Include="eventManager.h" />
+    <ClInclude Include="eventPlayerLevelUp.h" />
     <ClInclude Include="event_0000_test.h" />
     <ClInclude Include="fieldBase.h" />
     <ClInclude Include="fieldManager.h" />
@@ -304,6 +308,7 @@
     <ClInclude Include="sceneTest2.h" />
     <ClInclude Include="sceneTestPixelCrash.h" />
     <ClInclude Include="sceneTestShop.h" />
+    <ClInclude Include="sceneTestWindowStatus.h" />
     <ClInclude Include="sceneWindowTest.h" />
     <ClInclude Include="settingButtonTest.h" />
     <ClInclude Include="shopBase.h" />
