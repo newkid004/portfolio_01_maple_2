@@ -66,6 +66,11 @@ void windowInventory::initButton(void)
 		b->init(i, this);
 		addButton("inven_tab_" + to_string(i), b);
 	}
+
+	buttonInvenMeso* b = new buttonInvenMeso;
+	b->init();
+	addButton("button_meso", b);
+
 	_currentButton = NULL;
 }
 
