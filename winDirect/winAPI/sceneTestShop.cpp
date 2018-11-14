@@ -9,7 +9,7 @@
 #include "windowShop.h"
 #include "windowToolTip.h"
 
-static fPOINT pos = fPOINT(150, 100);
+static windowShop* winShop;
 
 HRESULT sceneTestShop::init(void)
 {
@@ -37,12 +37,21 @@ void sceneTestShop::update(void)
 	WINMANAGER->update();
 
 	updateControl();
+
+	
 }
 
 void sceneTestShop::render(void)
 {
 	GAMESYSTEM->render();
 	WINMANAGER->render();
+
+	IMAGEMANAGER->statePos(0);
+	IMAGEMANAGER->setTransform();
+
+	//shop->ClickRect text
+	_renderTarget->DrawRectangle(&RectF(winShop->getResizeClickRect().LT.x, winShop->getResizeClickRect().LT.y,
+		winShop->getResizeClickRect().RB.x, winShop->getResizeClickRect().RB.y), TEXTMANAGER->getBrush());
 
 	renderText();
 }
@@ -99,7 +108,7 @@ void sceneTestShop::initPlayer(void)
 void sceneTestShop::initWindow(void)
 {
 	// ----- shop ----- //
-	windowShop* winShop = new windowShop;
+	winShop = new windowShop;
 	winShop->init();
 	winShop->getPos() = { 200, 50 };
 
@@ -146,24 +155,22 @@ void sceneTestShop::initShortcut(void)
 
 void sceneTestShop::updateControl(void)
 {
-	if (KEYMANAGER->down(VK_UP))	pos.y -= TIMEMANAGER->getElapsedTime() * 100;
-	if (KEYMANAGER->down(VK_DOWN))	pos.y += TIMEMANAGER->getElapsedTime() * 100;
-	if (KEYMANAGER->down(VK_LEFT))	pos.x -= TIMEMANAGER->getElapsedTime() * 100;
-	if (KEYMANAGER->down(VK_RIGHT))	pos.x += TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down(VK_UP))	WINMANAGER->find("shop")->getPos().y -= TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down(VK_DOWN))	WINMANAGER->find("shop")->getPos().y += TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down(VK_LEFT))	WINMANAGER->find("shop")->getPos().x -= TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down(VK_RIGHT))	WINMANAGER->find("shop")->getPos().x += TIMEMANAGER->getElapsedTime() * 100;
 
 	if (KEYMANAGER->press('1'))		SHOPMANAGER->find("shop")->add(ITEMMANAGER->find(getRandomItemName()));
 	if (KEYMANAGER->press('2'))
 	{
 		GAMESYSTEM->getPlayer()->getInventory(0)->push(ITEMMANAGER->find(getRandomItemName()));
-		SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(0));
+		SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(.0));
 	}
 
 	if (KEYMANAGER->press('A'))		((windowShop*)WINMANAGER->find("shop"))->scrollShop(-1);
 	if (KEYMANAGER->press('Z'))		((windowShop*)WINMANAGER->find("shop"))->scrollShop(+1);
 	if (KEYMANAGER->press('S'))		((windowShop*)WINMANAGER->find("shop"))->scrollPlayer(-1);
 	if (KEYMANAGER->press('X'))		((windowShop*)WINMANAGER->find("shop"))->scrollPlayer(+1);
-
-	WINMANAGER->find("shop")->getPos() = pos;
 }
 
 void sceneTestShop::renderText(void)

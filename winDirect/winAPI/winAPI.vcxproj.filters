@@ -268,6 +268,9 @@
     <Filter Include="메인게임\Game Framework\Manager\event\_base\player">
       <UniqueIdentifier>{6d3b8ff9-1c91-45f4-bdf7-8311126abafe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="메인게임\Scene\test\inventory">
+      <UniqueIdentifier>{f9a3cfb1-58d0-4eef-b892-e29803cdf529}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -508,6 +511,9 @@
       <Filter>메인게임\Game Framework\Manager\window\status</Filter>
     </ClCompile>
     <ClCompile Include="eventPlayerLevelUp.cpp" />
+    <ClCompile Include="buttonInventory.cpp" />
+    <ClCompile Include="sceneTestInventory.cpp" />
+    <ClCompile Include="windowInventory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -632,9 +638,6 @@
     </ClInclude>
     <ClInclude Include="winManager.h">
       <Filter>메인게임\Game Framework\Manager\window</Filter>
-    </ClInclude>
-    <ClInclude Include="windowBase.h">
-      <Filter>메인게임\Game Framework\Manager\window\_base</Filter>
     </ClInclude>
     <ClInclude Include="gameSystem.h">
       <Filter>메인게임\Game Framework\Manager\_sington\gameSystem</Filter>
@@ -762,9 +765,6 @@
     <ClInclude Include="playerTestScene.h">
       <Filter>메인게임\Scene\test\player</Filter>
     </ClInclude>
-    <ClInclude Include="windowShop.h">
-      <Filter>메인게임\Game Framework\Manager\window\shop</Filter>
-    </ClInclude>
     <ClInclude Include="itemManager.h">
       <Filter>메인게임\Game Framework\Manager\item</Filter>
     </ClInclude>
@@ -786,6 +786,15 @@
     <ClInclude Include="buttonCheckBox.h">
       <Filter>메인게임\Game Framework\Manager\window\_button\checkBox</Filter>
     </ClInclude>
+    <ClInclude Include="windowBase.h">
+      <Filter>메인게임\Game Framework\Manager\window\_base</Filter>
+    </ClInclude>
+    <ClInclude Include="windowShop.h">
+      <Filter>메인게임\Game Framework\Manager\window\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonInventory.h" />
+    <ClInclude Include="sceneTestInventory.h" />
+    <ClInclude Include="windowInventory.h" />
     <ClInclude Include="sceneTestWindowStatus.h">
       <Filter>메인게임\Scene\test\window\status</Filter>
     </ClInclude>
