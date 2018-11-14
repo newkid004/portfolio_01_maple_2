@@ -3,7 +3,7 @@
 
 class windowStatusDetail;
 
-class windowStatus : public windowBase
+class windowStatus : public windowMovable
 {
 protected :
 	windowStatusDetail* _bindWindow;
