@@ -10,6 +10,7 @@ protected:
 
 	function<UI_LIST_ITER(void)> _active;
 	windowBase* _bindWindow;
+
 public:
 	virtual HRESULT init(void) { return S_OK; };
 	virtual void release(void) {};
@@ -25,7 +26,7 @@ public:
 	fPOINT getAbsPos(void) { return _pos + _bindWindow->getPos(); };
 	virtual fRECT getAbsRect(void) { fRECT rc; rc.LT = getAbsPos(); rc.RB = rc.LT + _size; return rc; };
 
-	function<UI_LIST_ITER(void)> & getActivate(void) { return _active; };
+	function<UI_LIST_ITER(void)> & getActive(void) { return _active; };
 public:
 	buttonBase() : _img(NULL), _bindWindow(NULL) {};
 	~buttonBase() {};

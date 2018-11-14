@@ -101,7 +101,6 @@ void sceneTestShop::initWindow(void)
 	// ----- shop ----- //
 	windowShop* winShop = new windowShop;
 	winShop->init();
-	winShop->getImage() = IMAGEMANAGER->find("UI_shop_layout");
 	winShop->getPos() = { 200, 50 };
 
 	// bind
