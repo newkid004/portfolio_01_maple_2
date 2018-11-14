@@ -43,7 +43,7 @@ protected :
 	void initButton(void);
 	void initButtonEtc(void);
 
-	void initDbClick(void);
+	void initCallback(void);
 	void initWheel(void);
 
 	void renderSelect(void);
