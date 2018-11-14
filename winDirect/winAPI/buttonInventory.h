@@ -10,7 +10,7 @@ protected:
 	float _slotY;
 	virtual itemBase* getRenderContent(void);
 
-	virtual void updateDbClick(void) { KEYMANAGER->setDBClick(GAMESYSTEM->findCallback("UI_shop_button_buy"), false); };
+	virtual void updateDbClick(void) { /* 아이템 사용 */ };
 public:
 	virtual HRESULT init(fPOINT pos, windowInventory* bindWindow);
 	virtual UI_LIST_ITER update(void);
@@ -22,3 +22,30 @@ public:
 	~buttonInventory() {}
 };
 
+struct tagInvenContent;
+
+class buttonInvenTab : public buttonBase
+{
+protected:
+	int _type;
+	tagInvenContent* _bindContent;
+protected:
+	virtual HRESULT init(void) override { return S_OK; };
+
+public:
+	virtual HRESULT init(int tabType, windowInventory* bindWindow);
+	virtual UI_LIST_ITER update(void) override { return _active(); };
+	virtual void render(void) override;
+
+protected:
+	virtual void initProp(void);
+	virtual void initActive(void);
+
+public:
+	int & getType(void) { return _type; };
+
+
+public:
+	buttonInvenTab(){}
+	~buttonInvenTab(){}
+};

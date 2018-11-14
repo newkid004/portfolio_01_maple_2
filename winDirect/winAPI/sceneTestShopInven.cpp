@@ -73,10 +73,11 @@ void sceneTestShopInven::initResource(void)
 	IMAGEMANAGER->add("UI_meso", L"image/UI/UI_meso.png");
 	IMAGEMANAGER->add("UI_checkBox", L"image/UI/UI_checkBox.png", 2);
 
-	IMAGEMANAGER->add("item", L"image/item/xcf/item_consume.png", 10, 3);
+	IMAGEMANAGER->add("item", L"image/item/icon/item_icon_consume.png", 10, 3);
 	IMAGEMANAGER->add("item_shadow", L"image/item/item_shadow.png");
 
 	IMAGEMANAGER->add("UI_inventory", L"image/UI/UI_inventory.png");
+	IMAGEMANAGER->add("UI_inventory_tab", L"image/UI/inventory/UI_inventory_tab.png", 5, 2);
 }
 
 void sceneTestShopInven::initItem(void)
@@ -103,7 +104,7 @@ void sceneTestShopInven::initPlayer(void)
 	player* & p = GAMESYSTEM->getPlayer();
 	p = new player; p->init();
 
-	p->getInventory(0)->push(ITEMMANAGER->find(L"¿¤¸¯¼­"));
+	//p->getInventory(0)->push(ITEMMANAGER->find(L"¿¤¸¯¼­"));
 
 	p->getMoney() = 5000000LL;
 }
