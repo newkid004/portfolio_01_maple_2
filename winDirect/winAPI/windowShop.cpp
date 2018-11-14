@@ -239,7 +239,9 @@ void windowShop::initCallback(void)
 	function<void(void)> f;
 
 	// buy
-	f = [&](void)->void {
+	f = [this](void)->void {
+		if (this != WINMANAGER->getFocus() || !IsClickRect(getAbsRect(), _ptMouse)) return;
+
 		// 현 상점 슬롯 가져옴
 		itemBase* viewItem = _shop->find(_conShop.scroll + _currentSlotButton->getSlot());
 
@@ -290,7 +292,9 @@ void windowShop::initCallback(void)
 	GAMESYSTEM->addCallback("UI_shop_button_buy", f);
 
 	// sell
-	f = [&](void)->void {
+	f = [this](void)->void {
+		if (this != WINMANAGER->getFocus() || !IsClickRect(getAbsRect(), _ptMouse)) return;
+
 		// 현 플레이어 슬롯에 해당하는 아이템 가져옴
 		auto & itemView = SHOPMANAGER->getPlayerView();
 		int index = _conPlayer.scroll + _currentSlotButton->getSlot();

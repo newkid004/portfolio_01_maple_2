@@ -24,9 +24,10 @@ void windowBase::release(void)
 
 UI_LIST_ITER windowBase::update(void)
 {
-	UI_LIST_ITER viewIter;
-	updateButton(viewIter);		if (viewIter  != _managedIter) return viewIter;
-	updateFocus(viewIter);		if (viewIter != _managedIter) return viewIter;
+	UI_LIST_ITER viewIter;  
+	UI_LIST_ITER ignoreIter = WINMANAGER->getIgnoreIter();
+	updateButton(viewIter);		if (viewIter == ignoreIter) return viewIter;
+	updateFocus(viewIter);		if (viewIter == ignoreIter) return viewIter;
 
 	viewIter = _managedIter;
 	return ++viewIter;
@@ -60,7 +61,7 @@ void windowBase::updateFocus(UI_LIST_ITER & outIter)
 	if (IsClickRect(getAbsRect(), _ptMouse))
 	{
 		// 윈도우를 맨 앞으로
-		if (KEYMANAGER->down(VK_LBUTTON))
+		if (KEYMANAGER->press(VK_LBUTTON))
 			this->show();
 
 		// 뒷 창 무시
@@ -111,9 +112,10 @@ UI_LIST_ITER windowMovable::update(void)
 	}
 
 	UI_LIST_ITER viewIter;
-	updateButton(viewIter);		if (viewIter != _managedIter) return viewIter;
-	updateMoveable(viewIter);	if (viewIter != _managedIter) return viewIter;
-	updateFocus(viewIter);		if (viewIter != _managedIter) return viewIter;
+	UI_LIST_ITER ignoreIter = WINMANAGER->getIgnoreIter();
+	updateButton(viewIter);		if (viewIter == ignoreIter) return viewIter;
+	updateMoveable(viewIter);	if (viewIter == ignoreIter) return viewIter;
+	updateFocus(viewIter);		if (viewIter == ignoreIter) return viewIter;
 
 	viewIter = _managedIter;
 	return ++viewIter;

@@ -66,6 +66,9 @@ void buttonShop_itemList::updateSelectClick(void)
 		winShop->getContentShop().selectedItem = { 
 			winShop->getContentShop().tabIndex, 
 			winShop->getContentShop().scroll + _slot };
+
+		if (!winShop->getShop()->find(winShop->getContentShop().scroll + _slot))
+			winShop->getContentShop().selectedItem = { -1, -1 };
 	}
 }
 
@@ -101,6 +104,9 @@ void buttonShop_playerItemList::updateSelectClick(void)
 		winShop->getContentPlayer().selectedItem = {
 			winShop->getContentPlayer().tabIndex,
 			winShop->getContentPlayer().scroll + _slot };
+
+		if (SHOPMANAGER->getPlayerView().size() <= winShop->getContentPlayer().scroll + _slot)
+			winShop->getContentPlayer().selectedItem = { -1, -1 };
 	}
 }
 

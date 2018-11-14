@@ -101,7 +101,11 @@ void sceneTestInventory::updateControl(void)
 
 	if (KEYMANAGER->press('2'))
 	{
-		GAMESYSTEM->getPlayer()->getInventory(0)->push(ITEMMANAGER->find(ITEMMANAGER->find(getRandomItemName())));
+		GAMESYSTEM->getPlayer()->getInventory(0)->push(
+			ITEMMANAGER->create(
+				ITEMMANAGER->find(getRandomItemName())
+			)
+		);
 	}
 
 

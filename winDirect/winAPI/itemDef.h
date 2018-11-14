@@ -14,8 +14,8 @@ namespace itemDef
 
 		ITEM_TYPE_CONSUMABLE			=	0x0004,
 
-		ITEM_TYPE_FIT					=	0x0008,
-		ITEM_TYPE_ETC					=	0x0010,
+		ITEM_TYPE_ETC					=	0x0008,
+		ITEM_TYPE_FIT					=	0x0010,
 		ITEM_TYPE_CACHE					=	0x0020
 	};
 

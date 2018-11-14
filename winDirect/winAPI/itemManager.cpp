@@ -54,7 +54,10 @@ itemBase * itemManager::find(wstring name)
 
 itemBase * itemManager::create(itemBase * viewItem)
 {
-	return create(viewItem->getContent()->type);
+	itemBase* i = create(viewItem->getContent()->type);
+	*i->getContent() = viewItem->getContent();
+
+	return i;
 }
 
 itemBase * itemManager::create(int type)

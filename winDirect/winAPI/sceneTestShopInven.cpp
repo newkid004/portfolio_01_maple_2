@@ -127,7 +127,6 @@ void sceneTestShopInven::initWindow(void)
 	WINMANAGER->add("UI_inventory", wInven);
 	WINMANAGER->show(wInven);
 
-
 	// bind
 	SHOPMANAGER->getWindow() = winShop;
 
@@ -179,8 +178,12 @@ void sceneTestShopInven::updateControl(void)
 	if (KEYMANAGER->press('1'))		SHOPMANAGER->find("shop")->add(ITEMMANAGER->find(getRandomItemName()));
 	if (KEYMANAGER->press('2'))
 	{
-		GAMESYSTEM->getPlayer()->getInventory(0)->push(ITEMMANAGER->find(getRandomItemName()));
-		SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(.0));
+		GAMESYSTEM->getPlayer()->getInventory(0)->push(
+			ITEMMANAGER->create(
+				ITEMMANAGER->find(getRandomItemName())
+				)
+			);
+		SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(0));
 	}
 
 	if (KEYMANAGER->press('A'))		((windowShop*)WINMANAGER->find("shop"))->scrollShop(-1);
