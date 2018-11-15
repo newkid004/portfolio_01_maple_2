@@ -6,6 +6,7 @@ namespace itemDef
 		ITEM_TYPE_NONE					=	0,
 		ITEM_TYPE_EQUIP					=	0x1000,
 		ITEM_TYPE_USEABLE				=	0x2000,
+		ITEM_TYPE_COUNTABLE				=	0x4000,
 		ITEM_TYPE_CHECK					=	0x00ff,
 
 		ITEM_TYPE_WEAPON				=	0x0001,

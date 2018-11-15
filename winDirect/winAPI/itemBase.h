@@ -17,6 +17,9 @@ struct itemContentBase
 	wstring name;
 	wstring memo;
 
+	int count;
+	int maxCount;
+
 	__int64 price;
 
 	itemContentBase() :
@@ -35,7 +38,9 @@ struct itemContentBase
 		this->frame			= i->frame;
 		this->name			= i->name;
 		this->memo			= i->memo;
-		this->price = i->price;
+		this->count			= i->count;
+		this->maxCount		= i->maxCount;
+		this->price			= i->price;
 	};
 };
 
@@ -52,7 +57,7 @@ struct itemContentEquip : public itemContentBase
 	stateLimit limit;
 	stateBasic basic;
 	statePoint point;
-	itemContentEquip() : itemContentBase() { type |= itemDef::ITEM_TYPE_EQUIP | itemDef::ITEM_TYPE_USEABLE; }
+	itemContentEquip() : itemContentBase() { type |= itemDef::ITEM_TYPE_EQUIP | itemDef::ITEM_TYPE_USEABLE; maxCount = 1; count = 1; }
 
 	virtual void operator=(itemContentEquip i) { itemContentBase::operator=(&i); }
 	virtual void operator=(itemContentEquip *i) 
@@ -72,16 +77,8 @@ struct itemContentArmor : public itemContentEquip {
 };
 
 // ----- consumeable ----- //
-struct itemContentConsume : public itemContentBase
-{
-	int count;
-
-	virtual void operator=(itemContentConsume i) { this->operator=(&i); };
-	virtual void operator=(itemContentConsume* i)
-	{
-		itemContentBase::operator=(i);
-		this->count = i->count;
-	};
+struct itemContentCountable : public itemContentBase {
+	itemContentCountable() : itemContentBase() { type |= itemDef::ITEM_TYPE_USEABLE; }
 };
 
 // ----- item Base ----- //

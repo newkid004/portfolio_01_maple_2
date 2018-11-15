@@ -9,9 +9,11 @@
 
 #include "itemBase.h"
 
+
 HRESULT windowInventory::init(void)
 {
 	windowBase::init();
+	_tabIndex = 0;
 
 	initButton();
 	return S_OK;
@@ -28,7 +30,7 @@ void windowInventory::render(void)
 {
 	windowBase::render();
 
-	POINT pSize = GAMESYSTEM->getPlayer()->getInventory(0)->size();
+	POINT pSize = GAMESYSTEM->getPlayer()->getInventory(_tabIndex)->size();
 	for (int i = 0; i < INVENX; ++i)
 	{
 		for (int j = 0; j < INVENY; ++j)
@@ -37,7 +39,7 @@ void windowInventory::render(void)
 
 			if (pSize.x * pSize.y <= viewIndex) return;
 
-			itemBase* viewItem = GAMESYSTEM->getPlayer()->getInventory(0)->find(POINT{ i,j });
+			itemBase* viewItem = GAMESYSTEM->getPlayer()->getInventory(_tabIndex)->find(POINT{ i,j });
 			if (viewItem)
 				viewItem->render2Inventory(_pos + fPOINT(27, 68) - viewItem->getContent()->img->getCenterFramePos(), fPOINT(i, j));
 		}
@@ -58,6 +60,12 @@ void windowInventory::initButton(void)
 		}
 	}
 
+	for (int i = 0; i <= IMAGEMANAGER->find("UI_shop_tab_player")->getMaxFrame().x; ++i)
+	{
+		buttonInvenTab* b = new buttonInvenTab;
+		b->init(i, this);
+		addButton("inven_tab_" + to_string(i), b);
+	}
 	_currentButton = NULL;
 }
 
@@ -74,5 +82,10 @@ void windowInventory::renderInfo(void)
 	wstring str; insertComma(&to_wstring(pMoney), &str);
 	TEXTMANAGER->drawText(&str, &RectF(0, 0, 80, 14), NULL,
 		TEXTMANAGER->find("defaultText_right"));
+}
+
+void windowInventory::selectInven(int index)
+{
+	_tabIndex = index;
 }
 
