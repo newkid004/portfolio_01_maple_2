@@ -31,6 +31,14 @@ enum MOVEMENT
 	M_SPWAN				= 0x0080,
 };
 
+enum COLLISIONSTATE
+{
+	C_NONE,
+	C_LAND,
+	C_LEFT,
+	C_RIGHT,
+	C_UP
+};
 struct stateBasic
 {
 	unsigned int		hp;								//ÇöÀç	hp

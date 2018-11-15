@@ -21,23 +21,23 @@ class fieldBase;
 class player : public characterBase
 {
 private:
-	animation* _aniBody;
-	animation* _aniArm;
-	animation* _aniLhand;
-	DIRECTION  _dir;
-	MOVEMENT   _movement[2];
-	fPOINT	   _headPosition;
-	fPOINT     _facePosition;
-	fPOINT     _hairPosition;
-	fPOINT	   _tempPos;
-	fieldBase* _fieldBase;
+	animation*				_aniBody;
+	animation*				_aniArm;
+	animation*				_aniLhand;
+	DIRECTION				_dir;
+	MOVEMENT				_movement[2];
+	COLLISIONSTATE			_collisionState;
+	fPOINT					_headPosition;
+	fPOINT					_facePosition;
+	fPOINT					_hairPosition;
+	fPOINT					_tempPos;
+	fieldBase*				_fieldBase;
 	ID2D1SolidColorBrush*   g_pBlackBrush;
-	inventory* _inven[PLAYER_INVENTORY_TAB_COUNT];
-	__int64		_money;
-	int			_statPoint = 0;
-
-	int		 _flip;
-	NUM_REAL _acc;
+	inventory*				_inven[PLAYER_INVENTORY_TAB_COUNT];
+	__int64					_money;
+	int						_statPoint = 0;
+	int						_flip;
+	NUM_REAL				_acc;
 public:
 	HRESULT init(void);
 	void release(void);
@@ -53,6 +53,7 @@ public :
 	void setMotions(MOVEMENT movement, int maxFrameX, int frameY, float delay);
 	void setAnimation(MOVEMENT movement);
 	void setMovement(MOVEMENT movement);
+	void setCollisionState(COLLISIONSTATE collisionState);
 	void setPartPosition(void);
 	void aniStart(void);
 	void aniStop(void);

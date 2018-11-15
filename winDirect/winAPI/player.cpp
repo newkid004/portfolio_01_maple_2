@@ -4,11 +4,11 @@
 #include "inventory.h"
 
 player::player() : _headPosition(fPOINT(0.0f, 0.0f)),
-_facePosition(fPOINT(0.0f, 0.0f)),
-_hairPosition(fPOINT(0.0f, 0.0f)),
-_tempPos(fPOINT(0.0f, 0.0f)),
-_acc(0.0f),
-g_pBlackBrush(NULL)
+				   _facePosition(fPOINT(0.0f, 0.0f)),
+				   _hairPosition(fPOINT(0.0f, 0.0f)),
+				   _tempPos(fPOINT(0.0f, 0.0f)),
+				   _acc(0.0f),
+				   g_pBlackBrush(NULL)
 {
 }
 
@@ -48,6 +48,7 @@ HRESULT player::init(void)
 
 	_movement[0] = _movement[1] = M_NONE;
 	_state.movement = M_NONE;
+	_collisionState = C_NONE;
 	_dir = LEFT;
 	_money = 0LL;
 
@@ -79,11 +80,11 @@ void player::update(void)
 
 	keyUpdate();
 	move();
+	pixelCollision();
 	setPartPosition();
 	convertToFixedVel();
 	setRayStruct();
 	convertToUnFixedVel();
-	pixelCollision();
 	_velocity = 0;
 }
 
@@ -199,6 +200,7 @@ void player::keyUpdate(void)
 			_tempPos.y = _position.y;
 			aniStop();
 			setMovement(M_JUMP);
+			setCollisionState(C_NONE);
 			aniStart();
 		}
 	}
@@ -285,19 +287,11 @@ void player::move(void)
 	if (_state.movement == M_JUMP)
 	{
 		jump();
-		if (_position.y > _tempPos.y)
-		{
-			_position.y = _tempPos.y;
-			_velocity = 0;
-			_acc = 0.0f;
-			setMovement(M_NONE);
-			aniStart();
-		}
 	}
-	else
-	{
-		_velocity.y += 5;
-	}
+	
+		_velocity.y += GRAVITY;
+	
+	
 	//_velocity *= TIMEMANAGER->getElapsedTime();
 	_position += _velocity;
 
@@ -306,8 +300,8 @@ void player::move(void)
 
 void player::jump(void)
 {
-	_velocity.y = -SPEED * 4 + (GRAVITY + _acc);
-	_acc += 20;
+	_velocity.y = -(SPEED + 1200) * TIMEMANAGER->getElapsedTime() + (_acc);
+	_acc += 1;
 }
 void player::pixelCollision(void)
 {
@@ -321,22 +315,26 @@ void player::pixelCollision(void)
 
 			if (r == 0 && g == 0 && b == 255)
 			{
-				_position.x = j + 80;
+				//_position.x = j + 80;
 				//_position.y = _rayStruct.leftRay[i].destfPos.y - 80;
 				break;
 			}
 		}
 	}
-	for (int i = _rayStruct.bottomRay.sourfPos.y; i < _rayStruct.bottomRay.destfPos.y; i++)
+	if (_velocity.y > 0)
 	{
-		int r = _fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 500, i + 500)) & 0x0000ff;
-		int g = (_fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 500, i + 500)) & 0x00ff00) >> 8;
-		int b = (_fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 500, i + 500)) & 0xff0000) >> 16;
-
-		if (r == 0 && g == 0 && b == 255)
+		for (int i = _rayStruct.bottomRay.sourfPos.y; i < _rayStruct.bottomRay.destfPos.y; i++)
 		{
-			_position.y = i - 80;
-			break;
+			int r = _fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 490, i + 490)) & 0x0000ff;
+			int g = (_fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 490, i + 490)) & 0x00ff00) >> 8;
+			int b = (_fieldBase->getPixel(fPOINT(_rayStruct.bottomRay.destfPos.x + 490, i + 490)) & 0xff0000) >> 16;
+
+			if (r == 0 && g == 0 && b == 255)
+			{
+				_position.y = i - 82;
+				setCollisionState(C_LAND);
+				break;
+			}
 		}
 	}
 }
@@ -360,5 +358,22 @@ void player::setMovement(MOVEMENT movement)
 
 	_state.movement = (MOVEMENT)(_movement[0] | _movement[1]);
 	setAnimation(_state.movement);
+}
+
+void player::setCollisionState(COLLISIONSTATE collisionState)
+{
+	if (collisionState == C_NONE)
+	{
+		_collisionState = C_NONE;
+	}
+	else if (collisionState == C_LAND)
+	{
+		if (_state.movement == M_JUMP)
+		{
+			_collisionState = C_LAND;
+			_acc = 0.0f;
+			setMovement(M_NONE);
+		}
+	}
 }
 
