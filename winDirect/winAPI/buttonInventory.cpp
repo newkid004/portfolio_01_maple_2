@@ -58,7 +58,7 @@ itemBase * buttonInventory::getRenderContent(void)
 }
 
 
-//========= itemTab==========
+//========= itemTab ==========
 
 HRESULT buttonInvenTab::init(int tabType, windowInventory * bindWindow)
 {
@@ -104,4 +104,49 @@ void buttonInvenTab::initActive(void)
 		}
 		return _bindWindow->getIter();
 	};
+}
+
+//=================== meso =========================
+
+HRESULT buttonInvenMeso::init(void)
+{
+	_img = IMAGEMANAGER->find("UI_button_meso");
+
+	_active = [&](void)->UI_LIST_ITER {WINMANAGER->trans("setting"); return _bindWindow->getIter(); };
+
+	_size = _img->getFrameSize();
+	_pos = { 9,268 };
+
+	_frame = 0;
+
+	return S_OK;
+}
+
+UI_LIST_ITER buttonInvenMeso::update(void)
+{
+	fRECT rc;
+	rc.LT = _pos + _bindWindow->getPos();
+	rc.RB = rc.LT + _size;
+
+	if (IsClickRect(rc, _ptMouse))
+	{
+		if (KEYMANAGER->up(VK_LBUTTON))
+			/*return _active()*/;
+		else if (KEYMANAGER->down(VK_LBUTTON))
+			_frame = 2;
+		else
+			_frame = 1;
+	}
+	else
+		_frame = 0;
+
+
+	return _bindWindow->getIter();
+}
+
+void buttonInvenMeso::render(void)
+{
+	IMAGEMANAGER->getTransformState() = TF_POSITION;
+	IMAGEMANAGER->statePos(_pos + _bindWindow->getPos());
+	_img->frameRender(0, _frame);
 }

@@ -78,6 +78,8 @@ void sceneTestShopInven::initResource(void)
 
 	IMAGEMANAGER->add("UI_inventory", L"image/UI/UI_inventory.png");
 	IMAGEMANAGER->add("UI_inventory_tab", L"image/UI/inventory/UI_inventory_tab.png", 5, 2);
+	IMAGEMANAGER->add("UI_button_meso", L"image/UI/inventory/UI_button_meso.png", 1, 4);
+	
 }
 
 void sceneTestShopInven::initItem(void)

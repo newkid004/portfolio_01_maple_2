@@ -44,8 +44,20 @@ protected:
 public:
 	int & getType(void) { return _type; };
 
-
 public:
 	buttonInvenTab(){}
 	~buttonInvenTab(){}
+};
+
+class buttonInvenMeso : public buttonBase
+{
+private:
+	int _frame;
+public:
+	HRESULT init(void);
+	UI_LIST_ITER update(void);
+	void render(void);
+
+	buttonInvenMeso() {}
+	~buttonInvenMeso() {}
 };
