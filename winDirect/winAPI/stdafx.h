@@ -98,6 +98,7 @@ using namespace MY_UTIL;
 #include "textManager.h"
 #include "eventManager.h"
 #include "itemManager.h"
+#include "imgNumManager.h"
 
 #include "gameSystem.h"
 
@@ -128,6 +129,7 @@ using namespace MY_UTIL;
 #define TEXTMANAGER		textManager::getSingleton()
 #define EVENTMANAGER	eventManager::getSingleton()
 #define ITEMMANAGER		itemManager::getSingleton()
+#define IMGNUMMANAGER	imgNumManager::getSingleton()
 
 #define GAMESYSTEM		gameSystem::getSingleton()
 

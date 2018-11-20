@@ -187,6 +187,7 @@
     <ClCompile Include="gameSystem.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
+    <ClCompile Include="imgNumManager.cpp" />
     <ClCompile Include="iniData.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="itemBase.cpp" />
@@ -283,6 +284,7 @@
     <ClInclude Include="gameSystem.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
+    <ClInclude Include="imgNumManager.h" />
     <ClInclude Include="iniData.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="itemBase.h" />

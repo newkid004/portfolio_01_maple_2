@@ -525,6 +525,7 @@
     <ClCompile Include="windowStatus.cpp">
       <Filter>메인게임\Game Framework\Manager\window\status</Filter>
     </ClCompile>
+    <ClCompile Include="imgNumManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -818,6 +819,7 @@
     <ClInclude Include="sceneTestShopInven.h">
       <Filter>메인게임\Scene\test\inventory</Filter>
     </ClInclude>
+    <ClInclude Include="imgNumManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="quest.Json">
