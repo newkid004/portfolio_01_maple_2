@@ -15,13 +15,13 @@ HRESULT textManager::init(void)
 	_renderTarget->CreateSolidColorBrush(C_COLOR_BLACK, &_brush);
 
 	// ±âº» ÅØ½ºÆ® »ý¼º
-	_currentFormat = gameNode::getTextFormat() = add("defaultText", L"µ¸¿òÃ¼", 12.f);
+	_currentFormat = gameNode::getTextFormat() = add("defaultText", L"µ¸¿ò", 12.f);
 
 	IDWriteTextFormat* text;
-	text = add("defaultText_right", L"µ¸¿òÃ¼", 12.f);	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
-	text = add("defaultText_center", L"µ¸¿òÃ¼", 12.f);	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-	text = add("statusText", L"µ¸¿òÃ¼", 11.f);
-	text = add("shopText", L"µ¸¿òÃ¼", 10.f);
+	text = add("defaultText_right", L"µ¸¿ò", 12.f);	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
+	text = add("defaultText_center", L"µ¸¿ò", 12.f);	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	text = add("statusText", L"µ¸¿ò", 11.f);
+	text = add("shopText", L"µ¸¿ò", 10.f);
 
 	return S_OK;
 }

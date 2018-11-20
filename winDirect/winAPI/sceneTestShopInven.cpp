@@ -73,7 +73,8 @@ void sceneTestShopInven::initResource(void)
 	IMAGEMANAGER->add("UI_meso", L"image/UI/UI_meso.png");
 	IMAGEMANAGER->add("UI_checkBox", L"image/UI/UI_checkBox.png", 2);
 
-	IMAGEMANAGER->add("item", L"image/item/icon/item_icon_consume.png", 10, 3);
+	IMAGEMANAGER->add("item", L"image/item/icon/item_icon_consume.png", fPOINT{ 50.f });
+	IMAGEMANAGER->add("item_equip_glove", L"image/item/icon/item_icon_equip_glove.png", fPOINT{ 50.f });
 	IMAGEMANAGER->add("item_shadow", L"image/item/item_shadow.png");
 
 	IMAGEMANAGER->add("UI_inventory", L"image/UI/UI_inventory.png");
@@ -85,17 +86,40 @@ void sceneTestShopInven::initResource(void)
 void sceneTestShopInven::initItem(void)
 {
 	itemBase* item;
+	itemContentArmor* contentArmor;
 
 	item = createItem(L"빨간 포션", L"체력\n조금\n회복\n함", fPOINT(0, 0));				item->getContent()->type = itemDef::ITEM_TYPE_ARMOR;		item->getContent()->price = 50;
 	item = createItem(L"주황 포션", L"체\n\n력\n보\n통\n\n회\n복\n\n함", fPOINT(50, 0));	item->getContent()->type = itemDef::ITEM_TYPE_ARMOR;		item->getContent()->price = 75;
-	item = createItem(L"하얀 포션", L"체력 많이 회복", fPOINT(100, 0));						item->getContent()->type = itemDef::ITEM_TYPE_CONSUMABLE;	item->getContent()->price = 150;
-	item = createItem(L"파란 포션", L"마나 조금 회복", fPOINT(150, 0));						item->getContent()->type = itemDef::ITEM_TYPE_CONSUMABLE;	item->getContent()->price = 100;
-	item = createItem(L"엘릭서", L"체력 꽤 회복", fPOINT(200, 0));						item->getContent()->type = itemDef::ITEM_TYPE_FIT;			item->getContent()->price = 700;
-	item = createItem(L"좋은 엘릭서", L"체력 전부 회복", fPOINT(250, 0));						item->getContent()->type = itemDef::ITEM_TYPE_FIT;			item->getContent()->price = 1000;
-	item = createItem(L"마나 엘릭서", L"마나 전부 회복", fPOINT(300, 0));						item->getContent()->type = itemDef::ITEM_TYPE_ETC;			item->getContent()->price = 2000;
-	item = createItem(L"순록의 우유", L"우유", fPOINT(350, 0));						item->getContent()->type = itemDef::ITEM_TYPE_ETC;			item->getContent()->price = 5000;
-	item = createItem(L"아침 이슬", L"어느 잎의 이슬", fPOINT(400, 0));						item->getContent()->type = itemDef::ITEM_TYPE_CACHE;		item->getContent()->price = 60000;
-	item = createItem(L"수박", L"달다", fPOINT(450, 0));						item->getContent()->type = itemDef::ITEM_TYPE_CACHE;		item->getContent()->price = 12000;
+	item = createItem(L"하얀 포션", L"체력 많이 회복", fPOINT(100, 0));					item->getContent()->type = itemDef::ITEM_TYPE_CONSUMABLE;	item->getContent()->price = 150;
+	item = createItem(L"파란 포션", L"마나 조금 회복", fPOINT(150, 0));					item->getContent()->type = itemDef::ITEM_TYPE_CONSUMABLE;	item->getContent()->price = 100;
+	item = createItem(L"엘릭서", L"체력 꽤 회복", fPOINT(200, 0));							item->getContent()->type = itemDef::ITEM_TYPE_FIT;			item->getContent()->price = 700;
+	item = createItem(L"좋은 엘릭서", L"체력 전부 회복", fPOINT(250, 0));					item->getContent()->type = itemDef::ITEM_TYPE_FIT;			item->getContent()->price = 1000;
+	item = createItem(L"마나 엘릭서", L"마나 전부 회복", fPOINT(300, 0));					item->getContent()->type = itemDef::ITEM_TYPE_ETC;			item->getContent()->price = 2000;
+	item = createItem(L"순록의 우유", L"우유", fPOINT(350, 0));							item->getContent()->type = itemDef::ITEM_TYPE_ETC;			item->getContent()->price = 5000;
+	item = createItem(L"아침 이슬", L"어느 잎의 이슬", fPOINT(400, 0));					item->getContent()->type = itemDef::ITEM_TYPE_CACHE;		item->getContent()->price = 60000;
+	item = createItem(L"수박", L"달다", fPOINT(450, 0));									item->getContent()->type = itemDef::ITEM_TYPE_CACHE;		item->getContent()->price = 12000;
+
+	item = new itemArmor; item->getContent() = new itemContentArmor; contentArmor = (itemContentArmor*)item->getContent();
+	item->getContent()->img = IMAGEMANAGER->find("item_equip_glove");
+	item->getContent()->name = L"노가다 목장갑";
+	item->getContent()->frame = fPOINT{ 0 };
+
+	contentArmor->limit.Lv = 100;
+	contentArmor->limitPoint.STR = 10;
+	contentArmor->limitPoint.DEX = 11;
+
+	contentArmor->limit.classes = (decltype(contentArmor->limit.classes))0x3;
+	
+	contentArmor->kind |= itemDef::ITEM_KIND_GLOVE;
+	contentArmor->point.STR = 2;
+	contentArmor->point.DEX = 2;
+	contentArmor->point.INT = 2;
+	contentArmor->point.LUK = 2;
+
+	contentArmor->basic.maxHp = 10;
+	contentArmor->basic.atkSpell = 5;
+
+	ITEMMANAGER->add(item);
 
 	// bind
 	ITEMMANAGER->getImgShadow() = IMAGEMANAGER->find("item_shadow");
@@ -109,6 +133,11 @@ void sceneTestShopInven::initPlayer(void)
 	//p->getInventory(0)->push(ITEMMANAGER->find(L"엘릭서"));
 
 	p->getMoney() = 5000000LL;
+
+	p->getStat().stateLimit.Lv = 100;
+	p->getStat().totalStatePoint.DEX = 15;
+
+	p->getStat().stateLimit.classes = (decltype(p->getStat().stateLimit.classes))0x1;
 }
 
 void sceneTestShopInven::initWindow(void)
@@ -150,6 +179,7 @@ void sceneTestShopInven::initShop(void)
 	shop->add(ITEMMANAGER->find(L"주황 포션"));
 	shop->add(ITEMMANAGER->find(L"하얀 포션"));
 	shop->add(ITEMMANAGER->find(L"파란 포션"));
+	shop->add(ITEMMANAGER->find(L"노가다 목장갑"));
 
 	SHOPMANAGER->add("shop", shop);
 
@@ -233,7 +263,7 @@ itemBase * sceneTestShopInven::createItem(wstring name, wstring memo, fPOINT & f
 
 wstring sceneTestShopInven::getRandomItemName(void)
 {
-	switch (RND->getInt(10))
+	switch (RND->getInt(11))
 	{
 	default: return L"빨간 포션";
 
@@ -247,5 +277,6 @@ wstring sceneTestShopInven::getRandomItemName(void)
 	case 7: return L"순록의 우유";
 	case 8: return L"아침 이슬";
 	case 9: return L"수박";
+	case 10: return L"노가다 목장갑";
 	}
 }

@@ -7,9 +7,6 @@ class itemBase;
 class sceneTestShopInven : public gameNode
 {
 public:
-	player* _player;
-
-public:
 	HRESULT init(void);
 	void release(void);
 	void update(void);
