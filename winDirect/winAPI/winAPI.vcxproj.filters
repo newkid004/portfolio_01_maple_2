@@ -256,23 +256,17 @@
     <Filter Include="메인게임\Game Framework\Manager\window\toolTip">
       <UniqueIdentifier>{af9557a4-d77c-4bb6-a49c-6e2ac93ad619}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\shop\_button">
-      <UniqueIdentifier>{80fe77a4-fe3d-40de-af7c-59440c4666c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\_button\checkBox">
-      <UniqueIdentifier>{70af5937-6349-4638-8b9d-08b606f80752}</UniqueIdentifier>
-    </Filter>
     <Filter Include="메인게임\Scene\test\inventory">
-      <UniqueIdentifier>{f9a3cfb1-58d0-4eef-b892-e29803cdf529}</UniqueIdentifier>
+      <UniqueIdentifier>{a97bb9b7-b1fa-4bd1-bb06-2dbd6d98e73f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="메인게임\Game Framework\util">
-      <UniqueIdentifier>{30ac60fa-a560-471f-923c-697567ffcde4}</UniqueIdentifier>
+    <Filter Include="메인게임\Game Framework\Manager\imgNum">
+      <UniqueIdentifier>{ddfc2c48-bb5e-4297-85ec-d5563b600b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인게임\Game Framework\Manager\window\shop\_button">
+      <UniqueIdentifier>{dc253dd0-1c78-4e10-b888-3191cfb83bf4}</UniqueIdentifier>
     </Filter>
     <Filter Include="메인게임\Game Framework\Manager\window\inventory">
-      <UniqueIdentifier>{1fd6ffb7-6075-4583-89dc-010a38065ed8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="메인게임\Game Framework\Manager\window\inventory\_button">
-      <UniqueIdentifier>{29dcd206-a3d1-441c-8489-01ffb97cf3ff}</UniqueIdentifier>
+      <UniqueIdentifier>{0bb066f7-0510-471a-a860-b163d6df523a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -505,27 +499,29 @@
       <Filter>메인게임\Game Framework\Manager\window\shop\_button</Filter>
     </ClCompile>
     <ClCompile Include="buttonCheckBox.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\_button\checkBox</Filter>
+      <Filter>메인게임\Game Framework\Manager\window\_button</Filter>
     </ClCompile>
-    <ClCompile Include="mapleUtil.cpp">
-      <Filter>메인게임\Game Framework\util</Filter>
+    <ClCompile Include="buttonInventory.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\_button</Filter>
     </ClCompile>
     <ClCompile Include="sceneTestInventory.cpp">
       <Filter>메인게임\Scene\test\inventory</Filter>
     </ClCompile>
-    <ClCompile Include="windowInventory.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="buttonInventory.cpp">
-      <Filter>메인게임\Game Framework\Manager\window\inventory\_button</Filter>
-    </ClCompile>
     <ClCompile Include="sceneTestShopInven.cpp">
       <Filter>메인게임\Scene\test\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="mapleUtil.cpp">
+      <Filter>API Framework\유틸</Filter>
+    </ClCompile>
+    <ClCompile Include="imgNumManager.cpp">
+      <Filter>메인게임\Game Framework\Manager\imgNum</Filter>
+    </ClCompile>
+    <ClCompile Include="windowInventory.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\inventory</Filter>
     </ClCompile>
     <ClCompile Include="windowStatus.cpp">
       <Filter>메인게임\Game Framework\Manager\window\status</Filter>
     </ClCompile>
-    <ClCompile Include="imgNumManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -801,25 +797,27 @@
     <ClInclude Include="buttonShop.h">
       <Filter>메인게임\Game Framework\Manager\window\shop\_button</Filter>
     </ClInclude>
-    <ClInclude Include="buttonCheckBox.h">
-      <Filter>메인게임\Game Framework\Manager\window\_button\checkBox</Filter>
+    <ClInclude Include="buttonInventory.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button</Filter>
     </ClInclude>
-    <ClInclude Include="mapleUtil.h">
-      <Filter>메인게임\Game Framework\util</Filter>
+    <ClInclude Include="buttonCheckBox.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button</Filter>
     </ClInclude>
     <ClInclude Include="sceneTestInventory.h">
       <Filter>메인게임\Scene\test\inventory</Filter>
     </ClInclude>
-    <ClInclude Include="windowInventory.h">
-      <Filter>메인게임\Game Framework\Manager\window\inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="buttonInventory.h">
-      <Filter>메인게임\Game Framework\Manager\window\inventory\_button</Filter>
-    </ClInclude>
     <ClInclude Include="sceneTestShopInven.h">
       <Filter>메인게임\Scene\test\inventory</Filter>
     </ClInclude>
-    <ClInclude Include="imgNumManager.h" />
+    <ClInclude Include="mapleUtil.h">
+      <Filter>API Framework\유틸</Filter>
+    </ClInclude>
+    <ClInclude Include="imgNumManager.h">
+      <Filter>메인게임\Game Framework\Manager\imgNum</Filter>
+    </ClInclude>
+    <ClInclude Include="windowInventory.h">
+      <Filter>메인게임\Game Framework\Manager\window\inventory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="quest.Json">
