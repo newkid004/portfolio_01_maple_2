@@ -489,6 +489,12 @@
     <ClCompile Include="buttonShop.cpp">
       <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
     </ClCompile>
+    <ClCompile Include="buttonCheckBox.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\_button</Filter>
+    </ClCompile>
+    <ClCompile Include="buttonInventory.cpp">
+      <Filter>메인게임\Game Framework\Manager\window\_button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -763,6 +769,12 @@
     </ClInclude>
     <ClInclude Include="buttonShop.h">
       <Filter>메인게임\Game Framework\Manager\window\_button\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonInventory.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button</Filter>
+    </ClInclude>
+    <ClInclude Include="buttonCheckBox.h">
+      <Filter>메인게임\Game Framework\Manager\window\_button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
