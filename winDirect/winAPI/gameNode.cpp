@@ -92,6 +92,9 @@ HRESULT gameNode::init(bool managerInit)
 		// 아이템 매니저 초기화
 		ITEMMANAGER->init();
 
+		// 이미지숫자 매니저 초기화
+		IMGNUMMANAGER->init();
+
 		// 게임 시스템 싱글톤 초기화
 		GAMESYSTEM->init();
 
@@ -189,6 +192,10 @@ void gameNode::release(void)
 		// 아이템 매니저 해제
 		ITEMMANAGER->release();
 		ITEMMANAGER->releaseSingleton();
+
+		// 이미지 숫자 매니저 해제
+		IMGNUMMANAGER->release();
+		IMGNUMMANAGER->releaseSingleton();
 
 		// 게임 시스템 해제
 		GAMESYSTEM->release();

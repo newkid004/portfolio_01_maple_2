@@ -46,6 +46,23 @@ image * imageManager::add(string strKey, const wchar_t * fileName, int maxFrameX
 	return img;
 }
 
+image * imageManager::add(string strKey, const wchar_t * fileName, float frameWidth, float frameHeight)
+{
+	// 추가하려는 이미지가 존재하는지 키값으로 확인
+	image* img = find(strKey);
+
+	// 이미 있다면 리턴
+	if (img) return img;
+
+	// 없으면 생성
+	img = new image;
+	img->init(fileName, frameWidth, frameHeight);
+
+	_mImageList.insert(make_pair(strKey, img));
+
+	return img;
+}
+
 // imageManager 핵심 함수
 image * imageManager::find(string strKey)
 {

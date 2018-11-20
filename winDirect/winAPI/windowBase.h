@@ -21,6 +21,10 @@ public :
 
 	virtual void updateAlways(void) {};
 
+protected :
+	virtual void updateButton(UI_LIST_ITER & outIter);
+	virtual void updateFocus(UI_LIST_ITER & outIter);
+
 public :
 	image* & getImage(void) { return _img; }
 	UI_LIST_ITER & getIter(void) { return _managedIter; };
@@ -44,4 +48,31 @@ public :	// ----- button ----- //
 public :
 	windowBase() {};
 	~windowBase() {};
+};
+
+//움직일 수 있는 window창
+class windowMovable :public windowBase
+{
+private:
+	fPOINT _gapPos;
+	bool _isClick;
+
+protected:
+	fRECT _clickRect;
+	fRECT _resizeClickRect;
+
+public:
+	virtual HRESULT init(void);
+	virtual UI_LIST_ITER update(void);
+
+protected :
+	virtual void updateMoveable(UI_LIST_ITER & outIter);
+
+public:
+	fRECT & getClickRect() { return _clickRect; }
+	fRECT & getResizeClickRect() { return _resizeClickRect; }
+
+public:
+	windowMovable(){}
+	~windowMovable(){}
 };

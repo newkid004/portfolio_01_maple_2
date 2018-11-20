@@ -3,12 +3,13 @@
 #include "itemDef.h"
 #include "state.h"
 
-#define INTERVAL_ITEM_IN_INVENTORY		50.0f
+#define INTERVAL_ITEM_IN_INVENTORY		fPOINT(36.f,35.f)
 #define INTERVAL_INVENTORY_TASK_BAR		fPOINT(5.0f, 10.0f)
 
 struct itemContentBase
 {
 	int type;
+	int kind;
 
 	image* img;
 
@@ -17,10 +18,14 @@ struct itemContentBase
 	wstring name;
 	wstring memo;
 
+	int count;
+	int maxCount;
+
 	__int64 price;
 
 	itemContentBase() :
 		type(0),
+		kind(0),
 		img(NULL),
 		frame(0.f),
 		price(0)
@@ -35,7 +40,9 @@ struct itemContentBase
 		this->frame			= i->frame;
 		this->name			= i->name;
 		this->memo			= i->memo;
-		this->price = i->price;
+		this->count			= i->count;
+		this->maxCount		= i->maxCount;
+		this->price			= i->price;
 	};
 };
 
@@ -50,15 +57,26 @@ struct tagItemEquipmentInfo
 struct itemContentEquip : public itemContentBase
 {
 	stateLimit limit;
+	statePoint limitPoint;
 	stateBasic basic;
 	statePoint point;
-	itemContentEquip() : itemContentBase() { type |= itemDef::ITEM_TYPE_EQUIP | itemDef::ITEM_TYPE_USEABLE; }
+
+	int up_max;
+	int up_count;
+
+	itemContentEquip() : itemContentBase() 
+	{ 
+		type |= itemDef::ITEM_TYPE_EQUIP | itemDef::ITEM_TYPE_USEABLE; 
+		maxCount = 1; count = 1; 
+		up_max = 7; up_count = 0;
+	}
 
 	virtual void operator=(itemContentEquip i) { itemContentBase::operator=(&i); }
 	virtual void operator=(itemContentEquip *i) 
 	{
 		itemContentBase::operator=(i);
 		this->limit = i->limit;
+		this->limitPoint = i->limitPoint;
 		this->basic = i->basic;
 		this->point = i->point;
 	};
@@ -72,16 +90,8 @@ struct itemContentArmor : public itemContentEquip {
 };
 
 // ----- consumeable ----- //
-struct itemContentConsume : public itemContentBase
-{
-	int count;
-
-	virtual void operator=(itemContentConsume i) { this->operator=(&i); };
-	virtual void operator=(itemContentConsume* i)
-	{
-		itemContentBase::operator=(i);
-		this->count = i->count;
-	};
+struct itemContentCountable : public itemContentBase {
+	itemContentCountable() : itemContentBase() { type |= itemDef::ITEM_TYPE_USEABLE; }
 };
 
 // ----- item Base ----- //

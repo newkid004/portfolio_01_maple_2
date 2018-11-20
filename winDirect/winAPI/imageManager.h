@@ -64,6 +64,8 @@ public :
 
 	// ----- image ----- //
 	image* add(string strKey, const wchar_t * fileName, int maxFrameX = 1, int maxFrameY = 1);
+	image* add(string strKey, const wchar_t * fileName, fPOINT frameSize) { return add(strKey, fileName, frameSize.x, frameSize.y); };
+	image* add(string strKey, const wchar_t * fileName, float frameWidth, float frameHeight);
 
 	// ----- layer ----- //
 	void pushLayer(fRECT * clippedArea);

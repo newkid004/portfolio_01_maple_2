@@ -17,24 +17,27 @@ enum e_PLAYER_INVENTORY_TAB
 	PLAYER_INVENTORY_TAB_COUNT
 };
 class inventory;
-
-class player : characterBase
+class fieldBase;
+class player : public characterBase
 {
 private:
-	animation* _aniBody;
-	animation* _aniArm;
-	animation* _aniLhand;
-	DIRECTION  _dir;
-	MOVEMENT   _movement[2];
-	fPOINT	   _headPosition;
-	fPOINT     _facePosition;
-	fPOINT     _hairPosition;
-	fPOINT	   _tempPos;
-	inventory* _inven[PLAYER_INVENTORY_TAB_COUNT];
-	__int64	 _money;
-
-	int		 _flip;
-	NUM_REAL _acc;
+	animation*				_aniBody;
+	animation*				_aniArm;
+	animation*				_aniLhand;
+	DIRECTION				_dir;
+	MOVEMENT				_movement[2];
+	COLLISIONSTATE			_collisionState;
+	fPOINT					_headPosition;
+	fPOINT					_facePosition;
+	fPOINT					_hairPosition;
+	fPOINT					_tempPos;
+	fieldBase*				_fieldBase;
+	ID2D1SolidColorBrush*   g_pBlackBrush;
+	inventory*				_inven[PLAYER_INVENTORY_TAB_COUNT];
+	__int64					_money;
+	int						_statPoint = 0;
+	int						_flip;
+	NUM_REAL				_acc;
 public:
 	HRESULT init(void);
 	void release(void);
@@ -50,14 +53,20 @@ public :
 	void setMotions(MOVEMENT movement, int maxFrameX, int frameY, float delay);
 	void setAnimation(MOVEMENT movement);
 	void setMovement(MOVEMENT movement);
+	void setCollisionState(COLLISIONSTATE collisionState);
 	void setPartPosition(void);
 	void aniStart(void);
 	void aniStop(void);
+	void move(void);
 	void jump(void);
+	void pixelCollision(void);
+	void convertToFixedVel(void) { _velocity *= TIMEMANAGER->getElapsedTime(); }
+	void convertToUnFixedVel(void) { _velocity /= TIMEMANAGER->getElapsedTime(); }
 
 public :	// ----- inventory, item ----- //
 	inventory*& getInventory(int index) { return _inven[index]; };
 	__int64 & getMoney(void) { return _money; };
+	int & getStatPoint(void) { return _statPoint; };
 
 public :
 	player();
