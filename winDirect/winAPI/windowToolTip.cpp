@@ -151,4 +151,5 @@ void windowToolTip::setBindItem(itemBase * item)
 
 	_bodyHeight -= _imgRef[IT_FRAME_TOP]->getSize().y;
 	_bodyHeight -= _imgRef[IT_FRAME_BOT]->getSize().y;
+
 }
