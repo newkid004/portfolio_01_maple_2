@@ -69,7 +69,7 @@ struct stateLimit
 	classesDef::CLASSES	classes;						//분류(직업)
 	
 
-	int					Lv;								//레벨
+	unsigned int		Lv;								//레벨
 
 	stateLimit()
 	{

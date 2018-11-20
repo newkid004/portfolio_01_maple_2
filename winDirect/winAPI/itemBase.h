@@ -9,6 +9,7 @@
 struct itemContentBase
 {
 	int type;
+	int kind;
 
 	image* img;
 
@@ -24,6 +25,7 @@ struct itemContentBase
 
 	itemContentBase() :
 		type(0),
+		kind(0),
 		img(NULL),
 		frame(0.f),
 		price(0)
@@ -55,15 +57,26 @@ struct tagItemEquipmentInfo
 struct itemContentEquip : public itemContentBase
 {
 	stateLimit limit;
+	statePoint limitPoint;
 	stateBasic basic;
 	statePoint point;
-	itemContentEquip() : itemContentBase() { type |= itemDef::ITEM_TYPE_EQUIP | itemDef::ITEM_TYPE_USEABLE; maxCount = 1; count = 1; }
+
+	int up_max;
+	int up_count;
+
+	itemContentEquip() : itemContentBase() 
+	{ 
+		type |= itemDef::ITEM_TYPE_EQUIP | itemDef::ITEM_TYPE_USEABLE; 
+		maxCount = 1; count = 1; 
+		up_max = 7; up_count = 0;
+	}
 
 	virtual void operator=(itemContentEquip i) { itemContentBase::operator=(&i); }
 	virtual void operator=(itemContentEquip *i) 
 	{
 		itemContentBase::operator=(i);
 		this->limit = i->limit;
+		this->limitPoint = i->limitPoint;
 		this->basic = i->basic;
 		this->point = i->point;
 	};
