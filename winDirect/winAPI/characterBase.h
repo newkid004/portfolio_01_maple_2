@@ -2,11 +2,12 @@
 #include "baseObject.h"
 #include "state.h"
 
+#define SPEED 200
+#define GRAVITY 5
+
 class patternBase;
 class buffBase;
 
-#define SPEED 200
-#define GRAVITY 100
 struct motionInfo
 {
 	int		maxFrameX;

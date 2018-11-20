@@ -9,7 +9,7 @@
 #include "windowShop.h"
 #include "windowToolTip.h"
 
-static fPOINT pos = fPOINT(150, 100);
+static windowShop* winShop;
 
 HRESULT sceneTestShop::init(void)
 {
@@ -37,6 +37,8 @@ void sceneTestShop::update(void)
 	WINMANAGER->update();
 
 	updateControl();
+
+	
 }
 
 void sceneTestShop::render(void)
@@ -44,13 +46,20 @@ void sceneTestShop::render(void)
 	GAMESYSTEM->render();
 	WINMANAGER->render();
 
+	IMAGEMANAGER->statePos(0);
+	IMAGEMANAGER->setTransform();
+
+	//shop->ClickRect text
+	_renderTarget->DrawRectangle(&RectF(winShop->getResizeClickRect().LT.x, winShop->getResizeClickRect().LT.y,
+		winShop->getResizeClickRect().RB.x, winShop->getResizeClickRect().RB.y), TEXTMANAGER->getBrush());
+
 	renderText();
 }
 
 void sceneTestShop::initResource(void)
 {
-	IMAGEMANAGER->add("UI_shop_button", L"image/UI/shop/UI_shop_button.png", 4, 3);
 	IMAGEMANAGER->add("UI_shop_layout", L"image/UI/shop/UI_shop_layout.png");
+	IMAGEMANAGER->add("UI_shop_button", L"image/UI/shop/UI_shop_button.png", 4, 3);
 	IMAGEMANAGER->add("UI_shop_tab_shop", L"image/UI/shop/UI_shop_tab_shop.png", 2, 2);
 	IMAGEMANAGER->add("UI_shop_tab_player", L"image/UI/shop/UI_shop_tab_player.png", 5, 2);
 	IMAGEMANAGER->add("UI_shop_selected_shop", L"image/UI/shop/UI_shop_selected_shop.png");
@@ -63,7 +72,7 @@ void sceneTestShop::initResource(void)
 	IMAGEMANAGER->add("UI_meso", L"image/UI/UI_meso.png");
 	IMAGEMANAGER->add("UI_checkBox", L"image/UI/UI_checkBox.png", 2);
 
-	IMAGEMANAGER->add("item", L"image/item/xcf/item_consume.png", 10, 3);
+	IMAGEMANAGER->add("item", L"image/item/icon/item_icon_consume.png", fPOINT(50.f));
 	IMAGEMANAGER->add("item_shadow", L"image/item/item_shadow.png");
 }
 
@@ -99,9 +108,8 @@ void sceneTestShop::initPlayer(void)
 void sceneTestShop::initWindow(void)
 {
 	// ----- shop ----- //
-	windowShop* winShop = new windowShop;
+	winShop = new windowShop;
 	winShop->init();
-	winShop->getImage() = IMAGEMANAGER->find("UI_shop_layout");
 	winShop->getPos() = { 200, 50 };
 
 	// bind
@@ -147,15 +155,19 @@ void sceneTestShop::initShortcut(void)
 
 void sceneTestShop::updateControl(void)
 {
-	if (KEYMANAGER->down(VK_UP))	pos.y -= TIMEMANAGER->getElapsedTime() * 100;
-	if (KEYMANAGER->down(VK_DOWN))	pos.y += TIMEMANAGER->getElapsedTime() * 100;
-	if (KEYMANAGER->down(VK_LEFT))	pos.x -= TIMEMANAGER->getElapsedTime() * 100;
-	if (KEYMANAGER->down(VK_RIGHT))	pos.x += TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down(VK_UP))	WINMANAGER->find("shop")->getPos().y -= TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down(VK_DOWN))	WINMANAGER->find("shop")->getPos().y += TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down(VK_LEFT))	WINMANAGER->find("shop")->getPos().x -= TIMEMANAGER->getElapsedTime() * 100;
+	if (KEYMANAGER->down(VK_RIGHT))	WINMANAGER->find("shop")->getPos().x += TIMEMANAGER->getElapsedTime() * 100;
 
 	if (KEYMANAGER->press('1'))		SHOPMANAGER->find("shop")->add(ITEMMANAGER->find(getRandomItemName()));
 	if (KEYMANAGER->press('2'))
 	{
-		GAMESYSTEM->getPlayer()->getInventory(0)->push(ITEMMANAGER->find(getRandomItemName()));
+		GAMESYSTEM->getPlayer()->getInventory(0)->push(
+			ITEMMANAGER->create(
+				ITEMMANAGER->find(getRandomItemName())
+				)
+			);
 		SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(0));
 	}
 
@@ -163,8 +175,6 @@ void sceneTestShop::updateControl(void)
 	if (KEYMANAGER->press('Z'))		((windowShop*)WINMANAGER->find("shop"))->scrollShop(+1);
 	if (KEYMANAGER->press('S'))		((windowShop*)WINMANAGER->find("shop"))->scrollPlayer(-1);
 	if (KEYMANAGER->press('X'))		((windowShop*)WINMANAGER->find("shop"))->scrollPlayer(+1);
-
-	WINMANAGER->find("shop")->getPos() = pos;
 }
 
 void sceneTestShop::renderText(void)

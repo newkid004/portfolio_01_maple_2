@@ -31,6 +31,14 @@ enum MOVEMENT
 	M_SPWAN				= 0x0080,
 };
 
+enum COLLISIONSTATE
+{
+	C_NONE,
+	C_LAND,
+	C_LEFT,
+	C_RIGHT,
+	C_UP
+};
 struct stateBasic
 {
 	unsigned int		hp;								//현재	hp
@@ -61,7 +69,7 @@ struct stateLimit
 	classesDef::CLASSES	classes;						//분류(직업)
 	
 
-	int					Lv;								//레벨
+	unsigned int		Lv;								//레벨
 
 	stateLimit()
 	{
@@ -79,19 +87,6 @@ struct statePoint
 	statePoint()
 	{
 		ZeroMemory(this, sizeof(statePoint));
-	}
-};
-
-struct subStatePoint
-{
-	unsigned int		STR;							//부스텟 힘
-	unsigned int		DEX;							//부스텟 민첩
-	unsigned int		INT;							//부스텟 지력
-	unsigned int		LUK;							//부스텟 운
-
-	subStatePoint()
-	{
-		ZeroMemory(this, sizeof(subStatePoint));
 	}
 };
 
@@ -143,9 +138,9 @@ struct state
 	statePoint			itemStatePoint;			// 아이템 장비 스킬 버프 등등 다 적용시켜서 올라간 주스텟
 	statePoint			totalStatePoint;		// 두개다 더한 토탈 주스텟
 
-	subStatePoint		permanentSubPoint;		// 직접 찍은 주스텟
-	subStatePoint		itemStateSubPoint;		// 아이템 장비 스킬 버프 등등 다 적용시켜서 올라간 주스텟
-	subStatePoint		totalStateSubPoint;		// 두개다 더한 토탈 주스텟
+	statePoint			permanentSubPoint;		// 직접 찍은 주스텟
+	statePoint			itemStateSubPoint;		// 아이템 장비 스킬 버프 등등 다 적용시켜서 올라간 주스텟
+	statePoint			totalStateSubPoint;		// 두개다 더한 토탈 주스텟
 
 	statePersent		permanentPersent;
 	statePersent		itemStatePersent;

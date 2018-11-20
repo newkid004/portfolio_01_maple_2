@@ -23,7 +23,12 @@ void eventManager::update()
 {
 	for (auto iter = _lEvent.begin(); iter != _lEvent.end();)
 	{
+		V_EVENT_CALL & vCatcher = getEventCatcherArray((*iter)->getParamType());
+
+		// catcherBefore -> event -> catcherAfter
+		for (auto cIter : vCatcher) if (cIter->getBeforeActive()) (*cIter->getBeforeActive())(*iter);
 		(*iter)->update();
+		for (auto cIter : vCatcher) if (cIter->getAfterActive()) (*cIter->getAfterActive())(*iter);
 
 		if ((*iter)->getTimeAlive() <= 0.f)
 		{

@@ -57,6 +57,12 @@ enum e_EVENT_KIND_ITEM
 
 enum e_EVENT_KIND_SKILL
 {
+	EK_SKILL_NONE = 0
+};
+
+enum e_EVENT_KIND_PLAYER
+{
+	EK_PLAYER_NONE = 0
 };
 
 // ----- act : 0x0f00 ----- //
@@ -101,7 +107,29 @@ enum e_EVENT_ACT_ITEM_CONSUMEABLE
 	EA_ITEM_CONSUMEABLE_NONE = 0
 };
 
+// act : player - status
+enum e_EVENT_ACT_PLAYER_STATUS
+{
+	EA_PLAYER_STATUS_STR		= 0x100,
+	EA_PLAYER_STATUS_DEX		= 0x200,
+	EA_PLAYER_STATUS_INT		= 0x300,
+	EA_PLAYER_STATUS_LUK		= 0x400,
+	EA_PLAYER_STATUS_LEVEL		= 0x500,
+	EA_PLAYER_STATUS_EXP		= 0x600,
+
+	EA_PLAYER_STATUS_NONE = 0
+};
+
 // ----- call : 0xf000 ---- //
 // 위 사항의 형태에 따른 캐쳐 호출형태(index)
 // 각 sour, destParam의 0xf000번째(0xf000 f000)의 형태로 전달
 // 세부형태가 딱히 없으면 비워둠(0)
+
+// call : player - status - change
+enum e_EVENT_CALL_PLAYER_STATUS_CHANGE
+{
+	EC_PLAYER_STATUS_CHANGE_INCREASE	= 0x1000,
+	EC_PLAYER_STATUS_CHANGE_DECREASE	= 0x2000,
+	
+	EC_PLAYER_STATUS_CHANGE_NONE	= 0
+};

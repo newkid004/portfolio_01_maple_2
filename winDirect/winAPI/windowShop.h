@@ -25,7 +25,7 @@ struct tagShopContent
 
 class shopBase;
 class buttonShop_itemList;
-class windowShop : public windowBase
+class windowShop : public windowMovable
 {
 private:
 	tagShopContent _conShop;
@@ -34,8 +34,6 @@ private:
 
 	buttonShop_itemList* _currentSlotButton;
 
-	bool _isSell2rightClick;
-
 public:
 	HRESULT init(void) override;
 	UI_LIST_ITER update(void) override;
@@ -43,9 +41,12 @@ public:
 
 protected :
 	void initButton(void);
-	void initDbClick(void);
+	void initButtonEtc(void);
+
+	void initCallback(void);
 	void initWheel(void);
 
+	void renderSelect(void);
 	void renderInfo(void);
 
 public:
@@ -53,8 +54,6 @@ public:
 	tagShopContent & getContentPlayer(void) { return _conPlayer; };
 	shopBase*& getShop(void) { return _shop; };
 	buttonShop_itemList*& getCurrentSlotButton(void) { return _currentSlotButton; };
-
-	bool & getIsSell2RightClick(void) { return _isSell2rightClick; };
 
 public :	// 
 	UI_LIST_ITER close(void) override;

@@ -6,6 +6,8 @@
 
 #include "shopBase.h"
 
+#include "buttonCheckBox.h"
+
 HRESULT buttonShop_itemList::init(int slot, windowShop* bindWindow)
 {
 	_bindWindow = bindWindow;
@@ -24,15 +26,9 @@ UI_LIST_ITER buttonShop_itemList::update(void)
 	{
 		((windowShop*)_bindWindow)->getCurrentSlotButton() = this;
 		updateDbClick();
-	}
+		updateRightClick();
+		updateSelectClick();
 
-	return _bindWindow->getIter();
-}
-
-void buttonShop_itemList::render(void)
-{
-	if (IsClickRect(getAbsRect(), _ptMouse))
-	{
 		windowToolTip* winTT = (windowToolTip*)WINMANAGER->find("item_toolTip");
 		itemBase* viewItem = getRenderContent();
 
@@ -42,12 +38,38 @@ void buttonShop_itemList::render(void)
 			winTT->show();
 		}
 	}
+
+	return _bindWindow->getIter();
 }
 
 void buttonShop_itemList::initPosition(windowShop* bindWindow)
 {
 	_pos = bindWindow->getContentShop().firstItemPos - 16.5f;
 	_size = { 243.f, 33.f };
+}
+
+void buttonShop_itemList::updateRightClick(void)
+{
+	if (((buttonCheckBox*)((windowShop*)_bindWindow)->findButton("shop_isRight"))->getIsCheck())
+	{
+		if (KEYMANAGER->press(VK_RBUTTON))
+			(*GAMESYSTEM->findCallback("UI_shop_button_buy"))();
+	}
+}
+
+void buttonShop_itemList::updateSelectClick(void)
+{
+	if (KEYMANAGER->press(VK_LBUTTON))
+	{
+		windowShop* winShop = (windowShop*)_bindWindow;
+		winShop->getContentPlayer().selectedItem = { -1, -1 };
+		winShop->getContentShop().selectedItem = { 
+			winShop->getContentShop().tabIndex, 
+			winShop->getContentShop().scroll + _slot };
+
+		if (!winShop->getShop()->find(winShop->getContentShop().scroll + _slot))
+			winShop->getContentShop().selectedItem = { -1, -1 };
+	}
 }
 
 itemBase * buttonShop_itemList::getRenderContent(void)
@@ -64,6 +86,30 @@ void buttonShop_playerItemList::initPosition(windowShop * bindWindow)
 	_size = { 201.f, 33.f };
 }
 
+void buttonShop_playerItemList::updateRightClick(void)
+{
+	if (((buttonCheckBox*)((windowShop*)_bindWindow)->findButton("shop_isRight"))->getIsCheck())
+	{
+		if (KEYMANAGER->press(VK_RBUTTON))
+			(*GAMESYSTEM->findCallback("UI_shop_button_sell"))();
+	}
+}
+
+void buttonShop_playerItemList::updateSelectClick(void)
+{
+	if (KEYMANAGER->press(VK_LBUTTON))
+	{
+		windowShop* winShop = (windowShop*)_bindWindow;
+		winShop->getContentShop().selectedItem = { -1, -1 };
+		winShop->getContentPlayer().selectedItem = {
+			winShop->getContentPlayer().tabIndex,
+			winShop->getContentPlayer().scroll + _slot };
+
+		if (SHOPMANAGER->getPlayerView().size() <= winShop->getContentPlayer().scroll + _slot)
+			winShop->getContentPlayer().selectedItem = { -1, -1 };
+	}
+}
+
 itemBase * buttonShop_playerItemList::getRenderContent(void)
 {
 	static vector<itemBase*> & playerItemView = SHOPMANAGER->getPlayerView();
@@ -74,6 +120,7 @@ itemBase * buttonShop_playerItemList::getRenderContent(void)
 	if (playerItemView.size() <= index) return NULL;
 
 	return playerItemView[_slot + bindWindow->getContentPlayer().scroll];
+
 }
 
 HRESULT buttonShop_itemTab::init(int tabType, windowShop * bindWindow)
@@ -94,8 +141,8 @@ HRESULT buttonShop_itemTab::init(int tabType, windowShop * bindWindow)
 
 void buttonShop_itemTab::render(void)
 {
-	IMAGEMANAGER->statePos(_bindWindow->getPos() + _pos);
-	_img->frameRender(fPOINT(_type, *_bindTab == _type));
+	IMAGEMANAGER->statePos(_bindWindow->getPos() + _pos); 
+	_img->frameRender(fPOINT(_type, _bindContent->tabIndex == _type));
 }
 
 void buttonShop_itemTab::initProp(void)
@@ -103,7 +150,7 @@ void buttonShop_itemTab::initProp(void)
 	_img = IMAGEMANAGER->find("UI_shop_tab_shop");
 	_pos = { 10.f, 100.f };
 
-	_bindTab = &((windowShop*)_bindWindow)->getContentShop().tabIndex;
+	_bindContent = &((windowShop*)_bindWindow)->getContentShop();
 }
 
 void buttonShop_itemTab::initActive(void)
@@ -113,7 +160,8 @@ void buttonShop_itemTab::initActive(void)
 		{
 			if (KEYMANAGER->press(VK_LBUTTON))
 			{
-				*_bindTab = _type;
+				_bindContent->tabIndex = _type;
+				_bindContent->scroll = 0;
 				return WINMANAGER->getIgnoreIter();
 			}
 		}
@@ -126,7 +174,7 @@ void buttonShop_playerItemTab::initProp(void)
 	_img = IMAGEMANAGER->find("UI_shop_tab_player");
 	_pos = { 286.f, 100.f };
 
-	_bindTab = &((windowShop*)_bindWindow)->getContentPlayer().tabIndex;
+	_bindContent = &((windowShop*)_bindWindow)->getContentPlayer();
 }
 
 void buttonShop_playerItemTab::initActive(void)
@@ -136,7 +184,8 @@ void buttonShop_playerItemTab::initActive(void)
 		{
 			if (KEYMANAGER->press(VK_LBUTTON))
 			{
-				*_bindTab = _type;
+				_bindContent->tabIndex = _type;
+				_bindContent->scroll = 0;
 				((windowShop*)_bindWindow)->selectInven(_type);
 				return WINMANAGER->getIgnoreIter();
 			}

@@ -57,7 +57,6 @@ HRESULT image::init(const wchar_t * fileName)
 
 HRESULT image::init(const wchar_t * fileName, int maxFrameX, int maxFrameY)
 {
-	//재초기화 방지용, 이미지 정보에 값이 들어 있다면 릴리즈를 먼저 해줄것
 	if (_imageInfo != NULL) this->release();
 
 	//이미지 정보 새로 생성후 초기화하기
@@ -77,6 +76,46 @@ HRESULT image::init(const wchar_t * fileName, int maxFrameX, int maxFrameY)
 
 	// 이미지 정보 입력
 	_putImageInfo();
+
+	// 프레임 보정
+	--_imageInfo->maxFrame.x;
+	--_imageInfo->maxFrame.y;
+
+	return S_OK;
+}
+
+HRESULT image::init(const wchar_t * fileName, fPOINT frameSize)
+{
+	return init(fileName, frameSize.x, frameSize.y);
+}
+
+HRESULT image::init(const wchar_t * fileName, float frameWidth, float frameHeight)
+{
+	if (_imageInfo != NULL) this->release();
+
+	//이미지 정보 새로 생성후 초기화하기
+	_imageInfo = new IMAGE_INFO;
+
+	_imageInfo->frameSize = fPOINT(frameWidth, frameHeight);
+
+	//파일이름
+	_fileName = fileName;
+
+	//리소스 입력
+	if (S_OK != _putImage())
+	{
+		release();
+		return E_FAIL;
+	}
+
+	// 이미지 정보 입력
+	_imageInfo->size.x = _imageInfo->bitmap->GetSize().width;
+	_imageInfo->size.y = _imageInfo->bitmap->GetSize().height;
+	_imageInfo->maxFrame.x = _imageInfo->size.x / _imageInfo->frameSize.x;
+	_imageInfo->maxFrame.y = _imageInfo->size.y / _imageInfo->frameSize.y;
+
+	_imageInfo->centerPos = _imageInfo->size / 2.f;
+	_imageInfo->centerFramePos = _imageInfo->frameSize / 2.f;
 
 	// 프레임 보정
 	--_imageInfo->maxFrame.x;

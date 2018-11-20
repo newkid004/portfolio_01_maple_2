@@ -6,21 +6,27 @@
 #include "inventory.h"
 
 #include "buttonShop.h"
+#include "buttonCheckBox.h"
 
 #include "itemBase.h"
 
+
 HRESULT windowShop::init(void)
 {
-	windowBase::init();
+	windowMovable::init();
+	
 	_shop = NULL;
+
+	_img = IMAGEMANAGER->add("UI_shop_layout", L"image/UI/shop/UI_shop_layout.png");
 
 	_conShop.firstItemPos = fPOINT(27.5f, 141.5f);
 	_conPlayer.firstItemPos = fPOINT(301.5f, 141.5f);
 
-	_isSell2rightClick = false;
+	_conShop.selectedItem.x = -1;
+	_conPlayer.selectedItem.x = -1;
 
 	initButton();
-	initDbClick();
+	initCallback();
 	initWheel();
 
 	return S_OK;
@@ -36,19 +42,23 @@ UI_LIST_ITER windowShop::update(void)
 		KEYMANAGER->setWheelUp(GAMESYSTEM->findCallback("UI_shop_scroll_up"), false);
 		KEYMANAGER->setWheelDown(GAMESYSTEM->findCallback("UI_shop_scroll_down"), false);
 	}
-
-	return windowBase::update();
+	
+	return windowMovable::update();
 }
 
 void windowShop::render(void)
 {
 	windowBase::render();
 
+	// 선택 아이템
+	renderSelect();
+
 	// 아이템 목록 render
 	if (_shop) _shop->render();
 
 	// 소지금 등
 	renderInfo();
+	
 }
 
 void windowShop::initButton(void)
@@ -111,14 +121,127 @@ void windowShop::initButton(void)
 			addButton("player_scroll_head", b);
 		}
 	}
+
+	// ---- right click ----- //
+	buttonCheckBox* btnRight = new buttonCheckBox;
+	btnRight->init(); btnRight->getPos() = { 249.f, 18.f };
+	addButton("shop_isRight", btnRight);
+	
+	// ----- etc ----- //
+	initButtonEtc();
 }
 
-void windowShop::initDbClick(void)
+void windowShop::initButtonEtc(void)
+{
+	// button : 상점 나가기
+	buttonBaseFrame* btnExit = new buttonBaseFrame;
+	btnExit->init(IMAGEMANAGER->find("UI_shop_button"));
+	btnExit->getPos() = { 201.f, 53.f };
+	btnExit->getActive() = [&](void)->UI_LIST_ITER {
+
+		buttonBaseFrame* btn = (buttonBaseFrame*)findButton("exit");
+		if (IsClickRect(btn->getAbsRect(), _ptMouse))
+		{
+			if (KEYMANAGER->up(VK_LBUTTON))
+				close();
+			else if (KEYMANAGER->press(VK_LBUTTON))
+			{
+				// 사운드 추가
+			}
+			else if (KEYMANAGER->down(VK_LBUTTON))
+				btn->getCurFrame() = { 2, 0 };
+			else
+				btn->getCurFrame() = { 1, 0 };
+		}
+		else
+			btn->getCurFrame() = { 0, 0 };
+
+		return _managedIter;
+	};
+	addButton("exit", btnExit);
+
+	// button : 아이템 구입
+	buttonBaseFrame* btnBuy = new buttonBaseFrame;
+	btnBuy->init(IMAGEMANAGER->find("UI_shop_button"));
+	btnBuy->getPos() = { 201.f, 73.f };
+	btnBuy->getActive() = [&](void)->UI_LIST_ITER {
+
+		buttonBaseFrame* btn = (buttonBaseFrame*)findButton("buy");
+		if (IsClickRect(btn->getAbsRect(), _ptMouse))
+		{
+			if (-1 < _conShop.selectedItem.x && KEYMANAGER->up(VK_LBUTTON))
+			{
+				_currentSlotButton = (buttonShop_itemList*)findButton("shop_slot_" + to_string(_conShop.selectedItem.y - _conShop.scroll));
+				if (_currentSlotButton)
+					(*GAMESYSTEM->findCallback("UI_shop_button_buy"))();
+
+				return WINMANAGER->getIgnoreIter();
+			}
+			else if (KEYMANAGER->press(VK_LBUTTON))
+			{
+				// 사운드 추가
+			}
+			else if (KEYMANAGER->down(VK_LBUTTON))
+				btn->getCurFrame() = { 2, 1 };
+			else
+				btn->getCurFrame() = { 1, 1 };
+		}
+		else
+			btn->getCurFrame() = { 0, 1 };
+
+		return _managedIter;
+	};
+	addButton("buy", btnBuy);
+
+	// button : 아이템 판매
+	buttonBaseFrame* btnSell = new buttonBaseFrame;
+	btnSell->init(IMAGEMANAGER->find("UI_shop_button"));
+	btnSell->getPos() = { 433.f, 73.f };
+	btnSell->getActive() = [&](void)->UI_LIST_ITER {
+
+		buttonBaseFrame* btn = (buttonBaseFrame*)findButton("sell");
+		if (IsClickRect(btn->getAbsRect(), _ptMouse))
+		{
+			if (-1 < _conPlayer.selectedItem.x && KEYMANAGER->up(VK_LBUTTON))
+			{
+				// 인벤토리 재정렬
+				_conPlayer.tabIndex = _conPlayer.selectedItem.x;
+				_conPlayer.scroll = _conPlayer.selectedItem.y;
+				SHOPMANAGER->makePlayerView(GAMESYSTEM->getPlayer()->getInventory(_conPlayer.selectedItem.x));
+
+				// 판매
+				_currentSlotButton = (buttonShop_itemList*)findButton("player_slot_0");
+				(*GAMESYSTEM->findCallback("UI_shop_button_sell"))();
+
+				_conPlayer.selectedItem.x = -1;
+
+				return WINMANAGER->getIgnoreIter();
+			}
+			else if (KEYMANAGER->press(VK_LBUTTON))
+			{
+				// 사운드 추가
+			}
+			else if (KEYMANAGER->down(VK_LBUTTON))
+				btn->getCurFrame() = { 2, 2 };
+			else
+				btn->getCurFrame() = { 1, 2 };
+		}
+		else
+			btn->getCurFrame() = { 0, 2 };
+
+		return _managedIter;
+	};
+	addButton("sell", btnSell);
+}
+
+void windowShop::initCallback(void)
 {
 	function<void(void)> f;
 
 	// buy
-	f = [&](void)->void {
+	f = [this](void)->void {
+		if (this != WINMANAGER->getFocus() || !IsClickRect(getAbsRect(), _ptMouse)) return;
+
 		// 현 상점 슬롯 가져옴
 		itemBase* viewItem = _shop->find(_conShop.scroll + _currentSlotButton->getSlot());
 
@@ -169,7 +292,9 @@ void windowShop::initDbClick(void)
 	GAMESYSTEM->addCallback("UI_shop_button_buy", f);
 
 	// sell
-	f = [&](void)->void {
+	f = [this](void)->void {
+		if (this != WINMANAGER->getFocus() || !IsClickRect(getAbsRect(), _ptMouse)) return;
+
 		// 현 플레이어 슬롯에 해당하는 아이템 가져옴
 		auto & itemView = SHOPMANAGER->getPlayerView();
 		int index = _conPlayer.scroll + _currentSlotButton->getSlot();
@@ -221,6 +346,29 @@ void windowShop::initWheel(void)
 		if (IsClickRect(viewPlayer, _ptMouse))	scrollPlayer(1);
 	};
 	GAMESYSTEM->addCallback("UI_shop_scroll_down", f);
+}
+
+void windowShop::renderSelect(void)
+{
+	static fPOINT intervalShop = { 47.f, 124.f };
+	static fPOINT intervalPlayer = { 321.f, 124.f };
+
+	int selectedShop	= _conShop.selectedItem.y - _conShop.scroll;
+	int selectedPlayer	= _conPlayer.selectedItem.y - _conPlayer.scroll;
+
+	if (_conShop.selectedItem.x == _conShop.tabIndex  &&
+		-1 < selectedShop && selectedShop < CNT_SHOP_ITEM_LIST)
+	{
+		IMAGEMANAGER->statePos(_pos + intervalShop).y += selectedShop * 42.f;
+		IMAGEMANAGER->find("UI_shop_selected_shop")->render();
+	}
+
+	if (_conPlayer.selectedItem.x == _conPlayer.tabIndex &&
+		-1 < selectedPlayer && selectedPlayer < CNT_SHOP_ITEM_LIST)
+	{
+		IMAGEMANAGER->statePos(_pos + intervalPlayer).y += selectedPlayer * 42.f;
+		IMAGEMANAGER->find("UI_shop_selected_player")->render();
+	}
 }
 
 void windowShop::renderInfo(void)

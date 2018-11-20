@@ -39,6 +39,10 @@ public :
 	void render(void) override;
 
 public :
+	void initImage(void);
+	void initFont(void);
+	void initImageNumber(void);
+
 	void renderNormal(void);
 	void renderEquip(void);
 
